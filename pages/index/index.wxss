@@ -1,0 +1,43 @@
+Page{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #f0f0f2;
+}
+
+.content{
+  width: 100%;
+  height: 100%;
+}
+
+.line{
+  width: auto;
+  height: auto;
+  margin: 20rpx;
+  padding: 20rpx;
+  background: white;
+  border-radius: 10rpx;
+}
+
+.upper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.next{
+  padding-top: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title{
+  font-size: 28rpx;
+}
+
+.value{
+  font-size: 24rpx;
+  color: #999;
+}

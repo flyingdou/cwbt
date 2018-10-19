@@ -1,0 +1,18 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <view class='line' wx:for = "{{taskList}}" wx:for-item = "task">
+           <view class='upper'>
+                  <!-- 设备名称 -->
+                  <view class='deviceName title'>设备名称: <text class='value'>{{task.name}}</text></view>
+                  <!-- 作业部位 -->
+                  <view class='devicePart title'>作业部位：<text class='value'>{{task.device_part}}</text></view>
+           </view>
+
+          <view class='next'>
+                  <!-- 计划时间 -->
+                  <view class='planTime title'>计划作业时间: <text class='value'>{{task.plan_job_time}}</text></view>
+                  <!-- 作业属性 -->
+                  <view class='jobAttribute title'>作业属性: <text class='value'>{{task.job_properties}}</text></view>
+           </view>
+      </view>
+</view>
