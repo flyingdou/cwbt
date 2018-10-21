@@ -104,8 +104,24 @@ Page({
          if (res.success) {
            var key2 = key + 'no';
            var dou2 = {};
-           dou2[key2] = res.person;
-           obj.setData(dou2);
+
+           // 查询到了数据
+           if (res.person) {
+              dou2[key2] = res.person;
+              obj.setData(dou2);
+           }
+
+           // 未查询的数据
+           if (!res.person) {
+              dou2[key2] = '';
+              obj.setData(dou2);
+              wx.showModal({
+                title: '提示',
+                content: '请输入正确的编号！',
+                showCancel: false
+              })
+              return;
+           }
          } else {
            console.log('请求数据失败！');
          }
