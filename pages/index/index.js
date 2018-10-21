@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    currentIndex:0,
     base_req_url:app.constant.base_req_url,
     taskList:[]
   },
@@ -15,6 +16,7 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    obj.init();
     obj.getTaskList();
   },
 
@@ -66,6 +68,42 @@ Page({
   onShareAppMessage: function () {
     
   },
+
+
+  /**
+   * 用户点击、滑动切换tab
+   */
+  changeCurrentIndex: function (e) {
+    var obj = this;
+    // 滑动切换
+    if (e.detail.source == 'touch') {
+      obj.setData({
+        currentIndex: e.detail.current
+      })
+    }
+
+    // 点击切换
+    if (e.currentTarget.dataset.index || e.currentTarget.dataset.index === 0) {
+      obj.setData({
+        currentIndex: e.currentTarget.dataset.index
+      })
+    }
+
+  },
+
+  /**
+   * init
+   */
+  init: function () {
+    var obj = this;
+    var sysInfo = wx.getSystemInfoSync();
+    var rate = 750 / sysInfo.windowWidth;
+    var swiperHeight = (sysInfo.windowHeight - 40) * rate;
+    obj.setData({
+      swiperHeight: swiperHeight
+    })
+  },
+
 
   getTaskList:  function () {
       // 请求数据

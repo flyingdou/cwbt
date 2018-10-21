@@ -1,0 +1,113 @@
+<!-- 页面开始 -->
+<view class='content'>
+
+
+<view class='ticket'>
+
+    <view class='line'>
+          <!-- plan_job_time -->
+          <view class='item'>
+                <view class='title'>作业时间：</view>
+                <view class='value'>2018-10-16</view>
+          </view>
+    </view>
+
+    <view class='line'>
+     <!-- job_part -->
+          <view class='item'>
+                <view class='title'>作业部位：</view>
+                <view class='value'>发动机</view>
+          </view>
+    </view>
+
+    <view class='line'>
+          <!-- code -->
+          <view class='item'>
+                <view class='title'>设备编码： </view>
+                <view class='value'>12456</view>
+          </view>
+
+          
+    
+    </view>
+
+    <view class='line'>
+          <!-- deviceName -->
+          <view class='item'>
+                <view class='title'>设备名称： </view>
+                <view class='value'>核心机</view>
+          </view>
+    </view>
+
+    <view class='line'>
+          <!-- job_properties -->
+          <view class='item'>
+                <view class='title'>作业属性： </view>
+                <view class='value'>维修</view>
+          </view>
+    </view>
+
+    <!-- 作业内容 -->
+    <view class='line'>
+          <view class='item desc'>
+                <view class='title'>作业内容：</view>
+                <view class='value text'>2355845037698247ndkkdnvjhhsdfnjxncvmnxcmvnsadfsdfsdhfsndfmnj</view>
+          </view>
+    </view>
+
+    <!-- 作业安全注意事项 -->
+    <view class='line'>
+          <view class='item desc'>
+                <view class='title'>安全注意事项：</view>
+                <view class='value text'>圣诞节疯狂司法考试 nj</view>
+          </view>
+    </view>
+
+    <!-- 作业安全注意事项 -->
+    <view class='line'>
+          <view class='item desc'>
+                <view class='title'>作业所需资源：</view>
+                <view class='value text'>速度发货速度 nj</view>
+          </view>
+    </view>
+
+    
+    <!-- operator -->
+    <view class='person'>
+          <view class='someone'>
+                <view class='title'>作业人员： </view>
+                <view class='name'>{{operatorno.name}}</view> 
+          </view>
+
+          <view class='sure'>
+                <input type='text' placeholder='请输入人员编号' data-flag = 'operator' placeholder-class='placeHolder' bindinput='bindInput'></input><text class='search name' bindtap='search' data-flag = 'operator'>搜索</text>
+          </view>
+    </view>
+
+
+    <!-- operator -->
+    <view class='person'>
+          <view class='someone'>
+                <view class='title'>作业完成确认人： </view>
+                <view class='name'>{{surePersonno.name}}</view> 
+          </view>
+
+          <view class='sure'>
+                <input type='text' placeholder='请输入人员编号' data-flag = 'surePerson' placeholder-class='placeHolder' bindinput='bindInput'></input><text class='search name' bindtap='search' data-flag = 'surePerson'>搜索</text>
+          </view>
+    </view>
+
+
+    
+</view>
+
+<!-- buttons -->
+
+<view class='buttons'>
+      <view class='scan' bindtap='scanCode'>扫描条码</view>
+      <view class='photo' bindtap='photo'>拍照</view>
+</view>
+
+
+
+</view>

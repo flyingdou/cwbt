@@ -11,6 +11,37 @@ Page{
   height: 100%;
 }
 
+
+/* tab css */
+.tab_title{
+  margin-top: 1rpx;
+  display: flex;
+  justify-content: space-around;
+  background: white;
+}
+
+.tab_title_sub{
+  font-size: 28rpx;
+  color: #9f9f9f;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.tab_title_sub_active{
+  position: relative;
+  color: #313131;
+}
+
+.activeLine{
+  position: absolute;
+  bottom: 0;
+  left: 22%;
+  width: 70rpx;
+  height: 4rpx;
+  background: #67dde0;
+}
+
+
 .line{
   width: auto;
   height: auto;

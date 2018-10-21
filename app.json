@@ -1,8 +1,9 @@
 {
   "pages":[
+    "pages/workTicket/workTicket",
     "pages/index/index",
-    "pages/mine/mine",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/mine/mine"
   ],
   "window":{
     "backgroundTextStyle":"light",

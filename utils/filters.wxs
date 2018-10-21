@@ -1,0 +1,174 @@
+// 过滤器
+var filters = {
+  getImgURL: function (image) {
+    return 'https://fish.ecartoon.com.cn/static/img/' + image;
+  },
+  errorImage: function (image) {
+    if(!image || image == ''){
+      return 'https://fish.ecartoon.com.cn/picture/201808219303.png';
+    }
+    return 'https://fish.ecartoon.com.cn/picture/' + image;
+  },
+  getWeatherImgURL: function (weather_code) {
+    if (!weather_code) {
+      weather_code = 100;
+    }
+    var url = 'https://fish.ecartoon.com.cn/picture/weather/' + weather_code + '.png';
+    return url;
+  },
+  toFixed: function (num, length) {
+    if (!isNaN(num)) {
+      return parseFloat(num).toFixed(length);
+    } else {
+      return num;
+    }
+  },
+  overflow_hidden: function (text, length) {
+    if(text){
+      if (text.length > length) {
+        text = text.substring(0, length) + '...';
+      }
+    }
+    return text;
+  },
+  distance: function (distance) {
+    if(!distance){
+      return '0m';
+    }
+    if(parseInt(distance) > 1000){
+      distance = (parseInt(distance) / 1000);
+      return distance.toFixed(2) + 'km';
+    }
+    return distance + 'm';
+  },
+
+  distanceUpperCase: function (distance) {
+    if (!distance) {
+      return '0M';
+    }
+    if (parseInt(distance) > 1000){
+      distance = (parseInt(distance) / 1000);
+      return distance.toFixed(2) + 'KM';
+    }
+
+    return distance + 'M';
+  },
+
+  week_cn: function (value, type) {
+    var weekTextList = [
+      ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+      ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
+    ];
+    return weekTextList[type || 0][value || 0];
+  },
+  
+  getWeatherImg: function (value) {
+    var matching = {
+      "100": "100n",
+      "103": "103n",
+      "104": "104n",
+      "300": "300n",
+      "301": "301n",
+      "407": "407n"
+    }
+    return matching[value] || value;
+  },
+
+    hiddenName: function (name) {
+      return !name || name.length <= 2 ? name : 
+        name.substring(0, 1) + '**' + name.substring(name.length - 1, name.length)
+    },
+
+    /**
+     * 字符串null过滤
+     */
+    stringNull: function (str) {
+       if (str == "null" || str == null) {
+         return "暂无";
+       } else {
+         return str;
+       }
+    },
+
+    /**
+     * 手机号、银行卡号处理
+     */
+    getStarNumberStr: function (str,headLength,footLength) {
+       var headIndex = headLength;
+       var footIndex = str.length - footLength;
+       var starLength = str.length - headLength - footLength;
+       var head = str.substring(0,headIndex);
+       var footer = str.substring(footIndex, str.length);
+       var star = "";
+       for(var x = 0; x < starLength; x++) {
+         star += "*";
+       }
+       return head + star + footer;
+    },
+
+    /**
+     * 手机号、银行卡混合模式
+     */
+    getStarNumberStrMix: function (str) {
+     
+      if (str.length == 11) {
+        // 手机号，默认3，4
+        str = filters.getStarNumberStr(str,3,4);
+      }
+      if (str.length > 11) {
+        // 银行卡，默认5，4
+        str = filters.getStarNumberStr(str,5,4);
+      }
+
+      return str;
+    },
+
+    /**
+     * 价格过滤
+     */
+    getPriceStr: function (str) {
+      if (str == "" || str == "null" || str == null || str == "undefined" || str == undefined || parseInt(str) == 0) {
+         str = "免费";
+      } else {
+         str = "￥" + parseFloat(str).toFixed(2);
+      }
+      return str;
+    },
+
+    /**
+     * 月转年
+     */
+    month2Year: function (value) {
+      value = (value % 12) == 0 ? (value / 12) : (parseInt(value / 12) + 1);
+      return value;
+    },
+
+    /**
+     * 作业属性过滤
+     */
+    jobProperties: function (value) {
+      var index = parseInt(value) -1;
+      return ["点检", "维修", "检修"][index];
+    }
+
+}
+
+// 暴露接口
+module.exports = {
+  getImgURL: filters.getImgURL,
+  errorImage: filters.errorImage,
+  getWeatherImgURL: filters.getWeatherImgURL,
+  toFixed: filters.toFixed,
+  overflow_hidden: filters.overflow_hidden,
+  distance: filters.distance,
+  distanceUpperCase: filters.distanceUpperCase,
+  week_cn: filters.week_cn,
+  getWeatherImg: filters.getWeatherImg,
+  hiddenName: filters.hiddenName,
+  stringNull: filters.stringNull,
+  getStarNumberStr:filters.getStarNumberStr,
+  getStarNumberStrMix:filters.getStarNumberStrMix,
+  getPriceStr:filters.getPriceStr,
+  month2Year: filters.month2Year,
+  jobProperties: filters.jobProperties
+}
