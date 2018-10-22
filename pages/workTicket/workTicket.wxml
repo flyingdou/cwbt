@@ -98,16 +98,41 @@
     </view>
 
 
+    <!-- 照片预览 -->
+    <view class='preview'>
+          <view class='imgs'>
+                <view class='img' wx:for = '{{photos}}' bindtap = 'preview' bindlongtap='deletePic' data-index = '{{index}}' >
+                      <image src='{{item.tempFilePath}}' mode = 'aspectFill' ></image>
+                </view>
+          </view>
+    </view>
+
+
     
 </view>
 
 <!-- buttons -->
 
-<view class='buttons'>
-      <view class='scan' bindtap='scanCode'>扫描条码</view>
-      <view class='photo' bindtap='photo'>拍照</view>
-</view>
+  <view class='button'>
+        <view class='buttons'  wx:if = '{{!isScan || !isPhoto}}'>
+                <view class='scan' bindtap='scanCode'>扫描条码</view>
+                <view class='photo' bindtap='photo'>拍照</view>
+        </view>
 
+        <view wx:if = '{{isScan && isPhoto}}'>
 
+              <view wx:if = '{{!isUpload}}'>
+                    <view class='upload' bindtap='uploadPictures'>上传图片</view>
+              </view>
+
+              <view wx:if = '{{isUpload}}'>
+                    <view class='finsh' bindtap='finsh'>完成</view>
+              </view>
+        </view>
+
+       
+
+       
+  </view>
 
 </view>
