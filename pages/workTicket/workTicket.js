@@ -16,6 +16,7 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     obj.init();
   },
 
   /**
@@ -66,6 +67,40 @@ Page({
   onShareAppMessage: function () {
 
   },
+
+  /**
+   * 初始化页面数据
+   */
+  init: () => {
+    var id = obj.data.id;
+    id = 1;
+    var param = {
+      id:id
+    };
+    var reqUrl = app.constant.base_req_url + 'workTicket/getWorkTicketById.we';
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        requestUrl: 'wechat',
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          obj.setData({
+            workTicket: res.workTicket
+          });
+        } else {
+          console.log('程序报错！');
+        }
+      },
+      fail: (e) => {
+        console.log('数据请求失败！');
+      }
+    })
+  },
+
    
   /**
    * 取输入框的值
@@ -142,9 +177,20 @@ Page({
        scanType:['barCode'],
        success: (res) => {
          isScan = true;
-         obj.setData({
-          isScan: isScan
-         });
+         if (res.result == obj.data.workTicket.code) {
+           var scanTime = obj.getNowFormatDate();
+           obj.setData({
+             isScan: isScan,
+             scanTime: scanTime
+           });
+         } else {
+           wx.showModal({
+             title: '提示',
+             content: '您当前所扫条码，不属于当前任务中的设备！',
+             showCancel: false
+           })
+           return;
+         }
          console.log(res);
        }
      })
@@ -310,8 +356,90 @@ Page({
    * finsh 保存数据
    */
   finsh: () => {
+    // 校验数据
+    var operator = obj.data.operatorno;
+    if (!operator) {
+      wx.showModal({
+        title: '提示',
+        content: '请补充作业人员！',
+        showCancel:false
+      })
+      return;
+    }
+    var surePerson = obj.data.surePersonno;
+    if (!surePerson) {
+      wx.showModal({
+        title: '提示',
+        content: '请补充作业完成确认人！',
+        showCancel: false
+      })
+      return;
+    }
     var photos = obj.data.photos;
-    console.log(photos);
+    for (var x = 0; x <photos.length; x++) {
+      delete photos[x]['tempFilePath'];
+    }
+    
+    var remark = obj.data.remark;
+    
+    var param = {
+      id: obj.data.workTicket.id,
+      operator: operator.no,
+      confirmPerson: surePerson.no,
+      devicePhotos: photos,
+      scanTime: obj.data.scanTime,
+      remark: remark
+    };
+
+    console.log(param);
+    var reqUrl = app.constant.base_req_url + 'workTicket/finsh.we';
+    // 发起微信请求
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        requestType:'wechat',
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          wx.showModal({
+            title: '提示',
+            content: '工作完成，有待上级人员确认！',
+            showCancel: false
+          })
+          wx.navigateTo({
+            url: '../../pages/index/index',
+          })
+        } else {
+          console.log('程序异常！');
+        }
+      },
+      fail: (e) => {
+        console.log('网络异常！');
+      }
+
+    })
+
+  },
+
+  test: () => {
+    // var dou = [
+    //   { "name": 'dou', "id": 1, "age": 18 }, 
+    //   { "name": 'dou', "id": 2, "age": 19 },
+    //   { "name": 'dou', "id": 3, "age": 19 }
+    //   ];
+    // for (var d = 0; d < dou.length; d++) {
+    //   delete dou[d]['name'];
+    // }
+    // console.log(dou);
+    var dou = obj.data.remark;
+    var param = {
+      dou:dou
+    };
+    console.log(JSON.stringify(param));
   }
+
 
 })

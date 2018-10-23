@@ -2,8 +2,6 @@
 App({
   onLaunch: function () {
    
-
-   
    
   },
   constant: {
