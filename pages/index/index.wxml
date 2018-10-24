@@ -29,7 +29,7 @@
         <swiper current='{{currentIndex}}' bindchange='changeCurrentIndex' style='height:{{swiperHeight}}rpx'>
         <!-- 工作任务 -->
         <swiper-item>
-              <view class='line' wx:for = "{{taskList}}" wx:for-item = "task">
+              <view class='line' wx:for = "{{taskList}}" wx:for-item = "task" bindtap='gotoTask' data-index = '{{index}}' >
                 <view class='upper'>
                         <!-- 设备名称 -->
                         <view class='deviceName title'>设备名称: <text class='value'>{{task.name}}</text></view>

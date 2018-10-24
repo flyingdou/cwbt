@@ -15,6 +15,10 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    var id = options.id;
+    obj.setData({
+      id:id
+    });
     obj.init();
 
   },
@@ -518,8 +522,18 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-          wx.navigateTo({
-            url: '../../pages/index/index',
+          wx.showModal({
+            title: '提示',
+            content: '成功提交点检反馈！',
+            showCancel: false,
+            success: (resx) => {
+              if (resx.confirm) {
+                wx.reLaunch({
+                  url: '../../pages/index/index',
+                })
+              }
+            },
+            
           })
         } else {
           console.log('程序异常');

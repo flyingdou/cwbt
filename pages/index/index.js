@@ -125,6 +125,29 @@ Page({
         }
       })
       
+  },
+
+  /**
+   * 跳转工作票或者点检反馈
+   */
+  gotoTask: (e) => {
+    var index = e.currentTarget.dataset.index;
+    var task = obj.data.taskList[index];
+    var url = '';
+    if (task.job_properties == 1) {
+        url = '../../pages/checkFeedback/checkFeedback';
+    } else {
+        url = '../../pages/workTicket/workTicket';
+    }
+    url = url + '?id=' + task.id;
+
+    // 跳转页面
+    wx.navigateTo({
+      url: url,
+    })
+
+    
+
   }
 
 })

@@ -16,6 +16,10 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     var id = options.id;
+     obj.setData({
+       id:id
+     });
      obj.init();
   },
 
@@ -73,7 +77,7 @@ Page({
    */
   init: () => {
     var id = obj.data.id;
-    id = 1;
+    // id = 1;
     var param = {
       id:id
     };
@@ -407,7 +411,15 @@ Page({
           wx.showModal({
             title: '提示',
             content: '工作完成，有待上级人员确认！',
-            showCancel: false
+            showCancel: false,
+            success: (resx) => {
+              if (resx.confirm) {
+                wx.reLaunch({
+                  url: '../../pages/index/index',
+                })
+              }
+            }
+
           })
           wx.navigateTo({
             url: '../../pages/index/index',
