@@ -114,9 +114,17 @@
     <!-- 照片预览 -->
     <view class='preview'>
           <view class='imgs'>
+                <!-- 照片 -->
                 <view class='img' wx:for = '{{photos}}' bindtap = 'preview' bindlongtap='deletePic' data-index = '{{index}}' >
                       <image src='{{item.tempFilePath}}' mode = 'aspectFill' ></image>
                 </view>
+
+                <!-- 添加照片按钮 -->
+                <view class='add' bindtap='photo' wx:if = '{{!isUpload}}'>
+                      <image src='../../icon/add.png' mode='aspectFill' ></image>
+                </view>
+
+
           </view>
     </view>
 

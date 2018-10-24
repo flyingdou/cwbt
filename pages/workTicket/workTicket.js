@@ -207,6 +207,7 @@ Page({
   photo: () => {
     var isPhoto = false;
     var photo = {};
+    var photos = obj.data.photos;
     wx.chooseImage({
       count:1,
       sizeType:['compressed'],
@@ -217,7 +218,7 @@ Page({
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
         console.log(res);
-        var photos = obj.data.photos;
+        
         photos.push(photo);
         obj.setData({
           isPhoto: isPhoto,

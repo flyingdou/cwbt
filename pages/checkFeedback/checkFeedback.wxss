@@ -156,3 +156,8 @@ image{
   border: 2rpx solid green;
   margin-right: 25rpx;
 }
+
+.add{
+  width: 100rpx;
+  height: 100rpx;
+}

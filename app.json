@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/checkFeedback/checkFeedback",
     "pages/workTicket/workTicket",
+    "pages/checkFeedback/checkFeedback",
     "pages/logs/logs",
     "pages/mine/mine"
   ],
