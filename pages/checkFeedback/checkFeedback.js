@@ -125,7 +125,7 @@ Page({
 
     // 加载页面初始数据
     var reqUrl = app.constant.base_req_url + 'deviceCheck/getCheckById.we'
-    var id = 1;
+    var id = obj.data.id;
     var param = {
         id:id
     };
