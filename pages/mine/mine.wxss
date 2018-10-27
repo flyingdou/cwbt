@@ -1,1 +1,13 @@
-/* pages/mine/mine.wxss */
+Page{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #f0f0f2;
+}
+
+.content{
+  width: 100%;
+  height: 100%;
+  font-size: 28rpx;
+}
