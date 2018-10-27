@@ -1,6 +1,8 @@
 {
   "pages":[
+    "pages/test/test",
     "pages/index/index",
+    "pages/uploadPic/uploadPic",
     "pages/workTicket/workTicket",
     "pages/checkFeedback/checkFeedback",
     "pages/logs/logs",

@@ -1,0 +1,64 @@
+Page{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #f0f0f2;
+}
+
+image{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.content{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+
+.blocks{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.block{
+  width: 200rpx;
+  height: 200rpx;
+  text-align: center;
+  line-height: 200rpx;
+  font-size: 32rpx;
+  color: white;
+}
+
+.task{
+  background: #3AA9F8;
+}
+
+.meetting{
+  background: #2BCFB4;
+}
+
+.random{
+  background: #FBAE38;
+}
+
+.pics{
+  position: fixed;
+  bottom: 10rpx;
+  left: 0rpx;
+}
+
+.pic{
+  width: 700rpx;
+  height: 800rpx;
+  background: url('https://fish.ecartoon.com.cn/picture/201810274602.jpg') no-repeat;
+  background-size: 100% 100%; 
+  font-size: 28rpx;
+  color: red;
+  text-align: center;
+}

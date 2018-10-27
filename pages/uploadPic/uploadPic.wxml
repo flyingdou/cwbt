@@ -1,0 +1,5 @@
+<view class = 'content'>
+
+   <view class='upload' bindtap='photo'>选择图片上传</view>
+ 
+</view>
