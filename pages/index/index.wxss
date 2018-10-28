@@ -1,9 +1,15 @@
 Page{
-  padding: 0;
   margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   background: #f0f0f2;
+}
+
+image{
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .content{
@@ -12,63 +18,46 @@ Page{
 }
 
 
-/* tab css */
-.tab_title{
-  margin-top: 1rpx;
+.blocks{
+  padding: 20rpx 5%;
   display: flex;
-  justify-content: space-around;
-  background: white;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.tab_title_sub{
-  font-size: 28rpx;
-  color: #9f9f9f;
+.block{
+  width: 200rpx;
+  height: 200rpx;
   text-align: center;
-  padding: 20rpx 0;
+  line-height: 200rpx;
+  font-size: 32rpx;
+  color: white;
 }
 
-.tab_title_sub_active{
-  position: relative;
-  color: #313131;
+.task{
+  background: #3AA9F8;
 }
 
-.activeLine{
-  position: absolute;
-  bottom: 0;
-  left: 22%;
-  width: 70rpx;
-  height: 4rpx;
-  background: #67dde0;
+.meetting{
+  background: #2BCFB4;
 }
 
-
-.line{
-  width: auto;
-  height: auto;
-  margin: 20rpx;
-  padding: 20rpx;
-  background: white;
-  border-radius: 10rpx;
+.random{
+  background: #FBAE38;
 }
 
-.upper{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.pics{
+  width: 90%;
+  height: 80%;
+  padding: 0 40rpx;
 }
 
-.next{
-  padding-top: 30rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title{
+.pic{
+  width: 100%;
+  height: 100%;
+  background: url('https://fish.ecartoon.com.cn/picture/201810274602.jpg') no-repeat;
+  background-size: 100% 100%; 
   font-size: 28rpx;
-}
-
-.value{
-  font-size: 24rpx;
-  color: #999;
+  color: red;
+  text-align: center;
 }

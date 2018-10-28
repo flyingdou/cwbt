@@ -1,0 +1,65 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
+<!-- 页面开始 -->
+<view class='content'>
+
+        <!-- tab_title -->
+        <view class='tab_title'>
+                <!-- tab_title_sub -->
+                <view class='tab_title_sub {{currentIndex == 0 ? "tab_title_sub_active" : ""}}' bindtap='changeCurrentIndex' data-index = '0' >
+                工作任务
+                        <view class='activeLine' wx:if = '{{currentIndex == 0}}'></view>
+                </view>
+
+                <!-- tab_title_sub -->
+                <view class='tab_title_sub {{currentIndex == 1 ? "tab_title_sub_active" : ""}}' bindtap='changeCurrentIndex' data-index = '1' >
+                会议通知
+                        <view class='activeLine' wx:if = '{{currentIndex == 1}}'></view>
+                </view>
+
+                <!-- tab_title_sub -->
+                <view class='tab_title_sub {{currentIndex == 2 ? "tab_title_sub_active" : ""}}' bindtap='changeCurrentIndex' data-index = '2' >
+                临时任务
+                        <view class='activeLine' wx:if = '{{currentIndex == 2}}'></view>
+                </view>
+        </view>
+
+
+        <!-- swiper -->
+        <swiper current='{{currentIndex}}' bindchange='changeCurrentIndex' style='height:{{swiperHeight}}rpx'>
+        <!-- 工作任务 -->
+        <swiper-item>
+              <view class='line' wx:for = "{{taskList}}" wx:for-item = "task" bindtap='gotoTask' data-index = '{{index}}' >
+                <view class='upper'>
+                        <!-- 设备名称 -->
+                        <view class='deviceName title'>设备名称: <text class='value'>{{task.name}}</text></view>
+                        <!-- 作业部位 -->
+                        <view class='devicePart title'>作业部位：<text class='value'>{{task.device_part}}</text></view>
+                </view>
+
+                <view class='next'>
+                        <!-- 计划时间 -->
+                        <view class='planTime title'>计划作业时间: <text class='value'>{{task.plan_job_time}}</text></view>
+                        <!-- 作业属性 -->
+                        <view class='jobAttribute title'>作业属性: <text class='value'>{{filter.jobProperties(task.job_properties)}}</text></view>
+                </view>
+            </view>
+        
+        </swiper-item>
+
+        <!-- 会议通知 -->
+        <swiper-item>会议通知</swiper-item>
+
+        <!-- 临时任务 -->
+        <swiper-item>临时任务</swiper-item>
+        
+        
+        </swiper>
+
+
+
+
+
+
+      
+</view>
