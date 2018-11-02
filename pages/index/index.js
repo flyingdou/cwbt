@@ -103,6 +103,18 @@ Page({
   },
 
   /**
+   * 保存用户输入的账号并检查该账号有没有微信小程序标识
+   */
+  checkAccountWechatId: (e) => {
+    // 保存账号
+    obj.data.account = e.detail.value;
+    // 根据账号查询微信标识(达到手机号码11位)
+    if (obj.data.account.length == 11) {
+      // ...
+    }
+  },
+
+  /**
    * 保存表单参数
    */
   saveFormParam: (e) => {

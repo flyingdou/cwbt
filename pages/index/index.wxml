@@ -25,7 +25,7 @@
         账号
       </view>
       <view class='form-right'>
-        <input type='text' class='form-input' placeholder='请输入账号' bindinput='saveFormParam' data-key='account'></input>
+        <input type='text' class='form-input' placeholder='请输入账号' bindinput='checkAccountWechatId' data-key='account'></input>
       </view>
     </view>
     <view class='form-line'>
