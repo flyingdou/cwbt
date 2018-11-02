@@ -1,4 +1,4 @@
-<view class = 'content' >
+<view class = 'content' wx:if = '{{memberId}}'>
      <view class='blocks'>
             <view class='block task' bindtap='goto' data-type = 'task'>工作任务</view>
             <view class='block meetting' bindtap='goto' data-type = 'meetting' >会议通知</view>
@@ -9,4 +9,35 @@
                CWBT掌中宝
           </view>
      </view>
+</view>
+
+<view class = 'login' wx:if='{{!memberId}}'>
+  <view class='banner'>
+    <image src='https://fish.ecartoon.com.cn/picture/201810274602.jpg'></image>
+  </view>
+
+  <!-- 填充高度 -->
+  <view style='height: 40rpx;'></view>
+
+  <view class='form'>
+    <view class='form-line'>
+      <view class='form-left'>
+        账号
+      </view>
+      <view class='form-right'>
+        <input type='text' class='form-input' placeholder='请输入账号' bindinput='saveFormParam' data-key='account'></input>
+      </view>
+    </view>
+    <view class='form-line'>
+      <view class='form-left'>
+        密码
+      </view>
+      <view class='form-right'>
+        <input type='password' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password'></input>
+      </view>
+    </view>
+    <!-- 填充高度 -->
+    <view style='height: 40rpx;'></view>
+    <view class='from-button' bindtap='login'>登录</view>
+  </view>
 </view>

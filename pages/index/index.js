@@ -14,6 +14,12 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+
+     if (app.constant.memberId) {
+       obj.setData({
+         memberId: app.constant.memberId
+       })
+     }
   },
 
   /**
@@ -94,6 +100,34 @@ Page({
       wx.navigateTo({
         url: url,
       })
+  },
+
+  /**
+   * 保存表单参数
+   */
+  saveFormParam: (e) => {
+    var key = e.currentTarget.dataset.key;
+    var value = e.detail.value;
+    obj.data[key] = value;
+  },
+
+  /**
+   * 登录
+   */
+  login: () => {
+    wx.showLoading({
+      title: '处理中,请稍候',
+      mask: true,
+    });
+    
+    // 模拟调用服务端
+    setTimeout(function () {
+      app.constant.memberId = 1;
+      obj.setData({
+        memberId: 1
+      });
+      wx.hideLoading();
+    }, 1000);
   }
 
 })
