@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
@@ -13,13 +14,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     obj = this;
+    obj = this;
 
-     if (app.constant.memberId) {
-       obj.setData({
-         memberId: app.constant.memberId
-       })
-     }
+    // 判断用户是否登录
+    if (app.constant.memberId) {
+      obj.setData({
+        memberId: app.constant.memberId
+      })
+    }
+
+    // 计算图标宽度
+    var systemInfo = util.getSystemInfo();
+    var proportion = systemInfo.proportion;
+    var accountIconWidth = 18 * proportion;
+    var passwordIconWidth = 15 * proportion;
+    obj.setData({
+      accountIconWidth: accountIconWidth,
+      passwordIconWidth: passwordIconWidth
+    });
   },
 
   /**

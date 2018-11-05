@@ -14,6 +14,20 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+/**
+ * 获取屏幕高度(px),宽度(px),转换成px的比例
+ */
+function getSystemInfo() {
+  var systemInfo = wx.getSystemInfoSync();
+  var windowWidth = systemInfo.windowWidth;
+  var windowHeight = systemInfo.windowHeight;
+  var proportion = 750 / windowWidth;
+  var windowWidthRpx = windowWidth * proportion;
+  var windowHeightRpx = windowHeight * proportion;
+  return { windowWidth, windowHeight, proportion, windowWidthRpx, windowHeightRpx }
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  getSystemInfo: getSystemInfo
 }

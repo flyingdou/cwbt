@@ -12,32 +12,30 @@
 </view>
 
 <view class = 'login' wx:if='{{!memberId}}'>
+  <!-- 填充高度 -->
+  <view style='height: 80rpx;'></view>
+
+  <!-- logo -->
   <view class='banner'>
-    <image src='https://fish.ecartoon.com.cn/picture/201810274602.jpg'></image>
+    <image src='https://fish.ecartoon.com.cn/picture/201810274602.jpg' mode='aspectFill'></image>
   </view>
 
   <!-- 填充高度 -->
-  <view style='height: 40rpx;'></view>
+  <view style='height: 80rpx;'></view>
 
   <view class='form'>
+    <!-- 填充高度 -->
+    <view style='height: 100rpx;'></view>
     <view class='form-line'>
-      <view class='form-left'>
-        账号
-      </view>
-      <view class='form-right'>
-        <input type='text' class='form-input' placeholder='请输入账号' bindinput='checkAccountWechatId' data-key='account'></input>
-      </view>
+      <image class='account-icon' src='../../icon/zhanghao@2x.png' mode='widthFix'></image>
+      <input type='text' class='form-input' placeholder='请输入手机号码' bindinput='checkAccountWechatId' data-key='account'></input>
     </view>
     <view class='form-line'>
-      <view class='form-left'>
-        密码
-      </view>
-      <view class='form-right'>
-        <input type='password' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password'></input>
-      </view>
+      <image class='password-icon' src='../../icon/mima@2x.png' mode='widthFix'></image>
+      <input type='password' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password'></input>
     </view>
     <!-- 填充高度 -->
-    <view style='height: 40rpx;'></view>
+    <view style='height: 70rpx;'></view>
     <view class='from-button' bindtap='login'>登录</view>
   </view>
 </view>
