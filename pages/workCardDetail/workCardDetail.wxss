@@ -52,6 +52,7 @@ image{
   text-align: left;
   background:rgba(245,245,245,1);
   width: 96%;
+  margin-top: 20rpx;
 }
 
 .placeholderClass{
@@ -62,6 +63,7 @@ image{
 
 .preview{
   overflow: hidden;
+  margin-top: 40rpx;
 }
 
 .pic{
