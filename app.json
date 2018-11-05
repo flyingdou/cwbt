@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/Tlist/Tlist",
     "pages/taskList/taskList",
     "pages/uploadPic/uploadPic",
     "pages/workTicket/workTicket",
@@ -19,14 +20,14 @@
       {
         "pagePath": "pages/index/index",
         "text": "工作任务",
-        "iconPath":"icon/task.png",
-        "selectedIconPath":"icon/task_selected.png"
+        "iconPath":"icon/task@2x.png",
+        "selectedIconPath":"icon/task_selected@2x.png"
       },
       {
         "pagePath": "pages/mine/mine",
         "text": "我的",
-        "iconPath":"icon/me.png",
-        "selectedIconPath":"icon/me_selected.png"
+        "iconPath":"icon/me@2x.png",
+        "selectedIconPath":"icon/me_selected@2x.png"
       }
     ]
   }

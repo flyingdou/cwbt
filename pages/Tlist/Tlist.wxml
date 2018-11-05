@@ -1,0 +1,47 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- 列表 -->
+      <view class='List'>
+           <!-- 每一个 -->
+           <view class='pre'>
+                 
+                 <view class='line div'>
+                       <view class='title'>设备名称</view>
+                       <view class='value'>柴油机</view>
+                 </view>
+
+                 <view class='line2 div'>
+                       <view class='line'>
+                             <view class='title'>作业部位</view>
+                             <view class='value'>部位一</view>
+                       </view>
+
+                       <view class='line'>
+                             <view class='title'>作业属性</view>
+                             <view class='value'>维修</view>
+                       </view>
+
+                 </view>
+
+                 <view class='line div'>
+                       <view class='fill'></view>
+                 </view>
+
+                 <view class='line div'>
+                      <view class='title'>作业时间</view>
+                      <view class='value'>2018-10-31</view>
+                 </view>
+
+                 <!-- 图标 -->
+                 <view class='tag'>
+                      <view class='tagDiv'>
+                            <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                            <view class='statusFont'>进行中</view>
+                      </view>
+                 </view>
+
+           </view>
+
+      </view>
+
+</view>
