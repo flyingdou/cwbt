@@ -1,10 +1,11 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/workCardDetail/workCardDetail",
+    "pages/workCard/workCard",
     "pages/Tlist/Tlist",
     "pages/taskList/taskList",
     "pages/uploadPic/uploadPic",
-    "pages/workTicket/workTicket",
     "pages/checkFeedback/checkFeedback",
     "pages/logs/logs",
     "pages/mine/mine"

@@ -1,0 +1,113 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- block1 -->
+      <view class='block1'>
+
+            <view class='line'>
+                  <view class='title'>作业时间</view>
+                  <view class='value'>2018-11-06</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>作业部位</view>
+                  <view class='value'>部位一</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>设备编码</view>
+                  <view class='value'>123456789</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>设备名称</view>
+                  <view class='value'>柴油机</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>作业内容</view>
+                  <view class='value'>清理油污</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>作业部位</view>
+                  <view class='value'>部位一</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>注意事项</view>
+                  <view class='value'>佩戴绝缘手套，防止触电</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>作业所需资源</view>
+                  <view class='value'>绝缘手套</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>设备状况</view>
+                  <view class='item'>
+                        <view class='value'>正常</view>
+                        <view class='moreIcon'>
+                              <image src='../../icon/more@2x.png'></image>
+                        </view>
+                  </view>
+            </view>
+            
+            <!-- error -->
+            <view class='error'>
+                  <view class='line'>
+                        <view class='title'>维修方式</view>
+                        <view class='item'>
+                              <view class='value'>自维修</view>
+                              <view class='moreIcon'>
+                                    <image src='../../icon/more@2x.png'></image>
+                              </view>
+                        </view>
+                  </view>
+
+                  <view class='remark'>
+                        <view class='title'>异常描述</view>
+                        <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass'></textarea>
+                  </view>
+
+            </view>
+
+            <view class='remark'>
+                  <view class='title'>备注</view>
+                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass'></textarea>
+                  
+            </view>
+
+            <!-- preview -->
+            <view class='preview'>
+                  <view class='pic'>
+                        <image src='https://fish.ecartoon.com.cn/picture/201810298982.jpg' mode='aspectFill' ></image>
+                  </view>
+
+                  <view class='pic'>
+                        <image src='https://fish.ecartoon.com.cn/picture/201810298982.jpg' mode='aspectFill' ></image>
+                  </view>
+
+                  <view class='pic'>
+                        <image src='../../icon/add.png' mode='aspectFill' ></image>
+                  </view>
+            
+            </view>
+
+            
+            <!-- 填充高度 -->
+            <view class='fill'></view>
+
+
+            <!-- 底部按钮 -->
+            <view class='buttons'>
+                  <view class='button scanButton'>扫描条码</view>
+                  <view class='button photoButton'>拍照</view>
+            </view>
+      
+      </view>
+
+
+
+
+</view>
