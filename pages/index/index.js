@@ -88,30 +88,19 @@ Page({
    * 前往工作任务列表
    */
   goto: (e) => {
-     var type = e.currentTarget.dataset.type;
-     var url = '';
-     if (type == 'meetting') {
-       wx.showModal({
-         title: '提示',
-         content: '暂无会议通知！',
-         showCancel: false
-       })
-       return;
-     }
-      if (type == 'random') {
-        wx.showModal({
-          title: '提示',
-          content: '暂无临时任务！',
-          showCancel: false
-        })
-        return;
-      }
-      if (type == 'task') {
-          url = '../../pages/taskList/taskList';
-      }
+    var page = e.currentTarget.dataset.page;
+    var message = e.currentTarget.dataset.message;
+    if (page && page != '') {
       wx.navigateTo({
-        url: url,
-      })
+        url: `../${page}/${page}`,
+      });
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: message,
+        showCancel: false
+      });
+    }
   },
 
   /**

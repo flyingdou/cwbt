@@ -1,16 +1,4 @@
-<view class = 'content' wx:if = '{{memberId}}'>
-     <view class='blocks'>
-            <view class='block task' bindtap='goto' data-type = 'task'>工作任务</view>
-            <view class='block meetting' bindtap='goto' data-type = 'meetting' >会议通知</view>
-            <view class='block random' bindtap='goto' data-type = 'random' >临时任务</view>
-     </view>
-     <view class='pics'>
-          <view class='pic'>
-               CWBT掌中宝
-          </view>
-     </view>
-</view>
-
+<!-- 登录页面 -->
 <view class = 'login' wx:if='{{!memberId}}'>
   <!-- 填充高度 -->
   <view style='height: 80rpx;'></view>
@@ -23,19 +11,54 @@
   <!-- 填充高度 -->
   <view style='height: 80rpx;'></view>
 
+  <!-- 表单 -->
   <view class='form'>
     <!-- 填充高度 -->
     <view style='height: 100rpx;'></view>
+    <!-- 账号输入框 -->
     <view class='form-line'>
       <image class='account-icon' src='../../icon/zhanghao@2x.png' mode='widthFix'></image>
       <input type='text' class='form-input' placeholder='请输入手机号码' bindinput='checkAccountWechatId' data-key='account'></input>
     </view>
+    <!-- 密码输入框 -->
     <view class='form-line'>
       <image class='password-icon' src='../../icon/mima@2x.png' mode='widthFix'></image>
       <input type='password' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password'></input>
     </view>
     <!-- 填充高度 -->
     <view style='height: 70rpx;'></view>
+    <!-- 登录按钮 -->
     <view class='from-button' bindtap='login'>登录</view>
   </view>
 </view>
+
+<!-- 船员操作首页 -->
+<view class = 'content' wx:if = '{{memberId}}'>
+  <!-- 顶部背景 -->
+    <view class='background'></view>
+    <!-- 操作按钮块 -->
+    <view class='blocks'>
+      <view class='block' bindtap='goto' data-page='taskList' data-message='暂无工作任务！'>
+        <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
+        <view class='block-text'>工作任务</view>
+        <view class='block-count'>10</view>
+      </view>
+      <view class='block' bindtap='goto' data-page='' data-message='暂无临时检查！'>
+        <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
+        <view class='block-text'>临时检查</view>
+        <view class='block-count'>5</view>
+      </view>
+      <view class='block' bindtap='goto' data-page='' data-message='暂无临时任务！'>
+        <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
+        <view class='block-text'>临时任务</view>
+        <view class='block-count'>5</view>
+      </view>
+    </view>
+    <!-- 填充高度 -->
+    <view style='height: 120rpx;'></view>
+    <!-- 底部图片 -->
+    <view class='pics'>
+      <image src='https://fish.ecartoon.com.cn/picture/201810274602.jpg' mode='aspectFill'></image>
+    </view>
+</view>
+
