@@ -1,4 +1,7 @@
-// 
+var app = getApp();
+var util = require('../../utils/util.js');
+var obj = {};
+
 Page({
 
   /**
@@ -12,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -26,7 +29,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 如果用户未登录则返回登录页面
+    if (!app.constant.memberId) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录',
+        showCancel: false,
+        complete: () => {
+          wx.switchTab({
+            url: '../index/index'
+          });
+        }
+      });
+    }
   },
 
   /**
@@ -58,9 +73,42 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 跳转页面
    */
-  onShareAppMessage: function () {
+  goto: (e) => {
+    var page = e.currentTarget.dataset.page;
+    var message = e.currentTarget.dataset.message;
+    if (page && page != '') {
+      wx.navigateTo({
+        url: `../${page}/${page}`,
+      });
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: message,
+        showCancel: false
+      });
+    }
+  },
 
+  /**
+   * 注销
+   */
+  cancellation: () => {
+    wx.showModal({
+      title: '提示',
+      content: '是否确定注销？',
+      success: (res) => {
+        if (res.confirm) {
+          // 清除用户记录
+          app.constant.memberId = null;
+          // 返回登录页面
+          wx.switchTab({
+            url: '../index/index'
+          });
+        }
+      }
+    });
   }
+
 })

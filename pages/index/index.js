@@ -16,13 +16,6 @@ Page({
   onLoad: function (options) {
     obj = this;
 
-    // 判断用户是否登录
-    if (app.constant.memberId) {
-      obj.setData({
-        memberId: app.constant.memberId
-      })
-    }
-
     // 计算图标宽度
     var systemInfo = util.getSystemInfo();
     var proportion = systemInfo.proportion;
@@ -45,7 +38,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 判断用户是否登录
+    if (app.constant.memberId) {
+      obj.setData({
+        memberId: app.constant.memberId
+      })
+    } else {
+      obj.setData({
+        memberId: null
+      });
+    }
   },
 
   /**
@@ -77,15 +79,7 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-
-  /**
-   * 前往工作任务列表
+   * 跳转页面
    */
   goto: (e) => {
     var page = e.currentTarget.dataset.page;

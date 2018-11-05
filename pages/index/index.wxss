@@ -133,6 +133,7 @@ image{
   position: absolute;
   top: 0;
   right: 0;
+  margin-top: -14rpx;
   padding: 4rpx;
   min-width: 24rpx;
   font-size: 20rpx;

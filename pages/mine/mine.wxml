@@ -1,1 +1,61 @@
-<view class = 'content'>我的</view>
+<!-- 我的页面 -->
+<view class = 'content'>
+  <!-- 顶部背景 -->
+  <view class='background'></view>
+  <!-- 我的信息 -->
+  <view class='block-card'>
+    <view class='user-info'>
+      <view class='user-image'>
+        <open-data type='userAvatarUrl'></open-data>
+      </view>
+      <view class='user-other-info'>
+        <view class='user-nick'>
+          <image class='user-nick-icon' src='../../icon/nick@2x.png' mode='widthFix'></image>
+          <view class='user-nick-text'>
+            <open-data type='userNickName'></open-data>
+          </view>
+        </view>
+        <view class='user-address'>
+          <image class='user-address-icon' src='../../icon/address@2x.png' mode='widthFix'></image>
+          <view class='user-address-text'>
+            <open-data type='userProvince' lang="zh_CN"></open-data> - <open-data type='userCity' lang="zh_CN"></open-data>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 填充高度 -->
+    <view style='height: 60rpx;'></view>
+    <!-- 操作按钮块 -->
+    <view class='blocks'>
+      <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
+        <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
+        <view class='block-text'>完成任务</view>
+        <view class='block-count'>10</view>
+      </view>
+      <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
+        <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
+        <view class='block-text'>设定推送</view>
+        <!-- <view class='block-count'>5</view> -->
+      </view>
+      <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
+        <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
+        <view class='block-text'>设备档案</view>
+        <!-- <view class='block-count'>5</view> -->
+      </view>
+    </view>
+  </view>
+  <!-- 填充高度 -->
+  <view style='height: 260rpx;'></view>
+  <!-- 底部操作栏 -->
+  <view class='tool-line'>
+    <view class='line' bindtap='cancellation'>
+      <view class='line-left'>
+        <image class='line-left-icon' src='../../icon/cancellation.png' mode='widthFix'></image>
+        <view class='line-left-text'>注销</view>
+      </view>
+      <view class='line-right'>
+        <image class='line-right-icon' src='../../icon/more@2x.png' mode='widthFix'></image>
+      </view>
+    </view>
+  </view>
+</view>
