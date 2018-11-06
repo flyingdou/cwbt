@@ -27,7 +27,19 @@ function getSystemInfo() {
   return { windowWidth, windowHeight, proportion, windowWidthRpx, windowHeightRpx }
 }
 
+/**
+ * 提示
+ */
+function tipsMessage (message) {
+  wx.showModal({
+    title: '提示',
+    content: message,
+    showCancel: false
+  });
+}
+
 module.exports = {
   formatTime: formatTime,
-  getSystemInfo: getSystemInfo
+  getSystemInfo: getSystemInfo,
+  tipsMessage: tipsMessage
 }

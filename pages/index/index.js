@@ -39,13 +39,13 @@ Page({
    */
   onShow: function () {
     // 判断用户是否登录
-    if (app.constant.memberId) {
+    if (app.constant.userId) {
       obj.setData({
-        memberId: app.constant.memberId
+        userId: app.constant.userId
       })
     } else {
       obj.setData({
-        memberId: null
+        userId: null
       });
     }
   },
@@ -105,7 +105,27 @@ Page({
     obj.data.account = e.detail.value;
     // 根据账号查询微信标识(达到手机号码11位)
     if (obj.data.account.length == 11) {
-      // ...
+      wx.request({
+        url: app.constant.base_req_url + 'cwbtMP/checkWechatMPIdByUser.we',
+        data: {
+          account: obj.data.account
+        },
+        success: (res) => {
+          if (res.data.code <= 0) {
+            obj.setData({
+              isGetUserInfo: true
+            });
+            wx.login({
+              success: (res) => {
+                obj.data.code = res.code;
+              }
+            });
+          }
+        },
+        fail: (e) => {
+          console.log(e);
+        }
+      });
     }
   },
 
@@ -121,20 +141,45 @@ Page({
   /**
    * 登录
    */
-  login: () => {
+  login: (e) => {
     wx.showLoading({
       title: '处理中,请稍候',
       mask: true,
     });
-    
-    // 模拟调用服务端
-    setTimeout(function () {
-      app.constant.memberId = 1;
-      obj.setData({
-        memberId: 1
-      });
-      wx.hideLoading();
-    }, 1000);
+    // 获取参数,生成json
+    var param = {};
+    if (e.type == 'getuserinfo') {
+      param = e.detail;
+    }
+    if (obj.data.code) {
+      param.code = obj.data.code;
+    }
+    // 调用服务端登录接口
+    wx.request({
+      url: app.constant.base_req_url + 'cwbtMP/login.we',
+      data: {
+        userName: obj.data.account,
+        pwd: obj.data.password,
+        json: JSON.stringify(param)
+      },
+      success: (res) => {
+        wx.hideLoading();
+        if (res.data.success) {
+          util.tipsMessage('登录成功！');
+          app.constant.userId = res.data.userId;
+          obj.setData({
+            userId: res.data.userId
+          });
+        } else {
+          util.tipsMessage('账号或密码错误！');
+        }
+      },
+      fail: (e) => {
+        wx.hideLoading();
+        console.log(e);
+        util.tipsMessage('网络异常，请稍后再试');
+      }
+    });
   }
 
 })

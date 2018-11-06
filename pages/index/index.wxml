@@ -1,5 +1,5 @@
 <!-- 登录页面 -->
-<view class = 'login' wx:if='{{!memberId}}'>
+<view class = 'login' wx:if='{{!userId}}'>
   <!-- 填充高度 -->
   <view style='height: 80rpx;'></view>
 
@@ -18,7 +18,7 @@
     <!-- 账号输入框 -->
     <view class='form-line'>
       <image class='account-icon' src='../../icon/zhanghao@2x.png' mode='widthFix'></image>
-      <input type='text' class='form-input' placeholder='请输入手机号码' bindinput='checkAccountWechatId' data-key='account'></input>
+      <input type='number' class='form-input' placeholder='请输入手机号码' bindinput='checkAccountWechatId' data-key='account'></input>
     </view>
     <!-- 密码输入框 -->
     <view class='form-line'>
@@ -28,12 +28,16 @@
     <!-- 填充高度 -->
     <view style='height: 70rpx;'></view>
     <!-- 登录按钮 -->
-    <view class='from-button' bindtap='login'>登录</view>
+    <view class='from-button' bindtap='login' wx:if='{{!isGetUserInfo}}'>登录</view>
+    <view class='from-button' wx:if='{{isGetUserInfo}}'>
+      登录
+      <button class='open-button' open-type='getUserInfo' bindgetuserinfo='login'></button>
+    </view>
   </view>
 </view>
 
 <!-- 船员操作首页 -->
-<view class = 'content' wx:if = '{{memberId}}'>
+<view class = 'content' wx:if = '{{userId}}'>
   <!-- 顶部背景 -->
   <view class='background'></view>
   <!-- 操作按钮块 -->
