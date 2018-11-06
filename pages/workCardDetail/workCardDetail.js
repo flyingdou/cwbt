@@ -6,7 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    statusList:[],
+    handleList: [],
+    status:0,
+    handle:0
   },
 
   /**
@@ -14,6 +17,7 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    obj.init();
   },
 
   /**
@@ -63,5 +67,36 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+
+  /**
+   * 初始化页面数据
+   */
+  init: () => {
+    var statusList = [
+      {id:0,name:"正常"},
+      {id: 1,name: "异常"}
+    ];
+    var handleList = [
+      {id: 0, name: "自维修"},
+      {id: 1, name: "委外维修"}
+    ];
+    obj.setData({
+      statusList: statusList,
+      handleList: handleList
+    });
+  },
+
+  /**
+   * picker、输入框取值
+   */
+  pickerChange: (e) => {
+    var key = e.currentTarget.dataset.key;
+    var dou = {};
+    dou[key] = e.detail.value;
+    obj.setData(dou);
   }
+
+
 })

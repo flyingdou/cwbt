@@ -45,36 +45,40 @@
 
             <view class='line'>
                   <view class='title'>设备状况</view>
-                  <view class='item'>
-                        <view class='value'>正常</view>
-                        <view class='moreIcon'>
-                              <image src='../../icon/more@2x.png'></image>
-                        </view>
-                  </view>
+                  <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
+                          <view class='item'>
+                                <view class='value'>{{status == 0 ? "正常" : "异常"}}</view>
+                                <view class='moreIcon'>
+                                      <image src='../../icon/more@2x.png'></image>
+                                </view>
+                          </view>
+                  </picker>
             </view>
             
             <!-- error -->
-            <view class='error'>
+            <view class='error' wx:if = '{{status != 0}}'>
                   <view class='line'>
                         <view class='title'>维修方式</view>
-                        <view class='item'>
-                              <view class='value'>自维修</view>
-                              <view class='moreIcon'>
-                                    <image src='../../icon/more@2x.png'></image>
+                        <picker range='{{handleList}}' range-key='name' bindchange='pickerChange' data-key = 'handle'>
+                              <view class='item'>
+                                    <view class='value'>{{handle == 0 ? "自维修" : "委外维修"}}</view>
+                                    <view class='moreIcon'>
+                                          <image src='../../icon/more@2x.png'></image>
+                                    </view>
                               </view>
-                        </view>
+                        </picker>
                   </view>
 
                   <view class='remark'>
                         <view class='title'>异常描述</view>
-                        <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass'></textarea>
+                        <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe'></textarea>
                   </view>
 
             </view>
 
             <view class='remark'>
                   <view class='title'>备注</view>
-                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass'></textarea>
+                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
                   
             </view>
 
