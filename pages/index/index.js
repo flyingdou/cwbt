@@ -7,7 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-     base_img_url: app.constant.base_img_url
+    base_img_url: app.constant.base_img_url,
+    work: 0,
+    temporaryCheck: 0,
+    temporaryWork: 0
   },
 
   /**
@@ -42,7 +45,7 @@ Page({
     if (app.constant.userId) {
       obj.setData({
         userId: app.constant.userId
-      })
+      });
     } else {
       obj.setData({
         userId: null
@@ -142,11 +145,7 @@ Page({
    * 登录
    */
   login: (e) => {
-    wx.showLoading({
-      title: '处理中,请稍候',
-      mask: true,
-    });
-    // 获取参数,生成json
+    // 获取参数，校验参数，生成json
     var param = {};
     if (e.type == 'getuserinfo') {
       param = e.detail;
@@ -154,6 +153,11 @@ Page({
     if (obj.data.code) {
       param.code = obj.data.code;
     }
+    // 弹出加载框
+    wx.showLoading({
+      title: '登录中，请稍候',
+      mask: true,
+    });
     // 调用服务端登录接口
     wx.request({
       url: app.constant.base_req_url + 'cwbtMP/login.we',

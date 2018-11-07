@@ -45,17 +45,17 @@
     <view class='block' bindtap='goto' data-page='taskList' data-message='功能暂无！'>
       <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
       <view class='block-text'>工作任务</view>
-      <view class='block-count'>10</view>
+      <view class='block-count'>{{work}}</view>
     </view>
     <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
       <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
       <view class='block-text'>临时检查</view>
-      <view class='block-count'>5</view>
+      <view class='block-count'>{{temporaryCheck}}</view>
     </view>
     <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
       <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
       <view class='block-text'>临时任务</view>
-      <view class='block-count'>5</view>
+      <view class='block-count'>{{temporaryWork}}</view>
     </view>
   </view>
   <!-- 填充高度 -->
