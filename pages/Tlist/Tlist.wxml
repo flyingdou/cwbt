@@ -3,22 +3,22 @@
       <!-- 列表 -->
       <view class='List'>
            <!-- 每一个 -->
-           <view class='pre'>
+           <view class='pre' wx:for = '{{taskList}}'>
                  
                  <view class='line div'>
                        <view class='title'>设备名称</view>
-                       <view class='value'>柴油机</view>
+                       <view class='value'>{{item.ename}}</view>
                  </view>
 
                  <view class='line2 div'>
                        <view class='line'>
-                             <view class='title'>作业部位</view>
-                             <view class='value'>部位一</view>
+                             <view class='title'>作业名称</view>
+                             <view class='value'>{{item.name}}</view>
                        </view>
 
                        <view class='line'>
-                             <view class='title'>作业属性</view>
-                             <view class='value'>维修</view>
+                             <view class='title'>维修等级</view>
+                             <view class='value'>{{item.level}}</view>
                        </view>
 
                  </view>
@@ -27,9 +27,17 @@
                        <view class='fill'></view>
                  </view>
 
-                 <view class='line div'>
-                      <view class='title'>作业时间</view>
-                      <view class='value'>2018-10-31</view>
+                 <view class='line2 div'>
+                       <view class='line'>
+                             <view class='title'>所属船舶</view>
+                             <view class='value'>{{item.boatName}}</view>
+                       </view>
+
+                       <view class='line'>
+                             <view class='title'>计划时间</view>
+                             <view class='value'>{{item.plannedtime}}</view>
+                       </view>
+
                  </view>
 
                  <!-- 图标 -->

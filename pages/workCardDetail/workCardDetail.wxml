@@ -84,18 +84,13 @@
 
             <!-- preview -->
             <view class='preview'>
-                  <view class='pic'>
-                        <image src='https://fish.ecartoon.com.cn/picture/201810298982.jpg' mode='aspectFill' ></image>
+                  <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
                   </view>
 
                   <view class='pic'>
-                        <image src='https://fish.ecartoon.com.cn/picture/201810298982.jpg' mode='aspectFill' ></image>
+                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
                   </view>
-
-                  <view class='pic'>
-                        <image src='../../icon/add.png' mode='aspectFill' ></image>
-                  </view>
-            
             </view>
 
             
@@ -105,8 +100,10 @@
 
             <!-- 底部按钮 -->
             <view class='buttons'>
-                  <view class='button scanButton'>扫描条码</view>
-                  <view class='button photoButton'>拍照</view>
+                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
+                  <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
+                  <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
+                  <view wx:if = '{{isUpload}}' class='button finshButton' bindtap='finsh'>完成</view>
             </view>
       
       </view>

@@ -2,8 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/workCardDetail/workCardDetail",
-    "pages/workCard/workCard",
     "pages/Tlist/Tlist",
+    "pages/workCard/workCard",
     "pages/taskList/taskList",
     "pages/uploadPic/uploadPic",
     "pages/checkFeedback/checkFeedback",

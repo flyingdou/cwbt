@@ -438,15 +438,6 @@ Page({
   },
 
   test: () => {
-    // var dou = [
-    //   { "name": 'dou', "id": 1, "age": 18 }, 
-    //   { "name": 'dou', "id": 2, "age": 19 },
-    //   { "name": 'dou', "id": 3, "age": 19 }
-    //   ];
-    // for (var d = 0; d < dou.length; d++) {
-    //   delete dou[d]['name'];
-    // }
-    // console.log(dou);
     var dou = obj.data.remark;
     var param = {
       dou:dou

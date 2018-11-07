@@ -104,6 +104,14 @@ image{
   box-shadow:0px 5px 10px rgba(0,85,248,0.1); 
 }
 
+.uploadButton{
+  background: #ff4401;
+}
+
+.finshButton{
+  background: black;
+}
+
 .item{
   display: flex;
   justify-content: flex-end;

@@ -14,6 +14,7 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     obj.init();
   },
 
   /**
@@ -63,5 +64,37 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 初始化页面数据
+   */
+  init: () => {
+    var reqUrl = app.constant.base_req_url + 'cwbtMP/getWorkCardList.we';
+    var param = {
+      type:1,
+      dept_id:211
+    };
+    wx.request({
+      url: reqUrl,
+      dataType:'json',
+      data:{
+        requestType:'wechat',
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          obj.setData({
+            taskList: res.workCardList
+          });
+        }
+      }
+    })
+
   }
+
+
+
+
 })
