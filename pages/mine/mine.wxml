@@ -27,17 +27,17 @@
     <view style='height: 60rpx;'></view>
     <!-- 操作按钮块 -->
     <view class='blocks'>
-      <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
+      <view class='block' bindtap='goto' data-link='' data-message='功能暂无！'>
         <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
         <view class='block-text'>今日完成任务</view>
         <view class='block-count'>0</view>
       </view>
-      <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
+      <view class='block' bindtap='goto' data-link='' data-message='功能暂无！'>
         <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
         <view class='block-text'>设定推送时间</view>
         <!-- <view class='block-count'>5</view> -->
       </view>
-      <view class='block' bindtap='goto' data-page='' data-message='功能暂无！'>
+      <view class='block' bindtap='goto' data-link='' data-message='功能暂无！'>
         <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
         <view class='block-text'>查询设备档案</view>
         <!-- <view class='block-count'>5</view> -->

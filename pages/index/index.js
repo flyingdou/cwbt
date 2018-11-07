@@ -108,11 +108,11 @@ Page({
    * 跳转页面
    */
   goto: (e) => {
-    var page = e.currentTarget.dataset.page;
+    var link = e.currentTarget.dataset.link;
     var message = e.currentTarget.dataset.message;
-    if (page && page != '') {
+    if (link && link != '') {
       wx.navigateTo({
-        url: `../${page}/${page}`,
+        url: link
       });
     } else {
       wx.showModal({
