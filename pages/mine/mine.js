@@ -30,7 +30,7 @@ Page({
    */
   onShow: function () {
     // 如果用户未登录则返回登录页面
-    if (!app.constant.userId) {
+    if (!app.user.id) {
       wx.showModal({
         title: '提示',
         content: '请先登录',
@@ -101,7 +101,7 @@ Page({
       success: (res) => {
         if (res.confirm) {
           // 清除用户记录
-          app.constant.userId = null;
+          app.user = {};
           // 返回登录页面
           wx.switchTab({
             url: '../index/index'

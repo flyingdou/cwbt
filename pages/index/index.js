@@ -42,9 +42,9 @@ Page({
    */
   onShow: function () {
     // 判断用户是否登录
-    if (app.constant.userId) {
+    if (app.user.id) {
       obj.setData({
-        userId: app.constant.userId
+        userId: app.user.id
       });
     } else {
       obj.setData({
@@ -170,7 +170,8 @@ Page({
         wx.hideLoading();
         if (res.data.success) {
           util.tipsMessage('登录成功！');
-          app.constant.userId = res.data.userId;
+          app.user.id = res.data.userId;
+          app.user.deptId = res.data.deptId;
           obj.setData({
             userId: res.data.userId
           });
