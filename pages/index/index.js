@@ -8,9 +8,9 @@ Page({
    */
   data: {
     base_img_url: app.constant.base_img_url,
-    work: 0,
-    temporaryCheck: 0,
-    temporaryWork: 0
+    cycleWorkCount: 0,
+    temporaryCheckCount: 0,
+    temporaryWorkCount: 0
   },
 
   /**
@@ -49,6 +49,29 @@ Page({
     } else {
       obj.setData({
         userId: null
+      });
+    }
+
+    // 根据用户权限查询任务数量
+    if (app.user.deptId) {
+      wx.request({
+        url: app.constant.base_req_url + 'cwbtMP/getWorksCount.we',
+        data: {
+          deptId: app.user.deptId
+        },
+        success: (res) => {
+          var data = {};
+          if (!isNaN(res.data.cycleWorkCount)) {
+            data.cycleWorkCount = res.data.cycleWorkCount;
+          }
+          if (!isNaN(res.data.temporaryCheckCount)) {
+            data.workCount = res.data.temporaryCheckCount;
+          }
+          if (!isNaN(res.data.temporaryWorkCount)) {
+            data.workCount = res.data.temporaryWorkCount;
+          }
+          obj.setData(data);
+        }
       });
     }
   },
@@ -172,9 +195,17 @@ Page({
           util.tipsMessage('登录成功！');
           app.user.id = res.data.userId;
           app.user.deptId = res.data.deptId;
-          obj.setData({
-            userId: res.data.userId
-          });
+          var data = { userId: res.data.userId };
+          if (!isNaN(res.data.worksCount.cycleWorkCount)) {
+            data.cycleWorkCount = res.data.worksCount.cycleWorkCount;
+          }
+          if (!isNaN(res.data.worksCount.temporaryCheckCount)) {
+            data.workCount = res.data.worksCount.temporaryCheckCount;
+          }
+          if (!isNaN(res.data.worksCount.temporaryWorkCount)) {
+            data.workCount = res.data.worksCount.temporaryWorkCount;
+          }
+          obj.setData(data);
         } else {
           util.tipsMessage('账号或密码错误！');
         }
