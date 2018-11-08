@@ -19,6 +19,13 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    var workCardId = options.workCardId;
+    if (!workCardId) {
+      workCardId = 1;
+    }
+    obj.setData({
+      workCardId: workCardId
+    })
     obj.init();
   },
 
@@ -81,13 +88,49 @@ Page({
       {id: 1,name: "异常"}
     ];
     var handleList = [
-      {id: 0, name: "自维修"},
-      {id: 1, name: "委外维修"}
+      { id: 0, name: "请选择" },  
+      { id: 1, name: "自行维修" },
+      { id: 2, name: "委外维修" }
     ];
     obj.setData({
       statusList: statusList,
       handleList: handleList
     });
+    obj.getWorkDetail();
+  },
+
+ /**
+  * 查询数据
+  */
+  getWorkDetail: (e) => {
+    var param = {
+      id: obj.data.workCardId
+    };
+    var reqUrl = app.constant.base_req_url + 'getWorkDetailById.we';
+    
+    // 请求数据
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data:{
+        requestType: 'wechat',
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          obj.setData({
+            workDetail: res.workDetail
+          });
+        } 
+        if (!res.success) {
+          console.log('程序异常！');
+        }
+      },
+      fail: (e) => {
+        console.log('网络异常！');
+      }
+    })
   },
 
   /**
@@ -111,25 +154,20 @@ Page({
       scanType: ['barCode'],
       success: (res) => {
         isScan = true;
-        var scanTime = obj.getNowFormatDate();
-        obj.setData({
-          isScan: isScan,
-          scanTime: scanTime
-        });
-        // if (res.result == obj.data.workTicket.code) {
-        //   var scanTime = obj.getNowFormatDate();
-        //   obj.setData({
-        //     isScan: isScan,
-        //     scanTime: scanTime
-        //   });
-        // } else {
-        //   wx.showModal({
-        //     title: '提示',
-        //     content: '您当前所扫条码，不属于当前任务中的设备！',
-        //     showCancel: false
-        //   })
-        //   return;
-        // }
+        if (res.result == obj.data.workDetail.number) {
+          var scanTime = obj.getNowFormatDate();
+          obj.setData({
+            isScan: isScan,
+            scanTime: scanTime
+          });
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '您当前所扫条码，不属于当前任务中的设备！',
+            showCancel: false
+          })
+          return;
+        }
         console.log(res);
       }
     })
@@ -297,42 +335,62 @@ Page({
    */
   finsh: () => {
     // 校验数据
-    var operator = obj.data.operatorno;
-    if (!operator) {
-      wx.showModal({
-        title: '提示',
-        content: '请补充作业人员！',
-        showCancel: false
-      })
-      return;
+    var status = obj.data.status;
+    var handle = obj.data.handle;
+    if (status == 1) {
+      if (handle == 0) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择维修方式！',
+          showCancel: false
+        })
+        return;
+      }
     }
-    var surePerson = obj.data.surePersonno;
-    if (!surePerson) {
-      wx.showModal({
-        title: '提示',
-        content: '请补充作业完成确认人！',
-        showCancel: false
-      })
-      return;
-    }
+
     var photos = obj.data.photos;
     for (var x = 0; x < photos.length; x++) {
       delete photos[x]['tempFilePath'];
     }
 
-    var remark = obj.data.remark;
+    
+    var userId = app.user.id;
+    if (!userId) {
+      userId = 1316;
+    }
+    var isError = status;
 
+    // 必填数据
     var param = {
-      id: obj.data.workTicket.id,
-      operator: operator.no,
-      confirmPerson: surePerson.no,
-      devicePhotos: photos,
-      scanTime: obj.data.scanTime,
-      remark: remark
+      id: obj.data.workDetail.id,
+      executorId: userId, // 执行者id
+      image: photos, // 照片信息
+      isError: isError, // 设备状态，是否异常
+      scanTime: obj.data.scanTime
     };
 
+    // 可选数据
+    // 备注信息
+    var remark = obj.data.remark;
+    if (remark) {
+      param.remark = remark;
+    }
+    
+    // 异常描述
+    var exceptionalDescribe = obj.data.exceptionalDescribe;
+    if (exceptionalDescribe) {
+      param.exceptionalDescribe = exceptionalDescribe;
+    }
+    
+    // 维修方式
+    if (handle) {
+      param.overhaulFunction = handle; // 1自行维修，2委外维修
+    }
+
+    // 测试功能
     console.log(param);
-    var reqUrl = app.constant.base_req_url + 'workTicket/finsh.we';
+    // return;
+    var reqUrl = app.constant.base_req_url + 'finsh.we';
     // 发起微信请求
     wx.request({
       url: reqUrl,
@@ -357,7 +415,7 @@ Page({
             }
 
           })
-          wx.navigateTo({
+          wx.reLaunch({
             url: '../../pages/index/index',
           })
         } else {

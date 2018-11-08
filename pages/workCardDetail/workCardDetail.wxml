@@ -4,43 +4,41 @@
       <view class='block1'>
 
             <view class='line'>
-                  <view class='title'>作业时间</view>
-                  <view class='value'>2018-11-06</view>
-            </view>
-
-            <view class='line'>
-                  <view class='title'>作业部位</view>
-                  <view class='value'>部位一</view>
+                  <view class='title'>设备名称</view>
+                  <view class='value'>{{workDetail.ename}}</view>
             </view>
 
             <view class='line'>
                   <view class='title'>设备编码</view>
-                  <view class='value'>123456789</view>
+                  <view class='value'>{{workDetail.number}}</view>
+            </view>
+            
+            <view class='line'>
+                  <view class='title'>作业名称</view>
+                  <view class='value'>{{workDetail.name}}</view>
             </view>
 
             <view class='line'>
-                  <view class='title'>设备名称</view>
-                  <view class='value'>柴油机</view>
+                  <view class='title'>维修等级</view>
+                  <view class='value'>{{workDetail.level}}</view>
             </view>
 
             <view class='line'>
-                  <view class='title'>作业内容</view>
-                  <view class='value'>清理油污</view>
+                  <view class='title'>所属船舶</view>
+                  <view class='value'>{{workDetail.boatName}}</view>
             </view>
 
             <view class='line'>
-                  <view class='title'>作业部位</view>
-                  <view class='value'>部位一</view>
+                  <view class='title'>计划时间</view>
+                  <view class='value'>{{workDetail.plannedtime}}</view>
             </view>
-
-            <view class='line'>
-                  <view class='title'>注意事项</view>
-                  <view class='value'>佩戴绝缘手套，防止触电</view>
-            </view>
-
-            <view class='line'>
-                  <view class='title'>作业所需资源</view>
-                  <view class='value'>绝缘手套</view>
+            
+            <!-- 作业内容 -->
+            <view class='remark'>
+                  <view class='title'>作业内容:</view>
+                  <view class='task'>
+                        <view class='value' wx:for = '{{workDetail.taskList}}'>{{item.name}}</view>
+                  </view>
             </view>
 
             <view class='line'>
@@ -61,7 +59,7 @@
                         <view class='title'>维修方式</view>
                         <picker range='{{handleList}}' range-key='name' bindchange='pickerChange' data-key = 'handle'>
                               <view class='item'>
-                                    <view class='value'>{{handle == 0 ? "自维修" : "委外维修"}}</view>
+                                    <view class='value'>{{handleList[handle].name}}</view>
                                     <view class='moreIcon'>
                                           <image src='../../icon/more@2x.png'></image>
                                     </view>
@@ -70,14 +68,14 @@
                   </view>
 
                   <view class='remark'>
-                        <view class='title'>异常描述</view>
+                        <view class='title'>异常描述:</view>
                         <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe'></textarea>
                   </view>
 
             </view>
 
             <view class='remark'>
-                  <view class='title'>备注</view>
+                  <view class='title'>备注:</view>
                   <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
                   
             </view>
