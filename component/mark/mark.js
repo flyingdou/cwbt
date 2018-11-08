@@ -1,0 +1,104 @@
+// component/mark.js
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    showModalStatus: Boolean,
+    type: String
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    list: [
+      { name: "一处", id: 1 },
+      { name: "二处", id: 2 },
+      { name: "三处", id: 3 },
+      { name: "四处", id: 4 },
+      { name: "五处", id: 5 },
+      { name: "六处", id: 6 },
+      { name: "七处", id: 7 },
+      { name: "八处", id: 8 },
+      { name: "九处", id: 9 },
+      { name: "十处", id: 10 },
+      { name: "十一处", id: 11 },
+      { name: "十二处", id: 12 },
+      { name: "十三处", id: 13 },
+      { name: "十四处", id: 14 },
+      { name: "十五处", id: 15 },
+      { name: "十六处", id: 16 }
+    ]
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    saveSelectValue: function (e) {
+      this.setData({
+        value: e.detail.value
+      });
+    },
+    tap: function (e) {
+      var btn_type = e.currentTarget.dataset.type;
+      /* 动画部分 */
+      // 第1步：创建动画实例 
+      var animation = wx.createAnimation({
+        duration: 200,  //动画时长
+        timingFunction: "linear", //线性
+        delay: 0  //0则不延迟
+      });
+
+      // 第2步：这个动画实例赋给当前的动画实例
+      this.animation = animation;
+
+      // 第3步：执行第一组动画
+      animation.opacity(0).rotateX(-100).step();
+
+      // 第4步：导出动画对象赋给数据对象储存
+      this.setData({
+        animationData: animation.export()
+      })
+
+      // 第5步：设置定时器到指定时候后，执行第二组动画
+      setTimeout(function () {
+        // 执行第二组动画
+        animation.opacity(1).rotateX(0).step();
+        // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
+        this.setData({
+          animationData: animation
+        })
+
+        var myEventDetail = {
+          type: btn_type,
+        } // detail对象，提供给事件监听函数
+        if (btn_type == 'success') {
+          myEventDetail.value = this.data.value;
+
+          // 保留历史选择
+          var list = this.data.list;
+          var value = this.data.value;
+          if (value instanceof Array) {
+            value.forEach(function (item, i) {
+              list.forEach(function (_item, _i) {
+                if (item == _item.id) {
+                  _item.checked = true;
+                }
+              });
+            });
+          }
+          this.setData({
+            list: list
+          });
+        } else {
+          myEventDetail.value = null;
+        }
+        var myEventOption = {} // 触发事件的选项
+        this.triggerEvent('Mark', myEventDetail, myEventOption);
+
+      }.bind(this), 200)
+    }
+  }
+})

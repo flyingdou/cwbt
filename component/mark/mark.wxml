@@ -1,0 +1,26 @@
+<!--mask-->
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+  <!--drawer content-->
+  <view class="btns" data-statu="close">
+    <view class='btn-cancel' bindtap='tap' data-type='cancel'>取消</view>
+    <view class='btn-success' bindtap='tap' data-type='success'>确定</view>
+  </view>
+  <!-- <view class="drawer_title">弹窗标题</view> -->
+  <view class="drawer_content">
+    <radio-group bindchange="saveSelectValue" wx:if='{{type=="radio"}}'>
+      <view class="top grid {{index == list.length - 1 ? 'bottom' : ''}}" wx:for='{{list}}' wx:key=''>
+        <label class="title col-0">{{item.name}}</label>
+        <radio value='{{item.id}}' checked='{{value == item.id ? true : false }}'></radio>
+      </view>
+    </radio-group>
+    <checkbox-group bindchange="saveSelectValue" wx:if='{{type=="checkbox"}}'>
+      <view class="top grid {{index == list.length - 1 ? 'bottom' : ''}}" wx:for='{{list}}' wx:key=''>
+        <label class="title col-0">{{item.name}}</label>
+        <checkbox class='checkbox' value='{{item.id}}' checked='{{item.checked}}'></checkbox>
+      </view>
+    </checkbox-group>
+  </view>
+</view>

@@ -11,7 +11,8 @@ Page({
     logo: app.constant.logo,
     cycleWorkCount: 0,
     temporaryCheckCount: 0,
-    temporaryWorkCount: 0
+    temporaryWorkCount: 0,
+    showModalStatus: true
   },
 
   /**
@@ -217,6 +218,13 @@ Page({
         util.tipsMessage('网络异常，请稍后再试');
       }
     });
+  },
+
+  test: function (e) {
+    obj.setData({
+      showModalStatus: false
+    });
+    console.log(e.detail.value);
   }
 
 })
