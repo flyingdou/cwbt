@@ -70,10 +70,14 @@ Page({
    * 初始化页面数据
    */
   init: () => {
-    var reqUrl = app.constant.base_req_url + 'cwbtMP/getWorkCardList.we';
+    var reqUrl = app.constant.base_req_url + 'getWorkCardList.we';
+    var dept_id = app.user.dept_id;
+    if (!dept_id) {
+      dept_id = 211;
+    }
     var param = {
       type:1,
-      dept_id:211
+      dept_id: dept_id
     };
     wx.request({
       url: reqUrl,
@@ -92,6 +96,17 @@ Page({
       }
     })
 
+  },
+
+  /**
+   * 跳转到任务详情页面
+   */
+  goto: (e) => {
+    var index = e.currentTarget.dataset.index;
+    var workCard = obj.data.taskList[index];
+    wx.redirectTo({
+      url: '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id,
+    })
   }
 
 

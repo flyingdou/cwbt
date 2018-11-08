@@ -3,7 +3,7 @@
       <!-- 列表 -->
       <view class='List'>
            <!-- 每一个 -->
-           <view class='pre' wx:for = '{{taskList}}'>
+           <view class='pre' wx:for = '{{taskList}}' bindtap='goto' data-index = '{{index}}'>
                  
                  <view class='line div'>
                        <view class='title'>设备名称</view>

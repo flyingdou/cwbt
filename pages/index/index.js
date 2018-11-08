@@ -55,7 +55,7 @@ Page({
     // 根据用户权限查询任务数量
     if (app.user.deptId) {
       wx.request({
-        url: app.constant.base_req_url + 'cwbtMP/getWorksCount.we',
+        url: app.constant.base_req_url + 'getWorksCount.we',
         data: {
           deptId: app.user.deptId
         },
@@ -132,7 +132,7 @@ Page({
     // 根据账号查询微信标识(达到手机号码11位)
     if (obj.data.account.length == 11) {
       wx.request({
-        url: app.constant.base_req_url + 'cwbtMP/checkWechatMPIdByUser.we',
+        url: app.constant.base_req_url + 'checkWechatMPIdByUser.we',
         data: {
           account: obj.data.account
         },
@@ -183,7 +183,7 @@ Page({
     });
     // 调用服务端登录接口
     wx.request({
-      url: app.constant.base_req_url + 'cwbtMP/login.we',
+      url: app.constant.base_req_url + 'login.we',
       data: {
         userName: obj.data.account,
         pwd: obj.data.password,

@@ -122,3 +122,9 @@ image{
   width: 26rpx;
   height: 26rpx;
 }
+
+.task{
+  margin-left: 16%;
+  background: #F5F5F5;
+  padding: 20rpx 4%;
+}
