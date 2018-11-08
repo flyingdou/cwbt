@@ -1,0 +1,27 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- 选择抽查处 -->
+      <view class='line' bindtap='choose'>
+            <view class='title'>选择抽查处</view>
+            <view class='moreIcon'>
+                  <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+            </view>
+      </view>
+
+      <!-- 填充高度 -->
+      <view class='fill'></view>
+
+
+      <!-- 功能按钮 -->
+      <view class='buttons'>
+            <view class='linex'>
+                  <view class='button workCard'>工作记录</view>
+                  <view class='button maintance'>维修记录</view>
+            </view>
+      </view>
+
+
+</view>
+
+<!-- 弹出框 -->
+<mark showModalStatus='{{showModalStatus}}' type='radio' bindMark='test'></mark>
