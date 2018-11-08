@@ -1,4 +1,4 @@
-// component/mark.js
+var app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -12,24 +12,20 @@ Component({
    * 组件的初始数据
    */
   data: {
-    list: [
-      { name: "一处", id: 1 },
-      { name: "二处", id: 2 },
-      { name: "三处", id: 3 },
-      { name: "四处", id: 4 },
-      { name: "五处", id: 5 },
-      { name: "六处", id: 6 },
-      { name: "七处", id: 7 },
-      { name: "八处", id: 8 },
-      { name: "九处", id: 9 },
-      { name: "十处", id: 10 },
-      { name: "十一处", id: 11 },
-      { name: "十二处", id: 12 },
-      { name: "十三处", id: 13 },
-      { name: "十四处", id: 14 },
-      { name: "十五处", id: 15 },
-      { name: "十六处", id: 16 }
-    ]
+    list: []
+  },
+
+  attached: function () {
+    var obj = this;
+    wx.request({
+      url: app.constant.base_req_url + 'getDepartmentListByParent.we',
+      data: {
+        json: JSON.stringify({ parentId: 21 })
+      },
+      success: function (res) {
+        obj.setData({ list: res.data });
+      }
+    })
   },
 
   /**
