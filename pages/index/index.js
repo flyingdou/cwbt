@@ -8,6 +8,7 @@ Page({
    */
   data: {
     base_img_url: app.constant.base_img_url,
+    logo: app.constant.logo,
     cycleWorkCount: 0,
     temporaryCheckCount: 0,
     temporaryWorkCount: 0
@@ -44,11 +45,11 @@ Page({
     // 判断用户是否登录
     if (app.user.id) {
       obj.setData({
-        userId: app.user.id
+        isLogin: true
       });
     } else {
       obj.setData({
-        userId: null
+        isLogin: false
       });
     }
 
@@ -195,7 +196,7 @@ Page({
           util.tipsMessage('登录成功！');
           app.user.id = res.data.userId;
           app.user.deptId = res.data.deptId;
-          var data = { userId: res.data.userId };
+          var data = { isLogin: true };
           if (!isNaN(res.data.worksCount.cycleWorkCount)) {
             data.cycleWorkCount = res.data.worksCount.cycleWorkCount;
           }

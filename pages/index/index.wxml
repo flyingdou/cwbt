@@ -1,14 +1,14 @@
 <!-- 登录页面 -->
-<view class = 'login' wx:if='{{!userId}}'>
+<view class = 'login' wx:if='{{!isLogin}}'>
   <!-- 填充高度 -->
   <view style='height: 80rpx;'></view>
 
   <!-- logo -->
   <view class='banner'>
-    <image src='https://fish.ecartoon.com.cn/picture/201810274602.jpg' mode='aspectFill'></image>
+    <image src='{{logo}}' mode='aspectFill'></image>
   </view>
 
-  <!-- 填充高度 -->
+  <!-- 填充高度 --> 
   <view style='height: 80rpx;'></view>
 
   <!-- 表单 -->
@@ -37,7 +37,7 @@
 </view>
 
 <!-- 船员操作首页 -->
-<view class = 'content' wx:if = '{{userId}}'>
+<view class = 'content' wx:if = '{{isLogin}}'>
   <!-- 顶部背景 -->
   <view class='background'></view>
   <!-- 操作按钮块 -->
@@ -62,7 +62,7 @@
   <view style='height: 120rpx;'></view>
   <!-- 底部图片 -->
   <view class='pics'>
-    <image src='https://fish.ecartoon.com.cn/picture/201810274602.jpg' mode='aspectFill'></image>
+    <image src='{{logo}}' mode='aspectFill'></image>
   </view>
 </view>
 
