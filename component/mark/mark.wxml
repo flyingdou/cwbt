@@ -1,8 +1,8 @@
 <!--mask-->
-<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" hidden="{{!showModalStatus}}"></view>
 <!--content-->
 <!--使用animation属性指定需要执行的动画-->
-<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+<view animation="{{animationData}}" class="drawer_box" hidden="{{!showModalStatus}}">
   <!--drawer content-->
   <view class="btns" data-statu="close">
     <view class='btn-cancel' bindtap='tap' data-type='cancel'>取消</view>
@@ -13,13 +13,13 @@
     <radio-group bindchange="saveSelectValue" wx:if='{{type=="radio"}}'>
       <view class="top grid {{index == list.length - 1 ? 'bottom' : ''}}" wx:for='{{list}}' wx:key=''>
         <label class="title col-0">{{item.name}}</label>
-        <radio value='{{item.id}}' checked='{{value == item.id ? true : false }}'></radio>
+        <radio value='{{item.id}}'></radio>
       </view>
     </radio-group>
     <checkbox-group bindchange="saveSelectValue" wx:if='{{type=="checkbox"}}'>
       <view class="top grid {{index == list.length - 1 ? 'bottom' : ''}}" wx:for='{{list}}' wx:key=''>
         <label class="title col-0">{{item.name}}</label>
-        <checkbox class='checkbox' value='{{item.id}}' checked='{{item.checked}}'></checkbox>
+        <checkbox class='checkbox' value='{{item.id}}'></checkbox>
       </view>
     </checkbox-group>
   </view>

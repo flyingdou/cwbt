@@ -32,11 +32,15 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    /**
+     * 保存用户选择的值
+     */
     saveSelectValue: function (e) {
-      this.setData({
-        value: e.detail.value
-      });
+      this.setData({ value: e.detail.value });
     },
+    /**
+     * 按钮点击触发
+     */
     tap: function (e) {
       var btn_type = e.currentTarget.dataset.type;
       /* 动画部分 */
@@ -56,7 +60,7 @@ Component({
       // 第4步：导出动画对象赋给数据对象储存
       this.setData({
         animationData: animation.export()
-      })
+      });
 
       // 第5步：设置定时器到指定时候后，执行第二组动画
       setTimeout(function () {
@@ -65,36 +69,19 @@ Component({
         // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
         this.setData({
           animationData: animation
-        })
+        });
 
         var myEventDetail = {
           type: btn_type,
         } // detail对象，提供给事件监听函数
         if (btn_type == 'success') {
           myEventDetail.value = this.data.value;
-
-          // 保留历史选择
-          var list = this.data.list;
-          var value = this.data.value;
-          if (value instanceof Array) {
-            value.forEach(function (item, i) {
-              list.forEach(function (_item, _i) {
-                if (item == _item.id) {
-                  _item.checked = true;
-                }
-              });
-            });
-          }
-          this.setData({
-            list: list
-          });
         } else {
-          myEventDetail.value = null;
+          this.setData({ value: null });
         }
         var myEventOption = {} // 触发事件的选项
         this.triggerEvent('Mark', myEventDetail, myEventOption);
-
-      }.bind(this), 200)
+      }.bind(this), 200);
     }
   }
 })

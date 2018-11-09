@@ -71,4 +71,4 @@
   </view>
 </view>
 
-<mark showModalStatus='{{showModalStatus}}' type='checkbox' bindMark='test'></mark>
+<!-- <mark showModalStatus='{{showModalStatus}}' type='radio' bindMark='test'></mark> -->
