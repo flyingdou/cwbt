@@ -81,8 +81,37 @@ Page({
     obj.setData({
       showModalStatus: false
     });
-    console.log(e.detail);  
+    var dept_id = 211;
+    if (e.detail.type == 'success') {
+      dept_id = e.detail.value;
+    }
 
+    obj.setData({
+      dept_id: dept_id
+    });
+
+  },
+  
+  // 跳转页面
+  goto: (e) => {
+    var dept_id = obj.data.dept_id;
+    if (!dept_id) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择需要抽查的处！',
+        showCancel: false
+      })
+      return;
+    }
+
+    // 类型
+    var queryType = e.currentTarget.dataset.querytype;
+
+    // 跳转页面
+    wx.redirectTo({
+      url: '../../pages/Tlist/Tlist?dept_id=' + dept_id + '&queryType=' + queryType + '&flag=spotCheck',
+    })
+    
   }
 
   

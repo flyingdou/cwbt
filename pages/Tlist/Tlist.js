@@ -15,6 +15,26 @@ Page({
   onLoad: function (options) {
      obj = this;
      obj.init();
+     // 跳转页面类型 
+     console.log(options);
+    var queryType = options.queryType;
+    if (queryType) {
+      obj.data.queryType = queryType;
+     }
+     
+     // 部门id
+     var dept_id = options.dept_id;
+     if (dept_id) {
+       obj.data.dept_id = dept_id;
+     }
+
+     // 抽查标记
+     var flag = options.flag;
+     if (flag) {
+       obj.data.flag = flag;
+     }
+
+     console.log(obj.data);
   },
 
   /**
@@ -71,7 +91,7 @@ Page({
    */
   init: () => {
     var reqUrl = app.constant.base_req_url + 'getWorkCardList.we';
-    var dept_id = app.user.dept_id;
+    var dept_id = app.user.deptId;
     if (!dept_id) {
       dept_id = 211;
     }

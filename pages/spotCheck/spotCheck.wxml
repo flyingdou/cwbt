@@ -15,8 +15,8 @@
       <!-- 功能按钮 -->
       <view class='buttons'>
             <view class='linex'>
-                  <view class='button workCard'>工作记录</view>
-                  <view class='button maintance'>维修记录</view>
+                  <view class='button workCard' bindtap='goto' data-queryType = '3'>工作记录</view>
+                  <view class='button maintance' bindtap='goto' data-queryType = '4'>维修记录</view>
             </view>
       </view>
 

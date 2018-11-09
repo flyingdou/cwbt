@@ -1,7 +1,7 @@
 {
   "backgroundTextStyle": "light",
   "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "CWBT掌中宝",
+  "navigationBarTitleText": "数字机务",
   "navigationBarTextStyle": "black",
   "usingComponents": {
     "mark": "../../component/mark/mark"
