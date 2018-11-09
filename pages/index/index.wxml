@@ -1,5 +1,5 @@
 <!-- 登录页面 -->
-<view class = 'login' wx:if='{{!isLogin}}'>
+<view class = 'login' wx:if='{{isLogin}}'>
   <!-- 填充高度 -->
   <view style='height: 80rpx;'></view>
 
@@ -37,7 +37,7 @@
 </view>
 
 <!-- 船员操作首页 -->
-<view class = 'content' wx:if = '{{isLogin}}'>
+<view class = 'content' wx:if = '{{!isLogin}}'>
   <!-- 顶部背景 -->
   <view class='background'></view>
   <!-- 操作按钮块 -->
@@ -57,7 +57,7 @@
       <view class='block-text'>临时任务</view>
       <view class='block-count'>{{temporaryWorkCount}}</view>
     </view>
-    <view class='block' bindtap='goto' data-link='' data-message='功能暂无！'>
+    <view class='block' bindtap='goto' data-link='' data-message='功能暂无！' wx:if='{{userPriv != 3}}'>
       <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
       <view class='block-text'>抽查</view>
       <!-- <view class='block-count'>{{temporaryWorkCount}}</view> -->

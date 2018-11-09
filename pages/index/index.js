@@ -46,15 +46,16 @@ Page({
     // 判断用户是否登录
     if (app.user.id) {
       obj.setData({
-        isLogin: true
+        isLogin: false,
+        userPriv: app.user.userPriv
       });
     } else {
       obj.setData({
-        isLogin: false
+        isLogin: true
       });
     }
 
-    // 根据用户权限查询任务数量
+    // 根据用户部门ID查询任务数量
     if (app.user.deptId) {
       wx.request({
         url: app.constant.base_req_url + 'getWorksCount.we',
@@ -195,9 +196,8 @@ Page({
         wx.hideLoading();
         if (res.data.success) {
           util.tipsMessage('登录成功！');
-          app.user.id = res.data.userId;
-          app.user.deptId = res.data.deptId;
-          var data = { isLogin: true };
+          app.user = res.data.user;
+          var data = { isLogin: false, userPriv: app.user.userPriv };
           if (!isNaN(res.data.worksCount.cycleWorkCount)) {
             data.cycleWorkCount = res.data.worksCount.cycleWorkCount;
           }
