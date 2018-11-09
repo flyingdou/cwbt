@@ -28,6 +28,12 @@ Page({
        obj.data.dept_id = dept_id;
      }
 
+     // 船舶id
+     var boat_id = options.boat_id; 
+     if (boat_id) {
+       obj.data.boat_id = boat_id;
+     }
+
      // 抽查标记
      var flag = options.flag;
      if (flag) {
@@ -91,14 +97,21 @@ Page({
    */
   init: () => {
     var reqUrl = app.constant.base_req_url + 'getWorkCardList.we';
-    var dept_id = app.user.deptId;
-    if (!dept_id) {
-      dept_id = 211;
-    }
-    var param = {
-      type:1,
-      dept_id: dept_id
-    };
+    var param = {};
+    if (obj.data.queryType == 1) {
+      param = {
+        type: '1',
+        dept_id: app.user.deptId,
+        status: '1'
+      };
+    } else if (obj.data.queryType == 3) {
+      console.log(1);
+      param = {
+        type: '1,2',
+        dept_id: obj.data.dept_id,
+        status: '2'
+      };
+    } 
     wx.request({
       url: reqUrl,
       dataType:'json',

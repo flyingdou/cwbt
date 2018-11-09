@@ -23,11 +23,36 @@ image{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 4%;
+  padding: 0 4%;
+  height: 80rpx;
   border-radius: 8rpx;
 }
 
+.title{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.multiSelector{
+  width: 50%;
+  font-size: 28rpx;
+}
+
+.dept-block{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 80rpx;
+}
+
+.dept-name{
+  margin-right: 10rpx;
+}
+
 .moreIcon{
+  margin-top: 6rpx;
   width: 26rpx;
   height: 26rpx;
 }

@@ -2,10 +2,16 @@
 <view class='content'>
       <!-- 选择抽查处 -->
       <view class='line' bindtap='choose'>
-            <view class='title'>选择抽查处</view>
-            <view class='moreIcon'>
-                  <image src='../../icon/more@2x.png' mode='aspectFill'></image>
-            </view>
+            <view class='title'>选择抽查的船</view>
+            <picker class='multiSelector' mode="multiSelector" bindchange="choose" bindcolumnchange="choose" 
+              range="{{objectMultiArray}}" range-key='name' value='{{multiIndex}}'>
+              <view class='dept-block'>
+                <view class='dept-name'>{{boat_name}}</view>
+                <view class='moreIcon'>
+                    <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                </view>
+              </view>
+            </picker>
       </view>
 
       <!-- 填充高度 -->
@@ -24,4 +30,4 @@
 </view>
 
 <!-- 弹出框 -->
-<mark showModalStatus='{{showModalStatus}}' type='radio' bindMark='test'></mark>
+<!-- <mark showModalStatus='{{showModalStatus}}' type='radio' bindMark='test'></mark> -->
