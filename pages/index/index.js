@@ -20,16 +20,6 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-
-    // 计算图标宽度
-    var systemInfo = util.getSystemInfo();
-    var proportion = systemInfo.proportion;
-    var accountIconWidth = 18 * proportion;
-    var passwordIconWidth = 15 * proportion;
-    obj.setData({
-      accountIconWidth: accountIconWidth,
-      passwordIconWidth: passwordIconWidth
-    });
   },
 
   /**
@@ -220,11 +210,23 @@ Page({
     });
   },
 
-  test: function (e) {
-    obj.setData({
-      showModalStatus: false
+  /**
+   * 发布临时工作卡
+   */
+  relapseWorkCard: (e) => {
+    var link = e.currentTarget.dataset.link;
+    // wx.scanCode({
+    //   scanType: ['barCode', 'qrCode'],
+    //   success: (res) => {
+    //     wx.navigateTo({
+    //       url: link + '?code=' + res.result
+    //     });
+    //   }
+    // });
+
+    wx.navigateTo({
+      url: link + '?code=0000123' 
     });
-    console.log(e.detail.value);
   }
 
 })
