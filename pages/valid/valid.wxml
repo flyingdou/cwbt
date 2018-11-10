@@ -1,0 +1,58 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <view class='up'>
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>设备名称</view>
+                        <view class='value'>{{valid.ename}}</view>
+                  </view>
+
+                  <view class='tv'>
+                        <view class='title'>作业人员</view>
+                        <view class='value'>{{valid.opeartor}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>完成时间</view>
+                        <view class='value'>{{valid.finishtime}}</view>
+                  </view>
+            </view>
+
+            <!-- 作业内容 -->
+            <view class='taskList'>
+                  <view class='taskTitle'>作业内容</view>
+                  
+                  <!-- 工作内容 -->
+                  <view class='task'>
+                        <view class='ta' wx:for = '{{valid.content}}'>{{item}}</view>
+                  </view>
+                  
+            </view>
+
+            <!-- 作业照片 -->
+            <view class='picsList'>
+                  <view class='taskTitle'>作业照片</view>
+                  <view class='pics'>
+                        <view class='pre' wx:for = '{{valid.image}}'>
+                              <view class='pic'>
+                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                              </view>
+                              <view class='picTime'>{{item.pic_time}}</view>
+                        </view>
+                  </view>
+            </view>
+
+
+
+      </view>
+
+      <!-- 底部功能按钮 -->
+      <view class='footer'>
+            <view class='checkButton' bindtap='valid'>验收</view>
+      </view>
+
+
+
+</view>

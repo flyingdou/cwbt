@@ -1,17 +1,19 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/valid/valid",
+    "pages/validList/validList",
     "pages/relapseWorkCard/relapseWorkCard",
+    "pages/logs/logs",
     "pages/spotCheck/spotCheck",
     "pages/supervise/supervise",
     "pages/workCardDetail/workCardDetail",
     "pages/Tlist/Tlist",
     "pages/workCard/workCard",
-    "pages/taskList/taskList",
+    "pages/mine/mine",
     "pages/uploadPic/uploadPic",
-    "pages/checkFeedback/checkFeedback",
-    "pages/logs/logs",
-    "pages/mine/mine"
+    "pages/taskList/taskList",
+    "pages/checkFeedback/checkFeedback"
   ],
   "window":{
     "backgroundTextStyle":"light",
