@@ -215,18 +215,18 @@ Page({
    */
   relapseWorkCard: (e) => {
     var link = e.currentTarget.dataset.link;
-    // wx.scanCode({
-    //   scanType: ['barCode', 'qrCode'],
-    //   success: (res) => {
-    //     wx.navigateTo({
-    //       url: link + '?code=' + res.result
-    //     });
-    //   }
-    // });
-
-    wx.navigateTo({
-      url: link + '?code=0000123' 
+    wx.scanCode({
+      scanType: ['barCode', 'qrCode'],
+      success: (res) => {
+        wx.navigateTo({
+          url: link + '?code=' + res.result
+        });
+      }
     });
+
+    // wx.navigateTo({
+    //   url: link + '?code=0000123' 
+    // });
   }
 
 })
