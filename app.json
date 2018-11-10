@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/relapseWorkCard/relapseWorkCard",
     "pages/spotCheck/spotCheck",
     "pages/supervise/supervise",
     "pages/workCardDetail/workCardDetail",
