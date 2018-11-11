@@ -1,0 +1,119 @@
+Page{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(241, 241, 241, 1);
+}
+
+image{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.content{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.up{
+  background: white;
+  margin: 20rpx;
+  padding: 20rpx;
+}
+
+.line{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0;
+  border-bottom: 2rpx solid rgba(241, 241, 241, 1);
+}
+
+.line:last-child{
+  border-bottom: none;
+}
+
+.tv{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title{
+  font-size: 28rpx;
+  color: rgba(51,51,51,1);
+}
+
+.value{
+  padding-left: 20rpx;
+  font-size: 28rpx;
+  color: rgba(153,153,153,1);
+  border-radius: 8rpx;
+}
+
+.taskTitle{
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: rgba(51,51,51,1);
+}
+
+.task{
+  padding: 20rpx;
+  margin: 0 20rpx;
+  background: rgba(153,153,153,1);
+}
+
+.ta{
+  font-size: 28rpx;
+  color: white;
+}
+
+
+.picsList{
+  
+}
+
+.pics{
+  overflow: hidden;
+  width: 100%;
+}
+
+.pre{
+   float: left;
+   margin-right: 20rpx;
+   padding-bottom: 20rpx;
+}
+
+.pic{
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.picTime{
+  font-size: 18rpx;
+  padding: 10rpx 0;
+  text-align: center;
+}
+
+.footer{
+   position: fixed;
+   left: 0;
+   bottom: 40rpx;
+   width: 100%;
+}
+
+.checkButton{
+  text-align: center;
+  padding: 15rpx 0;
+  margin: 0 20rpx;
+  background:rgba(255,114,114,1);
+  box-shadow:0px 5px 10px rgba(255,114,114,0.1);
+  font-size: 28rpx;
+  color: white;
+  border-radius: 8rpx;
+}
+
+
