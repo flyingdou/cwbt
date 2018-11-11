@@ -215,18 +215,25 @@ Page({
    */
   relapseWorkCard: (e) => {
     var link = e.currentTarget.dataset.link;
-    wx.scanCode({
-      scanType: ['barCode', 'qrCode'],
-      success: (res) => {
-        wx.navigateTo({
-          url: link + '?code=' + res.result
-        });
-      }
-    });
 
-    // wx.navigateTo({
-    //   url: link + '?code=0000123' 
-    // });
+    // 正式环境执行代码
+    if (!app.constant.isDev) {
+      wx.scanCode({
+        scanType: ['barCode', 'qrCode'],
+        success: (res) => {
+          wx.navigateTo({
+            url: link + '?code=' + res.result
+          });
+        }
+      });
+    } 
+    
+    // 开发环境执行代码
+    if (app.constant.isDev) {
+      wx.navigateTo({
+        url: link + '?code=0000123' 
+      });
+    }
   }
 
 })
