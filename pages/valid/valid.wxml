@@ -36,7 +36,7 @@
                   <view class='taskTitle'>作业照片</view>
                   <view class='pics'>
                         <view class='pre' wx:for = '{{valid.image}}'>
-                              <view class='pic'>
+                              <view class='pic' bindtap='preview' data-index = '{{index}}'>
                                     <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
                               </view>
                               <view class='picTime'>{{item.pic_time}}</view>

@@ -4,8 +4,8 @@
 
       <view class='list'>
             
-                <view class='pre' wx:for = '{{validList}}' bindtap='goto' data-id = '{{item.id}}'>
-                      <view class='line'>
+                <view class='pre' wx:for = '{{validList}}'>
+                      <view class='line' bindtap='goto' data-id = '{{item.id}}'>
                             <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>设备名称</view>
