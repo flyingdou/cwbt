@@ -41,7 +41,7 @@
                  </view>
 
                  <!-- 图标 -->
-                 <view class='tag'>
+                 <view class='tag' wx:if = '{{item.status == 9}}'>
                       <view class='tagDiv'>
                             <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                             <view class='statusFont'>进行中</view>

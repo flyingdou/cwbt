@@ -42,12 +42,12 @@
   <view class='background'></view>
   <!-- 操作按钮块 -->
   <view class='blocks'>
-    <view class='block' bindtap='goto' data-link='../Tlist/Tlist?queryType=0' data-message='功能暂无！' wx:if='{{userPriv != 2}}'>
+    <view class='block' bindtap='goto' data-link='../Tlist/Tlist?queryType=1' data-message='功能暂无！' wx:if='{{userPriv != 2}}'>
       <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
       <view class='block-text'>工作任务</view>
       <view class='block-count'>{{cycleWorkCount}}</view>
     </view>
-    <view class='block' bindtap='goto' data-link='' data-message='功能暂无！' wx:if='{{userPriv != 2}}'>
+    <view class='block' bindtap='goto' data-link='../Tlist/Tlist?queryType=2' data-message='功能暂无！' wx:if='{{userPriv != 2}}'>
       <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
       <view class='block-text'>临时任务</view>
       <view class='block-count'>{{temporaryWorkCount}}</view>

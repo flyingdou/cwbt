@@ -14,9 +14,7 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
-     obj.init();
-     // 跳转页面类型 
-     console.log(options);
+    // 跳转页面类型 
     var queryType = options.queryType;
     if (queryType) {
       obj.data.queryType = queryType;
@@ -40,7 +38,8 @@ Page({
        obj.data.flag = flag;
      }
 
-     console.log(obj.data);
+
+    obj.init();
   },
 
   /**
@@ -98,18 +97,24 @@ Page({
   init: () => {
     var reqUrl = app.constant.base_req_url + 'getWorkCardList.we';
     var param = {};
-    if (obj.data.queryType == 1) {
+    var queryType = obj.data.queryType;
+    if (queryType == 1) { // 周期工作列表
       param = {
         type: '1',
         dept_id: app.user.deptId,
-        status: '1'
+        status: '1,9' // 未完成、进行中
       };
-    } else if (obj.data.queryType == 3) {
-      console.log(1);
+    } else if (obj.data.queryType == 2) { // 临时工作列表
+      param = {
+        type: '2',
+        dept_id: app.user.deptId,
+        status: '1,9' // 未完成、进行中
+      };
+    } else if (obj.data.queryType == 3) { // 抽查工作列表
       param = {
         type: '1,2',
-        dept_id: obj.data.dept_id,
-        status: '2'
+        dept_id: app.user.deptId,
+        status: '2,3' // 已完成、已验收
       };
     } 
     wx.request({
@@ -137,6 +142,14 @@ Page({
   goto: (e) => {
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.taskList[index];
+    if (workCard.status == 9) {
+      wx.showModal({
+        title: '提示',
+        content: '该工作已在进行中，请选择其他工作！',
+        showCancel: false
+      })
+      return;
+    }
     wx.redirectTo({
       url: '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id,
     })

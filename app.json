@@ -9,11 +9,8 @@
     "pages/supervise/supervise",
     "pages/workCardDetail/workCardDetail",
     "pages/Tlist/Tlist",
-    "pages/workCard/workCard",
     "pages/mine/mine",
-    "pages/uploadPic/uploadPic",
-    "pages/taskList/taskList",
-    "pages/checkFeedback/checkFeedback"
+    "pages/uploadPic/uploadPic"
   ],
   "window":{
     "backgroundTextStyle":"light",

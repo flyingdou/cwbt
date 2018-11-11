@@ -122,8 +122,8 @@ Page({
             showCancel:false,
             success: (rex) => {
               if (rex.confirm){
-                wx.navigateTo({
-                  url: '../../pages/validList/validList',
+                wx.navigateBack({
+                  delta: 1
                 })
               }
             }

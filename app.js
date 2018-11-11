@@ -12,7 +12,7 @@ App({
   },
   user: {
     id:1317,
-    userPriv:2,
+    userPriv:3,
     deptId:211
   }
 })
