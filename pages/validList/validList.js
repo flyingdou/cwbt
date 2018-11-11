@@ -110,7 +110,7 @@ Page({
     var isAll = obj.data.isAll;
     var chooseList = obj.data.chooseList;
     if (!chooseList) {
-      chooseList = {};
+      chooseList = [];
     }
     if (id && id.length > 0) {
       // 全选
@@ -161,6 +161,64 @@ Page({
       }
     })
     
+    
+  },
+
+  /**
+    * 验收
+    */
+  valid: () => {
+    var chooseList = obj.data.chooseList;
+    // 校验数据
+    if (!chooseList || chooseList.length == 0) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择需要验收的工作！',
+        showCancel: false
+      })
+      return;
+    }
+    var reqUrl = app.constant.base_req_url + 'updateWorkFeedBackStatus.we';
+    chooseList = chooseList.join(",");
+    var param = {
+      id: chooseList,
+      confirm_id: app.user.id
+    };
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          wx.showModal({
+            title: '提示',
+            content: '验收成功！',
+            showCancel: false,
+            success: (rex) => {
+              if (rex.confirm) {
+                wx.navigateBack({
+                  delta:1 // 返回层级
+                })
+              }
+            }
+
+          })
+        }
+      }
+    })
+  },
+
+  /**
+   * 跳转详情页面
+   */
+  goto: (e) => {
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../../pages/valid/valid?id=' + id,
+    })
     
   }
 

@@ -4,7 +4,7 @@
 
       <view class='list'>
             
-                <view class='pre' wx:for = '{{validList}}'>
+                <view class='pre' wx:for = '{{validList}}' bindtap='goto' data-id = '{{item.id}}'>
                       <view class='line'>
                             <view class='line1'>
                                   <view class='tv left'>
@@ -45,7 +45,7 @@
             
 
             <!-- 验收按钮 -->
-            <view class='valid'>验收</view>
+            <view class='valid' bindtap='valid'>验收</view>
             
       
       </view>
