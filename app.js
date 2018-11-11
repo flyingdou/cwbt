@@ -10,8 +10,6 @@ App({
     logo: 'https://fish.ecartoon.com.cn/picture/201810274602.jpg'
   },
   user: {
-    id: 1316,
-    deptId: 211,
-    userPriv: 2
+    
   }
 })
