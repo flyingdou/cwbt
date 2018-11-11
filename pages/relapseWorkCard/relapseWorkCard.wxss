@@ -27,6 +27,7 @@ image{
 }
 
 .title{
+  width: 50%;
   font-size: 28rpx;
   color: rgba(51, 51, 51, 1);
 }
@@ -126,6 +127,7 @@ image{
 .content-input{
   padding: 0 20rpx;
   font-size: 28rpx;
+  width: 284rpx;
   color: rgba(153, 153, 153, 1);
   border: 2rpx solid #F0F0F2;
 }
