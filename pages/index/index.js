@@ -9,10 +9,8 @@ Page({
   data: {
     base_img_url: app.constant.base_img_url,
     logo: app.constant.logo,
-    cycleWorkCount: 0,
-    temporaryCheckCount: 0,
-    temporaryWorkCount: 0,
-    showModalStatus: true
+    showModalStatus: true,
+    workCount: {}
   },
 
   /**
@@ -53,14 +51,10 @@ Page({
           deptId: app.user.deptId
         },
         success: (res) => {
-          var data = {};
-          if (!isNaN(res.data.cycleWorkCount)) {
-            data.cycleWorkCount = res.data.cycleWorkCount;
-          }
-          if (!isNaN(res.data.temporaryCheckCount)) {
-            data.temporaryWorkCount = res.data.temporaryCheckCount;
-          }
-          obj.setData(data);
+          var workCount = res.data;
+          obj.setData({
+            workCount: workCount
+          });
         }
       });
     }
@@ -185,14 +179,12 @@ Page({
           util.tipsMessage('登录成功！');
           app.user = res.data.user;
           wx.setStorageSync('user', res.data.user);
-          var data = { isLogin: false, userPriv: app.user.userPriv };
-          if (!isNaN(res.data.worksCount.cycleWorkCount)) {
-            data.cycleWorkCount = res.data.worksCount.cycleWorkCount;
-          }
-          if (!isNaN(res.data.worksCount.temporaryCheckCount)) {
-            data.temporaryWorkCount = res.data.worksCount.temporaryCheckCount;
-          }
-          obj.setData(data);
+          var workCount = res.data.workCount;
+          obj.setData({
+            isLogin: false, 
+            userPriv: app.user.userPriv,
+            workCount: workCount
+          });
         } else {
           util.tipsMessage('账号或密码错误！');
         }
