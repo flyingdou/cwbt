@@ -102,6 +102,7 @@ Page({
         if (res.confirm) {
           // 清除用户记录
           app.user = {};
+          wx.removeStorageSync('user');
           // 返回登录页面
           wx.switchTab({
             url: '../index/index'

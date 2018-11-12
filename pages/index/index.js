@@ -58,10 +58,7 @@ Page({
             data.cycleWorkCount = res.data.cycleWorkCount;
           }
           if (!isNaN(res.data.temporaryCheckCount)) {
-            data.workCount = res.data.temporaryCheckCount;
-          }
-          if (!isNaN(res.data.temporaryWorkCount)) {
-            data.workCount = res.data.temporaryWorkCount;
+            data.temporaryWorkCount = res.data.temporaryCheckCount;
           }
           obj.setData(data);
         }
@@ -187,15 +184,13 @@ Page({
         if (res.data.success) {
           util.tipsMessage('登录成功！');
           app.user = res.data.user;
+          wx.setStorageSync('user', res.data.user);
           var data = { isLogin: false, userPriv: app.user.userPriv };
           if (!isNaN(res.data.worksCount.cycleWorkCount)) {
             data.cycleWorkCount = res.data.worksCount.cycleWorkCount;
           }
           if (!isNaN(res.data.worksCount.temporaryCheckCount)) {
-            data.workCount = res.data.worksCount.temporaryCheckCount;
-          }
-          if (!isNaN(res.data.worksCount.temporaryWorkCount)) {
-            data.workCount = res.data.worksCount.temporaryWorkCount;
+            data.temporaryWorkCount = res.data.worksCount.temporaryCheckCount;
           }
           obj.setData(data);
         } else {
