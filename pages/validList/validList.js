@@ -14,7 +14,7 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
-     obj.init();
+    
   },
 
   /**
@@ -28,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    obj.init();
   },
 
   /**
