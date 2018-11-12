@@ -15,7 +15,7 @@ App({
     base_req_url: "http://127.0.0.119:8080/hqwl/api/cwbtMP/",
     upload_url: 'https://fish.ecartoon.com.cn/uploadFile',
     logo: 'https://fish.ecartoon.com.cn/picture/201810274602.jpg',
-    isDev: false
+    isDev: true
   },
   user: {}
 

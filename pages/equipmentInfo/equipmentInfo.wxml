@@ -1,0 +1,89 @@
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 页面开始 -->
+<view class='content' wx:if='{{!loadingStatus}}'>
+
+      <!-- block1 -->
+      <view class='block1'>
+
+            <view class='line'>
+                  <view class='title'>设备名称</view>
+                  <view class='value'>{{equipment.name}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>编号</view>
+                  <view class='value'>{{equipment.number}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>原编号</view>
+                  <view class='value'>{{equipment.source_number}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>型号</view>
+                  <view class='value'>{{equipment.model}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>所属船舶</view>
+                  <view class='value'>{{equipment.boatname}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>船舶部门</view>
+                  <view class='value' wx:if='equipment.boatdepartment == 1'>驾驶部</view>
+                  <view class='value' wx:elif='equipment.boatdepartment == 2'>轮机部</view>
+                  <view class='value' wx:else></view>
+            </view>
+            
+            <!-- 作业内容 -->
+            <view class='remark'>
+                  <view class='title'>主要技术参数:</view>
+                  <view class='task'>
+                      <view class='content-box' wx:for='{{equipment.parameters}}' wx:key=''>
+                        <view class='add-content'>
+                          {{index+1}}. {{item.name}}：{{item.value}}
+                        </view>
+                      </view>
+                  </view>
+            </view>
+
+            <!-- <view class='remark'>
+                  <view class='title'>备注:</view>
+                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
+                  
+            </view> -->
+
+            <!-- preview -->
+            <!-- <view class='preview'>
+                  <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
+                  </view>
+
+                  <view class='pic'>
+                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
+                  </view>
+            </view> -->
+
+            
+            <!-- 填充高度 -->
+            <!-- <view class='fill'></view> -->
+
+
+            <!-- 底部按钮 -->
+            <!-- <view class='buttons'>
+                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
+                  <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
+                  <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
+                  <view class='button finshButton' bindtap='finsh'>保存</view>
+            </view> -->
+      
+      </view>
+
+
+
+
+</view>

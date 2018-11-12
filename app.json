@@ -4,6 +4,7 @@
     "pages/valid/valid",
     "pages/validList/validList",
     "pages/relapseWorkCard/relapseWorkCard",
+    "pages/equipmentInfo/equipmentInfo",
     "pages/logs/logs",
     "pages/spotCheck/spotCheck",
     "pages/supervise/supervise",
