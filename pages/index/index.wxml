@@ -1,3 +1,5 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
 <!-- 登录页面 -->
 <view class = 'login' wx:if='{{isLogin}}'>
   <!-- 填充高度 -->
@@ -45,23 +47,23 @@
     <view class='block' bindtap='goto' data-link='../Tlist/Tlist?queryType=1' data-message='功能暂无！' wx:if='{{userPriv != 2}}'>
       <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
       <view class='block-text'>工作任务</view>
-      <view class='block-count'>{{cycleWorkCount}}</view>
+      <view class='block-count'>{{filter.toFixed(workCount.cycleWorkCount, 0)}}</view>
     </view>
     <view class='block' bindtap='goto' data-link='../Tlist/Tlist?queryType=2' data-message='功能暂无！' wx:if='{{userPriv != 2}}'>
       <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
       <view class='block-text'>临时任务</view>
-      <view class='block-count'>{{temporaryWorkCount}}</view>
+      <view class='block-count'>{{filter.toFixed(workCount.temporaryWorkCount, 0)}}</view>
     </view>
     <view class='block' bindtap='goto' data-link='../../pages/validList/validList' data-message='功能暂无！' wx:if='{{userPriv != 3}}'>
       <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
       <view class='block-text'>工作卡验收</view>
-      <!-- <view class='block-count'>{{temporaryCheckCount}}</view> -->
+      <view class='block-count'>{{filter.toFixed(workCount.checkAcceptanceCount, 0)}}</view>
     </view>
     <view class='block' bindtap='relapseWorkCard' data-link='../relapseWorkCard/relapseWorkCard' data-message='功能暂无！' 
       wx:if='{{userPriv != 3}}'>
       <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
-      <view class='block-text'>发布临时工作卡</view>
-      <!-- <view class='block-count'>{{temporaryWorkCount}}</view> -->
+      <view class='block-text'>督导</view>
+      <!-- <view class='block-count'>{{filter.toFixed(workCount.temporaryCheckCount, 0)}}</view> -->
     </view>
   </view>
   <!-- 填充高度 -->

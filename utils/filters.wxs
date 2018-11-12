@@ -20,7 +20,7 @@ var filters = {
     if (!isNaN(num)) {
       return parseFloat(num).toFixed(length);
     } else {
-      return num;
+      return 0;
     }
   },
   overflow_hidden: function (text, length) {
