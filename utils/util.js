@@ -46,7 +46,7 @@ function tipsMessage (message) {
 function getRequestURL(interfaceName) {
   // 开发模式
   if (app.constant.isDev) {
-    return `http://192.168.0.210:8080/hqwl/api/cwbtMP/${interfaceName}`;
+    return `http://192.168.0.106:8080/hqwl/api/cwbtMP/${interfaceName}`;
   }
 
   // 非开发模式
