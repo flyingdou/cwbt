@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/index/index",
     "pages/releaseSupervise/releaseSupervise",
+    "pages/index/index",
     "pages/valid/valid",
     "pages/validList/validList",
     "pages/relapseWorkCard/relapseWorkCard",
