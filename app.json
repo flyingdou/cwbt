@@ -1,13 +1,12 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/releaseSupervise/releaseSupervise",
     "pages/valid/valid",
     "pages/validList/validList",
     "pages/relapseWorkCard/relapseWorkCard",
     "pages/equipmentInfo/equipmentInfo",
     "pages/logs/logs",
-    "pages/spotCheck/spotCheck",
-    "pages/supervise/supervise",
     "pages/workCardDetail/workCardDetail",
     "pages/Tlist/Tlist",
     "pages/mine/mine",
