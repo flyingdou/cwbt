@@ -1,3 +1,5 @@
+var app = getApp();
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -38,8 +40,24 @@ function tipsMessage (message) {
   });
 }
 
+/**
+ * 获取请求地址
+ */
+function getRequestURL(interfaceName) {
+  // 开发模式
+  if (app.constant.isDev) {
+    return `http://192.168.0.210:8080/hqwl/api/cwbtMP/${interfaceName}`;
+  }
+
+  // 非开发模式
+  if (!app.constant.isDev) {
+    return app.constant.base_req_url + interfaceName;
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
   getSystemInfo: getSystemInfo,
-  tipsMessage: tipsMessage
+  tipsMessage: tipsMessage,
+  getRequestURL: getRequestURL
 }

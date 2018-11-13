@@ -44,9 +44,10 @@ Page({
     }
 
     // 根据用户部门ID查询任务数量
+    var url = util.getRequestURL('getWorksCount.we');
     if (app.user.deptId) {
       wx.request({
-        url: app.constant.base_req_url + 'getWorksCount.we',
+        url: url,
         data: {
           deptId: app.user.deptId
         },
@@ -115,8 +116,9 @@ Page({
     obj.data.account = e.detail.value;
     // 根据账号查询微信标识(达到手机号码11位)
     if (obj.data.account.length == 11) {
+      var url = util.getRequestURL('checkWechatMPIdByUser.we');
       wx.request({
-        url: app.constant.base_req_url + 'checkWechatMPIdByUser.we',
+        url: url,
         data: {
           account: obj.data.account
         },
@@ -166,8 +168,9 @@ Page({
       mask: true,
     });
     // 调用服务端登录接口
+    var url = util.getRequestURL('login.we');
     wx.request({
-      url: app.constant.base_req_url + 'login.we',
+      url: url,
       data: {
         userName: obj.data.account,
         pwd: obj.data.password,

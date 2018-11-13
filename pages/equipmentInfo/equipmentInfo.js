@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = {};
 Page({
 
@@ -73,8 +74,9 @@ Page({
       title: '数据加载中',
       mask: true
     });
+    var url = util.getRequestURL('getWcEquipmentcardByNumber.we');
     wx.request({
-      url: app.constant.base_req_url + 'getWcEquipmentcardByNumber.we',
+      url: url,
       data: {
         number: obj.data.code
       },

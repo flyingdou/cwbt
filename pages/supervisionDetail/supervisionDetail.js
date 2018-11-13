@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = {};
 Page({
 
@@ -24,6 +25,10 @@ Page({
         creator: options.creator
       });
     }
+
+    obj.setData({
+      userPriv: app.user.userPriv
+    });
   },
 
   /**
@@ -72,9 +77,10 @@ Page({
    * 查询督导内容列表
    */
   getSupervisionContentList: function () {
+    var url = util.getRequestURL('getSupervisionContentList.we');
     var param = { userId: app.user.id, deptId: app.user.deptId };
     wx.request({
-      url: app.constant.base_req_url + 'getSupervisionContentList.we',
+      url: url,
       data: {
         supervisionId: obj.data.id
       },
@@ -95,7 +101,7 @@ Page({
    */
   reSend: function (e) {
     wx.navigateTo({
-      url: `../releaseSupervision/releaseSupervision?id=${obj.data.id}&contents=${JSON.stringify(obj.data.contents)}`
+      url: `../releaseSupervise/releaseSupervise?id=${obj.data.id}&contents=${JSON.stringify(obj.data.contents)}`
     });
   },
 

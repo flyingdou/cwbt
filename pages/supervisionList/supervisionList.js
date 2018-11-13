@@ -15,6 +15,10 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+
+    obj.setData({
+      userPriv: app.user.userPriv
+    });
   },
 
   /**
@@ -70,9 +74,10 @@ Page({
    * 查询督导列表数据
    */
   getSupervisionList: function () {
+    var url = util.getRequestURL('getSupervisionList.we');
     var param = { userId: app.user.id, deptId: app.user.deptId };
     wx.request({
-      url: app.constant.base_req_url + 'getSupervisionList.we',
+      url: url,
       data: {
         json: JSON.stringify(param)
       },

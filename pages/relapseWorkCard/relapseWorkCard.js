@@ -77,8 +77,9 @@ Page({
       title: '数据加载中',
       mask: true
     });
+    var url = util.getRequestURL('getWcEquipmentcardByNumber.we');
     wx.request({
-      url: app.constant.base_req_url + 'getWcEquipmentcardByNumber.we',
+      url: url,
       data: {
         number: obj.data.code
       },
@@ -202,8 +203,9 @@ Page({
       title: '正在保存中',
       mask: true
     });
+    var url = util.getRequestURL('addTemporaryWorkCard.we');
     wx.request({
-      url: app.constant.base_req_url + 'addTemporaryWorkCard.we',
+      url: url,
       data: {
         json: encodeURI(JSON.stringify(param))
       },
