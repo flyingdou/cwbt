@@ -138,6 +138,8 @@ image{
   align-items: center;
   margin-bottom: 20rpx;
   font-size: 28rpx;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .add-content{
