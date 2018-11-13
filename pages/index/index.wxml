@@ -58,7 +58,7 @@
       wx:if='{{userPriv == 3}}'>
       <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
       <view class='block-text'>督导通知</view>
-      <view class='block-count'>{{filter.toFixed(workCount.cycleWorkCount, 0)}}</view>
+      <view class='block-count'>{{filter.toFixed(workCount.supervisionCount, 0)}}</view>
     </view>
     <view class='block' bindtap='goto' data-link='../../pages/validList/validList' data-message='功能暂无！' wx:if='{{userPriv == 2}}'>
       <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>

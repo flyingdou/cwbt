@@ -45,11 +45,12 @@ Page({
 
     // 根据用户部门ID查询任务数量
     var url = util.getRequestURL('getWorksCount.we');
+    var param = { deptId: app.user.deptId, userId: app.user.id };
     if (app.user.deptId) {
       wx.request({
         url: url,
         data: {
-          deptId: app.user.deptId
+          json: JSON.stringify(param)
         },
         success: (res) => {
           var workCount = res.data;

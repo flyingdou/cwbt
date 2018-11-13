@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    base_img_url: app.constant.base_img_url
   },
 
   /**
@@ -19,16 +19,6 @@ Page({
     if (options.id) {
       obj.data.id = options.id;
     }
-
-    if (options.creator) {
-      obj.setData({
-        creator: options.creator
-      });
-    }
-
-    obj.setData({
-      userPriv: app.user.userPriv
-    });
   },
 
   /**
@@ -42,7 +32,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getSupervisionContentList();
+    this.getSuperviseFeedback();
   },
 
   /**
@@ -74,18 +64,19 @@ Page({
   },
 
   /**
-   * 查询督导内容列表
+   * 查询督导反馈
    */
-  getSupervisionContentList: function () {
-    var url = util.getRequestURL('getSupervisionContentList.we');
+  getSuperviseFeedback: function () {
+    var url = util.getRequestURL('getSupervisFeedBack.we');
     wx.request({
       url: url,
       data: {
         supervisionId: obj.data.id
       },
       success: function (res) {
+        res.data.image = JSON.parse(res.data.image);
         obj.setData({
-          contents: res.data
+          superviseFeedback: res.data
         });
       },
       fail: function (e) {
@@ -96,18 +87,20 @@ Page({
   },
 
   /**
-   * 转发
+   * 图片预览
    */
-  reSend: function (e) {
-    wx.navigateTo({
-      url: `../releaseSupervise/releaseSupervise?id=${obj.data.id}&contents=${JSON.stringify(obj.data.contents)}`
-    });
-  },
-
-  /**
-   * 执行
-   */
-  implement: function (e) {
-
+  preview: (e) => {
+    var imgs = [];
+    var photos = obj.data.superviseFeedback.image;
+    for (var i = 0; i < photos.length; i++) {
+      imgs.push(app.constant.base_img_url + '/' + photos[i].name);
+    }
+    console.log(imgs);
+    var index = e.currentTarget.dataset.index;
+    // 预览开始
+    wx.previewImage({
+      current: imgs[index],
+      urls: imgs
+    })
   }
 })
