@@ -2,54 +2,72 @@
 <view class='content'>
       <!-- 列表 -->
       <view class='List'>
-           <!-- 每一个 -->
-           <view class='pre' wx:for = '{{taskList}}' bindtap='goto' data-index = '{{index}}'>
-                 
-                 <view class='line div'>
-                       <view class='title'>设备名称</view>
-                       <view class='value'>{{item.ename}}</view>
-                 </view>
+           <checkbox-group bindchange = 'chooseChange'>
+                    <!-- 每一个 -->
+                    <view class='pre' wx:for = '{{taskList}}' bindtap='goto' data-index = '{{index}}'>
+                          
+                          <!-- 第一行 -->
+                          <view class='line div'>
+                                <view class='title'>设备名称</view>
+                                <view class='value'>{{item.ename}}</view>
+                          </view>
 
-                 <view class='line2 div'>
-                       <view class='line'>
-                             <view class='title'>作业名称</view>
-                             <view class='value'>{{item.name}}</view>
-                       </view>
+                          <!-- 第二行 -->
+                          <view class='line2 div'>
+                                <view class='line'>
+                                      <view class='title'>作业名称</view>
+                                      <view class='value'>{{item.name}}</view>
+                                </view>
 
-                       <view class='line'>
-                             <view class='title'>维修等级</view>
-                             <view class='value'>{{item.level}}</view>
-                       </view>
+                                <view class='line'>
+                                      <view class='title'>维修等级</view>
+                                      <view class='value'>{{item.level}}</view>
+                                </view>
 
-                 </view>
+                          </view>
 
-                 <view class='line div'>
-                       <view class='fill'></view>
-                 </view>
+                          <view class='line div'>
+                                <view class='fill'></view>
+                          </view>
+                          
+                          <!-- 第三行 -->
+                          <view class='line2 div'>
+                                <view class='line'>
+                                      <view class='title'>所属船舶</view>
+                                      <view class='value'>{{item.boatName}}</view>
+                                </view>
 
-                 <view class='line2 div'>
-                       <view class='line'>
-                             <view class='title'>所属船舶</view>
-                             <view class='value'>{{item.boatName}}</view>
-                       </view>
+                                <view class='line'>
+                                      <view class='title'>计划时间</view>
+                                      <view class='value'>{{item.plannedtime}}</view>
+                                </view>
 
-                       <view class='line'>
-                             <view class='title'>计划时间</view>
-                             <view class='value'>{{item.plannedtime}}</view>
-                       </view>
+                          </view>
 
-                 </view>
+                          <!-- 图标 -->
+                          <view class='tag' wx:if = '{{item.status == 9}}'>
+                                <view class='tagDiv'>
+                                      <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                      <view class='statusFont'>被领取</view>
+                                </view>
+                          </view>
+                          
 
-                 <!-- 图标 -->
-                 <view class='tag' wx:if = '{{item.status == 9}}'>
-                      <view class='tagDiv'>
-                            <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                            <view class='statusFont'>进行中</view>
-                      </view>
-                 </view>
+                          <!-- 多选择 -->
+                          <view class='choose'>
+                                <checkbox value='{{item.id}}' catchtap='ni' wx:if = '{{isGet && item.status == 1}}'></checkbox>
+                          </view>
 
-           </view>
+                    </view>
 
+           </checkbox-group>
+
+      </view>
+
+      <!-- 底部按钮 -->
+      <view class='footer'>
+            <view class='button chooseTask' wx:if = '{{!isGet}}' bindtap='chooseStart'>领取任务</view>
+            <view class='button get' wx:if = '{{isGet}}' data-status = '9' bindtap='getTask'>完成</view>
       </view>
 
 </view>

@@ -1,0 +1,76 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- 选择行 -->
+      <!-- <view class='line' bindtap='choose' >
+            <view class='title'>发送给：</view>
+            <view class='moreIcon'>
+                  <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+            </view>
+      </view> -->
+
+      <!-- 选择发送部门 -->
+      <view class='choose'>
+            <view class='title'>发送给：</view>
+            <!-- pickers -->
+            <view class='pickers'>
+                  <picker bindchange='pickerChange' range='{{array0}}' value='{{array0Index}}' range-key='name'>
+                          <view class='picker'>
+                                ----
+                          </view>
+                  </picker>
+
+                  <picker bindchange='pickerChange' range='{{array0}}' value='{{array1Index}}' range-key='name'>
+                          <view class='picker'>
+                                ----
+                          </view>
+                  </picker>
+
+                  <picker bindchange='pickerChange' range='{{array0}}' value='{{array2Index}}' range-key='name'>
+                          <view class='picker'>
+                                ----
+                          </view>
+                  </picker>
+            </view>
+      </view>
+
+      <view class='fill'></view>
+
+
+      <!-- 内容区 -->
+      <view class='textArea'>
+            <view class='remark'>
+                  <view class='title'>内容：</view>
+                  <textarea placeholder='请输入督导内容！' maxlength='-1' class='textAreaClass' placeholder-class='inputPlaceHolder' bindinput='inputChange' data-key = 'content'></textarea>
+            </view>
+      </view>
+
+      <!-- 已有内容 -->
+      <view class='textArea'>
+            <view class='remark'>
+                  <view class='title'>已有内容：</view>
+                  <view class='remarkList'>
+                        <view class='remarkContent'>
+                              <view class='remarkTitle'>窦元要求：</view>
+                              <view class='remarkValue'>1.检查离心机运行情况、检查船舶甲板情况</view>
+                        </view>
+
+                        <view class='remarkContent'>
+                              <view class='remarkTitle'>华文要求：</view>
+                              <view class='remarkValue'>1.检查锚机情况</view>
+                        </view>
+
+                  </view>
+            </view>
+      </view>
+
+
+      <!-- 发送按钮 -->
+      <view class='sendButton'>
+            <view class='send'>发送</view>
+      </view>
+
+
+</view>
+
+<!-- 弹出框 -->
+<!-- <mark showModalStatus='{{showModalStatus}}' type='checkbox' bindMark='test'></mark> -->

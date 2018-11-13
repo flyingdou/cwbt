@@ -7,6 +7,7 @@ Page({
    */
   data: {
     showModalStatus: false, // 默认禁用
+    array0: []
   },
 
   /**
@@ -14,6 +15,7 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     obj.init();
   },
 
   /**
@@ -66,6 +68,23 @@ Page({
   },
 
   /**
+   * 初始化页面
+   */
+  init: () => {
+    var array0 = [
+      { 'id': 9, 'name': '----' },
+      {'id':10,'name':'荆州处'},
+      {'id':11,'name':'武汉处'},
+      {'id':12,'name':'长沙处'},
+      {'id':13,'name':'岳阳处'}
+    ];
+    obj.setData({
+      array0: array0,
+      array0Value:'----'
+    });
+  },
+
+  /**
    * 展示弹出框
    */
   choose: () => {
@@ -84,6 +103,16 @@ Page({
     console.log(e.detail);
 
   },
+  
+  /**
+   * 选择变化
+   */
+  pickerChange: (e) => {
+    var index = e.detail.value;
+    var flag = e.currentTarget.dataset.flag;
+    
+    
+  }
 
 
 

@@ -131,7 +131,8 @@ Page({
         res = res.data;
         if (res.success) {
           obj.setData({
-            taskList: res.workCardList
+            taskList: res.workCardList,
+            isGet: false
           });
         }
       }
@@ -156,7 +157,87 @@ Page({
     wx.redirectTo({
       url: '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id,
     })
+  },
+
+  /**
+   * 多选
+   */
+  chooseChange: (e) =>{
+    var chooseList = e.detail.value;
+    obj.setData({
+      chooseList: chooseList
+    });
+  },
+
+  /**
+   * ni
+   */
+  ni: () => {
+
+  },
+
+
+  /**
+   * 触发多选
+   */
+  chooseStart: () => {
+     obj.setData({
+       isGet: true
+     });
+  },
+
+
+
+  // 领取任务
+  getTask: (e) => {
+    var chooseList = obj.data.chooseList;
+    if (chooseList.length == 0) {
+      obj.setData({
+        isGet:false
+      });
+       return;
+    }
+    chooseList.join(',');
+    var status = e.currentTarget.dataset.status;
+    
+    // 参数
+    var param = {
+      id: chooseList,
+      status: status
+    };
+
+    wx.request({
+      url: app.constant.base_req_url + 'updateMuiltWorkCard.we',
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          chooseList = obj.data.chooseList;
+          var taskList = obj.data.taskList;
+          for (var c in chooseList) {
+            for (var t in taskList) {
+              if (chooseList[c] == taskList[t].id) {
+                taskList[t].status = param.status;
+              }
+            }
+          }
+
+          // 设置到页面数据中
+          obj.setData({
+            taskList: taskList,
+            isGet: false
+          });
+        }
+      }
+    })
+
+
   }
+
+
 
 
 

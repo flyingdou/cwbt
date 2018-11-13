@@ -79,3 +79,36 @@ image{
    text-align: center;
    border-radius: 8rpx;
 }
+
+.choose{
+  padding: 20rpx 4%;
+}
+
+.pickers{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40rpx;
+}
+
+picker{
+  padding-right: 30rpx;
+}
+
+.remarkList{
+  padding: 20rpx;
+}
+
+.remarkContent{
+  padding-bottom: 20rpx;
+}
+
+.remarkTitle{
+  font-size: 28rpx;
+}
+
+.remarkValue{
+  font-size: 28rpx;
+  color: #999999;
+  padding-top: 10rpx;
+}
