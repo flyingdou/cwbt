@@ -41,6 +41,14 @@
                   </view>
             </view>
 
+            <!-- 验收标准 -->
+            <view class='remark'>
+                  <view class='title'>验收标准:</view>
+                  <view class='task'>
+                        <view class='value' wx:for = '{{workDetail.taskList}}'>{{item.mark}}</view>
+                  </view>
+            </view>
+
             <view class='line'>
                   <view class='title'>设备状况</view>
                   <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >

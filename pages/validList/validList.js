@@ -144,6 +144,9 @@ Page({
     var reqUrl = app.constant.base_req_url + 'getWorkfeedbackList.we';
     wx.request({
       url: reqUrl,
+      data: {
+        dept_id: app.user.deptId
+      },
       dataType: 'json',
       success: (res) => {
         res = res.data;

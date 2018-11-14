@@ -26,7 +26,18 @@
                   
                   <!-- 工作内容 -->
                   <view class='task'>
-                        <view class='ta' wx:for = '{{valid.content}}'>{{item}}</view>
+                        <view class='ta' wx:for = '{{valid.content}}'>{{item.name}}</view>
+                  </view>
+                  
+            </view>
+
+            <!-- 验收标准 -->
+            <view class='taskList'>
+                  <view class='taskTitle'>验收标准</view>
+                  
+                  <!-- 工作内容 -->
+                  <view class='task'>
+                        <view class='ta' wx:for = '{{valid.content}}'>{{item.mark}}</view>
                   </view>
                   
             </view>
