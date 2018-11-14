@@ -17,10 +17,10 @@
                   <view class='value'>{{equipment.number}}</view>
             </view>
             
-            <view class='line'>
+            <!-- <view class='line'>
                   <view class='title'>工作卡名称</view>
                   <view class='value'><input type='text' style='text-align: right;' placeholder='输入工作卡名称' bindinput='saveFormData' data-key='name'></input></view>
-            </view>
+            </view> -->
 
             <view class='line'>
                   <view class='title'>维修方式</view>
@@ -28,7 +28,7 @@
             </view>
             
             <!-- 作业内容 -->
-            <view class='remark'>
+            <!-- <view class='remark'>
                   <view class='title'>工作内容:</view>
                   <view class='task'>
                       <view class='content-box' wx:for='{{contents}}' wx:key=''>
@@ -37,13 +37,13 @@
                         <view class='add-content' bindtap='addContent' wx:if='{{index == contents.length - 1}}'>添加内容</view>
                       </view>
                   </view>
-            </view>
-
-            <!-- <view class='remark'>
-                  <view class='title'>备注:</view>
-                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
-                  
             </view> -->
+
+            <view class='remark'>
+                  <view class='title'>异常描述:</view>
+                  <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='saveFormData' data-key = 'remark'></textarea>
+                  
+            </view> 
 
             <!-- preview -->
             <!-- <view class='preview'>

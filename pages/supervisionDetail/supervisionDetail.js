@@ -108,6 +108,8 @@ Page({
    * 执行
    */
   implement: function (e) {
-
+    wx.navigateTo({
+      url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.creator}&contents=${JSON.stringify(obj.data.contents)}`
+    });
   }
 })

@@ -9,8 +9,7 @@ Page({
   data: {
     loadingStatus: true,
     pickerData: [{ code: -1, name: '请选择' }, { code: 0, name: '自行维修' }, { code: 1, name: '委外维修' } ],
-    index: 0,
-    contents: ['']
+    index: 0
   },
 
   /**
@@ -124,52 +123,16 @@ Page({
   },
 
   /**
-   * 添加内容
-   */
-  addContent: (e) => {
-    var contents = obj.data.contents;
-    contents.push('');
-    obj.setData({ contents: contents });
-  },
-
-  /**
-   * 删除内容
-   */
-  delContent: (e) => {
-    wx.showModal({
-      title: '提示',
-      content: '确定删除？',
-      success: (res) => {
-        if (res.confirm) {
-          var index = e.currentTarget.dataset.index;
-          var contents = obj.data.contents;
-          contents.splice(index, 1);
-          obj.setData({ contents: contents });
-        } 
-      }
-    })
-  },
-
-  /**
-   * 保存内容数据
-   */
-  saveContentData: function (e) {
-    var index = e.currentTarget.dataset.index;
-    var value = e.detail.value;
-    obj.data.contents[index] = value;
-  },
-
-  /**
    * 检查表单数据
    */
   checkFormData: function () {
     var data = obj.data;
-    var name = data.name;
+    var remark = data.remark;
     var overhaulFunction = data.pickerData[data.index].code;
-    if (!name) {
+    if (!remark) {
       wx.showModal({
         title: '提示',
-        content: '请输入工作卡名称',
+        content: '请输入异常描述',
         showCancel: false
       });
       return false;
@@ -195,9 +158,9 @@ Page({
     var data = obj.data;
     var param = {
       equipmentId: data.equipment.id,
-      name: data.name,
-      overhaulFunction: data.pickerData[data.index].code,
-      content: data.contents.join(',')
+      name: data.equipment.name + data.pickerData[data.index].name,
+      remark: data.remark,
+      overhaulFunction: data.pickerData[data.index].code
     }
     wx.showLoading({
       title: '正在保存中',
