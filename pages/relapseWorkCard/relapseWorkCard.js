@@ -182,7 +182,7 @@ Page({
             showCancel: false,
             complete: function () {
               wx.navigateBack({
-                delta: 1
+                delta: 4
               });
             }
           });
