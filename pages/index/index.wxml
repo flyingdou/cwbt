@@ -44,7 +44,7 @@
   <view class='background'></view>
   <!-- 操作按钮块 -->
   <view class='blocks'>
-    <view class='block' bindtap='goto' data-link='../Tlist/Tlist?queryType=1' data-message='功能暂无！' wx:if='{{userPriv == 3}}'>
+    <view class='block' bindtap='goto' data-link='../spotCheck/spotCheck' data-message='功能暂无！' wx:if='{{userPriv == 3}}'>
       <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
       <view class='block-text'>工作任务</view>
       <view class='block-count'>{{filter.toFixed(workCount.cycleWorkCount, 0)}}</view>

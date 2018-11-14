@@ -16,7 +16,7 @@ Page({
   onLoad: function (options) {
      obj = this;
      // 初始化多列选择器
-     this.multiSelectorInit();
+     // this.multiSelectorInit();
   },
 
   /**
@@ -147,6 +147,12 @@ Page({
   
   // 跳转页面
   goto: (e) => {
+    var link = e.currentTarget.dataset.link;
+    wx.navigateTo({
+      url: link
+    });
+    return;
+
     var dept_id = obj.data.dept_id;
     var boat_id = obj.data.boat_id;
     if (!boat_id) {
