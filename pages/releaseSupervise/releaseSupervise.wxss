@@ -103,6 +103,11 @@ picker{
   padding-bottom: 20rpx;
 }
 
+.remark{
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
 .remarkTitle{
   font-size: 28rpx;
 }
@@ -112,3 +117,14 @@ picker{
   color: #999999;
   padding-top: 10rpx;
 }
+
+.valuess{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.lp{
+  padding-right: 30rpx;
+}
+
