@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    user_id: app.user.id
 
   },
 
@@ -37,6 +38,21 @@ Page({
      if (flag) {
        obj.data.flag = flag;
      }
+
+     // 船舶部门
+    var boatdepartment = options.boatdepartment;
+    if (boatdepartment) {
+      obj.data.boatdepartment = boatdepartment;
+    }
+    
+
+    // 修改的列表
+    var isUpdate = options.isUpdate;
+    if (isUpdate) {
+        obj.setData({
+          isUpdate: isUpdate
+        });
+    }
 
     obj.init();
 
@@ -98,14 +114,18 @@ Page({
    * 初始化页面数据
    */
   init: () => {
+    var isUpdate = obj.data.isUpdate;
     var reqUrl = app.constant.base_req_url + 'getWorkCardList.we';
+    
     var param = {};
     var queryType = obj.data.queryType;
+    var boatdepartment = obj.data.boatdepartment;
     if (queryType == 1) { // 周期工作列表
       param = {
         type: '1',
         dept_id: app.user.deptId,
-        status: '1,9' // 未完成、进行中
+        status: '1,9', // 未完成、进行中
+        boatdepartment: boatdepartment, //船舶部门
       };
     } else if (obj.data.queryType == 2) { // 临时工作列表
       param = {
@@ -119,7 +139,17 @@ Page({
         dept_id: app.user.deptId,
         status: '2,3' // 已完成、已验收
       };
+    }
+
+    if (isUpdate) {
+      reqUrl = app.constant.base_req_url + 'getWorkcardUpdateAbleList.we';
+      param = {
+        executor_id: app.user.id
+      };
     } 
+    
+    // console.log(param);
+    // return;
     wx.request({
       url: reqUrl,
       dataType:'json',
@@ -146,7 +176,7 @@ Page({
   goto: (e) => {
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.taskList[index];
-    if (workCard.status == 9) {
+    if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
       wx.showModal({
         title: '提示',
         content: '该工作已在进行中，请选择其他工作！',
@@ -186,6 +216,16 @@ Page({
      });
   },
 
+  /**
+   * 取消多选框
+   */
+  undo: () => {
+    obj.setData({
+      isGet: false,
+      chooseList:[]
+    });
+  },
+
 
 
   // 领取任务
@@ -203,7 +243,8 @@ Page({
     // 参数
     var param = {
       id: chooseList,
-      status: status
+      status: status,
+      collectorpersonid: app.user.id
     };
 
     wx.request({
@@ -221,6 +262,7 @@ Page({
             for (var t in taskList) {
               if (chooseList[c] == taskList[t].id) {
                 taskList[t].status = param.status;
+                taskList[t].collectorpersonid = param.collectorpersonid;
               }
             }
           }
@@ -233,6 +275,45 @@ Page({
         }
       }
     })
+
+
+  },
+
+  /**
+   * 取消领取
+   */
+  unchoose: (e) => {
+    var id = e.currentTarget.dataset.id;
+    var index = e.currentTarget.dataset.index;
+    var param = {
+      id: [id],
+      status: 1,
+      collectorpersonid: app.user.id
+    };
+
+    console.log(param);
+    console.log(index);
+    // return;
+
+    var taskList = obj.data.taskList;
+
+    wx.request({
+      url: app.constant.base_req_url + 'updateMuiltWorkCard.we',
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+             taskList[index].status = param.status;
+             obj.setData({
+               taskList: taskList
+             });
+        }
+      }
+    })
+      
 
 
   }

@@ -6,6 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    photos:[],
+    status:0, // 默认拍照
+    statusList: [
+      { id: 0, name: "正常" },
+      { id: 1, name: "异常" }
+    ],
+    deviceStatus: 0
 
   },
 
@@ -14,6 +21,28 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     var contents = options.contents;
+     if (contents) {
+        contents = JSON.parse(contents);
+        obj.setData({
+          contents: contents
+        });
+     }
+
+     var creator = options.creator;
+     if (creator) {
+       obj.setData({
+         creator: creator
+       });
+     }
+
+     var id = options.id;
+     if (id) {
+       obj.setData({
+         id:id
+       });
+     }
+
   },
 
   /**
@@ -63,5 +92,256 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+   
+  /**
+   * 输入框改变
+   */
+  inputChange: (e) => {
+     var key = e.currentTarget.dataset.key;
+     var value = e.detail.value;
+     var dou = {};
+     dou[key] = value;
+     obj.setData(dou);
+  },
+
+  /**
+   * 下拉框选中
+   */
+  pickerChange: (e) => {
+     var key = e.currentTarget.dataset.key;
+     var index = e.detail.value;
+     var statusList = obj.data.statusList;
+     obj.setData({
+       deviceStatus: statusList[index].id
+     });
+  },
+
+
+  /**
+  * 拍照
+  */
+  photo: () => {
+    var status = obj.data.status;
+    var photo = {};
+    var photos = obj.data.photos;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['camera'],
+      success: (res) => {
+        status = 1;
+        var timex = obj.getNowFormatDate();
+        photo.pic_time = timex;
+        photo.tempFilePath = res.tempFilePaths[0];
+        console.log(res);
+
+        photos.push(photo);
+        obj.setData({
+          status: status,
+          photos: photos
+        });
+      },
+    })
+
+    obj.setData({
+      status: status
+    });
+  },
+
+
+  /**
+   * 图片预览
+   */
+  preview: (e) => {
+    var imgs = [];
+    var photos = obj.data.photos;
+    for (var i = 0; i < photos.length; i++) {
+      imgs.push(photos[i].tempFilePath);
+    }
+    var index = e.currentTarget.dataset.index;
+    // 预览开始
+    wx.previewImage({
+      current: imgs[index],
+      urls: imgs
+    })
+  },
+
+  /**
+   * 删除图片
+   */
+  deletePic: (e) => {
+    var index = e.currentTarget.dataset.index;
+    var photos = obj.data.photos;
+    photos.splice(index, 1);
+    var status = obj.data.status;
+    if (photos.length == 0) {
+      status = 0;
+    }
+    obj.setData({
+      photos: photos,
+      status: status
+    });
+
+  },
+
+  /**
+   * 上传图片
+   */
+  uploadPics: (i) => {
+    var status = obj.data.status;
+    var photos = obj.data.photos;
+    var count = photos.length;
+    var reqUrl = app.constant.upload_url;
+    if (!i) {
+      i = 0;
+    }
+    // 开始上传图片
+    wx.uploadFile({
+      url: reqUrl,
+      filePath: photos[i].tempFilePath,
+      name: 'myfile',
+      success: (res) => {
+        var res = res.data;
+        if (res) {
+          res = JSON.parse(res);
+        }
+        if (res.success) {
+          photos[i].name = res.picture;
+        } else {
+          var x = i + 1;
+          console.log('第' + x + '张图片上传失败！');
+        }
+      },
+      fail: (e) => {
+        var y = i + 1;
+        console.log('第' + y + '张图片上传失败！可能是网络异常导致');
+      },
+      complete: () => {
+        console.log(i);
+        i++;
+        if (i >= count) {
+          status = 2;
+          obj.setData({
+            status: status
+          });
+          console.log('图片上传完成！');
+          return;
+        } else {
+          // 图片还未传完，需要继续上传
+          obj.uploadPics(i);
+        }
+      }
+
+    })
+  },
+
+  /**
+   * 获取yyyy-MM-dd HH:mm:ss
+   */
+  getNowFormatDate: () => {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    var hh = date.getHours();
+    var mm = date.getMinutes();
+    var ss = date.getSeconds();
+    if (hh < 10) {
+      hh = '0' + hh;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    if (ss < 10) {
+      ss = '0' + ss;
+    }
+    if (month >= 1 && month <= 9) {
+      month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+      strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+      + " " + hh + seperator2 + mm + seperator2 + ss;
+    return currentdate;
+  },
+
+  /**
+   * 调用上传方法
+   */
+  uploadPictures: () => {
+    obj.uploadPics();
+  },
+
+  /**
+   * 完成督导任务，生成督导反馈
+   */
+  finishSupervise: () => {
+    var photos = obj.data.photos;
+    for (var x = 0; x < photos.length; x++) {
+      delete photos[x]['tempFilePath'];
+    }
+    var param = {};
+    param.remark = obj.data.remark;
+    param.image = photos;
+    param.opeartor = app.user.id;
+    param.supervisionId = obj.data.id;
+
+    var reqUrl = app.constant.base_req_url + 'saveSupervisFeedBack.we';
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+         res = res.data;
+         if (res.success) {
+           // 数据执行成功
+           var deviceStatus = obj.data.deviceStatus;
+           if (deviceStatus == 1) {
+             // 设备异常，跳转到生成临时工作卡页面
+             obj.relapseWorkCard();
+           } 
+           if (deviceStatus == 0) {
+             // 设备正常，回列表
+             wx.navigateBack({
+               delta:2
+             })
+             
+           }
+         }
+      }
+    })
+  },
+
+    /**
+    * 发布临时工作卡
+    */
+    relapseWorkCard: (e) => {
+        var link = '../relapseWorkCard/relapseWorkCard';
+        // 正式环境执行代码
+        if(!app.constant.isDev) {
+          wx.scanCode({
+            scanType: ['barCode', 'qrCode'],
+            success: (res) => {
+              wx.navigateTo({
+                url: link + '?code=' + res.result
+              });
+            }
+          });
+        }
+      // 开发环境执行代码
+      if(app.constant.isDev) {
+            wx.navigateTo({
+              url: link + '?code=0000123'
+            });
+        }
+
+    }
+
+
+
 })

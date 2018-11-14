@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/releaseSupervise/releaseSupervise",
     "pages/supervise/supervise",
+    "pages/releaseSupervise/releaseSupervise",
     "pages/spotCheck/spotCheck",
     "pages/valid/valid",
     "pages/validList/validList",

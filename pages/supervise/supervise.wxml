@@ -4,22 +4,18 @@
       <!-- 发起人 -->
       <view class='line'>
             <view class='title'>发起人：</view>
-            <view class='value'>窦元</view>
+            <view class='value'>{{creator}}</view>
       </view>
 
       <!-- 内容 -->
-      <view class='remarkDiv'>
+      <view class='remarkDiv' wx:if = '{{contents.length > 0}}'>
             <view class='title'>内容：</view>
             <view class='remarks'>
-                  <view class='remark'>
-                        <view class='title'>窦元要求：</view>
-                        <view class='value'>1.检查离心机运行情况、检查船舶甲板情况</view>
+                  <view class='remark' wx:for = '{{contents}}'>
+                        <view class='title'>{{item.opeartor}}要求：</view>
+                        <view class='value'>{{item.content}}</view>
                   </view>
-
-                  <view class='remark'>
-                        <view class='title'>华文要求：</view>
-                        <view class='value'>1.检查锚机情况</view>
-                  </view>
+                  
             </view>
       </view>
 
@@ -27,27 +23,26 @@
       <view class='description'>
             <view class='title'>情况反馈: </view>
             <view class='textAreaDiv'>
-                  <textarea placeholder='请输入现场情况反馈！' placeholder-class='placeHolder' maxlength='-1' bindinput='inputChange' data-key = 'content'></textarea>
+                  <textarea placeholder='请输入现场情况反馈！' placeholder-class='placeHolder' maxlength='-1' bindinput='inputChange' data-key = 'remark'></textarea>
             </view>
       </view>
 
       <view class='deviceStatus'>
             <view class='title'>设备状态：</view>
-            <picker range='deviceStatusList' range-key='name' value='0' bindchange='pickerChange'>
-                    <view class='value'>正常</view>
+            <picker range='{{statusList}}' range-key='name' value='0' bindchange='pickerChange'>
+                    <view class='value'>{{statusList[deviceStatus].name}}</view>
             </picker>
-      
       </view>
 
 
       <!-- preview -->
       <view class='preview'>
-            <!-- <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+            <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
                   <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
-            </view> -->
+            </view>
 
             <view class='pic'>
-                  <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
+                  <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' wx:if = '{{status != 2}}'></image>
             </view>
       </view>
 
@@ -56,9 +51,9 @@
 
       <!-- footer -->
       <view class='footer'>
-            <view class='button photo'>拍照</view>
-            <view class='button uploadPic'>上传照片</view>
-            <view class='button finish'>完成</view>
+            <view class='button photo' wx:if = '{{status == 0}}' bindtap='photo'>拍照</view>
+            <view class='button uploadPic' wx:if = '{{status == 1}}' bindtap='uploadPictures'>上传照片</view>
+            <view class='button finish' wx:if = '{{status == 2}}' bindtap='finishSupervise'>完成</view>
       </view>
 
 

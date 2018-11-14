@@ -56,6 +56,8 @@ textarea{
 
 .remark{
   padding-bottom: 10rpx;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .description{

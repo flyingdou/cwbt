@@ -45,11 +45,13 @@
                           </view>
 
                           <!-- 图标 -->
-                          <view class='tag' wx:if = '{{item.status == 9}}'>
+                          <view class='tag' wx:if = '{{item.status == 9 && !isUpdate}}'>
                                 <view class='tagDiv'>
                                       <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                                       <view class='statusFont'>被领取</view>
                                 </view>
+
+                                <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-id='{{item.id}}' data-index = '{{index}}'>取消</view>
                           </view>
                           
 
@@ -65,9 +67,13 @@
       </view>
 
       <!-- 底部按钮 -->
-      <view class='footer'>
+      <view class='footer' wx:if = '{{!isUpdate}}'>
             <view class='button chooseTask' wx:if = '{{!isGet}}' bindtap='chooseStart'>领取任务</view>
             <view class='button get' wx:if = '{{isGet}}' data-status = '9' bindtap='getTask'>完成</view>
+            <view class='button cancel' wx:if = '{{isGet}}' bindtap='undo'>取消</view>
       </view>
+
+      <!-- 底部填充 -->
+      <view class='douFill'></view>
 
 </view>

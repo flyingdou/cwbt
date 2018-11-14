@@ -333,12 +333,13 @@ Page({
   },
 
   /**
-   * finsh 保存数据
+   * finish 保存数据
    */
-  finsh: () => {
+  finish: () => {
     // 校验数据
     var status = obj.data.status;
     var handle = obj.data.handle;
+    var workcardName = undefined;
     if (status == 1) {
       if (handle == 0) {
         wx.showModal({
@@ -348,6 +349,17 @@ Page({
         })
         return;
       }
+      var handleName = undefined;
+      if (handle == 1) {
+        handle = 0; // 自行维修
+        handleName = '自行维修';
+      }
+
+      if (handle == 2) {
+          handle = 1; // 委外维修
+          handleName = '委外维修';
+      }
+      workcardName = obj.data.workDetail.ename + '-' + handleName;
     }
 
     var photos = obj.data.photos;
@@ -368,7 +380,8 @@ Page({
       executorId: userId, // 执行者id
       image: photos, // 照片信息
       isError: isError, // 设备状态，是否异常
-      scanTime: obj.data.scanTime
+      scanTime: obj.data.scanTime,
+      equipmentId: obj.data.workDetail.eid
     };
 
     // 可选数据
@@ -384,15 +397,21 @@ Page({
       param.exceptionalDescribe = exceptionalDescribe;
     }
     
+    
     // 维修方式
-    if (handle) {
+    if (handle || handle == 0) {
       param.overhaulFunction = handle; // 1自行维修，2委外维修
     }
 
+    // 工作卡名称
+    if (workcardName) {
+      param.workcardName = workcardName;
+    }
+
     // 测试功能
-    console.log(param);
+    // console.log(param);
     // return;
-    var reqUrl = app.constant.base_req_url + 'finsh.we';
+    var reqUrl = app.constant.base_req_url + 'finish.we';
     // 发起微信请求
     wx.request({
       url: reqUrl,

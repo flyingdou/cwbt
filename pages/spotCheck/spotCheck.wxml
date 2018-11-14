@@ -22,7 +22,7 @@
       <view class='buttons'>
             <view class='linex'>
                   <view class='button workCard' bindtap='goto' data-link='../Tlist/Tlist?queryType=1&boatdepartment=1'>驾驶部</view>
-                  <view class='button maintance' bindtap='goto' data-link='../Tlist/Tlist?queryType=1&boatdepartment=1'>轮机部</view>
+                  <view class='button maintance' bindtap='goto' data-link='../Tlist/Tlist?queryType=1&boatdepartment=2'>轮机部</view>
             </view>
       </view>
 

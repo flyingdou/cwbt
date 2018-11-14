@@ -64,6 +64,9 @@ image{
   position: absolute;
   right: 20rpx;
   top: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .tagDiv{
@@ -82,6 +85,17 @@ image{
   height: 100%;
   text-align: center;
   line-height: 42rpx;
+}
+
+.cancelButton{
+  font-size: 18rpx;
+  color: white;
+  text-align: center;
+  background: #2682FF;
+  margin-left: 10rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 5rpx;
+
 }
 
 .choose{
@@ -113,4 +127,14 @@ image{
 
 .get{
   background: black;
+}
+
+.cancel{
+  background: #ff4401;
+  margin-top: 25rpx;
+}
+
+.douFill{
+  width: 100%;
+  height: 200rpx;
 }
