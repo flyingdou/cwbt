@@ -156,10 +156,11 @@ Page({
       return;
     }
     var data = obj.data;
+    var name = `${data.equipment.name}-${data.pickerData[data.index].name}`;
     var param = {
       equipmentId: data.equipment.id,
-      name: data.equipment.name + data.pickerData[data.index].name,
-      remark: data.remark,
+      name: name,
+      exceptionalDescribe: data.remark,
       overhaulFunction: data.pickerData[data.index].code
     }
     wx.showLoading({
