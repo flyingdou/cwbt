@@ -153,24 +153,24 @@ Page({
     });
     return;
 
-    var dept_id = obj.data.dept_id;
-    var boat_id = obj.data.boat_id;
-    if (!boat_id) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择需要抽查的船！',
-        showCancel: false
-      })
-      return;
-    }
+    // var dept_id = obj.data.dept_id;
+    // var boat_id = obj.data.boat_id;
+    // if (!boat_id) {
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '请选择需要抽查的船！',
+    //     showCancel: false
+    //   })
+    //   return;
+    // }
 
-    // 类型
-    var queryType = e.currentTarget.dataset.querytype;
+    // // 类型
+    // var queryType = e.currentTarget.dataset.querytype;
 
-    // 跳转页面
-    wx.redirectTo({
-      url: '../../pages/Tlist/Tlist?boat_id=' + boat_id + '&dept_id=' + dept_id + '&queryType=' + queryType + '&flag=spotCheck',
-    })
+    // // 跳转页面
+    // wx.redirectTo({
+    //   url: '../../pages/Tlist/Tlist?boat_id=' + boat_id + '&dept_id=' + dept_id + '&queryType=' + queryType + '&flag=spotCheck',
+    // })
     
   }
 
