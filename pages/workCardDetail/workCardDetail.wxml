@@ -84,18 +84,19 @@
 
             <view class='remark'>
                   <view class='title'>备注:</view>
-                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
+                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark}}'></textarea>
                   
             </view>
 
             <!-- preview -->
             <view class='preview'>
+                  <!-- 拍摄的照片 -->
                   <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
-                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
+                        <image src='{{item.tempFilePath ?  item.tempFilePath : base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
                   </view>
 
                   <view class='pic'>
-                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
+                        <image wx:if = '{{!isUpload}}' src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
                   </view>
             </view>
 
@@ -108,13 +109,13 @@
             <view class='buttons'>
                   <!-- 修改时 -->
                   <view wx:if = '{{isRollback}}'>
-                          <view wx:if = '{{!already}}'>
+                          <view wx:if = '{{!alreadyRoll}}'>
                                 <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='rollback'>撤回</view>
                           </view>
 
-                          <view wx:if = '{{already}}'>
+                          <view wx:if = '{{alreadyRoll}}'>
                                 <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                                <view wx:if = '{{isPhoto}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
+                                <view wx:if = '{{isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
                                 <view  class='button finshButton' bindtap='update'>修改</view>
                           </view>
                           

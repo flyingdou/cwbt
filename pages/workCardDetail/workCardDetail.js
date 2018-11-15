@@ -120,12 +120,19 @@ Page({
       url: reqUrl,
       dataType: 'json',
       data:{
-        requestType: 'wechat',
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
         res = res.data;
         if (res.success) {
+          if (res.workFeedback) {
+            var workFeedback = res.workFeedback;
+            workFeedback.image = JSON.parse(workFeedback.image);
+            obj.setData({
+              photos: workFeedback.image,
+              workFeedback: workFeedback
+            });
+          }
           obj.setData({
             workDetail: res.workDetail
           });
@@ -222,7 +229,14 @@ Page({
     var imgs = [];
     var photos = obj.data.photos;
     for (var i = 0; i < photos.length; i++) {
-      imgs.push(photos[i].tempFilePath);
+      var url = '';
+      if (photos[i].name) {
+        url = app.constant.base_img_url + '/' + photos[i].name;
+      }
+      if (photos[i].tempFilePath) {
+        url = photos[i].tempFilePath;
+      }
+      imgs.push(url);
     }
     var index = e.currentTarget.dataset.index;
     // 预览开始
@@ -232,10 +246,16 @@ Page({
     })
   },
 
+  
   /**
    * 删除图片
    */
   deletePic: (e) => {
+    var isRollback = obj.data.isRollback;
+    var alreadyRoll = obj.data.alreadyRoll;
+    if (isRollback && !alreadyRoll) {
+      return;
+    }
     var index = e.currentTarget.dataset.index;
     var photos = obj.data.photos;
     photos.splice(index, 1);
@@ -259,6 +279,12 @@ Page({
     var reqUrl = app.constant.upload_url;
     if (!i) {
       i = 0;
+    }
+    // 已有照片，不上传
+    if (!photos[i].tempFilePath) {
+      i++;
+      obj.uploadPics(i);
+      return;
     }
     // 开始上传图片
     wx.uploadFile({
@@ -517,6 +543,56 @@ Page({
         }
       }
     })
+  },
+
+
+  /**
+   * 修改数据
+   */
+  update: () => {
+    var reqUrl = app.constant.base_req_url + 'updateWorkfeedback.we';
+    var workDetail = obj.data.workDetail;
+    var workFeedback = obj.data.workFeedback;
+    var photos = obj.data.photos;
+    for (var x = 0; x < photos.length; x++) {
+      if (photos[x].tempFilePath) {
+           delete photos[x]['tempFilePath'];
+      }
+    }
+    var param = {};
+    param.id = workFeedback.id; // 反馈id
+    param.image =JSON.stringify(photos); // 反馈图片
+    param.mark = obj.data.remark; // 反馈数据
+    param.workcardId = workDetail.id; // 工作卡id
+
+    console.log(param);
+
+    // 发起微信请求
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          wx.showModal({
+            title: '提示',
+            content: '修改成功！',
+            showCancel: false,
+            success: (rex) => {
+              if (rex.confirm) {
+                wx.navigateBack({
+                  delta: 2,
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+
   }
 
 
