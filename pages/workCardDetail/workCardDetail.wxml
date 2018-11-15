@@ -106,10 +106,28 @@
 
             <!-- 底部按钮 -->
             <view class='buttons'>
-                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
-                  <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                  <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                  <view wx:if = '{{isUpload}}' class='button finshButton' bindtap='finish'>完成</view>
+                  <!-- 修改时 -->
+                  <view wx:if = '{{isRollback}}'>
+                          <view wx:if = '{{!already}}'>
+                                <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='rollback'>撤回</view>
+                          </view>
+
+                          <view wx:if = '{{already}}'>
+                                <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
+                                <view wx:if = '{{isPhoto}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
+                                <view  class='button finshButton' bindtap='update'>修改</view>
+                          </view>
+                          
+                  </view>
+
+                  <!-- 非修改时 -->
+                  <view wx:if = '{{!isRollback}}'>
+                        <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
+                        <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
+                        <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
+                        <view wx:if = '{{isUpload}}' class='button finshButton' bindtap='finish'>完成</view>
+                  </view>
+                  
             </view>
       
       </view>

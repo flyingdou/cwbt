@@ -19,7 +19,14 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var workCardId = options.workCardId;
+    var isRollback = options.isRollback; // 是否撤回
+    if (isRollback) {
+       obj.setData({
+         isRollback: isRollback
+       });
+    }
+
+    var workCardId = options.workCardId; // 工作卡id
     if (!workCardId) {
       workCardId = 1;
     }
@@ -482,6 +489,34 @@ Page({
     })
 
 
+  },
+
+
+  /**
+   * 撤回数据
+   */
+  rollback: () => {
+    var param = {
+      workcardId: obj.data.workCardId
+    };
+
+    var reqUrl = app.constant.base_req_url + 'rollback.we';
+    wx.request({
+      url: reqUrl,
+      dataType:'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          // 撤回成功
+          obj.setData({
+            alreadyRoll:true
+          });
+        }
+      }
+    })
   }
 
 

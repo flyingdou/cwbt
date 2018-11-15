@@ -176,6 +176,7 @@ Page({
   goto: (e) => {
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.taskList[index];
+    var isUpdate = obj.data.isUpdate;
     if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
       wx.showModal({
         title: '提示',
@@ -184,8 +185,15 @@ Page({
       })
       return;
     }
+
+    // 跳转传参
+    var redUrl = '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id;
+    if (isUpdate) {
+      redUrl = redUrl + '&isRollback=true';
+    }
+
     wx.redirectTo({
-      url: '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id,
+      url: redUrl,
     })
   },
 
