@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user_id: app.user.id
+    
 
   },
 
@@ -15,11 +15,15 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     obj.setData({
+       user_id: app.user.id
+     });
     // 跳转页面类型 
     var queryType = options.queryType;
     if (queryType) {
       obj.data.queryType = queryType;
      }
+     
      
      // 部门id
      var dept_id = options.dept_id;

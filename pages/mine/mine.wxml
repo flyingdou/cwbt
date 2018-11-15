@@ -29,7 +29,7 @@
     <view class='blocks'>
       <view class='block' bindtap='goto' data-link='../../pages/Tlist/Tlist?isUpdate=true' data-message='功能暂无！'>
         <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
-        <view class='block-text'>今日完成任务</view>
+        <view class='block-text'>未验收工作</view>
         <!-- <view class='block-count'>0</view> -->
       </view>
       <view class='block' bindtap='getEquipmentInfo' data-link='../equipmentInfo/equipmentInfo' data-message='功能暂无！'>
