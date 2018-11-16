@@ -1,0 +1,67 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <checkbox-group bindchange = 'checkboxChange'> 
+
+      <view class='list'>
+            
+                <view class='pre' wx:for = '{{workCardList}}' wx:key=''>
+                      <view class='line' bindtap='goto' data-link = '{{item.status == 0 ? "../supervisionDetail/supervisionDetail?id=" + item.id + "&creator=" + item.creator : "../superviseFeedback/superviseFeedback?id=" + item.id}}'>
+                            <!-- 填充高度 -->
+                            <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>设备名称</view>
+                                        <view class='value'>{{item.equipmentName}}</view>
+                                  </view>
+
+                                  <view class='tv'>
+                                        <view class='title'>发起人</view>
+                                        <view class='value'>{{item.userName}}</view>
+                                  </view>
+                            </view>
+
+                            <view class='lineFill'></view>
+
+                            <view class='line2'>
+                                  <view class='tv right'>
+                                        <view class='title'>异常发现时间</view>
+                                        <view class='value'>{{item.createtime}}</view>
+                                  </view>
+                            </view>
+
+                            <!-- 图标 -->
+                            <view class='tag' wx:if='{{item.status == 1}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已反馈</view>
+                                  </view>
+                            </view>
+                      </view>
+
+                </view>
+
+      </view>
+      
+      <!-- 功能按钮 -->
+      <view class='footer'>
+            <!-- 全选按钮 -->
+            <!-- <checkbox-group bindchange = 'chooseAll'>
+                  <view class='isAll'>
+                        <checkbox value = '{{isAll.id}}' checked='{{isAll.checked}}'>全选</checkbox>
+                  </view>
+            </checkbox-group> -->
+            
+            <!-- 验收按钮 -->
+            <!-- <view class='valid' bindtap='goto' data-link='../releaseSupervise/releaseSupervise' wx:if='{{userPriv == 2}}'>发起督导</view> -->
+            
+      
+      </view>
+
+
+      </checkbox-group>
+      
+
+
+
+
+</view>

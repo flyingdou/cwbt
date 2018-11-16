@@ -4,6 +4,8 @@
     "pages/supervise/supervise",
     "pages/releaseSupervise/releaseSupervise",
     "pages/spotCheck/spotCheck",
+    "pages/selectTemporaryWorkCard/selectTemporaryWorkCard",
+    "pages/mtwcList/mtwcList",
     "pages/valid/valid",
     "pages/validList/validList",
     "pages/relapseWorkCard/relapseWorkCard",
