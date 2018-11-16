@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/switch/switch",
+    "pages/tempList/tempList",
     "pages/supervise/supervise",
     "pages/releaseSupervise/releaseSupervise",
     "pages/spotCheck/spotCheck",
