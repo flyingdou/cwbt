@@ -1,0 +1,19 @@
+<!-- 页面开始 -->
+<view class='content'>
+      
+
+      <!-- 填充高度 -->
+      <view class='fill'></view>
+
+
+      <!-- 功能按钮 -->
+      <view class='buttons'>
+            <view class='linex'>
+                  <view class='button workCard' bindtap='goto' data-link='../tempList/tempList?overhaul=0'>自行维修</view>
+                  <view class='button maintance' bindtap='goto' data-link='../tempList/tempList?overhaul=1'>委外维修</view>
+            </view>
+      </view>
+
+
+</view>
+
