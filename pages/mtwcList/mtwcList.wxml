@@ -5,9 +5,9 @@
       <view class='list'>
             
                 <view class='pre' wx:for = '{{workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '{{item.status == 0 ? "../supervisionDetail/supervisionDetail?id=" + item.id + "&creator=" + item.creator : "../superviseFeedback/superviseFeedback?id=" + item.id}}'>
+                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id : "../tempWork/tempWork" }}'>
                             <!-- 填充高度 -->
-                            <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
+                            <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 9}}'></view>
                             <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>设备名称</view>
@@ -24,16 +24,23 @@
 
                             <view class='line2'>
                                   <view class='tv right'>
-                                        <view class='title'>异常发现时间</view>
+                                        <view class='title'>异常时间</view>
                                         <view class='value'>{{item.createtime}}</view>
                                   </view>
                             </view>
 
                             <!-- 图标 -->
-                            <view class='tag' wx:if='{{item.status == 1}}'>
+                            <view class='tag' wx:if='{{item.status == 2}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                                         <view class='statusFont'>已反馈</view>
+                                  </view>
+                            </view>
+                            <!-- 图标 -->
+                            <view class='tag' wx:if='{{item.status == 9}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已领取</view>
                                   </view>
                             </view>
                       </view>

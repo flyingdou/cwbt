@@ -1,0 +1,116 @@
+<!-- 页面开始 -->
+<view class='content'>
+
+      <!-- 临时工作卡反馈 -->
+      <view style='height: 20rpx;'></view>
+      <view class='up'>
+            <view class='up-title'>
+              临时工作卡反馈
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>反馈人</view>
+                        <view class='value'>{{feedback.userName1}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>反馈时间</view>
+                        <view class='value'>{{feedback.scanTime}}</view>
+                  </view>
+            </view>
+
+            <!-- 作业内容 -->
+            <view class='taskList'>
+                  <view class='taskTitle'>情况描述</view>
+                  
+                  <!-- 工作内容 -->
+                  <view class='task'>
+                        <view class='ta'>{{feedback.mark1 || "已修复"}}</view>
+                  </view>
+                  
+            </view>
+
+            <!-- 作业照片 -->
+            <view class='picsList'>
+                  <view class='taskTitle'>现场照片</view>
+                  <view class='pics'>
+                        <view class='pre' wx:for = '{{feedback.image1}}' wx:key=''>
+                              <view class='pic' bindtap='preview1' data-index = '{{index}}'>
+                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                              </view>
+                              <view class='picTime'>{{item.pic_time}}</view>
+                        </view>
+                  </view>
+            </view>
+
+
+
+      </view>
+
+      <!-- 异常反馈 -->
+      <view style='height: 20rpx;'></view>
+      <view class='up'>
+            <view class='up-title'>
+              上次异常情况
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>反馈人</view>
+                        <view class='value'>{{feedback.userName2}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>反馈时间</view>
+                        <view class='value'>{{feedback.createtime}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>维修方式</view>
+                        <view class='value'>{{overhaul_function[feedback.overhaul_function]}}</view>
+                  </view>
+            </view>
+
+            <!-- 作业内容 -->
+            <view class='taskList'>
+                  <view class='taskTitle'>情况描述</view>
+                  
+                  <!-- 工作内容 -->
+                  <view class='task'>
+                        <view class='ta'>{{feedback.exceptional_describe}}</view>
+                  </view>
+                  
+            </view>
+
+            <!-- 作业照片 -->
+            <view class='picsList'>
+                  <view class='taskTitle'>现场照片</view>
+                  <view class='pics'>
+                        <view class='pre' wx:for = '{{feedback.image2}}' wx:key=''>
+                              <view class='pic' bindtap='preview2' data-index = '{{index}}'>
+                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                              </view>
+                              <view class='picTime'>{{item.pic_time}}</view>
+                        </view>
+                  </view>
+            </view>
+
+
+
+      </view>
+
+      <!-- 底部功能按钮 -->
+      <!-- <view class='footer'>
+            <view class='checkButton' bindtap='valid'>验收</view>
+      </view> -->
+
+
+
+</view>

@@ -6,6 +6,7 @@
     "pages/spotCheck/spotCheck",
     "pages/selectTemporaryWorkCard/selectTemporaryWorkCard",
     "pages/mtwcList/mtwcList",
+    "pages/mtwcFeedBack/mtwcFeedBack",
     "pages/valid/valid",
     "pages/validList/validList",
     "pages/relapseWorkCard/relapseWorkCard",

@@ -16,6 +16,10 @@ Page({
   onLoad: function (options) {
     obj = this;
 
+    if (options.type) {
+      obj.data.type = options.type;
+    }
+
     obj.setData({
       userPriv: app.user.userPriv
     });
@@ -71,11 +75,11 @@ Page({
   },
 
   /**
-   * 查询督导列表数据
+   * 查询管理端临时工作卡列表数据
    */
   getWorkCardList: function () {
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
-    var param = { userPriv: app.user.userPriv, deptId: app.user.deptId, status: [1,2,9] };
+    var param = { userPriv: app.user.userPriv, deptId: app.user.deptId, status: [1, 2, 9], overhaul_function: obj.data.type };
     wx.request({
       url: url,
       data: {

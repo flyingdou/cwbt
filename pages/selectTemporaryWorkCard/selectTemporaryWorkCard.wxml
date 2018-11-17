@@ -23,8 +23,8 @@
       <!-- 功能按钮 -->
       <view class='buttons'>
             <view class='linex'>
-                  <view class='button workCard' bindtap='goto' data-link='../mtwcList/mtwcList?type=1'>自行维修</view>
-                  <view class='button maintance' bindtap='goto' data-link='../mtwcList/mtwcList?type=2'>委外维修</view>
+                  <view class='button workCard' bindtap='goto' data-link='../mtwcList/mtwcList?type=0'>自行维修</view>
+                  <view class='button maintance' bindtap='goto' data-link='../mtwcList/mtwcList?type=1'>委外维修</view>
             </view>
       </view>
 
