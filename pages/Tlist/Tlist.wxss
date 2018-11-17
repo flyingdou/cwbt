@@ -95,7 +95,6 @@ image{
   margin-left: 10rpx;
   padding: 8rpx 20rpx;
   border-radius: 5rpx;
-
 }
 
 .choose{

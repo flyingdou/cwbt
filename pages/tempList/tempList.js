@@ -1,12 +1,12 @@
 var app = getApp();
-var obj = null;
+var util = require('../../utils/util.js');
+var obj = {};
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
 
   },
 
@@ -14,36 +14,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     obj = this;
-     obj.setData({
-       user_id: app.user.id
-     });
-     
-     // 部门id
-     var dept_id = options.dept_id;
-     if (dept_id) {
-       obj.data.dept_id = dept_id;
-     }
+    obj = this;
+    var overhaul = options.overhaul;
 
-     // 船舶id
-     var boat_id = options.boat_id; 
-     if (boat_id) {
-       obj.data.boat_id = boat_id;
-     }
-    
-
-    // 修改的列表
-    var isUpdate = options.isUpdate;
-    if (isUpdate) {
-        obj.setData({
-          isUpdate: isUpdate
-        });
-    }
-
-    obj.init();
-
-
-    
+    obj.setData({
+      userPriv: app.user.userPriv,
+      overhaul: overhaul,
+      user_id: app.user.id,
+    });
   },
 
   /**
@@ -57,8 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-
+    this.getWorkCardList();
   },
 
   /**
@@ -89,79 +66,101 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  goto: function (e) {
+    var index = e.currentTarget.dataset.index;
+    var workCard = obj.data.workCardList[index];
+    if (workCard.collectorpersonid != app.user.id) {
+        wx.showModal({
+          title: '提示',
+          content: '该任务已被他人领取，请选择其他任务！',
+          showCancel: false
+        })
+        return;
+    }
+    var link = e.currentTarget.dataset.link;
+    wx.navigateTo({
+      url: link
+    });
   },
 
   /**
-   * 初始化页面数据
+   * 查询督导列表数据
    */
-  init: () => {
-    var isUpdate = obj.data.isUpdate;
-    var reqUrl = app.constant.base_req_url + 'getWorkCardList.we';
-    var param = {};
-    param = {
-      type: '2',
-      dept_id: app.user.deptId,
-      status: '1,9' // 未完成、进行中
-    }
-
-    if (isUpdate) {
-      reqUrl = app.constant.base_req_url + 'getWorkcardUpdateAbleList.we';
-      param = {
-        executor_id: app.user.id
+  getWorkCardList: function () {
+    var url = util.getRequestURL('getTemporaryWorkCardList.we');
+    var param = { 
+      userPriv: app.user.userPriv, 
+      deptId: app.user.deptId, 
+      status: [1,9], // 未完成、被领取的
+      overhaul_function: obj.data.overhaul 
       };
-    } 
-    
-    // console.log(param);
-    // return;
+    wx.request({
+      url: url,
+      data: {
+        json: JSON.stringify(param)
+      },
+      success: function (res) {
+        obj.setData({
+          workCardList: res.data
+        });
+      },
+      fail: function (e) {
+        util.tipsMessage('网络异常！');
+        console.log(e);
+      }
+    });
+  },
+
+  /**
+   * 取消领取
+   */
+  cancle: (e) => {
+    wx.showModal({
+      title: '提示',
+      content: '确定取消领该任务吗？',
+      success: (rex) => {
+        if (rex.cancel) {
+          return;
+        }
+        
+        // 执行释放任务操作
+        if (rex.confirm) {
+          obj.release(e);
+        }
+      }
+    })
+   
+
+  },
+ 
+  /**
+   * 释放任务
+   */
+  release: (e) => {
+    var reqUrl = app.constant.base_req_url + 'updateWorkCard.we';
+    var index = e.currentTarget.dataset.index;
+    var workCardList = obj.data.workCardList;
+    var param = {
+      id: workCardList[index].id,
+      status: 1 // 未处理状态
+    };
+
+    // 发起微信请求
     wx.request({
       url: reqUrl,
-      dataType:'json',
-      data:{
+      dataType: 'json',
+      data: {
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
         res = res.data;
         if (res.success) {
+          workCardList[index].status = param.status;
           obj.setData({
-            taskList: res.workCardList
+            workCardList: workCardList
           });
         }
       }
     })
-
-  },
-
-  /**
-   * 跳转到任务详情页面
-   */
-  goto: (e) => {
-    var index = e.currentTarget.dataset.index;
-    var workCard = obj.data.taskList[index];
-    var isUpdate = obj.data.isUpdate;
-    if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
-      wx.showModal({
-        title: '提示',
-        content: '该工作已在进行中，请选择其他工作！',
-        showCancel: false
-      })
-      return;
-    }
-
-    // 跳转传参
-    var redUrl = '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id;
-    if (isUpdate) {
-      redUrl = redUrl + '&isRollback=true';
-    }
-
-    wx.redirectTo({
-      url: redUrl,
-    })
-  },
-
-
+  }
 })

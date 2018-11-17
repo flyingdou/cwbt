@@ -149,6 +149,23 @@ var filters = {
     jobProperties: function (value) {
       var index = parseInt(value) -1;
       return ["点检", "维修", "检修"][index];
+    },
+
+
+    /**
+     * 维修方式
+     */
+    overhaul: function (value) {
+     var res = parseInt(value);
+     if (value == 0) {
+        res = "自行维修";
+     }
+
+     if (value == 1) {
+       res = "委外维修";
+     }
+     return res;
+      
     }
 
 }
@@ -170,5 +187,6 @@ module.exports = {
   getStarNumberStrMix:filters.getStarNumberStrMix,
   getPriceStr:filters.getPriceStr,
   month2Year: filters.month2Year,
-  jobProperties: filters.jobProperties
+  jobProperties: filters.jobProperties,
+  overhaul: filters.overhaul
 }
