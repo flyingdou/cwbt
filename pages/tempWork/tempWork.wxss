@@ -13,6 +13,10 @@ image{
   height: 100%;
 }
 
+textarea{
+  z-index: 0;
+}
+
 .content{
   background: white;
   padding: 0 4%;
@@ -76,14 +80,30 @@ image{
   margin-right: 20rpx;
 }
 
+.shotPic{
+  width: 160rpx;
+  height: 160rpx;
+  padding-right: 20rpx;
+}
+
 .pic{
-  width: 100rpx;
-  height: 100rpx;
+  float: left;
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 20rpx;
+}
+
+.addPic{
+  float: left;
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 20rpx;
 }
 
 .pic_time{
-  font-size: 11rpx;
+  font-size: 16rpx;
   text-align: center;
+  width: 160rpx;
 }
 
 .fill{
@@ -159,4 +179,10 @@ image{
 
 .xd{
   padding-right: 10rpx;
+  width: 160rpx;
 }
+
+.xdInput{
+  width: 50%;
+}
+

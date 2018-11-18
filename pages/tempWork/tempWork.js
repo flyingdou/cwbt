@@ -169,6 +169,17 @@ Page({
   },
 
 
+  /**
+   * 阻止点击穿透
+   */
+  myTouchMove: () => {
+    var isHidden = obj.data.isHidden;
+    if (!isHidden) {
+        return;  // 弹出时阻止页面滑动
+    }
+  },
+
+
 /**
  * 扫码
  */
