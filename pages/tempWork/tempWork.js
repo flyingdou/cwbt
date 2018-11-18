@@ -140,9 +140,12 @@ Page({
           if (res.workDetail.status == 9) {
              hasGot = true; // 未领取，展示领取button
           }
+          // 领导领取委外维修的临时工作卡
+          var user_priv = app.user.userPriv; // 用户权限
           obj.setData({
             workDetail: res.workDetail,
-            hasGot: hasGot
+            hasGot: hasGot,
+            user_priv: user_priv
           });
         } 
         if (!res.success) {
