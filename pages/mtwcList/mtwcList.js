@@ -17,11 +17,11 @@ Page({
     obj = this;
 
     if (options.type) {
-      obj.data.type = options.type;
+      obj.data.type = options.type; // 维修方式
     }
 
     obj.setData({
-      userPriv: app.user.userPriv
+      userPriv: app.user.userPriv // 用户权限
     });
   },
 
