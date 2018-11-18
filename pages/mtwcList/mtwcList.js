@@ -16,12 +16,16 @@ Page({
   onLoad: function (options) {
     obj = this;
 
+    // 维修方式
     if (options.type) {
-      obj.data.type = options.type; // 维修方式
+      obj.setData({
+        type: options.type
+      });
     }
 
+    // 用户权限
     obj.setData({
-      userPriv: app.user.userPriv // 用户权限
+      userPriv: app.user.userPriv 
     });
   },
 
@@ -79,7 +83,7 @@ Page({
    */
   getWorkCardList: function () {
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
-    var param = { userPriv: app.user.userPriv, deptId: app.user.deptId, status: [1, 2, 9], overhaul_function: obj.data.type };
+    var param = { userPriv: app.user.userPriv, deptId: app.user.deptId, status: [1, 2, 4, 9], overhaul_function: obj.data.type };
     wx.request({
       url: url,
       data: {

@@ -114,6 +114,11 @@
             <view class='checkButton' bindtap='valid'>验收</view>
       </view> 
 
+      <!-- 底部功能按钮 -->
+      <view class='footer' wx:if='{{type == 1}}'>
+            <view class='checkButton' bindtap='valid'>确认</view>
+      </view> 
+
 
 
 </view>

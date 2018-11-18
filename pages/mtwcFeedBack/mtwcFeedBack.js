@@ -149,7 +149,7 @@ Page({
         wx.hideLoading();
         wx.showModal({
           title: '提示',
-          content: '验收成功！',
+          content: '操作成功！',
           showCancel: false,
           complete: function () {
             wx.navigateBack({
