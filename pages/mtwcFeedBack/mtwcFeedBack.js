@@ -21,6 +21,12 @@ Page({
     if (options.id) {
       obj.data.id = options.id;
     }
+
+    if (options.type) {
+      obj.setData({
+        type: options.type
+      });
+    }
   },
 
   /**
@@ -122,5 +128,41 @@ Page({
       current: imgs[index],
       urls: imgs
     })
+  },
+
+  /**
+   * 验收
+   */
+  valid: function () {
+    wx.showLoading({
+      title: '处理中',
+      mark: true
+    });
+    var url = util.getRequestURL('updateWorkFeedBackStatus.we');
+    var param = { id: obj.data.feedback.id, confirm_id: app.user.id };
+    wx.request({
+      url: url,
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: function (res) {
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示',
+          content: '验收成功！',
+          showCancel: false,
+          complete: function () {
+            wx.navigateBack({
+              delta: 1
+            });
+          }
+        });
+      },
+      fail: function (e) {
+        wx.hideLoading();
+        util.tipsMessage('网络异常！');
+        console.log(e);
+      }
+    });
   }
 })
