@@ -10,11 +10,31 @@
                               {{item.dept_name}}
                         </view>
                   </view>
+
                   <picker wx:for = '{{arrayList}}' wx:for-item = 'array' bindchange='pickerChange' range='{{array}}' value='{{0}}' range-key='dept_name' data-arrayIndex = '{{index}}'>
                           <view class='value'>
                                 {{arrayList[index][indexList[index]].dept_name || "请选择"}} 
                           </view>
                   </picker>
+            </view>
+
+            <!-- 船舶、设备 -->
+            <view class='boatDiv'>
+                  <!-- boat -->
+                  <view class='boat'>
+                        <view class='title'>船舶: </view>
+                        <picker range='{{boatList}}' range-key='name' bindchange='boatChange' >
+                                 <view class='value pickValue'>{{boat.name || "请选择"}}</view>
+                        </picker>
+                  </view>
+
+
+                  <!-- device -->
+                  <view class='device'>
+                        <view class='title'>设备:</view>
+                        <view class='value' bindtap='chooseDevice'>{{device.name || "请选择"}}</view>
+                  </view>
+            
             </view>
       </view>
 
@@ -50,4 +70,8 @@
 
 
 </view>
+
+
+<!-- 使用mark弹出框 -->
+<mark showModalStatus = '{{showModalStatus}}' type = 'radio' bindMark = 'chooseRes' list = '{{deviceList}}'></mark>
 

@@ -95,6 +95,32 @@ picker{
   padding-right: 30rpx;
 }
 
+
+.boatDiv{
+   padding-top: 20rpx;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.boat{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 20rpx;
+}
+
+.device{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pickValue{
+  padding-left: 20rpx;
+}
+
+
 .remarkList{
   padding: 20rpx;
 }

@@ -4,8 +4,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    showModalStatus: Boolean,
-    type: String
+    showModalStatus: Boolean, // 是否显示弹出框
+    list: Array, // 数据传入
+    type: String, // 弹出框显示内容类别
   },
 
   /**
@@ -17,15 +18,15 @@ Component({
 
   attached: function () {
     var obj = this;
-    wx.request({
-      url: app.constant.base_req_url + 'getDepartmentListByParent.we',
-      data: {
-        json: JSON.stringify({ parentId: 21 })
-      },
-      success: function (res) {
-        obj.setData({ list: res.data });
-      }
-    })
+    // wx.request({
+    //   url: app.constant.base_req_url + 'getDepartmentListByParent.we',
+    //   data: {
+    //     json: JSON.stringify({ parentId: 21 })
+    //   },
+    //   success: function (res) {
+    //     obj.setData({ list: res.data });
+    //   }
+    // })
   },
 
   /**
