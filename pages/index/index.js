@@ -45,7 +45,7 @@ Page({
 
     // 根据用户部门ID查询任务数量
     var url = util.getRequestURL('getWorksCount.we');
-    var param = { deptId: app.user.deptId, userId: app.user.id };
+    var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv };
     if (app.user.deptId) {
       wx.request({
         url: url,

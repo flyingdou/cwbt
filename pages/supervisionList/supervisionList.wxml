@@ -5,7 +5,7 @@
       <view class='list'>
             
                 <view class='pre' wx:for = '{{supervisionList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '{{item.status == 0 ? "../supervisionDetail/supervisionDetail?id=" + item.id + "&creator=" + item.creator : "../superviseFeedback/superviseFeedback?id=" + item.id}}'>
+                      <view class='line' bindtap='goto' data-link = '../supervisionProcess/supervisionProcess?id={{item.id}}'>
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
                             <view class='line1'>

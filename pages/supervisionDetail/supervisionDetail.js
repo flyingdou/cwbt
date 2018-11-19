@@ -20,6 +20,10 @@ Page({
       obj.data.id = options.id;
     }
 
+    if (options.sort) {
+      obj.data.sort = options.sort;
+    }
+
     if (options.creator) {
       obj.setData({
         creator: options.creator
@@ -27,6 +31,7 @@ Page({
     }
 
     obj.setData({
+      userId: app.user.id,
       userPriv: app.user.userPriv
     });
   },
@@ -81,11 +86,12 @@ Page({
     wx.request({
       url: url,
       data: {
-        supervisionId: obj.data.id
+        json: JSON.stringify({ supervisionId: obj.data.id, sort: obj.data.sort })
       },
       success: function (res) {
         obj.setData({
-          contents: res.data
+          supervise: res.data,
+          contents: res.data.contents
         });
       },
       fail: function (e) {

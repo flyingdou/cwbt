@@ -15,6 +15,7 @@
     "pages/relapseWorkCard/relapseWorkCard",
     "pages/equipmentInfo/equipmentInfo",
     "pages/supervisionList/supervisionList",
+    "pages/supervisionProcess/supervisionProcess",
     "pages/supervisionDetail/supervisionDetail",
     "pages/superviseFeedback/superviseFeedback",
     "pages/logs/logs",

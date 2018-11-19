@@ -75,7 +75,7 @@ Page({
    */
   getSupervisionList: function () {
     var url = util.getRequestURL('getSupervisionList.we');
-    var param = { userId: app.user.id, deptId: app.user.deptId };
+    var param = { userId: app.user.id, deptId: app.user.deptId, userPriv: app.user.userPriv };
     wx.request({
       url: url,
       data: {

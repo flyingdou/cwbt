@@ -57,10 +57,6 @@ image{
   align-items: center;
 }
 
-.left{
- margin-right: 120rpx;
-}
-
 .tv{
   display: flex;
   justify-content: flex-start;

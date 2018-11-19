@@ -1,0 +1,100 @@
+page{
+  background-color: #F0F0F2;
+}
+
+.no-data{
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  text-align: center;
+  font-size: 12px;
+  color: #8f8e8e;
+}
+
+.no-data > image{
+  width: 30px;
+  height: 30px;
+}
+
+.sign-title-time{
+  margin-top: 10px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+.sign-content{
+  margin-top: 10px;
+  padding: 0 10px;
+  overflow: hidden;
+}
+
+.sign-content-left{
+  float: left;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  color: #FFF;
+  background-color: #FF4401;
+  border-radius: 20px;
+}
+
+.sign-content-right{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  float: left;
+  margin-left: 10px;
+  padding: 10px;
+  width: 78%;
+  overflow: hidden;
+  background-color: #FFF;
+  border-radius: 10px;
+}
+
+.content-text{
+  font-size: 28rpx;
+  color: rgba(153,153,153,1);
+}
+
+.content-text-middle {
+  color: #333;
+}
+
+.clubImage{
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+
+.clubInfo{
+  float: left;
+  margin-left: 10px;
+  padding: 0 10px;
+  width: 180px;
+  border-left: 1px solid #F0F0F2;
+}
+
+.clubName{
+  font-size: 14px;
+  color: #444;
+}
+
+.clubScore{
+  margin-top: 5px;
+  font-size: 12px;
+  color: #FF4401;
+  overflow: hidden;
+}
+
+.totalScore{
+  float: left;
+}
+
+.otherScore{
+  float: left;
+  margin-left: 10px;
+  color: #BBB; 
+}
