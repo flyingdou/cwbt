@@ -386,7 +386,7 @@ Page({
       // 开发环境执行代码
       if(app.constant.isDev) {
             wx.navigateTo({
-              url: link + '?code=0000123'
+              url: link + '?code=' + obj.data.deviceNumber,
             });
         }
 

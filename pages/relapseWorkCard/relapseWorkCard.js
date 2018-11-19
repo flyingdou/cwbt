@@ -20,10 +20,6 @@ Page({
   onLoad: function (options) {
     obj = this;
     var code = options.code;
-    // 开发环境
-    if(app.constant.isDev) {
-      code = '121300110011100';
-    }
     if (code) {
       obj.data.code = code;
     }

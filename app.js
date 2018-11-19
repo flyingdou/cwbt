@@ -7,7 +7,7 @@ App({
 
     // 开发模式添加默认用户
     if (this.constant.isDev) {
-      this.user = { id: 1313, deptId: 21, userPriv: 2 };
+      this.user = { id: 1316, deptId: 213, userPriv: 2 };
     }
   },
   constant: {

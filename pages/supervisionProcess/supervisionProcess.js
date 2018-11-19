@@ -115,9 +115,11 @@ Page({
         supervisionId: obj.data.id
       },
       success: function (res) {
-        res.data.type = 'feedback';
-        var supervise = obj.data.supervise;
-        obj.data.feedback = res.data;
+        if (res.data) {
+          res.data.type = 'feedback';
+          var supervise = obj.data.supervise;
+          obj.data.feedback = res.data;
+        }
       },
       fail: function (e) {
         util.tipsMessage('网络异常！');
@@ -135,6 +137,11 @@ Page({
 
     // 校验进入权限
     if (!obj.checkJurisdiction(index)) {
+        wx.showModal({
+          title: '提示',
+          content: '抱歉，您暂无权限查看！',
+          showCancel: false,
+        })
       return;
     }
 

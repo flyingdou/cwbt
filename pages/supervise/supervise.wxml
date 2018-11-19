@@ -9,7 +9,7 @@
 
       <!-- 船 -->
       <view class='line'>
-            <view class='title'>船：</view>
+            <view class='title'>船舶：</view>
             <view class='value'>{{boat}}</view>
       </view>
 
