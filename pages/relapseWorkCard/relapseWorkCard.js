@@ -9,7 +9,9 @@ Page({
   data: {
     loadingStatus: true,
     pickerData: [{ code: -1, name: '请选择' }, { code: 0, name: '自行维修' }, { code: 1, name: '委外维修' } ],
-    index: 0
+    index: 0,
+    base_img_url: app.constant.base_img_url,
+    photos: [],
   },
 
   /**
@@ -17,9 +19,13 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-
-    if (options.code) {
-      obj.data.code = options.code;
+    var code = options.code;
+    // 开发环境
+    if(app.constant.isDev) {
+      code = '121300110011100';
+    }
+    if (code) {
+      obj.data.code = code;
     }
 
     // 页面初始化
@@ -129,10 +135,11 @@ Page({
     var data = obj.data;
     var remark = data.remark;
     var overhaulFunction = data.pickerData[data.index].code;
+    var photos = obj.data.photos;
     if (!remark) {
       wx.showModal({
         title: '提示',
-        content: '请输入异常描述',
+        content: '请输入异常描述！',
         showCancel: false
       });
       return false;
@@ -140,13 +147,23 @@ Page({
     if (overhaulFunction < 0) {
       wx.showModal({
         title: '提示',
-        content: '请选择维修方式',
+        content: '请选择维修方式！',
         showCancel: false
       });
       return false;
     }
+    if (photos.length < 1) {
+      wx.showModal({
+        title: '提示',
+        content: '请上传异常图片！',
+        showCancel: false,
+      })
+      return false;
+    }
+
     return true;
   },
+
 
   /**
    * 保存临时工作卡数据
@@ -157,12 +174,19 @@ Page({
     }
     var data = obj.data;
     var name = `${data.equipment.name}-${data.pickerData[data.index].name}`;
+    var photos = obj.data.photos;
+    for(var x in photos) {
+      delete photos[x]['tempFilePath']; // 删除tempFilePath
+    }
     var param = {
       equipmentId: data.equipment.id,
       name: name,
       exceptionalDescribe: data.remark,
-      overhaulFunction: data.pickerData[data.index].code
+      overhaulFunction: data.pickerData[data.index].code,
+      image: JSON.stringify(photos),
+      creator: app.user.id
     }
+
     wx.showLoading({
       title: '正在保存中',
       mask: true
@@ -196,5 +220,145 @@ Page({
         util.tipsMessage('网络异常！');
       }
     });
-  }
+  },
+
+  /**
+  * 拍照
+  */
+  photo: () => {
+    var isPhoto = false;
+    var photo = {};
+    var photos = obj.data.photos;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['camera'],
+      success: (res) => {
+        isPhoto = true;
+        var timex = util.formatTime(new Date());
+        photo.pic_time = timex;
+        photo.tempFilePath = res.tempFilePaths[0];
+        console.log(res);
+
+        photos.push(photo);
+        obj.setData({
+          isPhoto: isPhoto,
+          photos: photos
+        });
+      },
+    })
+
+    obj.setData({
+      isPhoto: isPhoto
+    });
+  },
+
+
+  /**
+   * 图片预览
+   */
+  preview: (e) => {
+    var imgs = [];
+    var photos = obj.data.photos;
+    for (var i = 0; i < photos.length; i++) {
+      var url = '';
+      if (photos[i].name) {
+        url = app.constant.base_img_url + '/' + photos[i].name;
+      }
+      if (photos[i].tempFilePath) {
+        url = photos[i].tempFilePath;
+      }
+      imgs.push(url);
+    }
+    var index = e.currentTarget.dataset.index;
+    // 预览开始
+    wx.previewImage({
+      current: imgs[index],
+      urls: imgs
+    })
+  },
+
+
+  /**
+   * 删除图片
+   */
+  deletePic: (e) => {
+    var index = e.currentTarget.dataset.index;
+    var photos = obj.data.photos;
+    photos.splice(index, 1);
+    var isPhoto = true;
+    if (photos.length == 0) {
+      isPhoto = false;
+    }
+    obj.setData({
+      photos: photos,
+      isPhoto: isPhoto
+    });
+
+  },
+
+  /**
+   * 上传图片
+   */
+  uploadPics: (i) => {
+    var photos = obj.data.photos;
+    var count = photos.length;
+    var reqUrl = app.constant.upload_url;
+    if (!i) {
+      i = 0;
+    }
+    // 已有照片，不上传
+    if (!photos[i].tempFilePath) {
+      i++;
+      obj.uploadPics(i);
+      return;
+    }
+    // 开始上传图片
+    wx.uploadFile({
+      url: reqUrl,
+      filePath: photos[i].tempFilePath,
+      name: 'myfile',
+      success: (res) => {
+        var res = res.data;
+        if (res) {
+          res = JSON.parse(res);
+        }
+        if (res.success) {
+          photos[i].name = res.picture;
+        } else {
+          var x = i + 1;
+          console.log('第' + x + '张图片上传失败！');
+        }
+      },
+      fail: (e) => {
+        var y = i + 1;
+        console.log('第' + y + '张图片上传失败！可能是网络异常导致');
+      },
+      complete: () => {
+        console.log(i);
+        i++;
+        if (i >= count) {
+          var isUpload = true;
+          obj.setData({
+            isUpload: isUpload
+          });
+          console.log('图片上传完成！');
+          return;
+        } else {
+          // 图片还未传完，需要继续上传
+          obj.uploadPics(i);
+        }
+      }
+
+    })
+  },
+
+  /**
+  * 调用上传方法
+  */
+  uploadPictures: () => {
+    obj.uploadPics();
+  },
+
+
 })
