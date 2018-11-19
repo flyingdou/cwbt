@@ -12,8 +12,8 @@ Page({
       { id: 0, name: "正常" },
       { id: 1, name: "异常" }
     ],
-    deviceStatus: 0
-
+    deviceStatus: 0,
+    isScan: true
   },
 
   /**
@@ -35,6 +35,24 @@ Page({
          creator: creator
        });
      }
+
+     if (options.boat) {
+       obj.setData({
+         boat: options.boat
+       });
+     }  
+
+     if (options.device) {
+       obj.setData({
+         device: options.device
+       });
+     }
+
+    if (options.deviceNumber) {
+      obj.setData({
+        deviceNumber: options.deviceNumber
+      });
+    }
 
      var id = options.id;
      if (id) {
@@ -115,6 +133,28 @@ Page({
      obj.setData({
        deviceStatus: statusList[index].id
      });
+  },
+
+  /**
+   * 扫码
+   */
+  scan: function () {
+    wx.scanCode({
+      scanType: ['barCode', 'qrCode'],
+      success: (res) => {
+        if (res.result == obj.data.deviceNumber) {
+          obj.setData({
+            isScan: false
+          });
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '扫码的条码不正确',
+            showCancel: false
+          })
+        }
+      }
+    });
   },
 
 
@@ -279,6 +319,16 @@ Page({
    * 完成督导任务，生成督导反馈
    */
   finishSupervise: () => {
+    // 判断是否需要扫码
+    if (obj.data.deviceNumber && obj.data.isScan) {
+      wx.showModal({
+        title: '提示',
+        content: '请先扫码',
+        showCancel: false
+      })
+      return;
+    }
+
     var photos = obj.data.photos;
     for (var x = 0; x < photos.length; x++) {
       delete photos[x]['tempFilePath'];

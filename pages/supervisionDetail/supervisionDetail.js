@@ -114,8 +114,11 @@ Page({
    * 执行
    */
   implement: function (e) {
+    var boat = obj.data.supervise.boat ? `&boat=${obj.data.supervise.boat}` : "";
+    var device = obj.data.supervise.device ? `&device=${obj.data.supervise.device}` : "";
+    var deviceNumber = obj.data.supervise.deviceNumber ? `&deviceNumber=${obj.data.supervise.deviceNumber}` : "";
     wx.navigateTo({
-      url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.creator}&contents=${JSON.stringify(obj.data.contents)}`
+      url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.creator}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.contents)}`
     });
   }
 })
