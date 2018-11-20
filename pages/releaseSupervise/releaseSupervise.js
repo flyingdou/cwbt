@@ -385,8 +385,15 @@ Page({
       }
       douList.reverse(); // 翻转数组
       var dept_id = douList[0];
+      var param = {}; // 参数
+      // 船舶
+      var boat = obj.data.boat;
+      if (boat.id != 0) {
+        param.boat = boat.id;
+        dept_id = boat.department; // 存储船的dept_id作为最小的部门单位
+      }
+
       var id = obj.data.id;
-      var param = {};
 
       // 两者必填参数
       param.content = obj.data.content || "";
@@ -403,12 +410,7 @@ Page({
         param.opeartor = app.user.id;
       }
 
-      // 船舶
-      var boat = obj.data.boat;
-      if (boat.id != 0) {
-        param.boat = boat.id;
-      }
-
+      
       // 设备
       var device = obj.data.device;
       if (device.id != 0) {

@@ -16,6 +16,9 @@ Page({
   onLoad: function (options) {
     obj = this;
     var overhaul = options.overhaul;
+    if (!overhaul) {
+        overhaul = 0; // 默认自行维修
+    }
 
     obj.setData({
       userPriv: app.user.userPriv,
@@ -66,17 +69,20 @@ Page({
 
   },
 
+  /**
+   * 跳转页面
+   */
   goto: function (e) {
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.workCardList[index];
-    if (workCard.collectorpersonid != app.user.id) {
-        wx.showModal({
-          title: '提示',
-          content: '该任务已被他人领取，请选择其他任务！',
-          showCancel: false
-        })
-        return;
-    }
+    // if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
+    //     wx.showModal({
+    //       title: '提示',
+    //       content: '该任务已被他人领取，请选择其他任务！',
+    //       showCancel: false
+    //     })
+    //     return;
+    // }
     var link = e.currentTarget.dataset.link;
     wx.navigateTo({
       url: link
@@ -84,7 +90,7 @@ Page({
   },
 
   /**
-   * 查询督导列表数据
+   * 查询临时工作卡列表数据
    */
   getWorkCardList: function () {
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
@@ -162,5 +168,53 @@ Page({
         }
       }
     })
+  },
+
+
+  /**
+   * releaseWorkcard
+   */
+  releaseWorkcard: () => {
+    var code = '';
+    // 扫码识别设备编号
+    wx.scanCode({
+      onlyFromCamera: true, // 仅能通过相机扫码
+      success: (res) => {
+        code = res.result;
+        obj.data.code = code;
+        obj.gotoWork();
+      },
+      fail: (e) => { // 扫码失败
+        wx.showModal({
+          title: '提示',
+          content: '扫码失败，请重新扫码！',
+          showCancel: false,
+        })
+        return;
+      }
+    })
+
+  },
+
+  /**
+   * goto
+   */
+  gotoWork: () => {
+     var code = obj.data.code;
+     if (!code || code == '') {
+        wx.showModal({
+          title: '提示',
+          content: '扫码不正确！',
+          showCancel: false,
+        })
+        return;
+     }
+
+     // 跳转
+    var url = '../../pages/releaseWorkCard/releaseWorkCard?code=' + code;
+     wx.navigateTo({
+       url: url,
+     })
   }
+
 })

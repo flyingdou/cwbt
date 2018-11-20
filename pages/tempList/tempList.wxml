@@ -43,12 +43,16 @@
                 </view>
 
       </view>
+
+
+
+      <!-- 填充 -->
+      <view class='fill'></view>
       
       <!-- 功能按钮 -->
       <view class='footer'>
-          
-            
-      
+            <!-- 发起临时工作卡 -->
+            <view class='button releaseWorkcard' bindtap='releaseWorkcard'>发布临时工作卡</view>
       </view>
 
 
