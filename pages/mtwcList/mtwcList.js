@@ -73,6 +73,16 @@ Page({
 
   goto: function (e) {
     var link = e.currentTarget.dataset.link;
+    var index = e.currentTarget.dataset.index;
+    var workCard = obj.data.workCardList[index];
+    if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
+      wx.showModal({
+        title: '提示',
+        content: '该任务已被他人领取，请选择其他任务！',
+        showCancel: false
+      })
+      return;
+    }
     wx.navigateTo({
       url: link
     });
@@ -83,7 +93,7 @@ Page({
    */
   getWorkCardList: function () {
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
-    var param = { userPriv: app.user.userPriv, deptId: app.user.deptId, status: [1, 2, 4, 9], overhaul_function: obj.data.type };
+    var param = { userPriv: app.user.userPriv, deptId: app.user.deptId, status: [1, 2, 4, 9, 14], overhaul_function: obj.data.type };
     wx.request({
       url: url,
       data: {

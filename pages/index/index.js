@@ -185,7 +185,7 @@ Page({
           wx.setStorageSync('user', res.data.user);
           var workCount = res.data.workCount;
           obj.setData({
-            isLogin: false, 
+            isLogin: false,
             userPriv: app.user.userPriv,
             workCount: workCount
           });

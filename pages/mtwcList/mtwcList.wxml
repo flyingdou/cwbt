@@ -5,9 +5,9 @@
       <view class='list'>
             
                 <view class='pre' wx:for = '{{workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type : "../tempWork/tempWork?id=" + item.id}}'>
+                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type : "../tempWork/tempWork?id=" + item.id}}' data-index='{{index}}'>
                             <!-- 填充高度 -->
-                            <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 9}}'></view>
+                            <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 4 || item.status == 9 || item.status == 14}}'></view>
                             <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>设备名称</view>
@@ -30,17 +30,24 @@
                             </view>
 
                             <!-- 图标 -->
-                            <view class='tag' wx:if='{{item.status == 2}}'>
+                            <view class='tag' wx:if='{{item.status == 9}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已领取</view>
+                                  </view>
+                            </view>
+                            <!-- 图标 -->
+                            <view class='tag' wx:if='{{item.status == 2 || item.status == 4}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                                         <view class='statusFont'>已反馈</view>
                                   </view>
                             </view>
                             <!-- 图标 -->
-                            <view class='tag' wx:if='{{item.status == 9}}'>
+                            <view class='tag' wx:if='{{item.status == 14}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                                        <view class='statusFont'>已领取</view>
+                                        <view class='statusFont'>已验收</view>
                                   </view>
                             </view>
                       </view>

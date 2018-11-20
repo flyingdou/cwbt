@@ -80,6 +80,7 @@ Page({
       data: {
         workcardId: obj.data.id
       },
+      
       success: function (res) {
         res.data.image1 = JSON.parse(res.data.image1);
         res.data.image2 = JSON.parse(res.data.image2);

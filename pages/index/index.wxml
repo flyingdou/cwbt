@@ -68,7 +68,7 @@
     <view class='block' bindtap='goto' data-link='../selectTemporaryWorkCard/selectTemporaryWorkCard' data-message='功能暂无！' wx:if='{{userPriv == 2}}'>
       <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
       <view class='block-text'>临时工作卡</view>
-      <!-- <view class='block-count'>{{filter.toFixed(workCount.temporaryWorkCount, 0)}}</view> -->
+      <view class='block-count'>{{filter.toFixed(workCount.mtwcCount, 0)}}</view>
     </view>
     <view class='block' bindtap='goto' data-link='../supervisionList/supervisionList' data-message='功能暂无！' 
       wx:if='{{userPriv == 2}}'>
