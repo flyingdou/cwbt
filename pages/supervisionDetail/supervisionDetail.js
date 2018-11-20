@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    base_img_url: app.constant.base_img_url
   },
 
   /**
@@ -47,7 +47,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getSupervisionContentList();
+    obj.getSupervisionContentList();
+    obj.getSupervisFeedBack();
   },
 
   /**
@@ -86,12 +87,11 @@ Page({
     wx.request({
       url: url,
       data: {
-        json: JSON.stringify({ supervisionId: obj.data.id, sort: obj.data.sort })
+        json: JSON.stringify({ supervisionId: obj.data.id })
       },
       success: function (res) {
         obj.setData({
-          supervise: res.data,
-          contents: res.data.contents
+          supervise: res.data
         });
       },
       fail: function (e) {
@@ -102,11 +102,54 @@ Page({
   },
 
   /**
+   * 查询督导反馈
+   */
+  getSupervisFeedBack: function () {
+    var url = util.getRequestURL('getSupervisFeedBack.we');
+    wx.request({
+      url: url,
+      data: {
+        supervisionId: obj.data.id
+      },
+      success: function (res) {
+        if (res.data) {
+          res.data.image = JSON.parse(res.data.image);
+          obj.setData({
+            superviseFeedback: res.data
+          });
+        }
+      },
+      fail: function (e) {
+        util.tipsMessage('网络异常！');
+        console.log(e);
+      }
+    });
+  },
+
+  /**
+   * 图片预览
+   */
+  preview: (e) => {
+    var imgs = [];
+    var photos = obj.data.superviseFeedback.image;
+    for (var i = 0; i < photos.length; i++) {
+      imgs.push(app.constant.base_img_url + '/' + photos[i].name);
+    }
+    console.log(imgs);
+    var index = e.currentTarget.dataset.index;
+    // 预览开始
+    wx.previewImage({
+      current: imgs[index],
+      urls: imgs
+    })
+  },
+
+  /**
    * 转发
    */
   reSend: function (e) {
     wx.navigateTo({
-      url: `../releaseSupervise/releaseSupervise?id=${obj.data.id}&contents=${JSON.stringify(obj.data.contents)}`
+      url: `../releaseSupervise/releaseSupervise?id=${obj.data.id}&contents=${JSON.stringify(obj.data.supervise.contents)}`
     });
   },
 
@@ -118,7 +161,7 @@ Page({
     var device = obj.data.supervise.device ? `&device=${obj.data.supervise.device}` : "";
     var deviceNumber = obj.data.supervise.deviceNumber ? `&deviceNumber=${obj.data.supervise.deviceNumber}` : "";
     wx.navigateTo({
-      url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.creator}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.contents)}`
+      url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.creator}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.supervise.contents)}`
     });
   }
 })

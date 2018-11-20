@@ -1,24 +1,35 @@
 <!-- 填充高度 -->
 <view style='height: 20rpx;'></view>
-
 <!-- 页面开始 -->
 <view class='content' wx:if='{{!loadingStatus}}'>
 
       <!-- block1 -->
       <view class='block1'>
 
+            <view class='up-title'>
+                  发起
+            </view>
+
             <view class='line'>
                   <view class='title'>发起人</view>
-                  <view class='value'>华文</view>
+                  <view class='value'>{{supervise.creator}}</view>
             </view>
             
             <!-- 内容 -->
-            <view class='remark' wx:for='{{contents}}' wx:key=''>
-                  <view class='title'>{{item.userName}}要求：</view>
-                  <view class='task'>
+            <view class='remark'>
+                  <view class='title'>{{supervise.contents[0].userName}}要求：</view>
+                  <view class='task-white'>
                       <view class='content-box'>
-                        {{item.content}}
+                        {{supervise.contents[0].content}}
                       </view>
+                  </view>
+                  <view class="bottom">
+                    <view class='bottom-left'>
+                      接收部门: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.deptName}}</text>
+                    </view>
+                    <view class='bottom-right'>
+                      {{supervise.auto_date}}
+                    </view>
                   </view>
             </view>
 
@@ -38,23 +49,136 @@
                         <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
                   </view>
             </view> -->
-
-            
-            <!-- 填充高度 -->
-            <view class='fill'></view>
-
-
-            <!-- 底部按钮 -->
-            <view class='buttons' wx:if='{{supervise.creatorId != userId && supervise.status == 0}}'>
-                  <view class='button scanButton' bindtap='reSend' wx:if='{{userPriv == 2}}'>转发</view>
-                  <view class='button photoButton' bindtap='implement'>执行</view>
-                  <!-- <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view> -->
-                  <!-- <view class='button finshButton' bindtap='finsh'>保存</view> -->
-            </view> 
-      
       </view>
-
-
-
-
 </view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;' wx:if='{{supervise.contents.length > 1}}'></view>
+<!-- 页面开始 -->
+<view class='content' wx:if='{{!loadingStatus && supervise.contents.length > 1}}'>
+
+      <!-- block1 -->
+      <view class='block1'>
+
+            <view class='up-title'>
+                  转发
+            </view>
+
+            <!-- <view class='line'>
+                  <view class='title'>发起人</view>
+                  <view class='value'>华文</view>
+            </view> -->
+            
+            <!-- 内容 -->
+            <view class='remark' wx:for='{{supervise.contents}}' wx:key='' wx:if='{{index > 0}}'>
+                  <view class='title'>{{item.userName}}要求：</view>
+                  <view class='task-white'>
+                      <view class='content-box'>
+                        {{item.content}}
+                      </view>
+                  </view>
+                  <view class="bottom">
+                    <view class='bottom-left'>
+                      接收部门: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.deptName}}</text>
+                    </view>
+                    <view class='bottom-right'>
+                      {{item.auto_date}}
+                    </view>
+                  </view>
+            </view>
+
+            <!-- <view class='remark'>
+                  <view class='title'>备注:</view>
+                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
+                  
+            </view> -->
+
+            <!-- preview -->
+            <!-- <view class='preview'>
+                  <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
+                  </view>
+
+                  <view class='pic'>
+                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
+                  </view>
+            </view> -->
+      </view>
+</view>
+
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;' wx:if='{{superviseFeedback}}'></view>
+<!-- 页面开始 -->
+<view class='content' wx:if='{{!loadingStatus && superviseFeedback}}'>
+
+      <!-- block1 -->
+      <view class='block1'>
+
+            <view class='up-title'>
+                  反馈
+            </view>
+
+            <view class='line'>
+                        <view class='title'>反馈人</view>
+                        <view class='value'>{{superviseFeedback.opeartor}}</view>
+            </view>
+
+            <view class='line'>
+                        <view class='title'>反馈时间</view>
+                        <view class='value'>{{superviseFeedback.auto_date}}</view>
+            </view>
+
+            <!-- 作业内容 -->
+            <view class='taskList'>
+                  <view class='taskTitle'>情况描述</view>
+                  
+                  <!-- 工作内容 -->
+                  <view class='task'>
+                        <view class='ta'>{{superviseFeedback.remark}}</view>
+                  </view>
+                  
+            </view>
+
+            <!-- 作业照片 -->
+            <view class='picsList'>
+                  <view class='taskTitle'>现场照片</view>
+                  <view class='pics'>
+                        <view class='pre' wx:for = '{{superviseFeedback.image}}' wx:key=''>
+                              <view class='pic' bindtap='preview' data-index = '{{index}}'>
+                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                              </view>
+                              <view class='picTime'>{{item.pic_time}}</view>
+                        </view>
+                  </view>
+            </view>
+
+            <!-- <view class='remark'>
+                  <view class='title'>备注:</view>
+                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
+                  
+            </view> -->
+
+            <!-- preview -->
+            <!-- <view class='preview'>
+                  <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
+                  </view>
+
+                  <view class='pic'>
+                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
+                  </view>
+            </view> -->
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view class='fill'></view>
+
+<!-- 底部按钮 -->
+<view class='buttons' wx:if='{{supervise.creatorId != userId && supervise.status == 0}}'>
+      <view class='button scanButton' bindtap='reSend' wx:if='{{userPriv == 2}}'>转发</view>
+      <view class='button photoButton' bindtap='implement'>执行</view>
+      <!-- <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view> -->
+      <!-- <view class='button finshButton' bindtap='finsh'>保存</view> -->
+</view> 
