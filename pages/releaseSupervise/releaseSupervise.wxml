@@ -42,7 +42,7 @@
 
 
       <!-- 内容区 -->
-      <view class='textArea'>
+      <view class='textArea' wx:if = '{{!showModalStatus}}'>
             <view class='remark'>
                   <view class='title'>内容：</view>
                   <textarea placeholder='请输入督导内容！' maxlength='-1' class='textAreaClass' placeholder-class='inputPlaceHolder' bindinput='inputChange' data-key = 'content'></textarea>

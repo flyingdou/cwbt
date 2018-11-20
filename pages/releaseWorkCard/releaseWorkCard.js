@@ -85,13 +85,13 @@ Page({
         number: obj.data.code
       },
       success: function (res) {
-        if (res.data) {
+        if (res.data) { // 数据请求成功
           obj.setData({
             loadingStatus: false,
             equipment: res.data
           });
           wx.hideLoading();
-        } else {
+        } else { // 数据请求失败
           wx.hideLoading();
           wx.showModal({
             title: '提示',
@@ -164,7 +164,7 @@ Page({
   /**
    * 保存临时工作卡数据
    */
-  finsh: function () {
+  finish: function () {
     if (!obj.checkFormData()) {
       return;
     }

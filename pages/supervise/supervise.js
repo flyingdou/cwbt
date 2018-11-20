@@ -353,7 +353,7 @@ Page({
            var deviceStatus = obj.data.deviceStatus;
            if (deviceStatus == 1) {
              // 设备异常，跳转到生成临时工作卡页面
-             obj.relapseWorkCard();
+             obj.releaseWorkCard();
            } 
            if (deviceStatus == 0) {
              // 设备正常，回列表
@@ -370,26 +370,11 @@ Page({
     /**
     * 发布临时工作卡
     */
-    relapseWorkCard: (e) => {
-        var link = '../relapseWorkCard/relapseWorkCard';
-        // 正式环境执行代码
-        if(!app.constant.isDev) {
-          wx.scanCode({
-            scanType: ['barCode', 'qrCode'],
-            success: (res) => {
-              wx.navigateTo({
-                url: link + '?code=' + res.result
-              });
-            }
-          });
-        }
-      // 开发环境执行代码
-      if(app.constant.isDev) {
-            wx.navigateTo({
-              url: link + '?code=' + obj.data.deviceNumber,
-            });
-        }
-
+    releaseWorkCard: (e) => {
+        var link = '../releaseWorkCard/releaseWorkCard';
+        wx.navigateTo({
+          url: link + '?code=' + obj.data.deviceNumber, // 跳转到发布临时工作卡页面
+        });
     }
 
 
