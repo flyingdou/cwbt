@@ -28,7 +28,7 @@
                       接收部门: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.contents[0].deptName}}</text>
                     </view>
                     <view class='bottom-right'>
-                      {{supervise.contents[0].auto_date}}
+                      {{supervise.contents[0].auto_date}} 
                     </view>
                   </view>
             </view>
