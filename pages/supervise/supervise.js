@@ -339,6 +339,10 @@ Page({
     param.opeartor = app.user.id;
     param.supervisionId = obj.data.id;
 
+    wx.showLoading({
+      title: '处理中',
+      mask: true,
+    })
     var reqUrl = app.constant.base_req_url + 'saveSupervisFeedBack.we';
     wx.request({
       url: reqUrl,
@@ -347,6 +351,7 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
+         wx.hideLoading();
          res = res.data;
          if (res.success) {
            // 数据执行成功
@@ -363,6 +368,13 @@ Page({
              
            }
          }
+      },
+      fail: (e) => {
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示',
+          content: '网络异常！',
+        })
       }
     })
   },

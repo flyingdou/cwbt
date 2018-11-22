@@ -430,14 +430,14 @@ Page({
     var handle = obj.data.handle;
     var workcardName = undefined;
     if (status == 1) {
-      if (handle == 0) {
-        wx.showModal({
-          title: '提示',
-          content: '请选择维修方式！',
-          showCancel: false
-        })
-        return;
-      }
+      // if (handle == 0) {
+      //   wx.showModal({
+      //     title: '提示',
+      //     content: '请选择维修方式！',
+      //     showCancel: false
+      //   })
+      //   return;
+      // }
       var handleName = undefined;
       if (handle == 1) {
         handle = 0; // 自行维修
@@ -462,16 +462,18 @@ Page({
       userId = 1316;
     }
     var isError = status;
+    var workCard = obj.data.workDetail;
 
     // 必填数据
     var param = {
-      id: obj.data.workDetail.id,
+      id: workCard.id,
       executorId: userId, // 执行者id
       image: photos, // 照片信息
       isError: isError, // 设备状态，是否异常
       scanTime: obj.data.scanTime,
-      equipmentId: obj.data.workDetail.eid,
-      type: obj.data.workDetail.type // 工作卡类型
+      equipmentId: workCard.eid,
+      type: workCard.type, // 工作卡类型
+      overhaulFunction: workCard.overhaul_function,// 0自行维修，1委外维修
     };
 
     // 可选数据
@@ -486,12 +488,6 @@ Page({
     if (exceptionalDescribe) {
       param.exceptionalDescribe = exceptionalDescribe;
     }
-    
-    
-    // 维修方式
-    if (handle || handle == 0) {
-      param.overhaulFunction = handle; // 1自行维修，2委外维修
-    }
 
     // 工作卡名称
     if (workcardName) {
@@ -501,6 +497,10 @@ Page({
     // 测试功能
     // console.log(param);
     // return;
+    wx.showLoading({
+      title: '处理中',
+      mask:true
+    })
     var reqUrl = app.constant.base_req_url + 'finish.we';
     // 发起微信请求
     wx.request({
@@ -511,6 +511,7 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
+        wx.hideLoading();
         res = res.data;
         if (res.success) {
           wx.showModal({
@@ -534,7 +535,11 @@ Page({
         }
       },
       fail: (e) => {
-        console.log('网络异常！');
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示',
+          content: '网络异常！',
+        })
       }
 
     })

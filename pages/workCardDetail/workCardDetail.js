@@ -450,6 +450,11 @@ Page({
     // 测试功能
     // console.log(param);
     // return;
+    // showLoding
+    wx.showLoading({
+      title: '处理中',
+      mask: true,
+    })
     var reqUrl = app.constant.base_req_url + 'finish.we';
     // 发起微信请求
     wx.request({
@@ -460,6 +465,8 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
+        // 隐藏Loading框
+        wx.hideLoading();
         res = res.data;
         if (res.success) {
           wx.showModal({
@@ -472,7 +479,8 @@ Page({
                   url: '../../pages/index/index',
                 })
               }
-            }
+            },
+            
 
           })
           wx.reLaunch({
@@ -483,7 +491,11 @@ Page({
         }
       },
       fail: (e) => {
-        console.log('网络异常！');
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示',
+          content: '网络异常！',
+        })
       }
 
     })

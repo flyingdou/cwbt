@@ -419,7 +419,10 @@ Page({
 
       // console.log(param);
       // return;
-
+      wx.showLoading({
+        title: '处理中...',
+        mask: true,
+      })
       var reqUrl = app.constant.base_req_url + 'saveSupervis.we';
       wx.request({
         url: reqUrl,
@@ -428,11 +431,19 @@ Page({
           json: encodeURI(JSON.stringify(param))
         },
         success: (res) => {
+          wx.hideLoading();
           if (res.data.success) {
             wx.navigateBack({
               delta:2
             })
           }
+        },
+        fail: (e) => {
+          wx.hideLoading();
+          wx.showModal({
+            title: '提示',
+            content: '网络异常！',
+          })
         }
       })
 

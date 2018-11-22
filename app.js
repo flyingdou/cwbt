@@ -11,11 +11,14 @@ App({
     }
   },
   constant: {
-    base_img_url: "https://fish.ecartoon.com.cn/picture",
-    base_req_url: "http://192.168.41.3:8080/hqwl/api/cwbtMP/",
-    upload_url: 'https://fish.ecartoon.com.cn/uploadFile', 
+    isDev: false,
+    base_img_url: 'https://cwbt.castlc.cn/picture',
+    base_req_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/',
+    upload_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/uploadFile.we',
     logo: 'https://fish.ecartoon.com.cn/picture/201810274602.jpg',
-    isDev: true
+    base_img_url_backup: 'https://fish.ecartoon.com.cn/picture',
+    base_req_url_backup: 'http://192.168.43.110:8080/hqwl/api/cwbtMP/',
+    upload_url_backup: 'https://fish.ecartoon.com.cn/uploadFile', 
   },
   user: {}
 
