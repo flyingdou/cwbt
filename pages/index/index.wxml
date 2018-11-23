@@ -20,12 +20,20 @@
     <!-- 账号输入框 -->
     <view class='form-line'>
       <image class='account-icon' src='../../icon/zhanghao@2x.png' mode='widthFix'></image>
-      <input type='number' class='form-input' placeholder='请输入手机号码' bindinput='checkAccountWechatId' data-key='account'></input>
+      <input type='number' class='form-input' placeholder='请输入手机号码' bindinput='checkAccountWechatId' data-key='account' value='{{account}}'></input>
+      <view class='operator-icon' bindtap='clearAccount' wx:if='{{account}}'>
+        <image class='right-icon' src='../../icon/del.png' mode='widthFix'></image>
+      </view>
     </view>
     <!-- 密码输入框 -->
     <view class='form-line'>
       <image class='password-icon' src='../../icon/mima@2x.png' mode='widthFix'></image>
-      <input type='password' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password'></input>
+      <input type='password' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password' value='{{password}}' hidden='{{lookPassword}}'></input>
+      <input type='input' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password' value='{{password}}' hidden='{{!lookPassword}}'></input>
+      <view class='operator-icon' bindtap='lookPassword' wx:if='{{password}}'>
+        <image class='right-icon' src='../../icon/look.png' mode='widthFix' hidden='{{lookPassword}}'></image>
+        <image class='right-icon' src='../../icon/look_active.png' mode='widthFix' hidden='{{!lookPassword}}'></image>
+      </view>
     </view>
     <!-- 填充高度 -->
     <view style='height: 70rpx;'></view>

@@ -10,6 +10,7 @@ Page({
     base_img_url: app.constant.base_img_url,
     logo: app.constant.logo,
     showModalStatus: true,
+    passworkInputType: 'password',
     workCount: {}
   },
 
@@ -37,16 +38,26 @@ Page({
         isLogin: false,
         userPriv: app.user.userPriv
       });
+      wx.showTabBar();
     } else {
       obj.setData({
-        isLogin: true
+        isLogin: true,
+        password: ''
+      });
+      wx.hideTabBar();
+    }
+
+    // 用户账号保留
+    if (wx.getStorageSync('account')) {
+      obj.setData({
+        account: wx.getStorageSync('account')
       });
     }
 
     // 根据用户部门ID查询任务数量
-    var url = util.getRequestURL('getWorksCount.we');
-    var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv };
     if (app.user.deptId) {
+      var url = util.getRequestURL('getWorksCount.we');
+      var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv };
       wx.request({
         url: url,
         data: {
@@ -114,7 +125,7 @@ Page({
    */
   checkAccountWechatId: (e) => {
     // 保存账号
-    obj.data.account = e.detail.value;
+    obj.setData({ account: e.detail.value });
     // 根据账号查询微信标识(达到手机号码11位)
     if (obj.data.account.length == 11) {
       var url = util.getRequestURL('checkWechatMPIdByUser.we');
@@ -148,7 +159,9 @@ Page({
   saveFormParam: (e) => {
     var key = e.currentTarget.dataset.key;
     var value = e.detail.value;
-    obj.data[key] = value;
+    var data = {};
+    data[key] = value;
+    obj.setData(data);
   },
 
   /**
@@ -183,12 +196,14 @@ Page({
           util.tipsMessage('登录成功！');
           app.user = res.data.user;
           wx.setStorageSync('user', res.data.user);
+          wx.setStorageSync('account', obj.data.account);
           var workCount = res.data.workCount;
           obj.setData({
             isLogin: false,
             userPriv: app.user.userPriv,
             workCount: workCount
           });
+          wx.showTabBar();
         } else {
           util.tipsMessage('账号或密码错误！');
         }
@@ -225,6 +240,23 @@ Page({
         url: link + '?code=0000123' 
       });
     }
-  }
+  },
 
+  /**
+   * 清除账号
+   */
+  clearAccount: function () {
+    obj.setData({
+      account: ''
+    });
+  },
+
+  /**
+   * 查看密码
+   */
+  lookPassword: function (e) {
+    obj.setData({
+      lookPassword: !obj.data.lookPassword
+    });
+  }
 })

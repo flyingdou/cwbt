@@ -39,6 +39,7 @@ image{
 }
 
 .form-line{
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -62,6 +63,26 @@ image{
   margin-right: 20rpx;
   width: 30rpx;
   height: auto;
+}
+
+.operator-icon{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20rpx 20rpx;
+  height: 1.4rem;
+}
+
+.right-icon{
+  width: 40rpx;
+  height: auto;
+}
+
+.form-input{
+  width: 260rpx;
 }
 
 .from-button{
