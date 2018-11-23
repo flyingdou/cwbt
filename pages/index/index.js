@@ -178,7 +178,7 @@ Page({
     }
     // 弹出加载框
     wx.showLoading({
-      title: '登录中，请稍候',
+      title: '登录中',
       mask: true,
     });
     // 调用服务端登录接口
