@@ -13,7 +13,8 @@ App({
   constant: {
     isDev: false,
     base_img_url: 'https://cwbt.castlc.cn/picture',
-    base_req_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/',
+    base_forward_url: 'https://cwbt.castlc.cn/cwbt/test/login',
+    base_req_url: 'http://cwbt.castlc.cn/cwbt/api/cwbtMP/',
     upload_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/uploadFile.we',
     logo: 'https://fish.ecartoon.com.cn/picture/201810274602.jpg',
     base_img_url_backup: 'https://fish.ecartoon.com.cn/picture',

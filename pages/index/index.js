@@ -183,12 +183,13 @@ Page({
     });
     // 调用服务端登录接口
     var url = util.getRequestURL('login.we');
+
     wx.request({
       url: url,
       data: {
         userName: obj.data.account,
         pwd: obj.data.password,
-        json: JSON.stringify(param)
+        json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
         wx.hideLoading();
@@ -258,5 +259,7 @@ Page({
     obj.setData({
       lookPassword: !obj.data.lookPassword
     });
-  }
+  },
+
+  
 })

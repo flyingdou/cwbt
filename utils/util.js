@@ -44,7 +44,8 @@ function tipsMessage (message) {
  * 获取请求地址
  */
 function getRequestURL(interfaceName) {
-  return app.constant.base_req_url_backup + interfaceName;
+  var url = app.constant.base_forward_url + '?url=' + app.constant.base_req_url + interfaceName;
+  return url;
 }
 
 module.exports = {
