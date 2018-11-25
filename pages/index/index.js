@@ -61,7 +61,7 @@ Page({
       wx.request({
         url: url,
         data: {
-          json: JSON.stringify(param)
+          json: encodeURI(JSON.stringify(param))
         },
         success: (res) => {
           var workCount = res.data;

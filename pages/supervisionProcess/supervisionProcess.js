@@ -71,10 +71,11 @@ Page({
    */
   getContentList: function () {
     var url = util.getRequestURL('getSupervisionContentList.we');
+    var param = { supervisionId: obj.data.id };
     wx.request({
       url: url,
       data: {
-        json: JSON.stringify({ supervisionId: obj.data.id })
+        json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
         var contents = res.data.contents;
