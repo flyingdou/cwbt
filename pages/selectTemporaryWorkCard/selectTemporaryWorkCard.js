@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
@@ -77,9 +78,9 @@ Page({
       mask: true
     });
     wx.request({
-      url: app.constant.base_req_url + 'getDepartmentListByParent.we',
+      url: util.getRequestURL('getDepartmentListByParent.we'),
       data: {
-        json: JSON.stringify({ parentId: 2 })
+        json: encodeURI(JSON.stringify({ parentId: 2 }))
       },
       success: function (res) {
         var data = res.data;
