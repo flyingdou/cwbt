@@ -171,6 +171,7 @@ Page({
   pickerChange: (e) => {
     // 未领取时禁用
     var hasGot = obj.data.hasGot;
+    var key = e.currentTarget.dataset.key;
     if (!hasGot) {
       wx.showModal({
         title: '提示',
@@ -179,11 +180,25 @@ Page({
       })
       return;
     }
-    var key = e.currentTarget.dataset.key;
     var dou = {};
     dou[key] = e.detail.value;
     obj.setData(dou);
   },
+
+
+  /**
+   * 输入框的值
+   */
+  inputChange: (e) => {
+    var key = e.currentTarget.dataset.key;
+    var dou = {};
+    dou[key] = e.detail.value;
+    obj.setData(dou);
+
+  },
+
+
+  
 
 
   /**

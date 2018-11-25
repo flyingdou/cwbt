@@ -179,7 +179,7 @@
       
       <!-- 预计完成时间 -->
       <view class='pickerDiv'>
-                <picker mode="date" value="{{expectedtime}}" start="{{startDate}}" end="{{endDate}}" bindchange="pickerChange" data-key='expectedtime'>
+                <picker mode="date" value="{{expectedtime}}" start="{{startDate}}" end="{{endDate}}" bindchange="inputChange" data-key='expectedtime'>
                         <view class="picker">预计完成时间: {{expectedtime}}</view>
                 </picker>
       </view> 
@@ -187,7 +187,7 @@
       <!-- 领取备注 -->
       <view class='inputDiv'>
            <view class='xd'>备注信息：</view>
-           <input type='text' class="xdInput" placeholder='请输入领取备注！' maxlength='-1' bindinput='pickerChange' data-key = 'collectNote'></input>
+           <input type='text' class="xdInput" placeholder='请输入领取备注！' maxlength='-1' bindinput='inputChange' data-key = 'collectNote'></input>
       </view>
       
   </modal>

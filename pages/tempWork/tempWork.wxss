@@ -186,3 +186,7 @@ textarea{
   width: 50%;
 }
 
+.pickerDiv{
+  padding-bottom: 20rpx;
+}
+

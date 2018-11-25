@@ -64,10 +64,11 @@
 .bottom {
 	padding-bottom:8px;
 }
+
 .title {
 	height: 30px;
 	line-height: 30px;
-	width: 160rpx;
+	width: 50%;
 	text-align: center;
 	display: inline-block;
 	font: 300 28rpx/30px "microsoft yahei";
