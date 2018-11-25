@@ -143,7 +143,7 @@ Page({
    * 释放任务
    */
   release: (e) => {
-    var reqUrl = app.constant.base_req_url + 'updateWorkCard.we';
+    var reqUrl = util.getRequestURL('updateWorkCard.we');
     var index = e.currentTarget.dataset.index;
     var workCardList = obj.data.workCardList;
     var param = {

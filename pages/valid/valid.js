@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
@@ -79,7 +80,7 @@ Page({
   init: () => {
     var id = obj.data.id;
     // 发起请求
-    var reqUrl = app.constant.base_req_url + 'getWorkfeedbackDetail.we';
+    var reqUrl = util.getRequestURL('getWorkfeedbackDetail.we');
     var valid = {};
     wx.request({
       url: reqUrl,
@@ -102,7 +103,7 @@ Page({
   * 验收
   */
   valid: () => {
-    var reqUrl = app.constant.base_req_url + 'updateWorkFeedBackStatus.we';
+    var reqUrl = util.getRequestURL('updateWorkFeedBackStatus.we');
     var param = {
       id:obj.data.id,
       confirm_id: app.user.id

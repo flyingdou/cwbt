@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
@@ -115,7 +116,7 @@ Page({
     var param = {
       id: obj.data.workCardId
     };
-    var reqUrl = app.constant.base_req_url + 'getTempWork.we';
+    var reqUrl = util.getRequestURL('getTempWork.we');
     
     // 请求数据
     wx.request({
@@ -191,7 +192,7 @@ Page({
       success: (res) => {
         isScan = true;
         if (res.result == obj.data.workDetail.number) {
-          var scanTime = obj.getNowFormatDate();
+          var scanTime = util.formatTime(new Date());
           obj.setData({
             isScan: isScan,
             scanTime: scanTime
@@ -235,7 +236,7 @@ Page({
       sourceType: ['camera'],
       success: (res) => {
         isPhoto = true;
-        var timex = obj.getNowFormatDate();
+        var timex = util.formatTime(new Date());
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
         console.log(res);
@@ -383,38 +384,6 @@ Page({
   },
 
   /**
-   * 获取yyyy-MM-dd HH:mm:ss
-   */
-  getNowFormatDate: () => {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    var hh = date.getHours();
-    var mm = date.getMinutes();
-    var ss = date.getSeconds();
-    if (hh < 10) {
-      hh = '0' + hh;
-    }
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-    if (ss < 10) {
-      ss = '0' + ss;
-    }
-    if (month >= 1 && month <= 9) {
-      month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-      strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-      + " " + hh + seperator2 + mm + seperator2 + ss;
-    return currentdate;
-  },
-
-  /**
    * 调用上传方法
    */
   uploadPictures: () => {
@@ -501,7 +470,7 @@ Page({
       title: '处理中',
       mask:true
     })
-    var reqUrl = app.constant.base_req_url + 'finish.we';
+    var reqUrl = util.getRequestURL('finish.we');
     // 发起微信请求
     wx.request({
       url: reqUrl,
@@ -563,7 +532,7 @@ Page({
     };
 
     wx.request({
-      url: app.constant.base_req_url + 'updateWorkCard.we',
+      url: util.getRequestURL('updateWorkCard.we'),
       dataType: 'json',
       data: {
         json: encodeURI(JSON.stringify(param))
@@ -588,7 +557,7 @@ Page({
       workcardId: obj.data.workCardId
     };
 
-    var reqUrl = app.constant.base_req_url + 'rollback.we';
+    var reqUrl = util.getRequestURL('rollback.we');
     wx.request({
       url: reqUrl,
       dataType:'json',
@@ -612,7 +581,7 @@ Page({
    * 修改数据
    */
   update: () => {
-    var reqUrl = app.constant.base_req_url + 'updateWorkfeedback.we';
+    var reqUrl = util.getRequestURL('updateWorkfeedback.we');
     var workDetail = obj.data.workDetail;
     var workFeedback = obj.data.workFeedback;
     var photos = obj.data.photos;
@@ -697,7 +666,7 @@ Page({
     }
     var collectNote = obj.data.collectNote;
     // 发送领取请求
-    var reqUrl = app.constant.base_req_url + 'updateWorkCard.we';
+    var reqUrl = util.getRequestURL('updateWorkCard.we');
     var param = {
       id: obj.data.workDetail.id,
       collectorpersonid: app.user.id,

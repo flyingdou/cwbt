@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js ');
 var obj = null;
 Page({
 
@@ -171,7 +172,7 @@ Page({
       sourceType: ['camera'],
       success: (res) => {
         status = 1;
-        var timex = obj.getNowFormatDate();
+        var timex = util.formatTime(new Date());
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
         console.log(res);
@@ -277,38 +278,6 @@ Page({
   },
 
   /**
-   * 获取yyyy-MM-dd HH:mm:ss
-   */
-  getNowFormatDate: () => {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    var hh = date.getHours();
-    var mm = date.getMinutes();
-    var ss = date.getSeconds();
-    if (hh < 10) {
-      hh = '0' + hh;
-    }
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-    if (ss < 10) {
-      ss = '0' + ss;
-    }
-    if (month >= 1 && month <= 9) {
-      month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-      strDate = "0" + strDate;
-    }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-      + " " + hh + seperator2 + mm + seperator2 + ss;
-    return currentdate;
-  },
-
-  /**
    * 调用上传方法
    */
   uploadPictures: () => {
@@ -343,7 +312,7 @@ Page({
       title: '处理中',
       mask: true,
     })
-    var reqUrl = app.constant.base_req_url + 'saveSupervisFeedBack.we';
+    var reqUrl = util.getRequestURL('saveSupervisFeedBack.we');
     wx.request({
       url: reqUrl,
       dataType: 'json',

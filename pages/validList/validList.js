@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
@@ -141,7 +142,7 @@ Page({
   init: () => {
     var validList = [];
     // 发起请求
-    var reqUrl = app.constant.base_req_url + 'getWorkfeedbackList.we';
+    var reqUrl = util.getRequestURL('getWorkfeedbackList.we');
     wx.request({
       url: reqUrl,
       data: {
@@ -181,7 +182,7 @@ Page({
       })
       return;
     }
-    var reqUrl = app.constant.base_req_url + 'updateWorkFeedBackStatus.we';
+    var reqUrl = util.getRequestURL('updateWorkFeedBackStatus.we');
     chooseList = chooseList.join(",");
     var param = {
       id: chooseList,

@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
@@ -112,7 +113,7 @@ Page({
     if (!dept_id) {
       dept_id = 2;
     }
-    var reqUrl = app.constant.base_req_url + 'getDepartmentClass.we';
+    var reqUrl = util.getRequestURL('getDepartmentClass.we');
     var param = {
       id: dept_id
     };
@@ -168,7 +169,7 @@ Page({
     if (!dept_id) {
       dept_id = 2;
     }
-    var reqUrl = app.constant.base_req_url + 'getNextDepartment.we';
+    var reqUrl = util.getRequestURL('getNextDepartment.we');
     var param = {
       id: dept_id
     };
@@ -305,7 +306,7 @@ Page({
    * 查询设备信息
    */
   getDevice: (boat_number) => {
-    var reqUrl = app.constant.base_req_url + 'getDeviceByBoat.we';
+    var reqUrl = util.getRequestURL('getDeviceByBoat.we');
     var param = {
       boat_number: boat_number
     };
@@ -423,7 +424,7 @@ Page({
         title: '处理中...',
         mask: true,
       })
-      var reqUrl = app.constant.base_req_url + 'saveSupervis.we';
+      var reqUrl = util.getRequestURL('saveSupervis.we');
       wx.request({
         url: reqUrl,
         dataType: 'json',

@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
@@ -119,7 +120,7 @@ Page({
    */
   init: () => {
     var isUpdate = obj.data.isUpdate;
-    var reqUrl = app.constant.base_req_url + 'getWorkCardList.we';
+    var reqUrl = util.getRequestURL('getWorkCardList.we');
     
     var param = {};
     var queryType = obj.data.queryType;
@@ -146,7 +147,7 @@ Page({
     }
 
     if (isUpdate) {
-      reqUrl = app.constant.base_req_url + 'getWorkcardUpdateAbleList.we';
+      reqUrl = util.getRequestURL('getWorkcardUpdateAbleList.we');
       param = {
         executor_id: app.user.id
       };
@@ -260,7 +261,7 @@ Page({
     };
 
     wx.request({
-      url: app.constant.base_req_url + 'updateMuiltWorkCard.we',
+      url: util.getRequestURL('updateMuiltWorkCard.we'),
       dataType: 'json',
       data: {
         json: encodeURI(JSON.stringify(param))
@@ -310,7 +311,7 @@ Page({
     var taskList = obj.data.taskList;
 
     wx.request({
-      url: app.constant.base_req_url + 'updateMuiltWorkCard.we',
+      url: util.getRequestURL('updateMuiltWorkCard.we'),
       dataType: 'json',
       data: {
         json: encodeURI(JSON.stringify(param))
