@@ -44,7 +44,12 @@ function tipsMessage (message) {
  * 获取请求地址
  */
 function getRequestURL(interfaceName) {
-  var url = app.constant.base_forward_url + '?url=' + app.constant.base_req_url + interfaceName;
+  var url = '';
+  if (!app.constant.isDev) {
+    url = app.constant.base_forward_url + '?url=' + app.constant.base_req_url + interfaceName;
+  } else {
+    url = app.constant.base_req_url_backup + interfaceName;
+  }
   return url;
 }
 
