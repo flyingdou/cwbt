@@ -79,7 +79,7 @@
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收部门: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.deptName}}</text>
+                      接收部门: <text style='color: rgba(153, 153, 153, 1);'>{{item.deptName}}</text>
                     </view>
                     <view class='bottom-right'>
                       {{item.auto_date}}
