@@ -1,5 +1,5 @@
 var app = getApp();
-var util = require('../../utils/util.js ');
+var util = require('../../utils/util.js');
 var obj = null;
 Page({
 
