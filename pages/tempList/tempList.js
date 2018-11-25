@@ -103,7 +103,7 @@ Page({
     wx.request({
       url: url,
       data: {
-        json: JSON.stringify(param)
+        json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
         obj.setData({
