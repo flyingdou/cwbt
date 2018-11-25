@@ -71,7 +71,7 @@
              
             <!-- 船舶端可看 -->
             <view class='line' wx:if = '{{user_priv == 3}}'> 
-                  <view class='title'>设备状况</view>
+                  <view class='title'>维修后设备状况</view>
                   <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
                           <view class='item'>
                                 <view class='value'>{{status == 0 ? "正常" : "异常"}}</view>
@@ -179,7 +179,7 @@
       
       <!-- 预计完成时间 -->
       <view class='pickerDiv'>
-                <picker mode="date" value="{{expectedtime}}" start="2018-09-01" end="2019-09-01" bindchange="pickerChange" data-key='expectedtime'>
+                <picker mode="date" value="{{expectedtime}}" start="{{startDate}}" end="{{endDate}}" bindchange="pickerChange" data-key='expectedtime'>
                         <view class="picker">预计完成时间: {{expectedtime}}</view>
                 </picker>
       </view> 

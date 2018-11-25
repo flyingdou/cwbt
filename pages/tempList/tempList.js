@@ -210,8 +210,9 @@ Page({
         return;
      }
 
-     // 跳转
-    var url = '../../pages/releaseWorkCard/releaseWorkCard?code=' + code;
+    // 跳转
+    var overhaul = obj.data.overhaul;
+    var url = '../../pages/releaseWorkCard/releaseWorkCard?code=' + code + '&overhaul=' + overhaul;
      wx.navigateTo({
        url: url,
      })

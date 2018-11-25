@@ -1,3 +1,5 @@
+<!-- 引入过滤器 -->
+<wxs module = 'filter' src = '../../utils/filters.wxs'></wxs>
 <!-- 填充高度 -->
 <view style='height: 20rpx;'></view>
 
@@ -19,7 +21,12 @@
 
             <view class='line'>
                   <view class='title'>维修方式</view>
-                  <view class='value'><picker range='{{pickerData}}' range-key='name' bindchange='saveFormData' data-key='index'>{{pickerData[index].name}}</picker></view>
+                  <view class='value'>
+                        <view wx:if = '{{overhaul == 0 || overhaul == 1}}'>{{filter.overhaul(overhaul)}}</view>
+                        <view wx:else>
+                              <picker range='{{pickerData}}' range-key='name' bindchange='saveFormData' data-key='index'>{{pickerData[index].name}}</picker>
+                        </view>
+                  </view>
             </view>
             
             <view class='remark'>

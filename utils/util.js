@@ -11,6 +11,18 @@ const formatTime = date => {
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
+ function formatDate (date, type) {
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var  day = date.getDate();
+  if (type) {
+     var yeax = parseInt(year);
+     year = yeax + 1;
+  } 
+
+  return [year, month, day].map(formatNumber).join('-');
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -57,5 +69,6 @@ module.exports = {
   formatTime: formatTime,
   getSystemInfo: getSystemInfo,
   tipsMessage: tipsMessage,
-  getRequestURL: getRequestURL
+  getRequestURL: getRequestURL,
+  formatDate: formatDate,
 }

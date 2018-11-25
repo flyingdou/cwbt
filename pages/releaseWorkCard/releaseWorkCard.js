@@ -19,10 +19,16 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var code = options.code;
+    var code = options.code; // 扫码识别的code
+    var overhaul = options.overhaul; // 维修方式
     if (code) {
-      obj.data.code = code;
+      obj.setData({
+        code: code,
+        overhaul: overhaul
+      });
     }
+    
+    
 
     // 页面初始化
     this.init();
@@ -130,7 +136,7 @@ Page({
   checkFormData: function () {
     var data = obj.data;
     var remark = data.remark;
-    var overhaulFunction = data.pickerData[data.index].code;
+    var overhaulFunction = obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul;
     var photos = obj.data.photos;
     if (!remark) {
       wx.showModal({
@@ -178,7 +184,7 @@ Page({
       equipmentId: data.equipment.id,
       name: name,
       exceptionalDescribe: data.remark,
-      overhaulFunction: data.pickerData[data.index].code,
+      overhaulFunction: obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul,
       image: JSON.stringify(photos),
       creator: app.user.id
     }

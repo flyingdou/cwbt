@@ -162,7 +162,7 @@ Page({
     var device = obj.data.supervise.device ? `&device=${obj.data.supervise.device}` : "";
     var deviceNumber = obj.data.supervise.deviceNumber ? `&deviceNumber=${obj.data.supervise.deviceNumber}` : "";
     wx.navigateTo({
-      url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.creator}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.supervise.contents)}`
+      url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.supervise.creator}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.supervise.contents)}`
     });
   }
 })

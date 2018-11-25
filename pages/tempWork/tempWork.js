@@ -102,9 +102,15 @@ Page({
       { id: 1, name: "自行维修" },
       { id: 2, name: "委外维修" }
     ];
+    var today = new Date();
+    var startDate = util.formatDate(today);
+    var endDate = util.formatDate(today,'0');
+
     obj.setData({
       statusList: statusList,
-      handleList: handleList
+      handleList: handleList,
+      startDate: startDate,
+      endDate: endDate,
     });
     obj.getWorkDetail();
   },
@@ -163,6 +169,16 @@ Page({
    * picker、输入框取值
    */
   pickerChange: (e) => {
+    // 未领取时禁用
+    var hasGot = obj.data.hasGot;
+    if (!hasGot) {
+      wx.showModal({
+        title: '提示',
+        content: '请先领取工作！',
+        showCancel: false
+      })
+      return;
+    }
     var key = e.currentTarget.dataset.key;
     var dou = {};
     dou[key] = e.detail.value;
