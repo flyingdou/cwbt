@@ -1,6 +1,9 @@
 App({
   onLaunch: function () {
-    // 用户登录态保存
+    // 初始化用户
+    this.user = {};
+
+    // 查看缓存中是否有用户信息
     if (wx.getStorageSync('user')) {
       this.user = wx.getStorageSync('user');
     }
@@ -20,7 +23,5 @@ App({
     base_img_url_backup: 'https://fish.ecartoon.com.cn/picture',
     base_req_url_backup: 'http://192.168.43.110:8080/hqwl/api/cwbtMP/',
     upload_url_backup: 'https://fish.ecartoon.com.cn/uploadFile', 
-  },
-  user: {}
-
+  }
 })
