@@ -158,6 +158,10 @@ image{
   font-size: 28rpx;
 }
 
+.margin-bottom20{
+  margin-bottom: 20rpx;
+}
+
 .bottom-right{
   color: rgba(153, 153, 153, 1);
 }
