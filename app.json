@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/shipList/shipList",
     "pages/switch/switch",
     "pages/tempList/tempList",
     "pages/tempWork/tempWork",

@@ -21,8 +21,8 @@
       <!-- 功能按钮 -->
       <view class='buttons'>
             <view class='linex'>
-                  <view class='button workCard' bindtap='goto' data-link='../Tlist/Tlist?queryType=1&boatdepartment=1'>驾驶部</view>
-                  <view class='button maintance' bindtap='goto' data-link='../Tlist/Tlist?queryType=1&boatdepartment=2'>轮机部</view>
+                  <view class='button workCard' bindtap='goto' data-link='../Tlist/Tlist?queryType=1&boatdepartment=1&boatId={{boatId}}'>驾驶部</view>
+                  <view class='button maintance' bindtap='goto' data-link='../Tlist/Tlist?queryType=1&boatdepartment=2&boatId={{boatId}}'>轮机部</view>
             </view>
       </view>
 

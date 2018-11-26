@@ -1,0 +1,32 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <view class='chooseBoat'>
+            <radio-group bindchange = 'choose' >
+                          <view class='pre' wx:for = '{{boatList}}'>
+                                <view class='left' bindtap='choose' data-index='{{index}}'>
+                                      <view class='line'>
+                                            <view class='title'>{{item.name}}</view>
+                                      </view>
+
+                                      <view class='line'>
+                                            <view class='value'>所属部门</view>
+                                            <view class='value'>{{item.deptName}}</view>
+                                      </view>
+                                </view>
+
+                                <view class='right'>
+                                      <radio value = '{{index}}' checked='{{item.checked}}'></radio>
+                                </view>
+                          
+                          
+                          </view>
+            
+            
+            
+            </radio-group>
+      
+      
+      </view>
+
+
+</view>

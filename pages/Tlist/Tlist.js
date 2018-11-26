@@ -59,6 +59,12 @@ Page({
         });
     }
 
+    // 船舶id2
+    var boatId = options.boatId;
+    if (boatId) {
+       obj.data.boatId = boatId;
+    }
+
     obj.init();
 
 
@@ -126,11 +132,13 @@ Page({
     var queryType = obj.data.queryType;
     var boatdepartment = obj.data.boatdepartment;
     if (queryType == 1) { // 周期工作列表
+      console.log(obj.data.boatId);
       param = {
         type: '1',
         dept_id: app.user.deptId,
         status: '1,9', // 未完成、进行中
         boatdepartment: boatdepartment, //船舶部门
+        boatId: obj.data.boatId, // 船舶Id
       };
     } else if (obj.data.queryType == 2) { // 临时工作列表
       param = {

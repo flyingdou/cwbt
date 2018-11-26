@@ -15,6 +15,12 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     var boatId = options.boatId;
+     if (boatId) {
+       obj.setData({
+         boatId: boatId
+       });
+     }
      // 初始化多列选择器
      // this.multiSelectorInit();
   },
@@ -148,6 +154,7 @@ Page({
   // 跳转页面
   goto: (e) => {
     var link = e.currentTarget.dataset.link;
+    console.log(link);
     wx.navigateTo({
       url: link
     });

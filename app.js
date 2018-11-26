@@ -10,7 +10,7 @@ App({
 
     // 开发模式添加默认用户
     if (this.constant.isDev) {
-      this.user = { id: 1316, deptId: 213, userPriv: 3 };
+      this.user = { id: 1316, deptId: 216, userPriv: 3 };
     }
   },
   constant: {
@@ -21,7 +21,7 @@ App({
     upload_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/uploadFile',
     logo: 'https://cwbt.castlc.cn/picture/shipLogo.jpg',
     base_img_url_backup: 'https://fish.ecartoon.com.cn/picture',
-    base_req_url_backup: 'http://192.168.43.110:8080/hqwl/api/cwbtMP/',
+    base_req_url_backup: 'http://192.168.0.106:8080/hqwl/api/cwbtMP/',
     upload_url_backup: 'https://fish.ecartoon.com.cn/uploadFile', 
   }
 })
