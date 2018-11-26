@@ -154,7 +154,6 @@ Page({
   // 跳转页面
   goto: (e) => {
     var link = e.currentTarget.dataset.link;
-    console.log(link);
     wx.navigateTo({
       url: link
     });
