@@ -89,7 +89,7 @@
   <view style='height: 120rpx;'></view>
   <!-- 底部图片 -->
   <view class='pics'>
-    <image src='{{logo}}' mode='aspectFill'></image>
+    <image src='{{logo}}'></image>
   </view>
 </view>
 
