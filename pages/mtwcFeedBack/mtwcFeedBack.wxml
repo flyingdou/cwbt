@@ -24,6 +24,27 @@
 
             <view class='line'>
                   <view class='tv'>
+                        <view class='title'>所属部门</view>
+                        <view class='value'>{{feedback.deptName}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>所属船舶</view>
+                        <view class='value'>{{feedback.boat}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>设备</view>
+                        <view class='value'>{{feedback.device}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
                         <view class='title'>维修方式</view>
                         <view class='value'>{{overhaul_function[feedback.overhaul_function]}}</view>
                   </view>
@@ -78,6 +99,27 @@
                   </view>
             </view>
 
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>所属部门</view>
+                        <view class='value'>{{feedback.deptName}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>所属船舶</view>
+                        <view class='value'>{{feedback.boat}}</view>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>设备</view>
+                        <view class='value'>{{feedback.device}}</view>
+                  </view>
+            </view>
+
             <!-- 作业内容 -->
             <view class='taskList'>
                   <view class='taskTitle'>情况描述</view>
@@ -110,12 +152,12 @@
       <view style='height: 80rpx;' wx:if='{{type == 0}}'></view>
 
       <!-- 底部功能按钮 -->
-      <view class='footer' wx:if='{{type == 0 && status != 14}}'>
+      <view class='footer' wx:if='{{type == 0 && feedback.status != 2}}'>
             <view class='checkButton' bindtap='valid'>验收</view>
       </view> 
 
       <!-- 底部功能按钮 -->
-      <view class='footer' wx:if='{{type == 1 && status != 14}}'>
+      <view class='footer' wx:if='{{type == 1 && feedback.status != 2}}'>
             <view class='checkButton' bindtap='valid'>确认</view>
       </view> 
 

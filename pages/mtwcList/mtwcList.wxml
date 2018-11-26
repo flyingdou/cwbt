@@ -22,6 +22,20 @@
 
                             <view class='lineFill'></view>
 
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>所属部门</view>
+                                        <view class='value'>{{item.deptName}}</view>
+                                  </view>
+
+                                  <view class='tv'>
+                                        <view class='title'>所属船舶</view>
+                                        <view class='value'>{{item.boat}}</view>
+                                  </view>
+                            </view>
+
+                            <view class='lineFill'></view>
+
                             <view class='line2'>
                                   <view class='tv right'>
                                         <view class='title'>异常时间</view>
