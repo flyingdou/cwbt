@@ -136,6 +136,16 @@ Page({
         }
       }
     });
+  },
+
+  /**
+   * 修改密码
+   */
+  updatePassword:() => {
+     var url = '../../pages/updatePWD/updatePWD';
+     wx.navigateTo({
+       url: url,
+     })
   }
 
 })

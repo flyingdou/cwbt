@@ -1,5 +1,5 @@
 <!-- 登录页面 -->
-<view class = 'login' wx:if='{{isLogin}}'>
+<view class = 'login'>
   <!-- 填充高度 -->
   <view style='height: 80rpx;'></view>
 
@@ -15,31 +15,42 @@
   <view class='form'>
     <!-- 填充高度 -->
     <view style='height: 100rpx;'></view>
-    <!-- 账号输入框 -->
-    <view class='form-line'>
-      <image class='account-icon' src='../../icon/zhanghao@2x.png' mode='widthFix'></image>
-      <input type='number' class='form-input' placeholder='请输入手机号码' bindinput='checkAccountWechatId' data-key='account' value='{{account}}'></input>
-      <view class='operator-icon' bindtap='clearAccount' wx:if='{{account}}'>
-        <image class='right-icon' src='../../icon/del.png' mode='widthFix'></image>
-      </view>
-    </view>
-    <!-- 密码输入框 -->
+
+    <!-- 原密码输入框 -->
     <view class='form-line'>
       <image class='password-icon' src='../../icon/mima@2x.png' mode='widthFix'></image>
-      <input type='password' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password' value='{{password}}' hidden='{{lookPassword}}'></input>
-      <input type='input' class='form-input' placeholder='请输入密码' bindinput='saveFormParam' data-key='password' value='{{password}}' hidden='{{!lookPassword}}'></input>
-      <view class='operator-icon' bindtap='lookPassword' wx:if='{{password}}'>
+      <input type='password' class='form-input' placeholder='请输入原密码' bindinput='saveFormParam' data-key='password' value='{{password}}' hidden='{{lookPassword}}'></input>
+      <input type='input' class='form-input' placeholder='请输入原密码' bindinput='saveFormParam' data-key='password' value='{{password}}' hidden='{{!lookPassword}}'></input>
+      <view class='operator-icon' bindtap='lookPassword' wx:if='{{password}}' data-flag = 'lookPassword'>
         <image class='right-icon' src='../../icon/look.png' mode='widthFix' hidden='{{lookPassword}}'></image>
         <image class='right-icon' src='../../icon/look_active.png' mode='widthFix' hidden='{{!lookPassword}}'></image>
+      </view>
+    </view>
+
+    <!-- 新密码输入框 -->
+    <view class='form-line'>
+      <image class='password-icon' src='../../icon/mima@2x.png' mode='widthFix'></image>
+      <input type='password' class='form-input' placeholder='请输入新密码' bindinput='saveFormParam' data-key='newPassword' value='{{newPassword}}' hidden='{{lookNewPassword}}'></input>
+      <input type='input' class='form-input' placeholder='请输入新密码' bindinput='saveFormParam' data-key='newPassword' value='{{newPassword}}' hidden='{{!lookNewPassword}}'></input>
+      <view class='operator-icon' bindtap='lookPassword' wx:if='{{newPassword}}' data-flag='lookNewPassword'>
+        <image class='right-icon' src='../../icon/look.png' mode='widthFix' hidden='{{lookNewPassword}}'></image>
+        <image class='right-icon' src='../../icon/look_active.png' mode='widthFix' hidden='{{!lookNewPassword}}'></image>
+      </view>
+    </view>
+
+    <!-- 确认新密码输入框 -->
+    <view class='form-line'>
+      <image class='password-icon' src='../../icon/mima@2x.png' mode='widthFix'></image>
+      <input type='password' class='form-input' placeholder='请确认新密码' bindinput='saveFormParam' data-key='reNewPassword' value='{{reNewPassword}}' hidden='{{lookReNewPassword}}'></input>
+      <input type='input' class='form-input' placeholder='请确认新密码' bindinput='saveFormParam' data-key='reNewPassword' value='{{reNewPassword}}' hidden='{{!lookReNewPassword}}'></input>
+      <view class='operator-icon' bindtap='lookPassword' wx:if='{{reNewPassword}}' data-flag='lookReNewPassword'>
+        <image class='right-icon' src='../../icon/look.png' mode='widthFix' hidden='{{lookReNewPassword}}'></image>
+        <image class='right-icon' src='../../icon/look_active.png' mode='widthFix' hidden='{{!lookReNewPassword}}'></image>
       </view>
     </view>
     <!-- 填充高度 -->
     <view style='height: 70rpx;'></view>
     <!-- 登录按钮 -->
-    <view class='from-button' bindtap='login' wx:if='{{!isGetUserInfo}}'>登录</view>
-    <view class='from-button' wx:if='{{isGetUserInfo}}'>
-      登录
-      <button class='open-button' open-type='getUserInfo' bindgetuserinfo='login'></button>
-    </view>
+    <view class='from-button' bindtap='updatePwd'>修改密码</view>
   </view>
 </view>

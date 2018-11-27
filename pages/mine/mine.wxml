@@ -46,16 +46,32 @@
   </view>
   <!-- 填充高度 -->
   <view style='height: 260rpx;'></view>
+
+  <view class='tool-line'>
+        <!-- 修改密码 -->
+        <view class='line' bindtap='updatePassword'>
+              <view class='line-left'>
+                    <image class='line-left-icon' src='../../icon/cancellation.png' mode='widthFix'></image>
+                    <view class='line-left-text'>修改密码</view>
+              </view>
+              <view class='line-right'>
+                    <image class='line-right-icon' src='../../icon/more@2x.png' mode='widthFix'></image>
+              </view>
+        </view>
+  </view>
+
   <!-- 底部操作栏 -->
   <view class='tool-line'>
-    <view class='line' bindtap='cancellation'>
-      <view class='line-left'>
-        <image class='line-left-icon' src='../../icon/cancellation.png' mode='widthFix'></image>
-        <view class='line-left-text'>注销</view>
-      </view>
-      <view class='line-right'>
-        <image class='line-right-icon' src='../../icon/more@2x.png' mode='widthFix'></image>
-      </view>
-    </view>
+          <view class='line' bindtap='cancellation'>
+                <view class='line-left'>
+                      <image class='line-left-icon' src='../../icon/cancellation.png' mode='widthFix'></image>
+                      <view class='line-left-text'>注销</view>
+                </view>
+                <view class='line-right'>
+                      <image class='line-right-icon' src='../../icon/more@2x.png' mode='widthFix'></image>
+                </view>
+          </view>
   </view>
+
+  
 </view>

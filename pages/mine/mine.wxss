@@ -140,6 +140,7 @@ image{
 
 .tool-line{
   background-color: #FFF;
+  margin-bottom: 2rpx;
 }
 
 .line{
