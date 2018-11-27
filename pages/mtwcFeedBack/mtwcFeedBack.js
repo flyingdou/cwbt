@@ -27,12 +27,6 @@ Page({
         type: options.type
       });
     }
-
-    if (options.status) {
-      obj.setData({
-        status: options.status
-      });
-    }
   },
 
   /**
