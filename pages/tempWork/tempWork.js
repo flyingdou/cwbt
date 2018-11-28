@@ -169,20 +169,29 @@ Page({
    * picker、输入框取值
    */
   pickerChange: (e) => {
+    
     // 未领取时禁用
     var hasGot = obj.data.hasGot;
     var key = e.currentTarget.dataset.key;
+    var timestamp = obj.data.timestamp ? obj.data.timestamp : undefined;
     if (!hasGot) {
+      if (timestamp && ((e.timeStamp - timestamp) < 1000)) { // 1一秒以内禁止再次弹窗
+        return;
+      }
       wx.showModal({
         title: '提示',
         content: '请先领取工作！',
         showCancel: false
       })
+      obj.setData({
+        timestamp: e.timeStamp
+      });
       return;
     }
     var dou = {};
     dou[key] = e.detail.value;
     obj.setData(dou);
+   
   },
 
 

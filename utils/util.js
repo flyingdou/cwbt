@@ -65,10 +65,36 @@ function getRequestURL(interfaceName) {
   return url;
 }
 
+
+
+
+/**
+ * 获取维修方式名称
+ */
+function getOverhaul (overhaul) {
+  var overhaulName = "";
+  var overhaulList = [
+    {"id":0,"name":"自行维修"},
+    {"id":1,"name":"委外维修"}
+  ];
+  for (var x in overhaulList) {
+    if (overhaulList[x].id == overhaul) {
+      return overhaulList[x].name;
+    }
+  }
+  return overhaulName;
+}
+
+
+
+
+
+
 module.exports = {
   formatTime: formatTime,
   getSystemInfo: getSystemInfo,
   tipsMessage: tipsMessage,
   getRequestURL: getRequestURL,
   formatDate: formatDate,
+  getOverhaul: getOverhaul,
 }

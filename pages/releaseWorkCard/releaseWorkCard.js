@@ -175,19 +175,24 @@ Page({
       return;
     }
     var data = obj.data;
-    var name = `${data.equipment.name}-${data.pickerData[data.index].name}`;
     var photos = obj.data.photos;
     for(var x in photos) {
       delete photos[x]['tempFilePath']; // 删除tempFilePath
     }
+    var overhaulFunction = obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul;
+    var name = data.equipment.name + '-' + util.getOverhaul(overhaulFunction);
     var param = {
       equipmentId: data.equipment.id,
       name: name,
       exceptionalDescribe: data.remark,
-      overhaulFunction: obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul,
+      overhaulFunction: overhaulFunction,
       image: JSON.stringify(photos),
       creator: app.user.id
     }
+
+    // 测试数据
+    console.log(param);
+    return;
 
     wx.showLoading({
       title: '正在保存中',

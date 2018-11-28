@@ -26,6 +26,11 @@
             </view>
 
             <view class='line'>
+                  <view class='title'>所属部门</view>
+                  <view class='value'>{{workDetail.deptName}}</view>
+            </view>
+
+            <view class='line'>
                   <view class='title'>所属船舶</view>
                   <view class='value'>{{workDetail.boatName}}</view>
             </view>
