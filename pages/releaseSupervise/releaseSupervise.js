@@ -109,7 +109,7 @@ Page({
    * 初始化页面
    */
   init: () => {
-    var dept_id = app.user.dept_id;
+    var dept_id = app.user.deptId;
     if (!dept_id) {
       dept_id = 2;
     }
@@ -151,7 +151,7 @@ Page({
       arrayList: arrayList,
       showModalStatus: false, // 是否展示弹出框
     });
-    var dept_id = app.user.dept_id;
+    var dept_id = app.user.deptId;
     obj.getNext(dept_id);
   },
 
@@ -162,13 +162,11 @@ Page({
     var top = obj.data.top;
     var top2 = obj.data.top2;
     if (!dept_id) {
-      dept_id = app.user.dept_id;
+      dept_id = app.user.deptId;
     }
     var arrayList = obj.data.arrayList;
     var lt = obj.data.lt;
-    if (!dept_id) {
-      dept_id = 2;
-    }
+   
     var reqUrl = util.getRequestURL('getNextDepartment.we');
     var param = {
       id: dept_id
@@ -384,7 +382,7 @@ Page({
         })
         return;
       }
-      douList.reverse(); // 翻转数组
+      douList.reverse(); // 反转数组
       var dept_id = douList[0];
       var param = {}; // 参数
       // 船舶

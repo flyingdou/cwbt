@@ -14,8 +14,13 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
-     // 初始化多列选择器
-     // this.multiSelectorInit();
+     var choose = wx.getStorageSync('choose');
+     wx.setNavigationBarTitle({
+       title: choose.name,
+     })
+     obj.setData({
+       chooseList: choose.chooseList
+     });
   },
 
   /**
@@ -75,7 +80,7 @@ Page({
     wx.navigateTo({
       url: link
     });
-    return;    
+    return;
   }
 
   

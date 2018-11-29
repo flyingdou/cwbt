@@ -19,6 +19,7 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    obj.init();
   },
 
   /**
@@ -106,6 +107,11 @@ Page({
    */
   goto: (e) => {
     var link = e.currentTarget.dataset.link;
+    var key = e.currentTarget.dataset.key;
+    var value = e.currentTarget.dataset.value;
+    if (key && value) {
+      wx.setStorageSync(key, obj.data[value]);
+    }
     var message = e.currentTarget.dataset.message;
     if (link && link != '') {
       wx.navigateTo({
@@ -258,6 +264,23 @@ Page({
   lookPassword: function (e) {
     obj.setData({
       lookPassword: !obj.data.lookPassword
+    });
+  },
+
+  /**
+   * init
+   */
+  init: () => {
+    var chooseList = [
+      { "name": "自行维修", "link":"../tempList/tempList?overhaul=0"},
+      { "name": "委外维修", "link": "../tempList/tempList?overhaul=1" },
+    ];
+    var chooseTemp = {
+      name:'维修方式',
+      chooseList: chooseList
+    };
+    obj.setData({
+      chooseTemp: chooseTemp
     });
   },
 

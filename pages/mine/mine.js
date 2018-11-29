@@ -15,7 +15,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    obj = this;
+    obj.init();
   },
 
   /**
@@ -78,6 +79,11 @@ Page({
   goto: (e) => {
     var link = e.currentTarget.dataset.link;
     var message = e.currentTarget.dataset.message;
+    var key = e.currentTarget.dataset.key;
+    var value = e.currentTarget.dataset.value;
+    if (key && value) {
+      wx.setStorageSync(key, obj.data[value]);
+    }
     if (link && link != '') {
       wx.navigateTo({
         url: link
@@ -146,6 +152,23 @@ Page({
      wx.navigateTo({
        url: url,
      })
-  }
+  },
+
+  /**
+   * init
+   */
+  init: () => {
+    var chooseList = [
+      { "name": "执行统计", "link": "../statistics/statistics?type=handle" },
+      { "name": "验收统计", "link": "../statistics/statistics?type=valid" },
+    ];
+    var chooseStatistics = {
+      name: '数据类型',
+      chooseList: chooseList
+    };
+    obj.setData({
+      chooseStatistics: chooseStatistics
+    });
+  },
 
 })

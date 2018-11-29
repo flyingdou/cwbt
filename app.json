@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/statistics/statistics",
     "pages/switch/switch",
     "pages/tempList/tempList",
     "pages/tempWork/tempWork",
