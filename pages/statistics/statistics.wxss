@@ -18,10 +18,10 @@ picker{
 
 .content{
   position: relative;
-  width: 100%;
+  width: 92%;
   height: 100%;
+  margin: 0 4%;
   margin-top: 30rpx;
-  background: white;
 }
 
 .line{
@@ -64,6 +64,8 @@ picker{
 
 .choose{
   padding: 20rpx 4%;
+  background: white;
+  border-radius: 8rpx;
 }
 
 .valuess{
@@ -73,7 +75,7 @@ picker{
 }
 
 .lp{
-  padding-right: 30rpx;
+  padding-right: 10rpx;
 }
 
 .footer{
@@ -112,14 +114,26 @@ picker{
 }
 
 .statisticsList{
-   padding-top: 20rpx;
+  margin-top:10px;
+  background:white;
+  border-radius:8rpx;
+
 }
 
 .pre{
    padding: 30rpx 20rpx;
    border-bottom: 1rpx solid rgba(245,245,245,1);
+}
+
+.preStatistics{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.preValid{
    display: flex;
-   justify-content: flex-end;
+   justify-content: space-between;
    align-items: center;
 }
 
@@ -143,6 +157,15 @@ picker{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-bottom: 20rpx;
+  padding-bottom: 10rpx;
 }
 
+.lineBlocks{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.lineBlock{
+  padding-right: 50rpx;
+}

@@ -71,14 +71,11 @@
             
       </view>
 
-      <view class='fill'></view>
-
-
       <!-- 船舶统计列表 -->
       <view class='statisticsList'>
             <radio-group bindchange = 'radioChange'>
                   <view wx:if = '{{type == "handle"}}'>
-                        <view class='pre' wx:for = '{{statisticsList}}' bindtap='radioChange' data-index = '{{index}}'>
+                        <view class='pre preStatistics' wx:for = '{{statisticsList}}' bindtap='radioChange' data-index = '{{index}}'>
                               <view class='blocks'>
                                       <view class='block'>
                                             <!-- 船名 -->
@@ -131,6 +128,54 @@
                               <view class='radioDiv'>
                                     <radio value='{{index}}' checked='{{item.checked}}'></radio>
                               
+                              </view>
+                        
+                        </view>
+                </view>
+
+
+
+                 <!-- 验收统计 -->
+                 <view wx:if = '{{type == "valid"}}'>
+                        <view class='pre preValid' wx:for = '{{validList}}' bindtap='radioChange' data-index = '{{index}}'>
+                              <view class='lineBlocks'>
+                                      <view class='lineBlock'>
+                                            <!-- 船名 -->
+                                            <view class='tv'>
+                                                  <view class='title'>{{item.boatname}}</view>
+                                            </view>
+
+                                            
+                                      </view>
+
+                                      <view class='lineBlock'>
+                                            <!-- 总数 -->
+                                            <view class='tv'>
+                                                  <view class='title'>总数</view>
+                                                  <view class='value'>{{item.number3}}</view>
+                                            </view>
+
+
+                                            <!-- 已完成 -->
+                                            <view class='tv'>
+                                                  <view class='title'>验收</view>
+                                                  <view class='value'>{{item.number2}}</view>
+                                            </view>
+
+                                            <!-- 未完成 -->
+                                            <view class='tv'>
+                                                  <view class='title'>未验收</view>
+                                                  <view class='value'>{{item.number1}}</view>
+                                            </view>
+
+                                      </view>
+                              
+                              
+                              </view>
+                              
+                              <!-- radio选择 -->
+                              <view class='radioDiv'>
+                                    <radio value='{{index}}' checked='{{item.checked}}'></radio>
                               </view>
                         
                         </view>

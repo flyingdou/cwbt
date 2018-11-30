@@ -16,9 +16,26 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+ 
 
+    // 船舶id
     if (options.boatId) {
       obj.data.boatId = options.boatId;
+    }
+    
+    // 开始时间
+    if (options.startDate) {
+      obj.data.startDate = options.startDate;
+    }
+
+    // 结束时间
+    if (options.endDate) {
+      obj.data.endDate = options.endDate;
+    }
+
+    // type
+    if (options.type) {
+      obj.data.type = options.type;
     }
   },
 
@@ -69,7 +86,30 @@ Page({
    */
   queryData: function () {
     var url = util.getRequestURL('statisticsdetails.we');
-    var param = { boatid: obj.data.boatId || 23 };
+    var param = { boatid: obj.data.boatId };
+    var style = 0;
+    if (obj.data.startDate) {
+      param.begintime = obj.data.startDate;
+    }
+    if (obj.data.endDate) {
+      param.endtime = obj.data.endDate;
+    }
+    if (obj.data.type == 'handle') {
+      style = 1;
+    }
+    if (obj.data.type == 'valid') {
+      style = 2;
+    }
+
+    param.style = style;
+
+
+    // 测试数据
+    // console.log(param);
+    
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: url,
       dataType:'json',
@@ -84,6 +124,9 @@ Page({
       fail: function (e) {
         util.tipsMessage('网络异常！');
         console.log(e);
+      },
+      complete: (xe) =>{
+        wx.hideLoading();
       }
     });
   }

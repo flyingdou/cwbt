@@ -81,20 +81,37 @@ Page({
     var message = e.currentTarget.dataset.message;
     var key = e.currentTarget.dataset.key;
     var value = e.currentTarget.dataset.value;
+    var priv = e.currentTarget.dataset.priv;
     if (key && value) {
       wx.setStorageSync(key, obj.data[value]);
     }
-    if (link && link != '') {
-      wx.navigateTo({
-        url: link
-      });
-    } else {
+
+
+    // 链接判断
+    if (!link && link == '') {
       wx.showModal({
         title: '提示',
         content: message,
         showCancel: false
       });
+      return;
+    } 
+
+    // 权限判断
+    if (parseInt(priv) == '2' && app.user.userPriv == 3) {
+      wx.showModal({
+        title: '提示',
+        content: message,
+        showCancel: false,
+      })
+      return;
     }
+
+    
+    // 数据校验通过
+    wx.navigateTo({
+      url: link
+    });
   },
 
   /**

@@ -122,14 +122,13 @@ Page({
     count = count.length;
     var lt = obj.data.lt;
     var arrayList = [];
-    for (var c = 0; c < (3 - count); c++) {
+    for (count; count < 3; count++) {
       var a = [];
       arrayList.push(a);
     }
 
     obj.setData({
       arrayList: arrayList,
-      showModalStatus: false, // 是否展示弹出框
     });
     var dept_id = app.user.deptId;
     obj.getNext(dept_id);
@@ -172,15 +171,17 @@ Page({
             }
 
           }
-          if (has) {
-            // 非第一条
-            if (res.department && res.department.length > 0) {
-              ind = parseInt(ind) + 1;
-              arrayList[ind] = res.department;
-            }
-          } else {
-            // 第一条
-            arrayList[0] = res.department;
+          if (res.department.length > 0) {
+              if (has) {
+                // 非第一条
+                if (res.department && res.department.length > 0) {
+                  ind = parseInt(ind) + 1;
+                  arrayList[ind] = res.department;
+                }
+              } else {
+                // 第一条
+                arrayList[0] = res.department;
+              }
           }
 
           // 船舶列表
@@ -277,11 +278,21 @@ Page({
     }
 
     // 数据校验通过
-    var reqUrl = util.getRequestURL('statisticsWcWorkcard.we');
+    var type = obj.data.type;
+    var reqUrl = '';
+    var key = '';
+    var dou = {};
+    if (type == 'handle') {
+       reqUrl = util.getRequestURL('statisticsWcWorkcard.we');
+       key = 'statisticsList';
+    }
+
+    if (type == 'valid') {
+       reqUrl = util.getRequestURL('statisticscheck.we');
+       key = 'validList';
+    }
     var param  = obj.data.param;
-      
     
-    var statisticsList = [];
     wx.showLoading({
       title: '加载中',
     })
@@ -294,21 +305,16 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-          statisticsList = res.list;
+          dou[key] = res.list;
         }
       },
       complete: (rex) => {
         wx.hideLoading();
-        obj.setData({
-          statisticsList: statisticsList
-        });
+        obj.setData(dou);
+        
       }
     })
     
-    
-    // 测试数据
-    // console.log(param);
-    return;
     
   },
 
@@ -368,14 +374,42 @@ Page({
     if (!index) {
       index = e.currentTarget.dataset.index;
     }
-    var statisticsList = obj.data.statisticsList;
-    for (var x in statisticsList) {
-      statisticsList[x].checked = false;
+    var type = obj.data.type;
+    var key = '';
+    var dou = {};
+    if (type == 'handle') {
+      key = 'statisticsList';
     }
-    statisticsList[index].checked = true;
-    obj.setData({
-      statisticsList: statisticsList
-    });
+    if (type == 'valid') {
+      key = 'validList';
+    }
+    var valueList = obj.data[key];
+    for (var x in valueList) {
+      valueList[x].checked = false;
+    }
+    valueList[index].checked = true;
+    dou[key] = valueList;
+    obj.setData(dou);
+    obj.goto(valueList[index].boatid);
+  },
+
+  /**
+   * 跳转到下一页面
+   */
+  goto: (boatId) => {
+   
+    var link = '../../pages/statisticDetail/statisticDetail?boatId=' + boatId + '&type=' + obj.data.type;
+    var startDate = obj.data.startDate;
+    if (startDate) {
+      link = link + '&startDate=' + startDate;
+    }
+    var endDate = obj.data.endDate;
+    if (endDate) {
+      link = link + '&endDate=' + endDate;
+    }
+    wx.navigateTo({
+      url: link,
+    })
   }
 
 

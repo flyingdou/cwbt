@@ -192,15 +192,17 @@ Page({
             }
             
           }
-          if (has) {
-            // 非第一条
-            if (res.department && res.department.length > 0) {
-              ind = parseInt(ind) + 1;
-              arrayList[ind] = res.department;
-            }
-          } else {
-            // 第一条
-            arrayList[0] = res.department;
+          if (res.department.length > 0) {
+              if (has) {
+                // 非第一条
+                if (res.department && res.department.length > 0) {
+                  ind = parseInt(ind) + 1;
+                  arrayList[ind] = res.department;
+                }
+              } else {
+                // 第一条
+                arrayList[0] = res.department;
+              }
           }
           
           // 船舶列表

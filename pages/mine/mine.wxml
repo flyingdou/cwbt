@@ -37,10 +37,10 @@
         <view class='block-text'>查询设备信息</view>
         <!-- <view class='block-count'>5</view> -->
       </view>
-      <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseStatistics' data-message='功能暂无！'>
-        <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
-        <view class='block-text'>其他</view>
-        <!-- <view class='block-count'>5</view> -->
+      <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseStatistics' data-priv = '2' data-message='暂无权限！'>
+        <!-- <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image> -->
+        <image class='block-icon' src='../../icon/statistics.png' mode='widthFix'></image>
+        <view class='block-text'>统计</view>
       </view>
     </view>
   </view>
