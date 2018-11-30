@@ -1,4 +1,7 @@
-// pages/statisticDetail/statisticDetail.js
+var app = getApp();
+var util = require('../../utils/util.js');
+var obj = {};
+
 Page({
 
   /**
@@ -12,7 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    obj = this;
 
+    if (options.boatId) {
+      obj.data.boatId = options.boatId;
+    }
   },
 
   /**
@@ -26,7 +33,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.queryData();
   },
 
   /**
@@ -58,9 +65,27 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 查询数据
    */
-  onShareAppMessage: function () {
-
+  queryData: function () {
+    var url = util.getRequestURL('statisticsdetails.we');
+    var param = { boatid: obj.data.boatId || 23 };
+    wx.request({
+      url: url,
+      dataType:'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: function (res) {
+        obj.setData({
+          list: res.data.list
+        });
+      },
+      fail: function (e) {
+        util.tipsMessage('网络异常！');
+        console.log(e);
+      }
+    });
   }
+
 })

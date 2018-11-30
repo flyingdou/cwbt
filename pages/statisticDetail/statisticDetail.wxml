@@ -1,2 +1,107 @@
-<!--pages/statisticDetail/statisticDetail.wxml-->
-<text>pages/statisticDetail/statisticDetail.wxml</text>
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- 列表 -->
+      <view class='List'>
+           <checkbox-group bindchange = 'chooseChange'>
+                    <!-- 每一个 -->
+                    <view class='pre' wx:for = '{{list}}' wx:key='' bindtap='goto' data-index = '{{index}}'>
+                          
+                          <!-- 第一行 -->
+                          <view class='line div'>
+                                <view class='title'>工作卡名称</view>
+                                <view class='value'>{{item.workname}}</view>
+                          </view>
+
+                          <!-- 第二行 -->
+                          <view class='line2 div'>
+                                <view class='line'>
+                                      <view class='title'>工作卡状态</view>
+                                      <view class='value'>{{item.workstatusname}}</view>
+                                </view>
+
+                                <view class='line'>
+                                      <view class='title'>验收状态</view>
+                                      <view class='value'>{{item.checkstatusname || "未验收"}}</view>
+                                </view>
+
+                          </view>
+
+                          <view class='line div'>
+                                <view class='fill'></view>
+                          </view>
+                          
+                          <view class='line2 div'>
+
+                                <view class='line'>
+                                      <view class='title'>执行人</view>
+                                      <view class='value'>{{item.executorname || "未完成"}}</view>
+                                </view>
+
+                                <view class='line'>
+                                      <view class='title'>验收人</view>
+                                      <view class='value'>{{item.asconfirmname || "未验收"}}</view>
+                                </view>
+
+                          </view>
+
+                          <view class='line2 div'>
+
+                                <view class='line'>
+                                      <view class='title'>完成时间</view>
+                                      <view class='value'>{{item.finishtime || "未完成"}}</view>
+                                </view>
+
+                                <!--<view class='line'>
+                                      <view class='title'></view>
+                                      <view class='value'></view>
+                                </view>-->
+
+                          </view>
+
+                          <view class='line2'>
+
+                                <view class='line'>
+                                      <view class='title'>验收时间</view>
+                                      <view class='value'>{{item.validdate || "未验收"}}</view>
+                                </view>
+
+                                <!--<view class='line'>
+                                      <view class='title'></view>
+                                      <view class='value'></view>
+                                </view>-->
+
+                          </view>
+
+                          <!-- 图标 -->
+                          <view class='tag' wx:if = '{{item.status == 9 && !isUpdate}}'>
+                                <view class='tagDiv'>
+                                      <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                      <view class='statusFont'>被领取</view>
+                                </view>
+
+                                <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-id='{{item.id}}' data-index = '{{index}}'>取消</view>
+                          </view>
+                          
+
+                          <!-- 多选择 -->
+                          <view class='choose'>
+                                <checkbox value='{{item.id}}' catchtap='ni' wx:if = '{{isGet && item.status == 1}}'></checkbox>
+                          </view>
+
+                    </view>
+
+           </checkbox-group>
+
+      </view>
+
+      <!-- 底部按钮 -->
+      <!-- <view class='footer' wx:if = '{{!isUpdate}}'>
+            <view class='button chooseTask' wx:if = '{{!isGet}}' bindtap='chooseStart'>领取任务</view>
+            <view class='button get' wx:if = '{{isGet}}' data-status = '9' bindtap='getTask'>完成</view>
+            <view class='button cancel' wx:if = '{{isGet}}' bindtap='undo'>取消</view>
+      </view> -->
+
+      <!-- 底部填充 -->
+      <!-- <view class='douFill'></view> -->
+
+</view>
