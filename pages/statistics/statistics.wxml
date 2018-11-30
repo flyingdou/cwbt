@@ -77,61 +77,63 @@
       <!-- 船舶统计列表 -->
       <view class='statisticsList'>
             <radio-group bindchange = 'radioChange'>
-                <view class='pre' wx:for = '{{statisticsList}}' bindtap='radioChange' data-index = '{{index}}'>
-                      <view class='blocks'>
-                              <view class='block'>
-                                    <!-- 船名 -->
-                                    <view class='tv'>
-                                          <view class='title'>{{item.boatname}}</view>
-                                    </view>
+                  <view wx:if = '{{type == "handle"}}'>
+                        <view class='pre' wx:for = '{{statisticsList}}' bindtap='radioChange' data-index = '{{index}}'>
+                              <view class='blocks'>
+                                      <view class='block'>
+                                            <!-- 船名 -->
+                                            <view class='tv'>
+                                                  <view class='title'>{{item.boatname}}</view>
+                                            </view>
 
-                                    <!-- 总数 -->
-                                    <view class='tv'>
-                                          <view class='title'>总数</view>
-                                          <view class='value'>{{item.number5}}</view>
-                                    </view>
+                                            <!-- 总数 -->
+                                            <view class='tv'>
+                                                  <view class='title'>总数</view>
+                                                  <view class='value'>{{item.number5}}</view>
+                                            </view>
+                                      </view>
+
+                                      <view class='block'>
+
+                                            <!-- 已完成 -->
+                                            <view class='tv'>
+                                                  <view class='title'>完成</view>
+                                                  <view class='value'>{{item.number2}}</view>
+                                            </view>
+
+                                            <!-- 未完成 -->
+                                            <view class='tv'>
+                                                  <view class='title'>未完成</view>
+                                                  <view class='value'>{{item.number1}}</view>
+                                            </view>
+
+                                      </view>
+
+                                      <view class='block'>
+                                            <!-- 提前完成 -->
+                                            <view class='tv'>
+                                                  <view class='title'>提前完成</view>
+                                                  <view class='value'>{{item.number4}}</view>
+                                            </view>
+
+                                            <!-- 逾期完成 -->
+                                            <view class='tv'>
+                                                  <view class='title'>逾期完成</view>
+                                                  <view class='value'>{{item.number3}}</view>
+                                            </view>
+
+                                      </view>
+                              
+                              
                               </view>
-
-                              <view class='block'>
-
-                                    <!-- 已完成 -->
-                                    <view class='tv'>
-                                          <view class='title'>完成</view>
-                                          <view class='value'>{{item.number2}}</view>
-                                    </view>
-
-                                    <!-- 未完成 -->
-                                    <view class='tv'>
-                                          <view class='title'>未完成</view>
-                                          <view class='value'>{{item.number1}}</view>
-                                    </view>
-
+                              
+                              <!-- radio选择 -->
+                              <view class='radioDiv'>
+                                    <radio value='{{index}}' checked='{{item.checked}}'></radio>
+                              
                               </view>
-
-                              <view class='block'>
-                                    <!-- 提前完成 -->
-                                    <view class='tv'>
-                                          <view class='title'>提前完成</view>
-                                          <view class='value'>{{item.number4}}</view>
-                                    </view>
-
-                                    <!-- 逾期完成 -->
-                                    <view class='tv'>
-                                          <view class='title'>逾期完成</view>
-                                          <view class='value'>{{item.number3}}</view>
-                                    </view>
-
-                              </view>
-                      
-                      
-                      </view>
-                      
-                      <!-- radio选择 -->
-                      <view class='radioDiv'>
-                            <radio value='{{index}}' checked='{{item.checked}}'></radio>
-                      
-                      </view>
-                
+                        
+                        </view>
                 </view>
             </radio-group>
       
