@@ -271,7 +271,7 @@ Page({
    * init
    */
   init: () => {
-    // 维修类型
+    // 维修类型 
     var tempList = [
       { "name": "自行维修", "link":"../tempList/tempList?overhaul=0"},
       { "name": "委外维修", "link": "../tempList/tempList?overhaul=1" },
@@ -291,9 +291,21 @@ Page({
       chooseList: statisticsList
     };
 
+    // 维修类型2
+    var tempList2 = [
+      { "name": "自行维修", "link": "../mtwcList/mtwcList?type=0" },
+      { "name": "委外维修", "link": "../mtwcList/mtwcList?type=1" },
+    ];
+    var chooseTemp2 = {
+      name: '维修方式',
+      chooseList: tempList2
+    };
+
+
     obj.setData({
       chooseTemp: chooseTemp,
-      chooseStatistics: chooseStatistics
+      chooseStatistics: chooseStatistics,
+      chooseTemp2: chooseTemp2
     });
   },
 

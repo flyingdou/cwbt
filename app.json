@@ -8,8 +8,6 @@
     "pages/tempWork/tempWork",
     "pages/releaseSupervise/releaseSupervise",
     "pages/supervise/supervise",
-    "pages/spotCheck/spotCheck",
-    "pages/selectTemporaryWorkCard/selectTemporaryWorkCard",
     "pages/mtwcList/mtwcList",
     "pages/releaseWorkCard/releaseWorkCard",
     "pages/mtwcFeedBack/mtwcFeedBack",

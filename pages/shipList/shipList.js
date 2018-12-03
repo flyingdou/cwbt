@@ -147,7 +147,19 @@ Page({
    * goto
    */
   goto: (boatId) => {
-    var url = '../../pages/spotCheck/spotCheck?boatId=' + boatId;
+    // 船舶部门
+    var boatDeptList = [
+      { "name": "驾驶部", "link": "../Tlist/Tlist?queryType=1&boatdepartment=1&boatId=" + boatId },
+      { "name": "轮机部", "link": "../Tlist/Tlist?queryType=1&boatdepartment=2&boatId=" + boatId },
+    ];
+    var chooseBoatDept = {
+      name: '船舶部门',
+      chooseList: boatDeptList
+    };
+    wx.setStorageSync('choose', chooseBoatDept);
+
+
+    var url = '../../pages/switch/switch';
     wx.navigateTo({
       url: url,
     })

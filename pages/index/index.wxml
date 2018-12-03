@@ -74,8 +74,6 @@
       <view class='block-count'>{{filter.toFixed(workCount.supervisionCount, 0)}}</view>
     </view>
 
-  
-    
   </view>
 
   <view class='blocks'>
@@ -86,7 +84,7 @@
         </view>
 
 
-        <view class='block' bindtap='goto' data-link='../selectTemporaryWorkCard/selectTemporaryWorkCard' data-message='功能暂无！'>
+        <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseTemp2' data-message='功能暂无！'>
           <image class='block-icon' src='../../icon/tempWork.png' mode='widthFix'></image>
           <view class='block-text'>临时工作</view>
           <view class='block-count'>{{filter.toFixed(workCount.mtwcCount, 0)}}</view>
