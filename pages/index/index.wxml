@@ -52,39 +52,73 @@
   <view class='background'></view>
   <!-- 操作按钮块 -->
   <view class='blocks'>
-    <view class='block' bindtap='goto' data-link='../shipList/shipList' data-message='功能暂无！' wx:if='{{userPriv == 3}}'>
+
+    <!-- wx:if='{{userPriv == 3}}' -->
+    <view class='block' bindtap='goto' data-link='../shipList/shipList' data-message='功能暂无！'>
       <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
       <view class='block-text'>工作任务</view>
       <view class='block-count'>{{filter.toFixed(workCount.cycleWorkCount, 0)}}</view>
     </view>
-    <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseTemp' data-message='功能暂无！' wx:if='{{userPriv == 3}}'>
+
+    <!--  wx:if='{{userPriv == 3}}' -->
+    <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseTemp' data-message='功能暂无！'>
       <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
       <view class='block-text'>临时任务</view>
       <view class='block-count'>{{filter.toFixed(workCount.temporaryWorkCount, 0)}}</view>
     </view>
-    <view class='block' bindtap='goto' data-link='../supervisionList/supervisionList' data-message='功能暂无！' 
-      wx:if='{{userPriv == 3}}'>
-      <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
+
+     <!-- wx:if='{{userPriv == 3}}' -->
+    <view class='block' bindtap='goto' data-link='../supervisionList/supervisionList' data-message='功能暂无！'>
+      <image class='block-icon' src='../../icon/supervision.png' mode='widthFix'></image>
       <view class='block-text'>督导通知</view>
       <view class='block-count'>{{filter.toFixed(workCount.supervisionCount, 0)}}</view>
     </view>
-    <view class='block' bindtap='goto' data-link='../../pages/validList/validList' data-message='功能暂无！' wx:if='{{userPriv == 2}}'>
-      <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
-      <view class='block-text'>工作卡验收</view>
-      <view class='block-count'>{{filter.toFixed(workCount.checkAcceptanceCount, 0)}}</view>
-    </view>
-    <view class='block' bindtap='goto' data-link='../selectTemporaryWorkCard/selectTemporaryWorkCard' data-message='功能暂无！' wx:if='{{userPriv == 2}}'>
-      <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
-      <view class='block-text'>临时工作卡</view>
-      <view class='block-count'>{{filter.toFixed(workCount.mtwcCount, 0)}}</view>
-    </view>
-    <view class='block' bindtap='goto' data-link='../supervisionList/supervisionList' data-message='功能暂无！' 
-      wx:if='{{userPriv == 2}}'>
-      <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
-      <view class='block-text'>督导</view>
-      <view class='block-count'>{{filter.toFixed(workCount.supervisionCount, 0)}}</view>
-    </view>
+
+  
+    
   </view>
+
+  <view class='blocks'>
+        <view class='block' bindtap='goto' data-link='../../pages/validList/validList' data-message='功能暂无！' >
+          <image class='block-icon' src='../../icon/valid.png' mode='widthFix'></image>
+          <view class='block-text'>工作验收</view>
+          <view class='block-count'>{{filter.toFixed(workCount.checkAcceptanceCount, 0)}}</view>
+        </view>
+
+
+        <view class='block' bindtap='goto' data-link='../selectTemporaryWorkCard/selectTemporaryWorkCard' data-message='功能暂无！'>
+          <image class='block-icon' src='../../icon/tempWork.png' mode='widthFix'></image>
+          <view class='block-text'>临时工作</view>
+          <view class='block-count'>{{filter.toFixed(workCount.mtwcCount, 0)}}</view>
+        </view>
+
+
+        <view class='block' bindtap='goto' data-link='../supervisionList/supervisionList' data-message='功能暂无！'>
+          <image class='block-icon' src='../../icon/supervise.png' mode='widthFix'></image>
+          <view class='block-text'>督导</view>
+          <view class='block-count'>{{filter.toFixed(workCount.supervisionCount, 0)}}</view>
+        </view>
+  </view>
+
+   <view class='blocks'>
+        <view class='block' bindtap='goto' data-link='../../pages/Tlist/Tlist?isUpdate=true' data-message='功能暂无！' >
+          <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
+          <view class='block-text'>未验收工作</view>
+        </view>
+
+
+        <view class='block' bindtap='getEquipmentInfo' data-link='../../pages/equipmentInfo/equipmentInfo' data-message='功能暂无！'>
+          <image class='block-icon' src='../../icon/deviceDetail.png' mode='widthFix'></image>
+          <view class='block-text'>查看设备信息</view>
+        </view>
+
+
+        <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseStatistics' data-message='功能暂无！'>
+          <image class='block-icon' src='../../icon/statistics.png' mode='widthFix'></image>
+          <view class='block-text'>统计</view>
+        </view>
+  </view>
+
   <!-- 填充高度 -->
   <view style='height: 120rpx;'></view>
   <!-- 底部图片 -->
@@ -92,5 +126,3 @@
     <image src='{{logo}}'></image>
   </view>
 </view>
-
-<!-- <mark showModalStatus='{{showModalStatus}}' type='radio' bindMark='test'></mark> -->

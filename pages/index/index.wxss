@@ -124,8 +124,6 @@ image{
 }
 
 .background{
-  width: 100%;
-  height: 290rpx;
   background: linear-gradient(180deg,rgba(52,138,255,1) 0%,rgba(38,213,255,1) 100%);
   opacity: 1;
 }
@@ -134,15 +132,12 @@ image{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: absolute;
-  top: 100rpx;
-  left: 50%;
-  margin-left: -330rpx;
   padding: 20rpx 0;
-  width: 660rpx;
-  height: 220rpx;
   background-color: #FFF;
   border-radius: 6rpx;
+  width: 92%;
+  height: 220rpx;
+  margin: 30rpx auto;
 }
 
 .block{

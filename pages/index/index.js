@@ -271,17 +271,58 @@ Page({
    * init
    */
   init: () => {
-    var chooseList = [
+    // 维修类型
+    var tempList = [
       { "name": "自行维修", "link":"../tempList/tempList?overhaul=0"},
       { "name": "委外维修", "link": "../tempList/tempList?overhaul=1" },
     ];
     var chooseTemp = {
       name:'维修方式',
-      chooseList: chooseList
+      chooseList: tempList
     };
+
+     // 统计数据类型
+     var statisticsList = [
+      { "name": "执行统计", "link": "../statistics/statistics?type=handle" },
+      { "name": "验收统计", "link": "../statistics/statistics?type=valid" },
+    ];
+    var chooseStatistics = {
+      name: '数据类型',
+      chooseList: statisticsList
+    };
+
     obj.setData({
-      chooseTemp: chooseTemp
+      chooseTemp: chooseTemp,
+      chooseStatistics: chooseStatistics
     });
+  },
+
+  
+
+  /**
+   * 查询设备信息
+   */
+  getEquipmentInfo: (e) => {
+    var link = e.currentTarget.dataset.link;
+
+    // 正式环境执行代码
+    if (!app.constant.isDev) {
+      wx.scanCode({
+        scanType: ['barCode', 'qrCode'],
+        success: (res) => {
+          wx.navigateTo({
+            url: link + '?code=' + res.result
+          });
+        }
+      });
+    }
+
+    // 开发环境执行代码
+    if (app.constant.isDev) {
+      wx.navigateTo({
+        url: link + '?code=0000123'
+      });
+    }
   },
 
   

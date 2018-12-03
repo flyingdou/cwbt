@@ -114,31 +114,6 @@ Page({
     });
   },
 
-  /**
-   * 查询设备信息
-   */
-  getEquipmentInfo: (e) => {
-    var link = e.currentTarget.dataset.link;
-
-    // 正式环境执行代码
-    if (!app.constant.isDev) {
-      wx.scanCode({
-        scanType: ['barCode', 'qrCode'],
-        success: (res) => {
-          wx.navigateTo({
-            url: link + '?code=' + res.result
-          });
-        }
-      });
-    }
-
-    // 开发环境执行代码
-    if (app.constant.isDev) {
-      wx.navigateTo({
-        url: link + '?code=0000123'
-      });
-    }
-  },
 
   /**
    * 注销
@@ -171,21 +146,6 @@ Page({
      })
   },
 
-  /**
-   * init
-   */
-  init: () => {
-    var chooseList = [
-      { "name": "执行统计", "link": "../statistics/statistics?type=handle" },
-      { "name": "验收统计", "link": "../statistics/statistics?type=valid" },
-    ];
-    var chooseStatistics = {
-      name: '数据类型',
-      chooseList: chooseList
-    };
-    obj.setData({
-      chooseStatistics: chooseStatistics
-    });
-  },
+  
 
 })

@@ -48,7 +48,7 @@ App({
     
   },
   constant: {
-    isDev: false,
+    isDev: true,
     base_img_url: 'https://cwbt.castlc.cn/picture',
     base_forward_url: 'https://cwbt.castlc.cn/cwbt/test/login',
     base_req_url: 'http://cwbt.castlc.cn/cwbt/api/cwbtMP/',

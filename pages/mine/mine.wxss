@@ -32,10 +32,14 @@ image{
   top: 100rpx;
   left: 50%;
   margin-left: -330rpx;
-  padding: 20rpx 0;
+  padding: 60rpx 0;
   width: 660rpx;
   background-color: #FFF;
   border-radius: 6rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 60rpx;
 }
 
 .user-info{
