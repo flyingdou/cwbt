@@ -36,14 +36,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "下次模拟更新",
-					"pathName": "pages/index/index"
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }

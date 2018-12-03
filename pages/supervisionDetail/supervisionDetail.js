@@ -136,7 +136,7 @@ Page({
     for (var i = 0; i < photos.length; i++) {
       imgs.push(app.constant.base_img_url + '/' + photos[i].name);
     }
-    console.log(imgs);
+    // console.log(imgs);
     var index = e.currentTarget.dataset.index;
     // 预览开始
     wx.previewImage({

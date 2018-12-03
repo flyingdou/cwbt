@@ -26,7 +26,7 @@ App({
 
     // 新版本下载失败
     updateManager.onUpdateFailed(function () {
-      
+
     })
 
 
