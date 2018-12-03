@@ -7,7 +7,7 @@ App({
     // 检查新版本
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
-      console.log(res.hasUpdate)
+      // console.log(res.hasUpdate)
     })
     
     // 新版本下载完成
