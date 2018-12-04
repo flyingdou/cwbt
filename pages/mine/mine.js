@@ -100,17 +100,6 @@ Page({
       });
       return;
     } 
-
-    // 权限判断
-    if (parseInt(priv) == '2' && app.user.userPriv == 3) {
-      wx.showModal({
-        title: '提示',
-        content: message,
-        showCancel: false,
-      })
-      return;
-    }
-
     
     // 数据校验通过
     wx.navigateTo({

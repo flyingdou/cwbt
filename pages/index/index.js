@@ -18,7 +18,10 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    obj.init();
+    if (app.user.id) {
+       obj.init();
+    }
+    
   },
 
   /**
@@ -108,6 +111,8 @@ Page({
     var link = e.currentTarget.dataset.link;
     var key = e.currentTarget.dataset.key;
     var value = e.currentTarget.dataset.value;
+    var userpriv = e.currentTarget.dataset.userpriv;
+    app.user.userPriv = userpriv;
     if (key && value) {
       wx.setStorageSync(key, obj.data[value]);
     }
@@ -215,6 +220,8 @@ Page({
             workCount: workCount
           });
           wx.showTabBar();
+          // 初始化页面数据
+          obj.init();
         } else {
           util.tipsMessage('账号或密码错误！');
         }
