@@ -16,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    obj.init();
+    // obj.init();
   },
 
   /**
