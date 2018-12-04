@@ -399,22 +399,56 @@ Page({
 
     ];
 
-    var blocksDiv = [];
-    var blockDiv = [];
-    for (var i = 0; i < funList.length; i++) {
-      blockDiv.push(funList[i]);
-      if ( blockDiv.length == 3 || i == (funList.length -1)) {
-        blocksDiv.push(blockDiv); // 将blockDiv放入blocksDiv中
-        blockDiv = []; // 清空blockDiv
-      }
-    }
+    var reqUrl = util.getRequestURL('getFuncs.we');
+    var param = {};
+    param.userId = app.user.id;
 
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        console.log(res);
+        if (res.success) {
+           obj.resizeList(res.funcList);
+        }
+      },
+      complete: (rx) => {
+        wx.hideLoading();
+      }
+    })
 
     obj.setData({
       chooseTemp: chooseTemp,
       chooseStatistics: chooseStatistics,
       chooseTemp2: chooseTemp2,
-      funList: funList,
+      funList: funList
+    });
+    
+  },
+
+  
+  /**
+   * 数组大小调整为3个
+   */
+  resizeList: (funList) => {
+    var blocksDiv = [];
+    var blockDiv = [];
+    for (var i = 0; i < funList.length; i++) {
+      blockDiv.push(funList[i]);
+      if (blockDiv.length == 3 || i == (funList.length - 1)) {
+        blocksDiv.push(blockDiv); // 将blockDiv放入blocksDiv中
+        blockDiv = []; // 清空blockDiv
+      }
+    }
+    obj.setData({
       blocksDiv: blocksDiv
     });
   },
