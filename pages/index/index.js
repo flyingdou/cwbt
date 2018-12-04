@@ -174,12 +174,16 @@ Page({
    */
   login: (e) => {
     // 获取参数，校验参数，生成json
-    var param = {};
+    var param = {}, encryptedData = null;
     if (e.type == 'getuserinfo') {
       param = e.detail;
     }
     if (obj.data.code) {
       param.code = obj.data.code;
+    }
+    if (param.encryptedData) {
+      encryptedData = param.encryptedData;
+      param.encryptedData = null;  
     }
     // 弹出加载框
     wx.showLoading({
@@ -194,7 +198,8 @@ Page({
       data: {
         userName: obj.data.account,
         pwd: obj.data.password,
-        json: encodeURI(JSON.stringify(param))
+        json: encodeURI(JSON.stringify(param)),
+        encryptedData: encryptedData
       },
       success: (res) => {
         wx.hideLoading();
