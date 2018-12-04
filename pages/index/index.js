@@ -409,6 +409,7 @@ Page({
     var reqUrl = util.getRequestURL('getFuncs.we');
     var param = {};
     param.userId = app.user.id;
+    param.deptId = app.user.deptId;
 
     wx.showLoading({
       title: '加载中...',
@@ -422,7 +423,6 @@ Page({
       },
       success: (res) => {
         res = res.data;
-        console.log(res);
         if (res.success) {
            obj.resizeList(res.funcList);
         }
