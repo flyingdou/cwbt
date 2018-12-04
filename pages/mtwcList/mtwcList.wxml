@@ -70,20 +70,7 @@
 
       </view>
       
-      <!-- 功能按钮 -->
-      <view class='footer'>
-            <!-- 全选按钮 -->
-            <!-- <checkbox-group bindchange = 'chooseAll'>
-                  <view class='isAll'>
-                        <checkbox value = '{{isAll.id}}' checked='{{isAll.checked}}'>全选</checkbox>
-                  </view>
-            </checkbox-group> -->
-            
-            <!-- 验收按钮 -->
-            <!-- <view class='valid' bindtap='goto' data-link='../releaseSupervise/releaseSupervise' wx:if='{{userPriv == 2}}'>发起督导</view> -->
-            
       
-      </view>
 
 
       </checkbox-group>
