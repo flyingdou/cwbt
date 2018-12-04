@@ -12,7 +12,7 @@
         <view class='user-nick'>
           <image class='user-nick-icon' src='../../icon/nick@2x.png' mode='widthFix'></image>
           <view class='user-nick-text'>
-            <open-data type='userNickName'></open-data>
+            <open-data>{{name}}</open-data>
           </view>
         </view>
         <view class='user-address'>

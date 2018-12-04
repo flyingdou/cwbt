@@ -42,6 +42,10 @@ Page({
           });
         }
       });
+    } else {
+      obj.setData({
+        name: app.user.name
+      });
     }
   },
 
