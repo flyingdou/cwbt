@@ -4,7 +4,7 @@
 
       <view class='list'>
             
-                <view class='pre' wx:for = '{{validList}}'>
+                <view class='pre' wx:for = '{{validList}}' wx:key = ''>
                       <view class='line' bindtap='goto' data-id = '{{item.id}}'>
                             <view class='line1'>
                                   <view class='tv left'>

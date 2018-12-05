@@ -2,7 +2,7 @@
 <view class='content'>
       <view class='chooseBoat'>
             <radio-group bindchange = 'choose' >
-                          <view class='pre' wx:for = '{{boatList}}' bindtap='choose' data-index='{{index}}'>
+                          <view class='pre' wx:for = '{{boatList}}' wx:key = '' bindtap='choose' data-index='{{index}}'>
                                 <view class='left'>
                                       <view class='line'>
                                             <view class='title'>{{item.name}}</view>

@@ -26,7 +26,7 @@
                   
                   <!-- 工作内容 -->
                   <view class='task'>
-                        <view class='ta' wx:for = '{{valid.content}}'>{{item.name}}</view>
+                        <view class='ta' wx:for = '{{valid.content}}' wx:key = ''>{{item.name}}</view>
                   </view>
                   
             </view>
@@ -37,7 +37,7 @@
                   
                   <!-- 工作内容 -->
                   <view class='task'>
-                        <view class='ta' wx:for = '{{valid.content}}'>{{item.mark}}</view>
+                        <view class='ta' wx:for = '{{valid.content}}' wx:key = ''>{{item.mark}}</view>
                   </view>
                   
             </view>
@@ -46,7 +46,7 @@
             <view class='picsList'>
                   <view class='taskTitle'>作业照片</view>
                   <view class='pics'>
-                        <view class='pre' wx:for = '{{valid.image}}'>
+                        <view class='pre' wx:for = '{{valid.image}}' wx:key = ''>
                               <view class='pic' bindtap='preview' data-index = '{{index}}'>
                                     <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
                               </view>

@@ -132,7 +132,7 @@ Page({
     var queryType = obj.data.queryType;
     var boatdepartment = obj.data.boatdepartment;
     if (queryType == 1) { // 周期工作列表
-      console.log(obj.data.boatId);
+      // console.log(obj.data.boatId);
       param = {
         type: '1',
         dept_id: app.user.deptId,

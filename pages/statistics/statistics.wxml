@@ -11,7 +11,7 @@
                         </view>
                   </view>
 
-                  <picker wx:for = '{{arrayList}}' wx:for-item = 'array' bindchange='pickerChange' range='{{array}}' value='{{0}}' range-key='dept_name' data-arrayIndex = '{{index}}'>
+                  <picker wx:for = '{{arrayList}}' wx:key = '' wx:for-item = 'array' bindchange='pickerChange' range='{{array}}' value='{{0}}' range-key='dept_name' data-arrayIndex = '{{index}}'>
                           <view class='value'>
                                 {{arrayList[index][indexList[index]].dept_name || "请选择"}} 
                           </view>
