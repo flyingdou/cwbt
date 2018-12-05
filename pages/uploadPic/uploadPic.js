@@ -1,5 +1,5 @@
 var app = getApp();
-var obj = this;
+var obj = null;
 Page({
 
   /**

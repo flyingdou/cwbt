@@ -4,7 +4,7 @@
       <view class='List'>
            <checkbox-group bindchange = 'chooseChange'>
                     <!-- 每一个 -->
-                    <view class='pre' wx:for = '{{list}}' wx:key='' bindtap='goto' data-index = '{{index}}'>
+                    <view class='pre' wx:for = '{{list}}' wx:key='' bindtap='goto' data-index = '{{index}}' data-link='../statisticWorkDetail/statisticWorkDetail?workId={{item.workid}}'>
                           
                           <!-- 第一行 -->
                           <view class='line div'>

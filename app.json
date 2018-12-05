@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/statistics/statistics",
     "pages/statisticDetail/statisticDetail",
+    "pages/statisticWorkDetail/statisticWorkDetail",
     "pages/switch/switch",
     "pages/tempList/tempList",
     "pages/tempWork/tempWork",

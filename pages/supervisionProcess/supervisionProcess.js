@@ -1,6 +1,7 @@
 var app = getApp();
 var util = require('../../utils/util.js');
-var obj = this;
+var obj = null;
+
 Page({
 
   /**

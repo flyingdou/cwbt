@@ -17,9 +17,12 @@ Page({
   onLoad: function (options) {
     obj = this;
 
-    if (options.id) {
-      obj.data.id = options.id;
+    // 保存工作卡id
+    if (options.workId) {
+      obj.data.workId = options.workId;
     }
+
+    this.queryData();
   },
 
   /**
@@ -33,7 +36,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getSuperviseFeedback();
+
   },
 
   /**
@@ -65,24 +68,42 @@ Page({
   },
 
   /**
-   * 查询督导反馈
+   * 查询数据
    */
-  getSuperviseFeedback: function () {
-    var url = util.getRequestURL('getSupervisFeedBack.we');
+  queryData: function () {
+    var param = {
+      id: obj.data.workId
+    };
+    var reqUrl = util.getRequestURL('getWorkDetailById.we');
+    
+    // 请求数据
     wx.request({
-      url: url,
-      data: {
-        supervisionId: obj.data.id
+      url: reqUrl,
+      dataType: 'json',
+      data:{
+        json: encodeURI(JSON.stringify(param))
       },
-      success: function (res) {
-        res.data.image = JSON.parse(res.data.image);
-        obj.setData({
-          superviseFeedback: res.data
-        });
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          if (res.workFeedback) {
+            var workFeedback = res.workFeedback;
+            workFeedback.image = JSON.parse(workFeedback.image);
+            obj.setData({
+              photos: workFeedback.image,
+              workFeedback: workFeedback
+            });
+          }
+          obj.setData({
+            workDetail: res.workDetail
+          });
+        } 
+        if (!res.success) {
+          console.log('程序异常！');
+        }
       },
-      fail: function (e) {
-        util.tipsMessage('网络异常！');
-        console.log(e);
+      fail: (e) => {
+        console.log('网络异常！');
       }
     });
   },
@@ -92,7 +113,7 @@ Page({
    */
   preview: (e) => {
     var imgs = [];
-    var photos = obj.data.superviseFeedback.image;
+    var photos = obj.data.workFeedback.image;
     for (var i = 0; i < photos.length; i++) {
       imgs.push(app.constant.base_img_url + '/' + photos[i].name);
     }

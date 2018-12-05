@@ -1,0 +1,132 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- block1 -->
+      <view class='block1'>
+
+            <view class='line'>
+                  <view class='title'>设备名称</view>
+                  <view class='value'>{{workDetail.ename}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>设备编码</view>
+                  <view class='value'>{{workDetail.number}}</view>
+            </view>
+            
+            <view class='line'>
+                  <view class='title'>作业名称</view>
+                  <view class='value'>{{workDetail.name}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>维修等级</view>
+                  <view class='value'>{{workDetail.level}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>所属船舶</view>
+                  <view class='value'>{{workDetail.boatName}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>计划时间</view>
+                  <view class='value'>{{workDetail.plannedtime}}</view>
+            </view>
+            
+            <!-- 作业内容 -->
+            <view class='remark'>
+                  <view class='title'>作业内容:</view>
+                  <view class='task'>
+                        <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{item.name}}</view>
+                  </view>
+            </view>
+
+            <!-- 验收标准 -->
+            <view class='remark'>
+                  <view class='title'>验收标准:</view>
+                  <view class='task'>
+                        <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{item.mark}}</view>
+                  </view>
+            </view>
+
+            
+            <!-- 填充高度 -->
+            <!--<view class='fill'></view>-->
+      
+      </view>
+
+</view>
+
+<!-- 填充高度 -->
+<view style="margin-top: 20rpx;"></view>
+
+<view class="content"> 
+  <!-- block1 -->
+      <view class='block1'>
+
+            <view class='line'>
+                  <view class='title'>执行人</view>
+                  <view class='value'>{{workDetail.executor || "未完成"}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>执行时间</view>
+                  <view class='value'>{{workDetail.scanTime || "未完成"}}</view>
+            </view>
+
+            <!-- 作业照片 -->
+            <view class='picsList'>
+                  <view class='taskTitle'>作业照片</view>
+                  <view class='pics'>
+                        <view class='pre' wx:for = '{{workFeedback.image}}' wx:key = ''>
+                              <view class='pic' bindtap='preview' data-index = '{{index}}'>
+                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                              </view>
+                              <view class='picTime'>{{item.pic_time}}</view>
+                        </view>
+                  </view>
+            </view>
+
+            <view class='remark'>
+                  <view class='title'>备注:</view>
+                  <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.mark}}' disable="disable"></textarea>
+                  
+            </view>
+
+            
+            <!-- 填充高度 -->
+            <!--<view class='fill'></view>-->
+      
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style="margin-top: 20rpx;"></view>
+
+<view class="content"> 
+  <!-- block1 -->
+      <view class='block1'>
+
+            <view class='line'>
+                  <view class='title'>验收人</view>
+                  <view class='value'>{{workDetail.confirmor || "未验收"}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>验收时间</view>
+                  <view class='value'>{{workDetail.validDate || "未验收"}}</view>
+            </view>
+
+            <view class='remark'>
+                  <view class='title'>验收备注:</view>
+                  <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.validRemark}}' disable="disable"></textarea>
+                  
+            </view>
+
+            
+            <!-- 填充高度 -->
+            <!--<view class='fill'></view>-->
+      
+      </view>
+</view>
+

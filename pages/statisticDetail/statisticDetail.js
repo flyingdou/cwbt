@@ -1,6 +1,6 @@
 var app = getApp();
 var util = require('../../utils/util.js');
-var obj = {};
+var obj = null;
 
 Page({
 
@@ -128,6 +128,13 @@ Page({
       complete: (xe) =>{
         wx.hideLoading();
       }
+    });
+  },
+
+  goto: function (e) {
+    var link = e.currentTarget.dataset.link;
+    wx.navigateTo({
+      url: link
     });
   }
 
