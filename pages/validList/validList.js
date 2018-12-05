@@ -146,7 +146,8 @@ Page({
     wx.request({
       url: reqUrl,
       data: {
-        dept_id: app.user.deptId
+        dept_id: app.user.deptId,
+        userId: app.user.id
       },
       dataType: 'json',
       success: (res) => {

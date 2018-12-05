@@ -39,7 +39,7 @@
 
                                 <view class='line'>
                                       <view class='title'>验收人</view>
-                                      <view class='value'>{{item.asconfirmname || "未验收"}}</view>
+                                      <view class='value'>{{item.confirmname || "未验收"}}</view>
                                 </view>
 
                           </view>
