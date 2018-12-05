@@ -172,23 +172,57 @@ Page({
   /**
     * 验收
     */
-  valid: () => {
+  valid: (e) => {
     var chooseList = obj.data.chooseList;
+    var status = e.currentTarget.dataset.status;
+    status = parseInt(status);
     // 校验数据
     if (!chooseList || chooseList.length == 0) {
       wx.showModal({
         title: '提示',
-        content: '请选择需要验收的工作！',
+        content: '请选择工作！',
         showCancel: false
       })
       return;
     }
+    var content = '';
+    if (status == 2) {
+      content = '确定要验收这些工作吗？';
+    }
+
+    if (status == 3) {
+      content = '确定要驳回这些工作吗？';
+    }
+    // 提示
+    wx.showModal({
+      title: '提示',
+      content: content,
+      success: (rx) => {
+        if (rx.confirm) {
+           obj.updateStatus(status);
+        }
+      }
+    })
+    
+
+  },
+
+  /**
+   * 修改状态
+   */
+  updateStatus: (status) => {
+    var chooseList = obj.data.chooseList;
     var reqUrl = util.getRequestURL('updateWorkFeedBackStatus.we');
     chooseList = chooseList.join(",");
     var param = {
       id: chooseList,
-      confirm_id: app.user.id
+      confirm_id: app.user.id,
+      status: status
     };
+    
+    wx.showLoading({
+      title: '处理中...',
+    })
     wx.request({
       url: reqUrl,
       dataType: 'json',
@@ -200,18 +234,21 @@ Page({
         if (res.success) {
           wx.showModal({
             title: '提示',
-            content: '验收成功！',
+            content: '操作成功！',
             showCancel: false,
             success: (rex) => {
               if (rex.confirm) {
                 wx.navigateBack({
-                  delta:1 // 返回层级
+                  delta: 1 // 返回层级
                 })
               }
             }
 
           })
         }
+      },
+      complete: (rr) => {
+        wx.hideLoading();
       }
     })
   },

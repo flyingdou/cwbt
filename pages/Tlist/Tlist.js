@@ -312,10 +312,6 @@ Page({
       collectorpersonid: app.user.id
     };
 
-    console.log(param);
-    console.log(index);
-    // return;
-
     var taskList = obj.data.taskList;
 
     wx.request({

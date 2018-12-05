@@ -117,6 +117,11 @@
                   <view class='value'>{{workDetail.validDate || "未验收"}}</view>
             </view>
 
+            <view class='line'>
+                  <view class='title'>验收状态</view>
+                  <view class='value'>{{workDetail.validStatus}}</view>
+            </view>
+
             <view class='remark'>
                   <view class='title'>验收备注:</view>
                   <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.validRemark}}' disable="disable"></textarea>
