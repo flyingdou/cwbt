@@ -6,12 +6,12 @@
             <!-- pickers -->
             <view class='pickers'>
                   <view class='valuess'>
-                        <view class='lp value' wx:for = '{{lt}}'>
+                        <view class='lp value' wx:for = '{{lt}}' wx:key=''>
                               {{item.dept_name}}
                         </view>
                   </view>
 
-                  <picker wx:for = '{{arrayList}}' wx:for-item = 'array' bindchange='pickerChange' range='{{array}}' value='{{0}}' range-key='dept_name' data-arrayIndex = '{{index}}'>
+                  <picker wx:for = '{{arrayList}}' wx:key='' wx:for-item = 'array' bindchange='pickerChange' range='{{array}}' value='{{0}}' range-key='dept_name' data-arrayIndex = '{{index}}'>
                           <view class='value'>
                                 {{arrayList[index][indexList[index]].dept_name || "请选择"}} 
                           </view>
@@ -54,7 +54,7 @@
             <view class='remark'>
                   <view class='title'>已有内容：</view>
                   <view class='remarkList'>
-                        <view class='remarkContent' wx:for = '{{contents}}' wx:for-item = 'content'>
+                        <view class='remarkContent' wx:for = '{{contents}}' wx:key='' wx:for-item = 'content'>
                               <view class='remarkTitle'>{{content.userName}}要求：</view>
                               <view class='remarkValue'>{{content.content}}</view>
                         </view>

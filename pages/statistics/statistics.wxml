@@ -6,7 +6,7 @@
             <!-- pickers -->
             <view class='pickers'>
                   <view class='valuess'>
-                        <view class='lp value' wx:for = '{{lt}}'>
+                        <view class='lp value' wx:for = '{{lt}}' wx:key=''>
                               {{item.dept_name}}
                         </view>
                   </view>
@@ -75,7 +75,7 @@
       <view class='statisticsList'>
             <radio-group bindchange = 'radioChange'>
                   <view wx:if = '{{type == "handle"}}'>
-                        <view class='pre preStatistics' wx:for = '{{statisticsList}}' bindtap='radioChange' data-index = '{{index}}'>
+                        <view class='pre preStatistics' wx:for = '{{statisticsList}}' wx:key='' bindtap='radioChange' data-index = '{{index}}'>
                               <view class='blocks'>
                                       <view class='block'>
                                             <!-- 船名 -->
@@ -137,7 +137,7 @@
 
                  <!-- 验收统计 -->
                  <view wx:if = '{{type == "valid"}}'>
-                        <view class='pre preValid' wx:for = '{{validList}}' bindtap='radioChange' data-index = '{{index}}'>
+                        <view class='pre preValid' wx:for = '{{validList}}' wx:key='' bindtap='radioChange' data-index = '{{index}}'>
                               <view class='lineBlocks'>
                                       <view class='lineBlock'>
                                             <!-- 船名 -->

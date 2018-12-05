@@ -52,7 +52,7 @@
                   
                   <!-- 拍摄的照片 -->
                   <view class='shot'>
-                        <view class='prePic' wx:for = '{{workDetail.image}}' bindtap='previewShot'  data-index = '{{index}}'>
+                        <view class='prePic' wx:for = '{{workDetail.image}}' wx:key='' bindtap='previewShot'  data-index = '{{index}}'>
                               <!-- 照片 -->
                               <view class='shotPic'>
                                     <image src='{{base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
@@ -117,7 +117,7 @@
             <!-- preview -->
             <view class='preview'>
                   <!-- 拍摄的照片 -->
-                  <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
                         <image src='{{item.tempFilePath ?  item.tempFilePath : base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
                   </view>
 

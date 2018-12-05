@@ -23,7 +23,7 @@
       <view class='remarkDiv' wx:if = '{{contents.length > 0}}'>
             <view class='title'>内容：</view>
             <view class='remarks'>
-                  <view class='remark' wx:for = '{{contents}}'>
+                  <view class='remark' wx:for = '{{contents}}' wx:key=''>
                         <view class='title'>{{item.userName}}要求：</view>
                         <view class='value'>{{item.content}}</view>
                   </view>
@@ -49,7 +49,7 @@
 
       <!-- preview -->
       <view class='preview'>
-            <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+            <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
                   <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
             </view>
 

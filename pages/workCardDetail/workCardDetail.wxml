@@ -37,7 +37,7 @@
             <view class='remark'>
                   <view class='title'>作业内容:</view>
                   <view class='task'>
-                        <view class='value' wx:for = '{{workDetail.taskList}}'>{{item.name}}</view>
+                        <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{item.name}}</view>
                   </view>
             </view>
 
@@ -45,7 +45,7 @@
             <view class='remark'>
                   <view class='title'>验收标准:</view>
                   <view class='task'>
-                        <view class='value' wx:for = '{{workDetail.taskList}}'>{{item.mark}}</view>
+                        <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{item.mark}}</view>
                   </view>
             </view>
 
@@ -91,7 +91,7 @@
             <!-- preview -->
             <view class='preview'>
                   <!-- 拍摄的照片 -->
-                  <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
                         <image src='{{item.tempFilePath ?  item.tempFilePath : base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
                   </view>
 

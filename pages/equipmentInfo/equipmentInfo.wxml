@@ -59,7 +59,7 @@
 
             <!-- preview -->
             <!-- <view class='preview'>
-                  <view class='pic' wx:for = '{{photos}}' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                  <view class='pic' wx:for = '{{photos}}' wx:key = '' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
                         <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
                   </view>
 
