@@ -68,7 +68,6 @@
 .title {
 	height: 30px;
 	line-height: 30px;
-	width: 50%;
 	text-align: center;
 	display: inline-block;
 	font: 300 28rpx/30px "microsoft yahei";
@@ -113,3 +112,11 @@ radio{
 .col-1 {-webkit-box-flex:1;box-flex:1;}
 .fl { float: left;}
 .fr { float: right;}
+
+.left{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 20rpx;
+}

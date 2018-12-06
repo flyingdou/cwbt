@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showBoat: false,
+    userList: []
     
   },
 
@@ -110,9 +112,6 @@ Page({
    */
   init: () => {
     var dept_id = app.user.deptId;
-    if (!dept_id) {
-      dept_id = 2;
-    }
     var reqUrl = util.getRequestURL('getDepartmentClass.we');
     var param = {
       id: dept_id
@@ -126,11 +125,16 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
+          var lt = res.department.lt;
+          // 反转数组
+          var douLt = lt.reverse();
           obj.setData({
-            lt:res.department.lt,
-            count: res.department.count
+            lt:lt,
+            count: res.department.count,
+            chooseDept: douLt[0].seq_id,
           });
           obj.getData();
+          obj.getUserList();
         }
       }
     })
@@ -231,6 +235,37 @@ Page({
     })
   },
 
+
+  /**
+   * 获取人员列表
+   */
+  getUserList: () => {
+     var reqUrl = util.getRequestURL('getUserList.we');
+     var param = {
+       user_id: app.user.id,
+       dept_id: obj.data.chooseDept
+     };
+
+     wx.request({
+       url: reqUrl,
+       dataType: 'json',
+       data: {
+         json: encodeURI(JSON.stringify(param))
+       },
+       success: (res) => {
+         res = res.data;
+         if (res.success) {
+           obj.setData({
+             userList: res.userList
+           });
+         }
+       }
+
+     })
+  
+  },
+
+
   /**
    * 选择变化
    */
@@ -268,6 +303,8 @@ Page({
     }
     
     dou.deptList = deptList;
+    // 每次选中的值
+    dou.chooseDept = dept_id;
     
     obj.setData(dou);
     // 查询下级机构
@@ -362,6 +399,8 @@ Page({
   },
 
   
+
+  
   /**
    * 发送督导到下级
    */
@@ -418,8 +457,6 @@ Page({
         param.device = device.id;
       }
 
-      // console.log(param);
-      // return;
       wx.showLoading({
         title: '处理中...',
         mask: true,
