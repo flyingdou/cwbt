@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_img_url: app.constant.base_img_url
+    base_img_url: app.constant.base_img_url,
+    isHidden: true
 
   },
 
@@ -100,14 +101,79 @@ Page({
   },
 
  /**
+  * 弹出验收框
+  */
+ valid: (e) => {
+   var status = e.currentTarget.dataset.status;
+   obj.setData({
+     status: status,
+     isHidden: false,
+   });
+ },
+
+
+  /**
+   * 弹出框取消
+   */
+  cancel: () => {
+    obj.setData({
+      isHidden: true,
+      validRemark: ''
+    });
+  },
+
+  /**
+   * 弹出框确定
+   */
+  confirm: () => {
+    // 数据校验
+    var validRemark = obj.data.validRemark;
+    var status = obj.data.status;
+    if (status == '3' && (!validRemark || validRemark == '')) {
+      wx.showModal({
+        title: '提示',
+        content: '请填写驳回意见！',
+        showCancel: false,
+      })
+      return;
+    }
+
+    obj.setData({
+      isHidden: true,
+    });
+
+    // 验收、驳回
+    obj.updateStatus();
+
+  },
+
+  /**
+   * inputChange
+   */
+  inputChange: (e) => {
+    var key = e.currentTarget.dataset.key;
+    var dou = {};
+    dou[key] = e.detail.value;
+    obj.setData(dou);
+  },
+
+
+  /**
   * 验收
   */
-  valid: () => {
+  updateStatus: () => {
     var reqUrl = util.getRequestURL('updateWorkFeedBackStatus.we');
     var param = {
-      id:obj.data.id,
-      confirm_id: app.user.id
+      id: obj.data.id,
+      confirm_id: app.user.id,
+      status: obj.data.status,
+      valid_remark: obj.data.validRemark,
     };
+
+
+    wx.showLoading({
+      title: '处理中',
+    })
     wx.request({
       url: reqUrl,
       dataType: 'json',
@@ -119,18 +185,21 @@ Page({
         if (res.success) {
           wx.showModal({
             title: '提示',
-            content: '验收成功！',
-            showCancel:false,
+            content: '操作成功！',
+            showCancel: false,
             success: (rex) => {
-              if (rex.confirm){
+              if (rex.confirm) {
                 wx.navigateBack({
                   delta: 1
                 })
               }
             }
-            
+
           })
         }
+      },
+      complete: (rd) => {
+        wx.hideLoading();
       }
     })
   },
