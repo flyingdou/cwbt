@@ -23,23 +23,26 @@
                         {{supervise.contents[0].content}}
                       </view>
                   </view>
-                  <view class="bottom margin-bottom20">
-                    <view class='bottom-left'>
-                      接收部门: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.contents[0].deptName}}</text>
-                    </view>
-                    <view class='bottom-left' wx:if='{{supervise.boat}}'>
-                      所属船舶: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.boat}}</text>
-                    </view>
-                  </view>
                   <view class="bottom">
-                    <view class='bottom-left' wx:if='{{supervise.device}}'>
+                    <view class='bottom-left'>
+                      接收人: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.contents[0].recUser}}</text>
+                    </view>
+                    <view class='bottom-right'>
+                      {{supervise.contents[0].auto_date}} 
+                    </view>
+                    <!--<view class='bottom-left' wx:if='{{supervise.boat}}'>
+                      所属船舶: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.boat}}</text>
+                    </view>-->
+                  </view>
+                  <view class="bottom margin-top20">
+                    <!--<view class='bottom-left' wx:if='{{supervise.device}}'>
                       设备: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.device}}</text>
                     </view>
                     <view class='bottom-left' wx:if='{{!supervise.device}}'>
                     </view>
                     <view class='bottom-right'>
                       {{supervise.contents[0].auto_date}} 
-                    </view>
+                    </view>-->
                   </view>
             </view>
 
@@ -89,7 +92,7 @@
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收部门: <text style='color: rgba(153, 153, 153, 1);'>{{item.deptName}}</text>
+                      接收人: <text style='color: rgba(153, 153, 153, 1);'>{{item.recUser}}</text>
                     </view>
                     <view class='bottom-right'>
                       {{item.auto_date}}

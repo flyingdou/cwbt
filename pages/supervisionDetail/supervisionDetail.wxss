@@ -158,8 +158,8 @@ image{
   font-size: 28rpx;
 }
 
-.margin-bottom20{
-  margin-bottom: 20rpx;
+.margin-top20{
+  margin-top: 20rpx;
 }
 
 .bottom-right{

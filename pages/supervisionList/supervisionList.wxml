@@ -15,15 +15,15 @@
                                   </view>
 
                                   <view class='tv right'>
-                                        <view class='title'>接收部门</view>
-                                        <view class='value'>{{item.deptName}}</view>
+                                        <view class='title'>接收人</view>
+                                        <view class='value'>{{item.recUser}}</view>
                                   </view>
                                   
                             </view>
 
                             <view class='lineFill'></view>
 
-                            <view class='line1' hidden='{{!item.boat && !item.device}}'>
+                            <!--<view class='line1' hidden='{{!item.boat && !item.device}}'>
                                   <view class='tv left' wx:if='{{item.boat}}'>
                                         <view class='title'>所属船舶</view>
                                         <view class='value'>{{item.boat}}</view>
@@ -34,9 +34,9 @@
                                         <view class='value'>{{item.device}}</view>
                                   </view>
                                   
-                            </view>
+                            </view>-->
 
-                            <view class='lineFill' hidden='{{!item.boat && !item.device}}'></view>
+                            <!--<view class='lineFill' hidden='{{!item.boat && !item.device}}'></view>-->
 
                             <view class='line2'>
                                   <view class='tv right'>
