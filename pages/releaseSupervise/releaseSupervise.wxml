@@ -19,7 +19,7 @@
             </view>
 
             <!-- 船舶、设备 -->
-            <view class='boatDiv'>
+            <view class='boatDiv' wx:if = '{{showBoat}}'>
                   <!-- boat -->
                   <view class='boat'>
                         <view class='title'>船舶: </view>
@@ -34,6 +34,15 @@
                         <view class='title'>设备:</view>
                         <view class='value' bindtap='chooseDevice'>{{device.name || "请选择"}}</view>
                   </view>
+            
+            </view>
+
+
+
+            <!-- 选择接收者 -->
+            <view class='recUserDiv'>
+                  <view class='title'>接收人</view>
+                        <view class='value' bindtap='chooseDevice'>{{user.name || "请选择"}}</view>
             
             </view>
       </view>
@@ -73,5 +82,5 @@
 
 
 <!-- 使用mark弹出框 -->
-<mark showModalStatus = '{{showModalStatus}}' type = 'radio' bindMark = 'chooseRes' list = '{{deviceList}}'></mark>
+<mark showModalStatus = '{{showModalStatus}}' type = 'radio' bindMark = 'chooseRes' list = '{{userList}}'></mark>
 

@@ -95,6 +95,10 @@ picker{
   padding-right: 30rpx;
 }
 
+.recUserDiv{
+  padding-top: 20rpx;
+}
+
 
 .boatDiv{
    padding-top: 20rpx;

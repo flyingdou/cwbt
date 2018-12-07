@@ -61,9 +61,20 @@
 
       <!-- 底部功能按钮 -->
       <view class='footer'>
-            <view class='checkButton' bindtap='valid'>验收</view>
+            <view class='button validNo' bindtap='valid' data-status = '3' >驳回</view>
+            <view class='button validYes' bindtap='valid' data-status = '2'>验收</view>
       </view>
 
-
-
 </view>
+
+
+
+<!-- 验收弹出框 -->
+<modal class = 'myModal' id="modal" hidden="{{isHidden}}" title='{{status == 2 ? "验收意见" : "驳回意见"}}' confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" >
+      
+      <!-- 验收意见 -->
+      <view class='inputDiv'>
+           <textarea placeholder='{{status == 2 ? "请输入验收意见！" : "请输入驳回意见！"}}' class='validRemark'  maxlength='-1' placeholder-class='placeHolder' value = '{{validRemark}}' bindinput='inputChange' data-key = 'validRemark' ></textarea>
+      </view>
+      
+  </modal>

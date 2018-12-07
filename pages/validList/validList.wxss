@@ -32,7 +32,6 @@ image{
   margin-bottom: 30rpx;
 }
 
-
 .line1{
   display: flex;
   justify-content: flex-start;
