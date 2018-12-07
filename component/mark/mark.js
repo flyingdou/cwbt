@@ -37,7 +37,8 @@ Component({
      * 保存用户选择的值
      */
     saveSelectValue: function (e) {
-      this.setData({ value: e.detail.value });
+      var value = e.detail.value ? e.detail.value : e.currentTarget.dataset.value;
+      this.setData({ value: value });
     },
     /**
      * 按钮点击触发

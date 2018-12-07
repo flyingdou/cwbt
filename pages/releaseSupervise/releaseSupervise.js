@@ -127,9 +127,11 @@ Page({
         if (res.success) {
           var lt = res.department.lt;
           // 反转数组
-          var douLt = lt.reverse();
+          var douLt = JSON.stringify(lt);
+          douLt = JSON.parse(douLt);
+          douLt.reverse();
           obj.setData({
-            lt:lt,
+            lt: lt,
             count: res.department.count,
             chooseDept: douLt[0].seq_id,
           });
@@ -306,10 +308,15 @@ Page({
     // 每次选中的值
     dou.chooseDept = dept_id;
     
+    
     obj.setData(dou);
     // 查询下级机构
     if (dept_id != 0) {
+        obj.setData({
+          user: {}
+        });
         obj.getNext(dept_id);
+        obj.getUserList();
     }
   },
 
@@ -398,6 +405,28 @@ Page({
     });
   },
 
+
+  /**
+   * 选择用户
+   */
+  chooseUser: (e) => {
+      var detail = e.detail;
+      if (detail.type == 'success') {
+        var userList = obj.data.userList;
+        for (var i in userList) {
+          if (userList[i].id == detail.value) {
+            obj.setData({
+              user: userList[i]
+            });
+          }
+        }
+      }
+
+      obj.setData({
+        showModalStatus: false
+      });
+  },
+
   
 
   
@@ -416,19 +445,24 @@ Page({
         }
       }
 
-      if (douList.length == 0) {
+      var user = obj.data.user;
+      if (!user || JSON.stringify(user) == '{}') {
         wx.showModal({
           title: '提示',
-          content: '请选择下发机构！',
+          content: '请选择接收人！',
         })
         return;
       }
-      douList.reverse(); // 反转数组
-      var dept_id = douList[0];
+     
       var param = {}; // 参数
+      var dept_id = '';
+      if (douList.length > 0) {
+        douList.reverse(); // 反转数组
+        param.recDept = douList[0];
+      }
       // 船舶
       var boat = obj.data.boat;
-      if (boat.id != 0) {
+      if (boat && boat.id != 0) {
         param.boat = boat.id;
         dept_id = boat.department; // 存储船的dept_id作为最小的部门单位
       }
@@ -437,7 +471,7 @@ Page({
 
       // 两者必填参数
       param.content = obj.data.content || "";
-      param.recDept = dept_id;
+      param.recUser = user.id;
       if (!id) {
         // 新增督导
         param.creator = app.user.id;
@@ -453,9 +487,10 @@ Page({
       
       // 设备
       var device = obj.data.device;
-      if (device.id != 0) {
+      if (device && device.id != 0) {
         param.device = device.id;
       }
+
 
       wx.showLoading({
         title: '处理中...',

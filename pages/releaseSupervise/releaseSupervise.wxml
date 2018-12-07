@@ -42,7 +42,7 @@
             <!-- 选择接收者 -->
             <view class='recUserDiv'>
                   <view class='title'>接收人</view>
-                        <view class='value' bindtap='chooseDevice'>{{user.name || "请选择"}}</view>
+                        <view class='recUser value' bindtap='chooseDevice'>{{user.name || "请选择"}}</view>
             
             </view>
       </view>
@@ -82,5 +82,5 @@
 
 
 <!-- 使用mark弹出框 -->
-<mark showModalStatus = '{{showModalStatus}}' type = 'radio' bindMark = 'chooseRes' list = '{{userList}}'></mark>
+<mark showModalStatus = '{{showModalStatus}}' type = 'radio' bindMark = 'chooseUser' list = '{{userList}}'></mark>
 

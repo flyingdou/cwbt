@@ -99,6 +99,9 @@ picker{
   padding-top: 20rpx;
 }
 
+.recUser{
+  padding-left: 40rpx;
+}
 
 .boatDiv{
    padding-top: 20rpx;
