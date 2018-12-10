@@ -50,6 +50,15 @@
 <view class = 'content' wx:if = '{{!isLogin}}'>
   <!-- 顶部背景 -->
   <view class='background'></view>
+
+  <!-- 底部图片 -->
+  <view class='pics'>
+    <image src='{{logo}}'></image>
+  </view>
+
+  <!-- 填充高度 -->
+  <view style='height: 40rpx;'></view>
+
   <!-- 操作按钮块 -->
   <view class='blocks' wx:for = '{{blocksDiv}}' wx:key = '' wx:for-item = 'blockDiv'>
 
@@ -117,10 +126,4 @@
         </view>
   </view> -->
 
-  <!-- 填充高度 -->
-  <view style='height: 120rpx;'></view>
-  <!-- 底部图片 -->
-  <view class='pics'>
-    <image src='{{logo}}'></image>
-  </view>
 </view>
