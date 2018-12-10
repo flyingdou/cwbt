@@ -191,8 +191,8 @@ Page({
     }
 
     // 测试数据
-    console.log(param);
-    return;
+    // console.log(param);
+    // return;
 
     wx.showLoading({
       title: '正在保存中',
