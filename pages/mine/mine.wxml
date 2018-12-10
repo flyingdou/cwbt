@@ -73,5 +73,17 @@
           </view>
   </view>
 
+  <view class='tool-line'>
+          <view class='line' bindtap='cancellation'>
+                <view class='line-left'>
+                      <image class='line-left-icon' src='../../icon/cancellation.png' mode='widthFix'></image>
+                      <view class='line-left-text'>版本号</view>
+                </view>
+                <view class='line-right line-right-text'>
+                      1.5.0
+                </view>
+          </view>
+  </view>
+
   
 </view>

@@ -186,5 +186,5 @@ image{
 
 .line-right-text{
   font-size: 28rpx;
-  color: #333333;
+  color: rgba(153,153,153,1);
 }
