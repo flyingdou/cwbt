@@ -139,7 +139,7 @@ Page({
       mark: true
     });
     var url = util.getRequestURL('updateWorkFeedBackStatus.we');
-    var param = { id: obj.data.feedback.id, confirm_id: app.user.id };
+    var param = { id: obj.data.feedback.id, confirm_id: app.user.id, status: 2 };
     wx.request({
       url: url,
       data: {
