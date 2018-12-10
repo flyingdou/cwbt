@@ -41,14 +41,14 @@ App({
 
     // 开发模式添加默认用户
     if (this.constant.isDev) {
-      this.user = { id: 1316, deptId: 216, userPriv: 3, name: 'hua' };
+      this.user = { id: 1310, deptId: 2, userPriv: 4, name: 'hua' };
     }
 
     
     
   },
   constant: {
-    isDev: true,
+    isDev: false,
     base_img_url: 'https://cwbt.castlc.cn/picture',
     base_forward_url: 'https://cwbt.castlc.cn/cwbt/test/login',
     base_req_url: 'http://cwbt.castlc.cn/cwbt/api/cwbtMP/',

@@ -51,7 +51,7 @@
         <!-- 修改密码 -->
         <view class='line' bindtap='updatePassword'>
               <view class='line-left'>
-                    <image class='line-left-icon' src='../../icon/cancellation.png' mode='widthFix'></image>
+                    <image class='line-left-icon' src='../../icon/updatePass.png' mode='widthFix'></image>
                     <view class='line-left-text'>修改密码</view>
               </view>
               <view class='line-right'>
@@ -74,9 +74,9 @@
   </view>
 
   <view class='tool-line'>
-          <view class='line' bindtap='cancellation'>
+          <view class='line'>
                 <view class='line-left'>
-                      <image class='line-left-icon' src='../../icon/cancellation.png' mode='widthFix'></image>
+                      <image class='line-left-icon' src='../../icon/version.png' mode='widthFix'></image>
                       <view class='line-left-text'>版本号</view>
                 </view>
                 <view class='line-right line-right-text'>

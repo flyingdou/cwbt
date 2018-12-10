@@ -242,6 +242,10 @@ Page({
    * 获取人员列表
    */
   getUserList: () => {
+     var userList = [];
+     obj.setData({
+       userList: userList
+     });
      var reqUrl = util.getRequestURL('getUserList.we');
      var param = {
        user_id: app.user.id,
@@ -281,6 +285,8 @@ Page({
     var boat = obj.data.boat;
     var device = obj.data.device;
     var top = obj.data.top;
+    var arrayList = obj.data.arrayList;
+
     if (!indexList) {
       indexList = [];
     }
@@ -288,11 +294,17 @@ Page({
     indexList[arrayIndex] = index;
     var dou = {};
     dou.indexList = indexList;
-    if (dept_id == 0 || (deptList[arrayIndex]  && dept_id != deptList[arrayIndex].dept_id)) { // 为0的情况，不相等,向下清除
+    if (dept_id == 0) { // 为0的情况，不相等,向下清除
        for (var i = arrayIndex; i < deptList.length ; i++) {
            deptList[i] = 0;
            indexList[i] = 0;
+           if (i < arrayList.length -1) {
+             arrayList[i+1] = [];
+           }
+           
        }
+     
+
 
        // 清空船舶，设备
        boat = top;
@@ -300,24 +312,44 @@ Page({
        dou.boat = boat;
        dou.device = device;
 
-    } else {
+    } else { // (deptList[arrayIndex]  && dept_id != deptList[arrayIndex].dept_id)
       deptList[arrayIndex] = dept_id; // 不等于0，则赋值
     }
     
     dou.deptList = deptList;
+
+    // 数据校验
+    var douList = [];
+    var lt = obj.data.lt;
+    for (var i in lt) {
+      douList.push(lt[i].seq_id);
+    }
+
+    // 将数据录入新的数组
+    for (var x in deptList) {
+      if (deptList[x] != 0) {
+        douList.push(deptList[x]);
+      }
+    }
+    douList = douList.reverse();
+
     // 每次选中的值
-    dou.chooseDept = dept_id;
+    dou.chooseDept = douList[0];
+    dou.arrayList = arrayList;
     
     
     obj.setData(dou);
     // 查询下级机构
     if (dept_id != 0) {
-        obj.setData({
-          user: {}
-        });
+        
         obj.getNext(dept_id);
-        obj.getUserList();
     }
+
+    obj.setData({
+      user: {}
+    });
+    obj.getUserList();
+    
   },
 
 
