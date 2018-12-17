@@ -1,0 +1,57 @@
+<!-- 页面开始 -->
+<view class = 'content'>
+      <!-- 导航栏 -->
+      <view class = 'navBar'>
+            <view class='preNav' wx:for = '{{navList}}' wx:key = '' wx:for-item='nav' >
+                  <view class='nav {{index == (navList.length-1) ? "current" : ""}}' data-deptid='{{nav.deptid}}'>{{nav.name}}</view>
+                  <text wx:if = '{{index < (navList.length-1)}}' class='nav' decode='ture'>&gt;</text>
+            </view>
+            
+      </view>
+
+      
+      <!-- 下级组织机构 -->
+      <view class='deptList'>
+            <!-- preDept -->
+            <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = ''>
+
+                  <view class='left'>
+                        <view class='deptName'>{{dept.dept_name}}</view>
+                        <view class='personCount'>（{{dept.personCount}}）</view>
+                  </view>
+
+                  <view class='right'>
+                        <view class='next'>
+                              <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                        </view>
+                  </view>
+
+            </view>
+
+      
+      </view>
+
+
+      <!-- 当前机构的人员 -->
+      <view class='userList'>
+            <view class='preUser' wx:for = '{{userList}}' wx:for-item = 'user' wx:key = ''>
+                  <view class='userName'>{{user.user_name}}</view>
+                  <view class='checkBox'>
+                        <checkbox value='{{user.user_id}}'></checkbox>
+                  </view>
+            
+            </view>
+      </view>
+
+      <!-- footer -->
+      <view class='footer'>
+            <view class='sureLine'>
+                  <view class='title'>已选择:</view>
+                  <view class='sure'>确定</view>
+            </view>
+      </view>
+
+
+
+
+</view>
