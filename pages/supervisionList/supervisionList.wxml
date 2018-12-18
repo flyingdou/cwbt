@@ -15,10 +15,10 @@
                                   </view>
 
                                   <view class='tv right'>
-                                        <view class='title'>接收人</view>
-                                        <view class='value'>{{item.recUser}}</view>
+                                        <!-- <view class='title'>发起时间</view> -->
+                                        <view class='value'>{{item.auto_date}}</view>
                                   </view>
-                                  
+
                             </view>
 
                             <view class='lineFill'></view>
@@ -38,10 +38,27 @@
 
                             <!--<view class='lineFill' hidden='{{!item.boat && !item.device}}'></view>-->
 
-                            <view class='line2'>
-                                  <view class='tv right'>
-                                        <!-- <view class='title'>发起时间</view> -->
-                                        <view class='value'>{{item.auto_date}}</view>
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>接收人</view>
+                                        <view class='value long-text'>
+                                          <block wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>
+                                            {{recUser.userName}}
+                                          </block>
+                                        </view>
+                                  </view>
+                            </view>
+
+                            <view class='lineFill'></view>
+
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>抄送人</view>
+                                        <view class='value long-text'>
+                                          <block wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>
+                                            {{fwdUser.userName}}
+                                          </block>
+                                        </view>
                                   </view>
                             </view>
 

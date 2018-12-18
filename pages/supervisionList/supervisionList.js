@@ -74,6 +74,10 @@ Page({
    * 查询督导列表数据
    */
   getSupervisionList: function () {
+    wx.showLoading({
+      title: '数据加载中',
+      mask: true
+    });
     var url = util.getRequestURL('getSupervisionList.we');
     var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv };
     wx.request({
@@ -83,11 +87,13 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        wx.hideLoading();
         obj.setData({
           supervisionList: res.data
         });
       },
       fail: function (e) {
+        wx.hideLoading();
         util.tipsMessage('网络异常！');
         console.log(e);
       }

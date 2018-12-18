@@ -74,6 +74,12 @@ image{
   color: rgba(153,153,153,1);
 }
 
+.long-text{
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .footer{
   position: fixed;
   left: 0;

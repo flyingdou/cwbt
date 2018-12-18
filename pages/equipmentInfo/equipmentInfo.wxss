@@ -42,14 +42,15 @@ image{
 }
 
 .textareaClass{
-  padding-left: 20rpx;
-  padding-top: 20rpx;
+  padding: 20rpx;
   font-size: 28rpx;
   color: rgba(51, 51, 51, 1);
   text-align: left;
   background:rgba(245,245,245,1);
   width: 96%;
   margin-top: 20rpx;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .placeholderClass{
@@ -121,7 +122,7 @@ image{
 }
 
 .task{
-  padding: 20rpx;
+  padding-top: 20rpx;
 }
 
 .content-input{

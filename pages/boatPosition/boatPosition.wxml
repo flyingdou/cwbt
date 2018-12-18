@@ -1,0 +1,3 @@
+<!-- 地图组件 -->
+<map id='map' longitude='{{defaultLongitude}}' latitude='{{defaultLatitude}}' scale="14" markers='{{markers}}'>
+</map>

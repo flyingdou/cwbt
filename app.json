@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/boatPosition/boatPosition",
     "pages/statistics/statistics",
     "pages/statisticDetail/statisticDetail",
     "pages/statisticWorkDetail/statisticWorkDetail",
@@ -16,7 +17,6 @@
     "pages/validList/validList",
     "pages/equipmentInfo/equipmentInfo",
     "pages/supervisionList/supervisionList",
-    "pages/supervisionProcess/supervisionProcess",
     "pages/supervisionDetail/supervisionDetail",
     "pages/superviseFeedback/superviseFeedback",
     "pages/logs/logs",
