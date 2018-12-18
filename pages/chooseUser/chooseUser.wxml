@@ -33,7 +33,7 @@
 
 
       <!-- 当前机构的人员 -->
-      <view class='userList'>
+      <view class='userList' wx:if = '{{userList && userList.length > 0}}'>
             <!-- checkboxGroup -->
             <checkbox-group>
                     <view class='preUser' wx:for = '{{userList}}' wx:for-item = 'user' wx:key = '' bindtap='checkboxChange' data-index = '{{index}}'>

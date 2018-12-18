@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/releaseSupervision/releaseSupervision",
+    "pages/releaseSupervise/releaseSupervise",
     "pages/index/index",
     "pages/boatPosition/boatPosition",
     "pages/statistics/statistics",
@@ -9,7 +10,6 @@
     "pages/switch/switch",
     "pages/tempList/tempList",
     "pages/tempWork/tempWork",
-    "pages/releaseSupervise/releaseSupervise",
     "pages/chooseUser/chooseUser",
     "pages/supervise/supervise",
     "pages/mtwcList/mtwcList",

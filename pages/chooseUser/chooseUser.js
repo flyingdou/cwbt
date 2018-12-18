@@ -15,7 +15,12 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    var type = options.type;
+    obj.data.type = type;
+
+    // 初始化页面数据
     obj.init();
+   
 		
 		
   },
@@ -77,37 +82,23 @@ Page({
    */
   init: () => {
     var navList = [];
-    var reqUrl = util.getRequestURL('getDepartmentUser.we');
-    var param = {};
-    param.dept_id = app.user.deptId;
-    param.type = 'nextDept';
+    var types = obj.data.type;
+    var choosedUser = [];
+    var key = '';
+    if (types == 'rec') {
+       key = 'copyUsers';
+    }
+    if (types == 'copy') {
+      key = 'recUsers';
+    }
+    choosedUser = wx.getStorageSync(key) || [];
+    obj.data.choosedUser = choosedUser;
+    var dept_id = app.user.deptId;
+    var status = 0;
+    obj.getNext(dept_id, status);
     
-    // 请求中
-    wx.showLoading({
-      title: '加载中...',
-    })
-    wx.request({
-      url: reqUrl,
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      dataType: 'json',
-      success:(res) => {
-        res = res.data;
-        if (res.success) {
-          navList.push(res.dept);
-          obj.setData({
-            deptList: res.deptList,
-            userList: res.userList,
-            navList: navList
-          });
-        }
-      },
-      complete: (rx) => {
-        wx.hideLoading();
-      }
-    })
-
+    
+   
   },
 
 
@@ -124,7 +115,7 @@ Page({
      obj.setData({
        navList: navList
      });
-     obj.getNext();
+     obj.getNext(null,null,null);
   },
 
   /**
@@ -147,19 +138,29 @@ Page({
       navList: doux
     });
     
-    obj.getNext();
+    obj.getNext(null, null, null);
   },
 
 
   /**
    * 查询下级数据
    */
-  getNext: () => {
-    var navList = obj.data.navList;
+  getNext: (dept_id, status) => {
+    var navList = obj.data.navList || [];
     var reqUrl = util.getRequestURL('getDepartmentUser.we');
     var param = {};
-    param.dept_id = navList[navList.length-1].seq_id;
+    dept_id = dept_id || navList[navList.length - 1].seq_id;
+    param.dept_id = dept_id;
     param.type = 'nextDept';
+
+    var choosedUser = obj.data.choosedUser || [];
+    var choosedUserIds = [];
+    for (var c in choosedUser) {
+      choosedUserIds.push(choosedUser[c].user_id);
+    }
+    choosedUserIds = choosedUserIds.join(',');
+    param.choosedUserIds = choosedUserIds;
+
     wx.showLoading({
       title: '加载中...',
     })
@@ -172,10 +173,14 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-           obj.setData({
-             deptList: res.deptList,
-             userList: res.userList
-           });
+           var dou = {};
+           dou.deptList = res.deptList;
+           dou.userList = res.userList;
+           if (status == 0) {
+             navList.push(res.dept);
+             dou.navList = navList;
+           }
+           obj.setData(dou);
         }
       },
       complete: (rx) => {
@@ -264,7 +269,9 @@ Page({
     }
 
     // 将值存储起来
-    wx.setStorageSync('chooseUsers', chooseUsers);
+    var key = obj.data.type;
+    key = key + 'Users';
+    wx.setStorageSync(key, chooseUsers);
 
     wx.navigateBack({
       delta: 1,

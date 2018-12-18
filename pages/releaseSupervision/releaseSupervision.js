@@ -28,6 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    obj.init();
 
   },
 
@@ -64,5 +65,40 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  /**
+   * inputChange
+   */
+  inputChange: (e) => {
+     var key = e.currentTarget.dataset.key;
+     wx.setStorageSync(key, e.detail.value);
+  },
+
+  /**
+   * 初始化页面数据
+   */
+  init: () => {
+    var dou = {};
+    dou.recUsers = wx.getStorageSync('recUsers') || [];
+    dou.copyUsers = wx.getStorageSync('copyUsers') || [];
+    dou.content = wx.getStorageSync('content') || '';
+    obj.setData(dou);
+
+  },
+
+
+  /**
+   * choose
+   */
+  choose: (e) => {
+    var type = e.currentTarget.dataset.type;
+    var jumpUrl = '../../pages/chooseUser/chooseUser?type=' + type;
+    wx.navigateTo({
+      url: jumpUrl,
+    })
+  },
+
+  
+
 })
