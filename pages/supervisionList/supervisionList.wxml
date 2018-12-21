@@ -44,6 +44,7 @@
                                         <view class='value long-text'>
                                           <block wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>
                                             {{recUser.userName}}
+                                            <block wx:if='{{recUserIndex != item.recUsers.length-1}}'>、</block>
                                           </block>
                                         </view>
                                   </view>
@@ -57,6 +58,7 @@
                                         <view class='value long-text'>
                                           <block wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>
                                             {{fwdUser.userName}}
+                                            <block wx:if='{{fwdUserIndex != item.fwdUsers.length-1}}'>、</block>
                                           </block>
                                         </view>
                                   </view>

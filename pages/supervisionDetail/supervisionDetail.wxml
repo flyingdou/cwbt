@@ -25,7 +25,7 @@
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{    index != supervise.contents[0].recUsers.length-1}}'>、</text></text>
+                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].recUsers.length-1}}'> 、</text></text>
                     </view>
                     <!--<view class='bottom-left' wx:if='{{supervise.boat}}'>
                       所属船舶: <text style='color: rgba(153, 153, 153, 1);'>
@@ -34,7 +34,7 @@
                   </view>
                   <view class="afk">
                     <view class='bottom-left'>
-                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{    index != supervise.contents[0].fwdUsers.length-1}}'>、</text></text>
+                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].fwdUsers.length-1}}'> 、</text></text>
                     </view>
                   </view>
                   <view class="ask">
@@ -104,12 +104,12 @@
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex' decode='{{true}}'>{{recUser.userName}}&nbsp;&nbsp;</text>
+                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>{{recUser.userName}}<text wx:if = '{{index != item.recUsers.length-1}}'> 、</text></text>
                     </view>
                   </view>
                   <view class="afk">
                     <view class='bottom-left'>
-                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex' decode='{{true}}'>{{fwdUser.userName}}&nbsp;&nbsp;</text>
+                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{index != item.fwdUsers.length-1}}'> 、</text></text>
                     </view>
                   </view>
                   <view class="ask">
