@@ -306,7 +306,23 @@ Page({
     param.remark = obj.data.remark;
     param.image = photos;
     param.opeartor = app.user.id;
-    param.supervisionId = obj.data.id;
+
+    var supervisionId = obj.data.id;
+    var type = 'supervision';
+    var contents = obj.data.contents;
+    
+    var supervisionId = obj.data.id;
+    contents.forEach ((item, index) => {
+        item.recUsers.forEach((sub, subIndex) => {
+            if (sub.id == app.user.id) {
+               supervisionId = item.id;
+               type = 'forward';
+            }
+        });
+    });
+    
+    param.supervisionId = supervisionId;
+    param.type = type;
 
     wx.showLoading({
       title: '处理中',
