@@ -94,6 +94,15 @@ Page({
         obj.setData({
           supervise: res.data
         });
+        res.data.contents.forEach(function (item) {
+          item.recUsers.forEach(function (recUser) {
+            if (app.user.id == recUser.id) {
+              obj.setData({
+                isRecUser: true
+              });
+            }
+          });
+        });
       },
       fail: function (e) {
         util.tipsMessage('网络异常！');

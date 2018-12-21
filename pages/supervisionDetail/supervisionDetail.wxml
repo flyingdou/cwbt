@@ -208,7 +208,7 @@
 <view class='fill'></view>
 
 <!-- 底部按钮 -->
-<view class='buttons' wx:if='{{supervise.creatorId != userId && supervise.status == 0 && superviseFeedback == 0}}'>
+<view class='buttons' wx:if='{{supervise.creatorId != userId && supervise.status == 0 && superviseFeedback == 0 && isRecUser}}'>
       <view class='button scanButton' bindtap='reSend' wx:if='{{userPriv == 2}}'>转发</view>
       <view class='button photoButton' bindtap='implement'>执行</view>
       <!-- <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view> -->
