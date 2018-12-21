@@ -104,10 +104,17 @@
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收人: <text style='color: rgba(153, 153, 153, 1);'>{{item.recUser}}</text>
+                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex' decode='{{true}}'>{{recUser.userName}}&nbsp;&nbsp;</text>
                     </view>
+                  </view>
+                  <view class="afk">
+                    <view class='bottom-left'>
+                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex' decode='{{true}}'>{{fwdUser.userName}}&nbsp;&nbsp;</text>
+                    </view>
+                  </view>
+                  <view class="ask">
                     <view class='bottom-right'>
-                      {{item.auto_date}}
+                      {{item.auto_date}} 
                     </view>
                   </view>
             </view>
