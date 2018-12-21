@@ -25,7 +25,7 @@
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].recUsers}}' wx:key='' decode='{{true}}'>{{item.userName}}&nbsp;&nbsp;</text>
+                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{    index != supervise.contents[0].recUsers.length-1}}'>、</text></text>
                     </view>
                     <!--<view class='bottom-left' wx:if='{{supervise.boat}}'>
                       所属船舶: <text style='color: rgba(153, 153, 153, 1);'>
@@ -34,7 +34,7 @@
                   </view>
                   <view class="afk">
                     <view class='bottom-left'>
-                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key='' decode='{{true}}'>{{item.userName}}&nbsp;&nbsp;</text>
+                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{    index != supervise.contents[0].fwdUsers.length-1}}'>、</text></text>
                     </view>
                   </view>
                   <view class="ask">

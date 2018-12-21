@@ -88,7 +88,7 @@
             </checkbox-group> -->
             
             <!-- 验收按钮 -->
-            <view class='valid' bindtap='goto' data-link='../releaseSupervise/releaseSupervise' wx:if='{{userPriv == 2}}'>发起督导</view>
+            <view class='valid' bindtap='goto' data-link='../releaseSupervision/releaseSupervision' wx:if='{{userPriv == 2}}'>发起督导</view>
             
       
       </view>
