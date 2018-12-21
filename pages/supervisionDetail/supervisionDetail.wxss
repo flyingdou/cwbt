@@ -158,6 +158,22 @@ image{
   font-size: 28rpx;
 }
 
+.afk{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+
+.ask{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+
 .margin-top20{
   margin-top: 20rpx;
 }

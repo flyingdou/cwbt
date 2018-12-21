@@ -1,18 +1,18 @@
 <!-- 页面开始 -->
-<view class='content'>
+<view class='content' wx:if='{{superviseFeedback && superviseFeedback.length > 0}}'>
       <view style='height: 20rpx;'></view>
-      <view class='up'>
+      <view class='up' wx:for='{{superviseFeedback}}' wx:key=''>
             <view class='line'>
                   <view class='tv'>
                         <view class='title'>反馈人</view>
-                        <view class='value'>{{superviseFeedback.opeartor}}</view>
+                        <view class='value'>{{item.opeartor}}</view>
                   </view>
             </view>
 
             <view class='line'>
                   <view class='tv'>
                         <view class='title'>反馈时间</view>
-                        <view class='value'>{{superviseFeedback.auto_date}}</view>
+                        <view class='value'>{{item.auto_date}}</view>
                   </view>
             </view>
 
@@ -22,7 +22,7 @@
                   
                   <!-- 工作内容 -->
                   <view class='task'>
-                        <view class='ta'>{{superviseFeedback.remark}}</view>
+                        <view class='ta'>{{item.remark}}</view>
                   </view>
                   
             </view>
@@ -31,11 +31,11 @@
             <view class='picsList'>
                   <view class='taskTitle'>现场照片</view>
                   <view class='pics'>
-                        <view class='pre' wx:for = '{{superviseFeedback.image}}' wx:key=''>
-                              <view class='pic' bindtap='preview' data-index = '{{index}}'>
-                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                        <view class='pre' wx:for = '{{item.image}}' wx:key='' wx:for-item='subItem' wx:for-index='subIndex'>
+                              <view class='pic' bindtap='preview' data-index = '{{subIndex}}'>
+                                    <image src='{{base_img_url}}/{{subItem.name}}' mode='aspectFill'></image>
                               </view>
-                              <view class='picTime'>{{item.pic_time}}</view>
+                              <view class='picTime'>{{subItem.pic_time}}</view>
                         </view>
                   </view>
             </view>

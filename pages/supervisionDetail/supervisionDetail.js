@@ -48,7 +48,7 @@ Page({
    */
   onShow: function () {
     obj.getSupervisionContentList();
-    obj.getSupervisFeedBack();
+    obj.getSupervisFeedBackCount();
   },
 
   /**
@@ -105,20 +105,18 @@ Page({
   /**
    * 查询督导反馈
    */
-  getSupervisFeedBack: function () {
-    var url = util.getRequestURL('getSupervisFeedBack.we');
+  getSupervisFeedBackCount: function () {
+    var url = util.getRequestURL('getSupervisFeedBackCount.we');
+    var param = { supervisionId: obj.data.id, userId: app.user.id, source: 1 }
     wx.request({
       url: url,
       data: {
-        supervisionId: obj.data.id
+        json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
-        if (res.data) {
-          res.data.image = JSON.parse(res.data.image);
-          obj.setData({
-            superviseFeedback: res.data
-          });
-        }
+        obj.setData({
+          superviseFeedback: res.data
+        });
       },
       fail: function (e) {
         util.tipsMessage('网络异常！');
@@ -143,6 +141,16 @@ Page({
       current: imgs[index],
       urls: imgs
     })
+  },
+
+  /**
+   * 跳转页面
+   */
+  goto: (e) => {
+    var link = e.currentTarget.dataset.link;
+    wx.navigateTo({
+      url: link
+    });
   },
 
   /**

@@ -19,6 +19,10 @@ Page({
     if (options.id) {
       obj.data.id = options.id;
     }
+
+    if (options.source) {
+      obj.data.source = options.source;
+    }
   },
 
   /**
@@ -68,13 +72,16 @@ Page({
    */
   getSuperviseFeedback: function () {
     var url = util.getRequestURL('getSupervisFeedBack.we');
+    var param = { supervisionId: obj.data.id, source: obj.data.source }
     wx.request({
       url: url,
       data: {
-        supervisionId: obj.data.id
+        json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
-        res.data.image = JSON.parse(res.data.image);
+        res.data.forEach(function (item) {
+          item.image = JSON.parse(res.data.image);
+        }); 
         obj.setData({
           superviseFeedback: res.data
         });
