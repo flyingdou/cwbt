@@ -83,6 +83,35 @@ textarea{
   color: rgba(153, 153, 153, 1);
 }
 
+.contents{
+  padding:20rpx;
+  margin:20rpx 0;
+  background:white;
+}
+
+.remarkList{
+  padding: 20rpx;
+}
+
+.remarkContent{
+  padding-bottom: 20rpx;
+}
+
+.contentLine{
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.remarkTitle{
+  font-size: 28rpx;
+}
+
+.remarkValue{
+  font-size: 28rpx;
+  color: #999999;
+  padding-top: 10rpx;
+}
+
 .sendButton{
   width: 100%;
   margin: 70rpx 0;

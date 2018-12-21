@@ -32,7 +32,7 @@
                   <view class='taskTitle'>现场照片</view>
                   <view class='pics'>
                         <view class='pre' wx:for = '{{item.image}}' wx:key='' wx:for-item='subItem' wx:for-index='subIndex'>
-                              <view class='pic' bindtap='preview' data-index = '{{subIndex}}'>
+                              <view class='pic' bindtap='preview' data-index = '{{subIndex}}' data-feedindex = '{{index}}'>
                                     <image src='{{base_img_url}}/{{subItem.name}}' mode='aspectFill'></image>
                               </view>
                               <view class='picTime'>{{subItem.pic_time}}</view>

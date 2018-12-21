@@ -80,7 +80,7 @@ Page({
       },
       success: function (res) {
         res.data.forEach(function (item) {
-          item.image = JSON.parse(res.data.image);
+          item.image = JSON.parse(item.image);
         }); 
         obj.setData({
           superviseFeedback: res.data
@@ -98,11 +98,11 @@ Page({
    */
   preview: (e) => {
     var imgs = [];
-    var photos = obj.data.superviseFeedback.image;
+    var feedIndex = e.currentTarget.dataset.feedindex;
+    var photos = obj.data.superviseFeedback[feedIndex].image;
     for (var i = 0; i < photos.length; i++) {
       imgs.push(app.constant.base_img_url + '/' + photos[i].name);
     }
-    console.log(imgs);
     var index = e.currentTarget.dataset.index;
     // 预览开始
     wx.previewImage({

@@ -20,9 +20,7 @@ Page({
 
     // 初始化页面数据
     obj.init();
-   
-		
-		
+
   },
 
   /**
@@ -115,7 +113,7 @@ Page({
      obj.setData({
        navList: navList
      });
-     obj.getNext(null,null,null);
+     obj.getNext(null,null);
   },
 
   /**
@@ -138,7 +136,7 @@ Page({
       navList: doux
     });
     
-    obj.getNext(null, null, null);
+    obj.getNext(null, null);
   },
 
 
@@ -152,14 +150,27 @@ Page({
     dept_id = dept_id || navList[navList.length - 1].seq_id;
     param.dept_id = dept_id;
     param.type = 'nextDept';
+    param.user_id = app.user.id;
 
     var choosedUser = obj.data.choosedUser || [];
     var choosedUserIds = [];
     for (var c in choosedUser) {
       choosedUserIds.push(choosedUser[c].user_id);
     }
+    
+
+    var upUsers = wx.getStorageSync('upUsers') || [];
+    if (upUsers.length > 0) {
+      for (var u in upUsers) {
+        choosedUserIds.push(upUsers[u]);
+      }
+    }
+
     choosedUserIds = choosedUserIds.join(',');
     param.choosedUserIds = choosedUserIds;
+
+    // 取出当前模式下，被选中的用户
+    var chooseList = wx.getStorageSync(obj.data.type + 'Users') || [];
 
     wx.showLoading({
       title: '加载中...',
@@ -175,6 +186,16 @@ Page({
         if (res.success) {
            var dou = {};
            dou.deptList = res.deptList;
+
+           // 标记当前已被选中的用户
+           for (var c in chooseList) {
+             for (var u in res.userList) {
+               if (chooseList[c].user_id == res.userList[u].user_id) {
+                 res.userList[u].checked = true;
+               }
+             }
+           }
+           
            dou.userList = res.userList;
            if (status == 0) {
              navList.push(res.dept);

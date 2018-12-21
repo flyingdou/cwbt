@@ -167,7 +167,7 @@ Page({
    */
   reSend: function (e) {
     wx.navigateTo({
-      url: `../releaseSupervise/releaseSupervise?id=${obj.data.id}&contents=${JSON.stringify(obj.data.supervise.contents)}`
+      url: `../releaseSupervision/releaseSupervision?id=${obj.data.id}&contents=${JSON.stringify(obj.data.supervise.contents)}`
     });
   },
 

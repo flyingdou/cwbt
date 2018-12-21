@@ -104,12 +104,12 @@
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>{{recUser.userName}}<text wx:if = '{{index != item.recUsers.length-1}}'> 、</text></text>
+                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>{{recUser.userName}}<text wx:if = '{{recUserIndex != item.recUsers.length-1}}'> 、</text></text>
                     </view>
                   </view>
                   <view class="afk">
                     <view class='bottom-left'>
-                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{index != item.fwdUsers.length-1}}'> 、</text></text>
+                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{fwdUserIndex != item.fwdUsers.length-1}}'> 、</text></text>
                     </view>
                   </view>
                   <view class="ask">

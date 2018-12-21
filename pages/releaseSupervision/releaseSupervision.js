@@ -15,6 +15,22 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+		var dou = {};
+		var contents = options.contents || '';
+		var id = options.id;
+		// 已有的督导内容
+		if (contents) {
+				contents = JSON.parse(contents);
+				dou.contents = contents;
+		}
+		
+		// 已有的督导id
+		if (id) {
+			dou.id = id;
+		}
+		
+		obj.setData(dou);
+		
   },
 
   /**
@@ -94,9 +110,152 @@ Page({
   choose: (e) => {
     var type = e.currentTarget.dataset.type;
     var jumpUrl = '../../pages/chooseUser/chooseUser?type=' + type;
+    var contents = obj.data.contents || [];
+    var upUsers = [];
+    if (contents.length > 0) {
+       for(var c in contents) {
+         // 发起人
+         upUsers.push(contents[c].opeartor);
+         // 接收人
+         var ru = contents[c].recUsers;
+         for (var r in ru) {
+           upUsers.push(ru[r].id);
+         }
+
+         // 抄送人
+         var fu = contents[c].fwdUsers;
+         for (var f in fu) {
+           upUsers.push(fu[f].id);
+         }
+
+       }
+       
+    }
+    wx.setStorageSync('upUsers', upUsers);
+
     wx.navigateTo({
       url: jumpUrl,
     })
+  },
+
+  /**
+   * send、发送督导
+   */
+  send: () => {
+		 // 校验参数
+     if (!obj.checkParam()) {
+			 return;
+		 }
+		 
+		 // 数据校验通过，调用发起、转发督导接口
+		 var param = obj.data.param;
+		//  console.log(param);
+		//  return;
+		 
+		 wx.showLoading({
+		 	title: '处理中...',
+		 	mask: true,
+		 })
+		 
+		 var reqUrl = util.getRequestURL('saveSupervis.we');
+		 wx.request({
+		 	url: reqUrl,
+		 	dataType: 'json',
+		 	data: {
+		 		json: encodeURI(JSON.stringify(param))
+		 	},
+		 	success: (res) => {
+		 		if (res.data.success) {
+          // 操作成功，移除缓存数据
+          wx.removeStorageSync('recUsers');
+          wx.removeStorageSync('copyUsers');
+          wx.removeStorageSync('content');
+          wx.removeStorageSync('upUsers');
+          
+          wx.showModal({
+            title: '提示',
+            content: '发送成功！',
+            showCancel: false,
+            success: (rex) => {
+              if (rex.confirm) {
+                // 返回上一级
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            }
+          })
+          
+		 		}
+		 	},
+		 	fail: (e) => {
+		 		wx.showModal({
+		 			title: '提示',
+		 			content: '网络异常！',
+           showCancel: false
+		 		})
+		 	},
+       complete: (rx) => {
+         wx.hideLoading();
+       }
+		 })
+  },
+
+  /**
+   * 校验参数
+   */
+  checkParam: () => {
+    var recUsers = obj.data.recUsers || [];
+    var copyUsers = obj.data.copyUsers || [];
+    var content = wx.getStorageSync('content') || null;
+		var id = obj.data.id || null;
+    if (recUsers.length < 1) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择接收人！',
+        showCancel: false,
+      })
+      return false;
+    }
+
+    if (!content) {
+      wx.showModal({
+        title: '提示',
+        content: '请输入督导内容！',
+        showCancel: false,
+      })
+      return false;
+    }
+
+    var param = {};
+		var recUser = [];
+		for (var r in recUsers) {
+			  recUser.push(recUsers[r].user_id);
+		}
+		param.recUser = recUser.join(',');
+		
+		var coypUser = [];
+		for (var c in copyUsers) {
+				coypUser.push(copyUsers[c].user_id);
+		}
+		param.fwdUser = coypUser.join(',');
+		
+    
+		param.content = content;
+    // 发起督导
+    if (!id) {
+      param.creator = app.user.id;
+    }
+    // 转发
+		if (id) {
+      param.id = id;
+      param.supervisionId = id;
+      param.opeartor = app.user.id;
+		}
+		
+		obj.data.param = param;
+    return true;
+
   },
 
   
