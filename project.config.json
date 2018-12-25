@@ -12,7 +12,7 @@
 		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.2",
+	"libVersion": "2.4.3",
 	"appid": "wx1d9be0cc0113a0e4",
 	"projectname": "cwbt",
 	"debugOptions": {
