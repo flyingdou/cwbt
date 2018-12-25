@@ -75,31 +75,6 @@
                   <view class='title'>备注:</view>
                   <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{equipment.mark}}' disabled></textarea>
             </view>
-
-            <!-- preview -->
-            <!-- <view class='preview'>
-                  <view class='pic' wx:for = '{{photos}}' wx:key = '' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
-                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
-                  </view>
-
-                  <view class='pic'>
-                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
-                  </view>
-            </view> -->
-
-            
-            <!-- 填充高度 -->
-            <!-- <view class='fill'></view> -->
-
-
-            <!-- 底部按钮 -->
-            <!-- <view class='buttons'>
-                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
-                  <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                  <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                  <view class='button finshButton' bindtap='finsh'>保存</view>
-            </view> -->
-      
       </view>
 
 

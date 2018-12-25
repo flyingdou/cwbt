@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/chooseEquipment/chooseEquipment",
     "pages/deptBoat/deptBoat",
     "pages/releaseSupervision/releaseSupervision",
     "pages/releaseSupervise/releaseSupervise",
@@ -51,7 +52,7 @@
         "selectedIconPath": "icon/boatList_selected.png"
       },
       {
-        "pagePath": "pages/equipmentInfo/equipmentInfo",
+        "pagePath": "pages/chooseEquipment/chooseEquipment",
         "text": "设备信息",
         "iconPath": "icon/deviceInfo.png",
         "selectedIconPath": "icon/deviceInfo_selected.png"

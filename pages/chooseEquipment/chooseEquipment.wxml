@@ -1,0 +1,67 @@
+<!-- 页面开始 -->
+<view class = 'content'>
+      <!-- 导航栏 -->
+      <view class = 'navBar'>
+            <view class='preNav' wx:for = '{{navList}}' wx:key = '' wx:for-item='nav' bindtap='up' data-index = '{{index}}' >
+                  <view class='nav {{index == (navList.length-1) ? "current" : ""}}' data-deptid='{{nav.seq_id}}'>{{nav.dept_name}}</view>
+                  <text wx:if = '{{index < (navList.length-1)}}' class='nav' decode='ture'>&gt;</text>
+            </view>
+            
+      </view>
+
+      
+      <!-- 下级组织机构 -->
+      <view wx:if = '{{deptList && deptList.length > 0}}' class='deptList'>
+            <!-- preDept -->
+            <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = '' bindtap='next' data-dept = '{{dept}}'>
+
+                  <view class='left'>
+                        <view class='deptName'>{{dept.dept_name}}</view>
+                  </view>
+
+                  <view class='right'>
+                        <view class='next'>
+                              <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                        </view>
+                  </view>
+
+            </view>
+
+      
+      </view>
+
+
+      <!-- 当前机构的船舶 -->
+      <view class='userList' wx:if = '{{boatList && boatList.length > 0}}'>
+            <view class='preUser' wx:for = '{{boatList}}' wx:for-item = 'boat' wx:key = '' data-index = '{{index}}' bindtap='boatChange'>
+                  <view class='userName'>{{boat.name}}</view>
+                  <view class='choose'>
+                        <radio checked='{{boat.checked}}'></radio>
+                  </view>
+            </view>
+      </view>
+
+
+      <!-- 当前船舶的设备 -->
+      <view class='userList' wx:if = '{{equipmentList && equipmentList.length > 0}}'>
+            <view class='preUser' wx:for = '{{equipmentList}}' wx:for-item = 'equipment' wx:key = '' data-index = '{{index}}' bindtap='equipmentChange'>
+                  <view class='userName'>{{equipment.name}}</view>
+                  <view class='choose'>
+                        <radio checked='{{equipment.checked}}'></radio>
+                  </view>
+            </view>
+      </view>
+
+      <!-- fill -->
+      <view class='douFill'></view>
+
+
+      <!-- footer -->
+      <view class='footer'>
+            <view class='scan' bindtap='scan'>扫码选择设备</view>
+      </view>
+
+
+
+
+</view>
