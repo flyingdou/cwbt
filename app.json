@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/deptBoat/deptBoat",
     "pages/releaseSupervision/releaseSupervision",
     "pages/releaseSupervise/releaseSupervise",
     "pages/boatPosition/boatPosition",
@@ -39,9 +40,21 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "工作任务",
+        "text": "首页",
         "iconPath":"icon/task@2x.png",
         "selectedIconPath":"icon/task_selected@2x.png"
+      },
+      {
+        "pagePath": "pages/deptBoat/deptBoat",
+        "text": "船名录",
+        "iconPath": "icon/boatList.png",
+        "selectedIconPath": "icon/boatList_selected.png"
+      },
+      {
+        "pagePath": "pages/equipmentInfo/equipmentInfo",
+        "text": "设备信息",
+        "iconPath": "icon/deviceInfo.png",
+        "selectedIconPath": "icon/deviceInfo_selected.png"
       },
       {
         "pagePath": "pages/mine/mine",
