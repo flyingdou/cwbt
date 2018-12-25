@@ -2,9 +2,9 @@
 <view class='content'>
       <!-- 选择发送部门 -->
       <view class='choose'>
-            <view class='title'>选择统计部门：</view>
+            <!--<view class='title'>选择统计部门：</view>-->
             <!-- pickers -->
-            <view class='pickers'>
+            <!--<view class='pickers'>
                   <view class='valuess'>
                         <view class='lp value' wx:for = '{{lt}}' wx:key=''>
                               {{item.dept_name}}
@@ -16,9 +16,24 @@
                                 {{arrayList[index][indexList[index]].dept_name || "请选择"}} 
                           </view>
                   </picker>
+            </view>-->
+
+
+            <!-- 选择部门 -->
+            <view class='timeDiv' bindtap='toSelectDeptPage'>
+                  <view class='title'>
+                        选择统计部门：
+                  </view>
+
+                  <view class='right'>
+                        <view class='value'>{{deptObj.dept_name ? deptObj.dept_name : "请选择"}}</view>
+                        <!-- moreIcon -->
+                        <view class='moreIcon'>
+                              <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+                        </view>
+                  </view>
+            
             </view>
-
-
 
             <!-- 选择时间段 -->
             <view class='timeLine'>
@@ -28,11 +43,11 @@
                               开始时间
                         </view>
 
-                        <view class='right'>
-                              <picker mode = 'date' bindchange='dateChange' data-key = 'startDate'>
-                                      <view class='value'>{{startDate ? startDate : "请选择"}}</view>
-                              </picker>
-
+                        <view class='right' bindtap='showMark' data-key='startDate'>
+                              <!--<picker mode = 'date' bindchange='dateChange' data-key = 'startDate'>
+                                      
+                              </picker>-->
+                              <view class='value'>{{startDate ? startDate : "请选择"}}</view>
                               <!-- moreIcon -->
                               <view class='moreIcon'>
                                     <image mode='aspectFill' src='../../icon/more@2x.png'></image>
@@ -50,11 +65,11 @@
                               结束时间
                         </view>
 
-                        <view class='right'>
-                              <picker mode = 'date' bindchange='dateChange' data-key = 'endDate' >
-                                      <view class='value'>{{endDate ? endDate : "请选择"}}</view>
-                              </picker>
-
+                        <view class='right' bindtap='showMark' data-key='endDate'>
+                              <!--<picker mode = 'date' bindchange='dateChange' data-key = 'endDate' >
+                                      
+                              </picker>-->
+                              <view class='value'>{{endDate ? endDate : "请选择"}}</view>
                               <!-- moreIcon -->
                               <view class='moreIcon'>
                                     <image mode='aspectFill' src='../../icon/more@2x.png'></image>
@@ -192,7 +207,7 @@
       </view>
       
 
-
-
-
 </view>
+
+<!-- 日历选择组件 -->
+<mark showModalStatus='{{showMark}}' bindMark='dateChange'></mark>

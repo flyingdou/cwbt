@@ -47,6 +47,7 @@ image{
 
 .remark{
   padding: 20rpx 0;
+  border-bottom: 2rpx solid #F0F0F2;
 }
 
 .textareaClass{

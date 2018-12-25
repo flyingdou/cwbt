@@ -10,20 +10,6 @@
   </view>
   <!-- <view class="drawer_title">弹窗标题</view> -->
   <view class="drawer_content">
-    <radio-group bindchange="saveSelectValue" wx:if='{{type=="radio"}}'>
-      <view class="top grid {{index == list.length - 1 ? 'bottom' : ''}}" wx:for='{{list}}' wx:key=''>
-        <view class='left' bindtap='saveSelectValue' data-value = '{{item.id}}' >
-              <label class="title col-0">{{item.name}}</label>
-              <label class='title col-0' wx:if = '{{item.post}}'>{{item.post}}</label>
-              <radio value='{{item.id}}'></radio>
-        </view>
-      </view>
-    </radio-group>
-    <checkbox-group bindchange="saveSelectValue" wx:if='{{type=="checkbox"}}'>
-      <view class="top grid {{index == list.length - 1 ? 'bottom' : ''}}" wx:for='{{list}}' wx:key=''>
-        <label class="title col-0">{{item.name}}</label>
-        <checkbox class='checkbox' value='{{item.id}}'></checkbox>
-      </view>
-    </checkbox-group>
+    <calendar bindCalendar='saveSelectValue'></calendar>
   </view>
 </view>

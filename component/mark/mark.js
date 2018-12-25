@@ -5,15 +5,13 @@ Component({
    */
   properties: {
     showModalStatus: Boolean, // 是否显示弹出框
-    list: Array, // 数据传入
-    type: String, // 弹出框显示内容类别
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    list: []
+    
   },
 
   attached: function () {

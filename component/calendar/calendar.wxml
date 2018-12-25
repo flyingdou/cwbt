@@ -1,0 +1,68 @@
+<view class='date-show'>
+   <view class='date-show-left' bindtap='preYear'>
+       <image src='../../icon/left.png' mode='aspectFit'></image>
+   </view>
+   <view class="date-show-middle">
+    {{year}}年{{month}}月
+   </view>
+   <view class='date-show-right' bindtap='nextYear'>
+       <image src='../../icon/right.png' mode='aspectFit'></image>
+   </view>
+</view>
+<swiper class='swiper' duration='{{duration}}' current-item-id='{{currentItem}}' bindchange='changeMonth' bindanimationfinish='changeMonthCallback'>
+  <!-- 左节点 -->
+  <swiper-item item-id='preMonth'>
+    <view class='wrap'>
+       <view>
+          
+         </view>
+         <view class='header'>
+             <view wx:for='{{date}}' wx:key='' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>
+         </view>
+         <view class='date-box'>
+             <view wx:for='{{dateArr}}' wx:key='' data-date='{{item.isToday}}' bindtap='changeDate'>            
+                 <view class='date-head {{activeDay == item.isToday ? "activeDay" : ""}}'>
+                     <view class='{{activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : "") }}'>{{item.dateNum}}</view>
+                 </view>
+                 <!-- <view class='date-weight'>{{item.weight}}</view> -->
+             </view>
+         </view>
+    </view>
+  </swiper-item>
+  <!-- 中节点 -->
+  <swiper-item item-id='currentMonth'>
+    <view class='wrap'>
+       <view>
+         </view>
+         <view class='header'>
+             <view wx:for='{{date}}' wx:key='' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>
+         </view>
+         <view class='date-box'>
+             <view wx:for='{{dateArr}}' wx:key='' data-date='{{item.isToday}}' bindtap='changeDate'>            
+                 <view class='date-head {{activeDay == item.isToday ? "activeDay" : ""}}'>
+                     <view class='{{activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : "") }}'>{{item.dateNum}}</view>
+                 </view>
+                 <!-- <view class='date-weight'>{{item.weight}}</view> -->
+             </view>
+         </view>
+    </view>
+  </swiper-item>
+  <!-- 右节点 -->
+  <swiper-item item-id='nextMonth'>
+    <view class='wrap'>
+       <view>
+         </view>
+         <view class='header'>
+             <view wx:for='{{date}}' wx:key='' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>{{item}}<view></view></view>
+         </view>
+         <view class='date-box'>
+             <view wx:for='{{dateArr}}' wx:key='' data-date='{{item.isToday}}' bindtap='changeDate'>            
+                 <view class='date-head {{activeDay == item.isToday ? "activeDay" : ""}}'>
+                     <view class='{{activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : "") }}'>{{item.dateNum}}</view>
+                 </view>
+                 <!-- <view class='date-weight'>{{item.weight}}</view> -->
+             </view>
+         </view>
+    </view>
+  </swiper-item>
+</swiper>

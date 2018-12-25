@@ -13,14 +13,14 @@
  
 /*content*/
 .drawer_box {
-  width: 650rpx;
+  width: 100%;
   overflow: hidden;
   position: fixed;
   top: 50%;
   left: 0;
   z-index: 1001;
   background: #FAFAFA;
-  margin: -220px 50rpx 0 50rpx;
+  margin-top: -400rpx;
   border-radius: 3px;
 }
  
@@ -30,7 +30,7 @@
   text-align: center;
 }
 .drawer_content {
-  height: 400px;
+  height: 800px;
   overflow-y: scroll; /*超出父盒子高度可滚动*/
 }
  

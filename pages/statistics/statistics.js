@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showMark: false
   },
 
   /**
@@ -46,7 +46,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (wx.getStorageSync("deptObj")) {
+      obj.setData({
+        deptObj: wx.getStorageSync("deptObj")
+      });
+      wx.removeStorageSync("deptObj")
+    }
   },
 
   /**
@@ -258,12 +263,36 @@ Page({
   },
 
 /**
+ * 去选择部门页面
+ */
+  toSelectDeptPage: function () {
+    wx.navigateTo({
+      url: '../chooseDept/chooseDept'
+    });
+  },
+
+/**
+ * 弹起日历
+ */
+  showMark: function (e) {
+    var key = e.currentTarget.dataset.key;
+    obj.setData({
+      dateKey: key,
+      showMark: true
+    });
+  },
+
+/**
  * 时间选择器改变
  */
   dateChange: (e) => {
-    var key = e.currentTarget.dataset.key;
-    var dou = {};
-    dou[key] = e.detail.value;
+    var key = obj.data.dateKey;
+    var dou = {
+      showMark: false
+    };
+    if (e.detail.value) {
+      dou[key] = e.detail.value;
+    }
     obj.setData(dou);
   },
 
@@ -322,20 +351,37 @@ Page({
    * 校验数据
    */
   checkData: () => {
-    // 数据校验
-    var deptList = obj.data.deptList;
-    var douList = [];
+    // // 数据校验
+    // var deptList = obj.data.deptList;
+    // var douList = [];
 
-    // 将数据录入新的数组
-    for (var x in deptList) {
-      if (deptList[x] != 0) {
-        douList.push(deptList[x]);
-      }
-    }
+    // // 将数据录入新的数组
+    // for (var x in deptList) {
+    //   if (deptList[x] != 0) {
+    //     douList.push(deptList[x]);
+    //   }
+    // }
 
-    // 获取lt的长度
-    var lt = obj.data.lt;
-    if ((lt.length + douList.length) < 3) {
+    // // 获取lt的长度
+    // var lt = obj.data.lt;
+    // if ((lt.length + douList.length) < 3) {
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '请选择统计部门！',
+    //     showCancel: false,
+    //   })
+    //   return false;
+    // }
+    
+    // // 反转数组
+    // douList.reverse();
+
+    var param = {};
+    // param.departmentid = douList.length == 0 ? lt[lt.length - 1].seq_id : douList[0];
+
+    // 部门
+    var deptObj = obj.data.deptObj;
+    if (!deptObj) {
       wx.showModal({
         title: '提示',
         content: '请选择统计部门！',
@@ -343,12 +389,8 @@ Page({
       })
       return false;
     }
-    
-    // 反转数组
-    douList.reverse();
+    param.departmentid = deptObj.seq_id;
 
-    var param = {};
-    param.departmentid = douList.length == 0 ? lt[lt.length - 1].seq_id : douList[0];
     // 开始时间
     var startDate = obj.data.startDate;
     if (startDate) {
