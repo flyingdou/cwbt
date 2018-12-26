@@ -71,7 +71,9 @@ image{
 .right{
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 50%;
+  height: 60rpx;
   color: blue;
 }
 

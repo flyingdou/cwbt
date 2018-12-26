@@ -21,14 +21,16 @@
                                 <radio checked='{{dept.seq_id == deptObj.seq_id}}'></radio>
                           </view>
                           <view class='deptName'>{{dept.dept_name}}</view>
-                          <view class='personCount'>（{{dept.personCount}}）</view>
+                          <view class='personCount'>（{{dept.deptCount}}）</view> 
                     </view>
 
-                    <view class='right' bindtap='next' data-dept = '{{dept}}'>
+                    <view class='right' bindtap='next' data-dept = '{{dept}}' wx:if='{{dept.deptCount && dept.deptCount > 0}}'>
                           <view class='next'>
                                 <image src='../../icon/more@2x.png' mode='aspectFill'></image>
                           </view>
                     </view>
+
+                    <view class='right' bindtap='radioChange' data-index='{{index}}' wx:else></view>
 
               </view>
             </radio-group>
