@@ -1,6 +1,12 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/sparePick/sparePick",
+    "pages/spareCost/spareCost",
+    "pages/spareChoosed/spareChoosed",
+    "pages/spareRecord/spareRecord",
+    "pages/spareList/spareList",
+    "pages/boatSpare/boatSpare",
     "pages/chooseDept/chooseDept",
     "pages/chooseEquipment/chooseEquipment",
     "pages/deptBoat/deptBoat",
