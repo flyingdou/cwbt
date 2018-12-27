@@ -1,2 +1,87 @@
-<!--pages/spareList/spareList.wxml-->
-<text>pages/spareList/spareList.wxml</text>
+<!-- 页面开始 -->
+<view class='content'>
+      <checkbox-group bindchange = 'checkboxChange'> 
+
+      <view class='list'>
+            
+                <view class='pre' wx:for = '{{list}}' wx:key=''>
+                      <view class='line' bindtap='goto' data-link = '../spareRecord/spareRecord?spareId={{item.id}}' data-index='{{index}}'>
+                            <!-- 填充高度 -->
+                            <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 4 || item.status == 9 || item.feedback == 2}}'></view>
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>备件名称</view>
+                                        <view class='value'>{{item.name}}</view>
+                                  </view>
+
+                                  <view class='tv'>
+                                        <view class='title'>型号</view>
+                                        <view class='value'>{{item.model || "无"}}</view>
+                                  </view>
+                            </view>
+
+                            <view class='lineFill'></view>
+
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>备件数量</view>
+                                        <view class='value'>{{item.number || 0}}</view>
+                                  </view>
+
+                                  <view class='tv'>
+                                        <view class='title'>所属船舶</view>
+                                        <view class='value'>{{item.boatName}}</view>
+                                  </view>
+                            </view>
+
+                            <view class='lineFill'></view>
+
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>厂家</view>
+                                        <view class='value'>{{item.manufactor || "无"}}</view>
+                                  </view>
+
+                                  <view class='tv'>
+                                        <view class='title'>创建时间</view>
+                                        <view class='value'>{{item.createtime}}</view>
+                                  </view>
+                            </view>
+
+                            <!-- 图标 -->
+                            <view class='tag' wx:if='{{item.status == 9}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已领取</view>
+                                  </view>
+                            </view>
+                            <!-- 图标 -->
+                            <view class='tag' wx:if='{{(item.status == 2 || item.status == 4) && item.feedback != 2}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已反馈</view>
+                                  </view>
+                            </view>
+                            <!-- 图标 -->
+                            <view class='tag' wx:if='{{item.feedback == 2}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已验收</view>
+                                  </view>
+                            </view>
+                      </view>
+
+                </view>
+
+      </view>
+      
+      
+
+
+      </checkbox-group>
+      
+
+
+
+
+</view>

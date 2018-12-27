@@ -1,4 +1,6 @@
-// pages/spareRecord/spareRecord.js
+var app = getApp();
+var util = require('../../utils/util.js');
+var obj = null;
 Page({
 
   /**
@@ -12,7 +14,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    obj = this;
 
+    if (options.spareId) {
+      obj.setData({
+        spareId: options.spareId
+      });
+    }
   },
 
   /**
@@ -26,7 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    obj.queryData();
   },
 
   /**
@@ -58,9 +66,36 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 数据
    */
-  onShareAppMessage: function () {
+  queryData: function () {
+    var url = util.getRequestURL('getSpareRecordBySpare.we');
+    var param = { spareId: obj.data.spareId };
 
+    // 测试数据
+    // console.log(param);
+    
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.request({
+      url: url,
+      dataType:'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: function (res) {
+        obj.setData({
+          list: res.data
+        });
+      },
+      fail: function (e) {
+        util.tipsMessage('网络异常！');
+        console.log(e);
+      },
+      complete: (xe) =>{
+        wx.hideLoading();
+      }
+    });
   }
 })
