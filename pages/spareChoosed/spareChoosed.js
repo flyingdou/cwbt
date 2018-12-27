@@ -1,4 +1,6 @@
-// pages/spareChoosed/spareChoosed.js
+var app = getApp();
+var util = require('../../utils/util.js');
+var obj = null;
 Page({
 
   /**
@@ -12,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    obj = this;
 
   },
 
@@ -26,7 +29,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 初始化页面数据
+    obj.init();
   },
 
   /**
@@ -62,5 +66,65 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  /**
+   * 初始化页面数据
+   */
+  init: () => {
+    var reqUrl = util.getRequestURL('getSparePickList.we');
+    var param = {
+      user_id: app.user.id,
+      status: 8 // 被领取
+    };
+
+    // loading
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        var dou = {};
+        var spareList = res.sparePickList || [];
+        dou.spareList = spareList;
+        if (res.success) {
+          obj.setData(dou);
+        }
+      },
+      complete: (com) => {
+        wx.hideLoading();
+      }
+    })
+
+  },
+
+
+  /**
+   * 扫码
+   */
+  scan: () => {
+    obj.goto();
+  },
+
+
+  /**
+   * 跳转到领用页面
+   */
+  goto: () => {
+    var code = obj.data.code || '20181224010101000001';
+    wx.navigateTo({
+      url: '../../pages/sparePick/sparePick?code=' + code,
+    })
+
+  },
+
+
+
 })
