@@ -110,7 +110,22 @@ Page({
    * 扫码
    */
   scan: () => {
-    obj.goto();
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        obj.setData({
+          code: res.result
+        })
+        obj.goto();
+      },
+      fail: () => {
+        wx.showModal({
+          title: '提示',
+          content: '扫码失败！',
+          showCancel: false
+        })
+      }
+    })
   },
 
 
@@ -121,6 +136,18 @@ Page({
     var code = obj.data.code || '20181224010101000001';
     wx.navigateTo({
       url: '../../pages/sparePick/sparePick?code=' + code,
+    })
+
+  },
+
+  /**
+   * 备件消耗
+   */
+  spareCost: (e) => {
+    var index = e.currentTarget.dataset.index;
+    var spare = obj.data.spareList[index];
+    wx.navigateTo({
+      url: '../../pages/spareCost/spareCost?spare=' + encodeURI(JSON.stringify(spare)),
     })
 
   },

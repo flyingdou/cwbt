@@ -3,7 +3,7 @@
       
       <!-- spareList -->
       <view class='spareList' wx:if = '{{spareList && spareList.length > 0}}'>
-            <view class='preSpare' wx:for = '{{spareList}}' wx:for-item = 'spare' wx:key = ''>
+            <view class='preSpare' wx:for = '{{spareList}}' wx:for-item = 'spare' wx:key = '' data-index = '{{index}}' bindtap='spareCost'>
                   <view class='line'>
                         <view class='title'>备件名称:</view>
                         <view class='value'>{{spare.name}}</view>

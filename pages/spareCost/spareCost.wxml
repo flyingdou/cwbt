@@ -1,2 +1,42 @@
-<!--pages/spareCost/spareCost.wxml-->
-<text>pages/spareCost/spareCost.wxml</text>
+<!-- 页面开始 -->
+<view class='content'>
+      <view class='spare'>
+            <view class='tv'>
+                  <view class='title'>备件名称:</view>
+                  <view class='value'>{{spare.name}}</view>
+            </view>
+
+            <view class='tv'>
+                  <view class='title'>备件数量:</view>
+                  <view class='value'>{{spare.number}}</view>
+            </view>
+
+            <view class='tv'>
+                  <view class='title'>使用数量:</view>
+                  <view class='value'>
+                        <input type='number' value = '{{costCount}}' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount'>5</input>
+                  </view>
+            </view>
+
+            <view class='line'>
+                  <view class='tv'>
+                        <view class='title'>消耗地点:</view>
+                        <view class='value'>{{equipment.name}}</view>
+                  </view>
+
+                  <view class='right' bindtap='chooseDevice'>
+                        <view class='value'>选择</view>
+                        <view class='moreIcon'>
+                              <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                        </view>
+                  </view>
+            </view>
+      </view>
+
+
+      <!-- footer -->
+      <view class='footer'>
+            <view class='cost' bindtap='cost'>确定</view>
+      </view>
+
+</view>
