@@ -76,14 +76,14 @@
                   </view>
 
                   <view class='remark'>
-                        <view class='title'>异常描述:</view>
+                        <view class='title'>异常描述</view>
                         <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe'></textarea>
                   </view>
 
             </view>
 
             <view class='remark'>
-                  <view class='title'>备注:</view>
+                  <view class='title'>备注</view>
                   <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark}}'></textarea>
                   
             </view>
@@ -126,7 +126,7 @@
                         <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
                         <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
                         <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                        <view wx:if = '{{isUpload}}' class='button finshButton' bindtap='finish'>完成</view>
+                        <view wx:if = '{{isScan}}' class='button finshButton' bindtap='finish'>完成</view>
                   </view>
                   
             </view>

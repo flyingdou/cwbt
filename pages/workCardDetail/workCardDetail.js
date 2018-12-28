@@ -28,9 +28,7 @@ Page({
     }
 
     var workCardId = options.workCardId; // 工作卡id
-    if (!workCardId) {
-      workCardId = 1;
-    }
+
     obj.setData({
       workCardId: workCardId
     })
@@ -50,12 +48,6 @@ Page({
   onShow: function () {
 
   },
-
-
-
-
-
-
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -140,9 +132,14 @@ Page({
               workFeedback: workFeedback
             });
           }
-          obj.setData({
-            workDetail: res.workDetail
-          });
+
+          var level = res.workDetail.level;
+          var dou = {};
+          if (level == 'A' || level == 'B') {
+             dou.isPhoto = true;
+          }
+          dou.workDetail = res.workDetail;
+          obj.setData(dou);
         } 
         if (!res.success) {
           console.log('程序异常！');
@@ -416,9 +413,6 @@ Page({
       param.workcardName = workcardName;
     }
 
-    // 测试功能
-    // console.log(param);
-    // return;
     // showLoding
     wx.showLoading({
       title: '处理中',
