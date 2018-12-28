@@ -1,2 +1,56 @@
-<!--pages/sparePick/sparePick.wxml-->
-<text>pages/sparePick/sparePick.wxml</text>
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- 备件基本信息 -->
+      <view class='spare'>
+            <view class='line'>
+                  <view class='title'>备件名称:</view>
+                  <view class='value'>{{spare.name}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>剩余数量:</view>
+                  <view class='value'>{{spare.number}}</view>
+            </view>
+
+            <view class='line choose'>
+                  <view class='left'>
+                        <view class='title'>所属船舶:</view>
+                        <view class='value'>{{spare.boatName}}</view>
+                  </view>
+
+                  <view class='right' wx:if = '{{spareList.length > 1}}' bindtap = 'showChoose' >
+                        <view class='moreFont'>更多</view>
+
+                        <view class='moreIcon'>
+                              <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                        </view>
+                  </view>
+                  
+
+            </view>
+      
+      </view>
+
+
+      <!-- footer -->
+      <view class='footer'>
+            <view class='pick' bindtap='pick'>领用</view>
+      </view>
+
+
+
+
+
+</view>
+
+
+<!-- 弹出框 -->
+<modal hidden = '{{isHidden}}' title = '选择船舶' confirm-text = '确定' cancel-text = '取消' bindconfirm = 'confirm' bindcancel = 'cancel'>
+      <!-- 选择船舶 -->
+      <radio-group>
+              <view class='tv'  wx:for = '{{spareList}}' wx:for-item = 'spare' wx:key ='' bindtap='choose' data-index = '{{index}}' >
+                    <view class='title'>{{spare.boatName}}</view>
+                    <radio checked='{{spare.checked}}'></radio>
+              </view>
+      </radio-group>
+</modal>

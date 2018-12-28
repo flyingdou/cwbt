@@ -1,9 +1,9 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/sparePick/sparePick",
-    "pages/spareCost/spareCost",
     "pages/spareChoosed/spareChoosed",
+    "pages/spareCost/spareCost",
+    "pages/sparePick/sparePick",
     "pages/spareRecord/spareRecord",
     "pages/spareList/spareList",
     "pages/boatSpare/boatSpare",
