@@ -1,0 +1,15 @@
+<view class='weui-cell-third content'>
+  <block wx:for="{{list}}" wx:key="">
+    <view class='weui-cell-list'>
+      <view class='weui-cell-circle'></view>  
+      <view class='weui-cell-line'>
+        <view class='weui-cell-time'><text class="text">{{item.finishtime}}</text></view>
+        <view class='weui-cell-name'></view>
+        <view class='weui-cell-event'>名称: <text class="text">{{item.name}}</text></view>
+        <view class='weui-cell-event'>执行人: <text class="text">{{item.executor}}</text></view>
+        <view class='weui-cell-event'>状态: <text class="text">{{item.statusName}}</text></view>
+      </view>
+    </view>
+  </block>
+</view>
+

@@ -107,5 +107,15 @@ Page({
         util.showTipsMessage('数据加载失败');
       }
     });
-  }
+  },
+
+  /**
+   * 工作卡历史维保记录
+   */
+  history: (e) => {
+    wx.navigateTo({
+      url: '../../pages/history/history?equipmentid=' + e.currentTarget.dataset.equipmentid,
+    })
+  },
+
 })

@@ -77,6 +77,15 @@
             </view>
       </view>
 
+      <!-- fill -->
+      <view class='douFill'></view>
+
+
+      <!-- footer -->
+      <view class='footer'>
+            <view class='record' bindtap='history' data-equipmentid = '{{equipment.id}}'>历史维保记录</view>
+      </view>
+
 
 
 

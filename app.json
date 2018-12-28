@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/history/history",
     "pages/spareChoosed/spareChoosed",
     "pages/spareCost/spareCost",
     "pages/sparePick/sparePick",
