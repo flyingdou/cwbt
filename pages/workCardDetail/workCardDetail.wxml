@@ -96,7 +96,7 @@
                   </view>
 
                   <view class='pic'>
-                        <image wx:if = '{{!isUpload}}' src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
+                        <image wx:if = '{{showPhoto}}' src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
                   </view>
             </view>
 
@@ -125,7 +125,7 @@
                   <view wx:if = '{{!isRollback}}'>
                         <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
                         <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                        <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
+                        <view wx:if = '{{isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
                         <view wx:if = '{{isScan}}' class='button finshButton' bindtap='finish'>完成</view>
                   </view>
                   

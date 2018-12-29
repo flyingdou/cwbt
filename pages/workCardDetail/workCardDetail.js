@@ -137,7 +137,9 @@ Page({
           var dou = {};
           if (level == 'A' || level == 'B') {
              dou.isPhoto = true;
+             dou.isUpload = true;
           }
+          dou.showPhoto = true;
           dou.workDetail = res.workDetail;
           obj.setData(dou);
         } 
@@ -199,6 +201,7 @@ Page({
    */
   photo: () => {
     var isPhoto = false;
+    var isUpload = obj.data.isUpload;
     var photo = {};
     var photos = obj.data.photos;
     wx.chooseImage({
@@ -207,6 +210,7 @@ Page({
       sourceType: ['camera'],
       success: (res) => {
         isPhoto = true;
+        isUpload = false;
         var timex = util.formatTime(new Date());
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
@@ -215,13 +219,15 @@ Page({
         photos.push(photo);
         obj.setData({
           isPhoto: isPhoto,
+          isUpload: isUpload,
           photos: photos
         });
       },
     })
 
     obj.setData({
-      isPhoto: isPhoto
+      isPhoto: isPhoto,
+      isUpload: isUpload
     });
   },
 
@@ -264,12 +270,15 @@ Page({
     var photos = obj.data.photos;
     photos.splice(index, 1);
     var isPhoto = true;
+    var isUpload = obj.data.isUpload;
     if (photos.length == 0) {
       isPhoto = false;
+      isUpload = false;
     }
     obj.setData({
       photos: photos,
-      isPhoto: isPhoto
+      isPhoto: isPhoto,
+      isUpload: isUpload
     });
 
   },
@@ -317,7 +326,8 @@ Page({
         if (i >= count) {
           var isUpload = true;
           obj.setData({
-            isUpload: isUpload
+            isUpload: isUpload,
+            showPhoto: false
           });
           console.log('图片上传完成！');
           return;
@@ -477,7 +487,8 @@ Page({
     // 参数
     var param = {
       id: id,
-      status: status
+      status: status,
+      collectorpersonid: app.user.id
     };
 
     wx.request({
