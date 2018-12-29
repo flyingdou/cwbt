@@ -191,6 +191,12 @@ Page({
              dou.navList = navList;
            }
            obj.setData(dou);
+
+           if (!res.deptList || res.deptList.length == 0) {
+              obj.setData({
+                deptObj: obj.data.navList[0]
+              });
+           }
         }
       },
       complete: (rx) => {
