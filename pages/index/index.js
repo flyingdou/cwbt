@@ -446,17 +446,33 @@ Page({
    * 数组大小调整为3个
    */
   resizeList: (funList) => {
-    var blocksDiv = [];
-    var blockDiv = [];
+    var blocksDiv1 = [], blockDiv1 = [], blocksDiv2 = [], blockDiv2 = [];
     for (var i = 0; i < funList.length; i++) {
-      blockDiv.push(funList[i]);
-      if (blockDiv.length == 3 || i == (funList.length - 1)) {
-        blocksDiv.push(blockDiv); // 将blockDiv放入blocksDiv中
-        blockDiv = []; // 清空blockDiv
+      if (funList[i].type == 1) {
+        blockDiv1.push(funList[i]);
+      } else {
+        blockDiv2.push(funList[i]);
+      }
+      if (blockDiv1.length == 4) {
+        blocksDiv1.push(blockDiv1); 
+        blockDiv1 = []; 
+      }
+      if (blockDiv2.length == 4) {
+        blocksDiv2.push(blockDiv2); 
+        blockDiv2 = []; 
+      }
+      if (i == (funList.length - 1)) {
+        if (blockDiv1.length > 0) {
+          blocksDiv1.push(blockDiv1); 
+        }
+        if (blockDiv2.length > 0) {
+          blocksDiv2.push(blockDiv2); 
+        }
       }
     }
     obj.setData({
-      blocksDiv: blocksDiv
+      blocksDiv1: blocksDiv1,
+      blocksDiv2: blocksDiv2
     });
   },
 

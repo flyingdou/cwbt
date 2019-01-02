@@ -50,26 +50,26 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath":"icon/task@2x.png",
-        "selectedIconPath":"icon/task_selected@2x.png"
+        "iconPath":"icon/tabBar-icon/home.png",
+        "selectedIconPath":"icon/tabBar-icon/home-selected.png"
       },
       {
         "pagePath": "pages/deptBoat/deptBoat",
         "text": "船名录",
-        "iconPath": "icon/boatList.png",
-        "selectedIconPath": "icon/boatList_selected.png"
+        "iconPath": "icon/tabBar-icon/boat.png",
+        "selectedIconPath": "icon/tabBar-icon/boat-selected.png"
       },
       {
         "pagePath": "pages/chooseEquipment/chooseEquipment",
         "text": "设备信息",
-        "iconPath": "icon/deviceInfo.png",
-        "selectedIconPath": "icon/deviceInfo_selected.png"
+        "iconPath": "icon/tabBar-icon/deviceInfo.png",
+        "selectedIconPath": "icon/tabBar-icon/deviceInfo-selected.png"
       },
       {
         "pagePath": "pages/mine/mine",
         "text": "我的",
-        "iconPath":"icon/me@2x.png",
-        "selectedIconPath":"icon/me_selected@2x.png"
+        "iconPath":"icon/tabBar-icon/mine.png",
+        "selectedIconPath":"icon/tabBar-icon/mine-selected.png"
       }
     ]
   }

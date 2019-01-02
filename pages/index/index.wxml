@@ -46,84 +46,53 @@
   </view>
 </view>
 
-<!-- 船员操作首页 -->
+<!-- 首页 -->
 <view class = 'content' wx:if = '{{!isLogin}}'>
-  <!-- 顶部背景 -->
-  <view class='background'></view>
 
-  <!-- 底部图片 -->
+  <!-- 轮播图 -->
   <view class='pics'>
-    <image src='{{logo}}'></image>
+    <swiper indicator-dots autoplay circular>
+      <swiper-item class='radius'> 
+        <image src='{{logo}}'></image>
+      </swiper-item>
+      <swiper-item class='radius'> 
+        <image src='{{logo}}'></image>
+      </swiper-item>
+      <swiper-item class='radius'> 
+        <image src='{{logo}}'></image>
+      </swiper-item>
+    </swiper>
   </view>
 
-  <!-- 填充高度 -->
-  <view style='height: 40rpx;'></view>
-
-  <!-- 操作按钮块 -->
-  <view class='blocks' wx:for = '{{blocksDiv}}' wx:key = '' wx:for-item = 'blockDiv'>
-
-    <!-- wx:if='{{userPriv == 3}}' -->
-    <view class='block' wx:for = '{{blockDiv}}' wx:key = '' bindtap='{{item.fun}}' data-link='{{item.link}}' data-key = '{{item.pkey}}' data-value = '{{item.pvalue}}' data-userpriv = '{{item.userpriv}}' data-message='功能暂无！'>
-      <image class='block-icon' src='{{item.iconPath}}' mode='widthFix'></image>
-      <view class='block-text'>{{item.name}}</view>
-      <view class='block-count' wx:if = '{{item.count}}'>{{filter.toFixed(workCount[item.count], 0)}}</view>
+  <!-- 日常处理 -->
+  <view class='blocks' wx:if='{{blocksDiv2 && blocksDiv2.length > 0}}'>
+    <view class='blocks-title'>日常处理</view>
+    <view class='blocks-content' wx:for='{{blocksDiv2}}' wx:key='' wx:for-item='blockDiv'>
+      <view class='blocks-item' wx:for='{{blockDiv}}' wx:key='' bindtap='{{item.fun}}' data-link='{{item.link}}' data-key = '{{item.pkey}}' data-value = '{{item.pvalue}}' data-userpriv = '{{item.userpriv}}' data-message='功能暂无！'>
+        <view class='blocks-icon'>
+          {{filter.toFixed(workCount[item.count], 0)}}
+        </view>
+        <view class='blocks-memo'>
+          {{item.name}}
+        </view>
+      </view>
     </view>
-
-    <!--  wx:if='{{userPriv == 3}}' -->
-    <!-- <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseTemp' data-message='功能暂无！'>
-      <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image>
-      <view class='block-text'>临时任务</view>
-      <view class='block-count'>{{filter.toFixed(workCount.temporaryWorkCount, 0)}}</view>
-    </view> -->
-
-     <!-- wx:if='{{userPriv == 3}}' -->
-    <!-- <view class='block' bindtap='goto' data-link='../supervisionList/supervisionList' data-message='功能暂无！'>
-      <image class='block-icon' src='../../icon/supervision.png' mode='widthFix'></image>
-      <view class='block-text'>督导通知</view>
-      <view class='block-count'>{{filter.toFixed(workCount.supervisionCount, 0)}}</view>
-    </view> -->
-
   </view>
 
-  <!-- <view class='blocks'>
-        <view class='block' bindtap='goto' data-link='../../pages/validList/validList' data-message='功能暂无！' >
-          <image class='block-icon' src='../../icon/valid.png' mode='widthFix'></image>
-          <view class='block-text'>工作验收</view>
-          <view class='block-count'>{{filter.toFixed(workCount.checkAcceptanceCount, 0)}}</view>
+  <!-- 日常应用 -->
+  <view class='blocks'>
+    <view class='blocks-title'>日常应用</view>
+    <view class='blocks-content' wx:for='{{blocksDiv1}}' wx:key='' wx:for-item='blockDiv'>
+      <view class='blocks-item' wx:for='{{blockDiv}}' wx:key='' bindtap='{{item.fun}}' data-link='{{item.link}}' data-key = '{{item.pkey}}' data-value = '{{item.pvalue}}' data-userpriv = '{{item.userpriv}}' data-message='功能暂无！'>
+        <view class='blocks-icon'>
+          <image src='{{item.iconPath}}'></image>
         </view>
-
-
-        <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseTemp2' data-message='功能暂无！'>
-          <image class='block-icon' src='../../icon/tempWork.png' mode='widthFix'></image>
-          <view class='block-text'>临时工作</view>
-          <view class='block-count'>{{filter.toFixed(workCount.mtwcCount, 0)}}</view>
+        <view class='blocks-memo'>
+          {{item.name}}
         </view>
-
-
-        <view class='block' bindtap='goto' data-link='../supervisionList/supervisionList' data-message='功能暂无！'>
-          <image class='block-icon' src='../../icon/supervise.png' mode='widthFix'></image>
-          <view class='block-text'>督导</view>
-          <view class='block-count'>{{filter.toFixed(workCount.supervisionCount, 0)}}</view>
-        </view>
-  </view> -->
-
-   <!-- <view class='blocks'>
-        <view class='block' bindtap='goto' data-link='../../pages/Tlist/Tlist?isUpdate=true' data-message='功能暂无！' >
-          <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
-          <view class='block-text'>未验收工作</view>
-        </view>
-
-
-        <view class='block' bindtap='getEquipmentInfo' data-link='../../pages/equipmentInfo/equipmentInfo' data-message='功能暂无！'>
-          <image class='block-icon' src='../../icon/deviceDetail.png' mode='widthFix'></image>
-          <view class='block-text'>查看设备信息</view>
-        </view>
-
-
-        <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseStatistics' data-message='功能暂无！'>
-          <image class='block-icon' src='../../icon/statistics.png' mode='widthFix'></image>
-          <view class='block-text'>统计</view>
-        </view>
-  </view> -->
+        <view class='blocks-count' wx:if = '{{item.count}}'>{{filter.toFixed(workCount[item.count], 0)}}</view>
+      </view>
+    </view>
+  </view>
 
 </view>
