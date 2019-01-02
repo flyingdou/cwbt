@@ -13,15 +13,24 @@
       <!-- 下级组织机构 -->
       <view wx:if = '{{deptList && deptList.length > 0}}' class='deptList'>
             <!-- preDept -->
-            <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = '' bindtap='next' data-dept = '{{dept}}'>
+            <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = '' bindtap='next' data-dept = '{{dept}}' data-deptindex = '{{index}}'>
 
                   <view class='left'>
+                        <radio checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></radio>
                         <view class='deptName'>{{dept.dept_name}}</view>
                   </view>
 
-                  <view class='right'>
+                  <!-- <view class='right'>
                         <view class='next'>
                               <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                        </view>
+                  </view> -->
+                  <view class='right'>
+                        <view class='next'>
+                              <view class='nextImg'>
+                                    <image src='../../icon/next@2x.png' mode='aspectFill'></image>
+                              </view>
+                              <view class='nextFont'>下级</view>
                         </view>
                   </view>
 
@@ -36,7 +45,7 @@
             <view class='preUser' wx:for = '{{boatList}}' wx:for-item = 'boat' wx:key = '' data-index = '{{index}}' bindtap='boatChange'>
                   <view class='userName'>{{boat.name}}</view>
                   <view class='choose'>
-                        <radio checked='{{boat.checked}}'></radio>
+                        <radio checked='{{boat.checked}}' color = 'rgba(54, 123, 240, 1)'></radio>
                   </view>
             </view>
       </view>
@@ -47,7 +56,7 @@
             <view class='preUser' wx:for = '{{equipmentList}}' wx:for-item = 'equipment' wx:key = '' data-index = '{{index}}' bindtap='equipmentChange'>
                   <view class='userName'>{{equipment.name}}</view>
                   <view class='choose'>
-                        <radio checked='{{equipment.checked}}'></radio>
+                        <radio checked='{{equipment.checked}}'  color = 'rgba(54, 123, 240, 1)'></radio>
                   </view>
             </view>
       </view>

@@ -18,19 +18,30 @@
 
                     <view class='left' bindtap='radioChange' data-index='{{index}}'>
                           <view class='radio'>
-                                <radio checked='{{dept.seq_id == deptObj.seq_id}}'></radio>
+                                <radio checked='{{dept.seq_id == deptObj.seq_id}}' color='rgba(54,123,240,1)'></radio>
                           </view>
                           <view class='deptName'>{{dept.dept_name}}</view>
                           <view class='personCount'>（{{dept.deptCount}}）</view> 
                     </view>
 
-                    <view class='right' bindtap='next' data-dept = '{{dept}}' wx:if='{{dept.deptCount && dept.deptCount > 0}}'>
+                    <!-- <view class='right' bindtap='next' data-dept = '{{dept}}' wx:if='{{dept.deptCount && dept.deptCount > 0}}'>
                           <view class='next'>
                                 <image src='../../icon/more@2x.png' mode='aspectFill'></image>
                           </view>
-                    </view>
+                    </view> -->
 
-                    <view class='right' bindtap='radioChange' data-index='{{index}}' wx:else></view>
+                    <view class='right' bindtap='next' data-dept = '{{dept}}' wx:if = '{{dept.deptCount && dept.deptCount > 0}}'>
+                        <view class='next'>
+                              <view class='nextImg'>
+                                    <image src='../../icon/next@2x.png' mode='aspectFill'></image>
+                              </view>
+                              <view class='nextFont'>下级</view>
+                        </view>
+                  </view>
+
+
+
+                  <view class='right' bindtap='radioChange' data-index='{{index}}' wx:else></view>
 
               </view>
             </radio-group>
@@ -38,30 +49,12 @@
       </view>
 
 
-      <!-- 当前机构的人员 --><!-- checkboxGroup -->
-      <!--<view class='userList' wx:if = '{{userList && userList.length > 0}}'>
-            <checkbox-group>
-                    <view class='preUser' wx:for = '{{userList}}' wx:for-item = 'user' wx:key = '' bindtap='checkboxChange' data-index = '{{index}}'>
-                          <view class='userName'>{{user.user_name}}</view>
-                          <view class='checkBox'>
-                                <checkbox checked='{{user.checked}}'></checkbox>
-                          </view>
-                    </view>
-            </checkbox-group>
-      </view>-->
+
 
       <!-- fill -->
       <view class='douFill'></view>
-
       <!-- footer -->
       <view class='footer'>
-            <!--<view class='chooseAllLine' bindtap='chooseAll'>
-                  <view class='chooseAll'>全选</view>
-                  <view class='checkBox'>
-                        <checkbox checked='{{checkAll}}'></checkbox>
-                  </view>
-            </view>-->
-
             <view class='sureLine'>
                   <view class='title'>已选择:<text wx:if = '{{deptObj}}'>{{deptObj.dept_name}}</text></view>
                   <view class='sure' bindtap='choose'>确定</view>

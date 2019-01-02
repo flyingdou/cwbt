@@ -64,16 +64,29 @@ image{
 
 .left{
   display: flex;
-  
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.right{
-  color: blue;
+.deptName{
+  padding-left: 20rpx;
 }
 
 .next{
-  width: 26rpx;
-  height: 26rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nextImg{
+  width: 32rpx;
+  height: 27rpx;
+}
+
+.nextFont{
+  padding-left: 15rpx;
+  font-size: 28rpx;
+  color: rgba(54, 123, 240, 1);
 }
 
 .userList{

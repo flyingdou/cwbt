@@ -62,12 +62,6 @@ image{
   border-bottom: none;
 }
 
-.left{
-  display: flex;
-  align-items: center;
-  width: 50%;
-}
-
 .right{
   display: flex;
   justify-content: flex-end;
@@ -77,9 +71,32 @@ image{
   color: blue;
 }
 
+.left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+}
+
+.deptName{
+  padding-left: 20rpx;
+}
+
 .next{
-  width: 26rpx;
-  height: 26rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nextImg{
+  width: 32rpx;
+  height: 27rpx;
+}
+
+.nextFont{
+  padding-left: 15rpx;
+  font-size: 28rpx;
+  color: rgba(54, 123, 240, 1);
 }
 
 .userList{
