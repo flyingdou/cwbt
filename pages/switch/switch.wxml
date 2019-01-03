@@ -1,19 +1,21 @@
 <!-- 页面开始 -->
 <view class='content'>
-      
-
-      <!-- 填充高度 -->
-      <view class='fill'></view>
 
 
       <!-- 功能按钮 -->
       <view class='buttons'>
             <view class='linex'>
-                  <view class='button workCard' bindtap='goto' data-link='{{chooseList[0].link}}'>{{chooseList[0].name}}</view>
-                  <view class='button maintance' bindtap='goto' data-link='{{chooseList[1].link}}'>{{chooseList[1].name}}</view>
+                  <view class='button' bindtap='goto' data-link='{{chooseList[0].link}}'>
+                  	<image src='../../icon/voluntarily.png'></image>
+                  	<view class='botton-text'>{{chooseList[0].name}}</view>
+                  </view>
+                  <view class='button' bindtap='goto' data-link='{{chooseList[1].link}}'>
+                  	<image src='../../icon/outsourcing.png'></image>
+                  	<view class='botton-text'>{{chooseList[1].name}}</view>
+                  </view>
             </view>
       </view>
 
-
+      <view class='background'><image src='../../icon/background.png'></image></view>
 </view>
 
