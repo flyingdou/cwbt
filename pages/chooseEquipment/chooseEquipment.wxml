@@ -20,11 +20,6 @@
                         <view class='deptName'>{{dept.dept_name}}</view>
                   </view>
 
-                  <!-- <view class='right'>
-                        <view class='next'>
-                              <image src='../../icon/more@2x.png' mode='aspectFill'></image>
-                        </view>
-                  </view> -->
                   <view class='right'>
                         <view class='next'>
                               <view class='nextImg'>

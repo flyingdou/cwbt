@@ -126,10 +126,14 @@ Page({
           if (dept.checked) {
             dept.checked = false;
             wx.removeStorageSync('choosedeptindex');
-            obj.data.deptUser = [];
+            obj.setData({
+              deptUser: []
+            });
           } else {
             dept.checked = true;
             wx.setStorageSync('choosedeptindex', deptindex);
+            // 选择部门下的用户
+            obj.getDeptUsers(deptList[deptindex].seq_id);
           }
       } else {
         dept.checked = false;
@@ -142,8 +146,7 @@ Page({
 			deptList: deptList
 		});
 		
-		// 选择部门下的用户
-		obj.getDeptUsers(deptList[deptindex].seq_id);
+
 	},
 	
 	
@@ -281,12 +284,13 @@ Page({
         if (res.success) {
            var dou = {};
            
-
+           var deptUser = [];
            // 标记当前已被选中的用户
            for (var c in chooseList) {
              for (var u in res.userList) {
                if (chooseList[c].user_id == res.userList[u].user_id) {
                  res.userList[u].checked = true;
+                 deptUser.push(res.userList[u]);
                }
              }
            }
@@ -299,6 +303,7 @@ Page({
            }
            dou.deptList = res.deptList;
            dou.userList = res.userList;
+           dou.deptUser = deptUser;
            if (status == 0) {
              navList.push(res.dept);
              dou.navList = navList;
