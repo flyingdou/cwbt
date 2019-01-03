@@ -77,13 +77,19 @@ Page({
   next: (e) => {
     var navList = obj.data.navList;
     var nav = e.currentTarget.dataset.dept;
+    var deptList = obj.data.deptList;
+    var deptindex = e.currentTarget.dataset.deptindex;
     navList.push(nav);
-    obj.setData({
-      navList: navList
-    });
 
-    // 清空设已有设备列表
-    // obj.clearEquipment();
+    // 重置机构选中状态
+    deptList.forEach((dept,index) => {
+      dept.checked = false;
+    });
+    deptList[deptindex].checked = true;
+    obj.setData({
+      navList: navList,
+      deptList: deptList
+    });
 
     obj.getData(null, null);
 
@@ -106,10 +112,6 @@ Page({
     obj.setData({
       navList: doux
     });
-
-
-    // 清空设已有设备列表
-    // obj.clearEquipment();
 
     obj.getData(null, null);
   },
@@ -186,10 +188,5 @@ Page({
       url: link
     });
 
-    // 清空设已有设备列表
-    // obj.clearEquipment();
-
-    // 查询设备
-    // obj.getEquipmentList();
   }
 })

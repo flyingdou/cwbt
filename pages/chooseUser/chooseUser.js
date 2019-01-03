@@ -109,9 +109,20 @@ Page({
     wx.removeStorageSync('chooseUsers');
      var navList = obj.data.navList;
      var nav = e.currentTarget.dataset.dept;
+     var deptList = obj.data.deptList;
+     var deptindex = e.currentTarget.dataset.deptindex;
      navList.push(nav);
+
+     // 清空机构选中状态
+     deptList.forEach((dept,index) => {
+       dept.checked = false;
+     });
+     deptList[deptindex].checked = true;
+
+
      obj.setData({
-       navList: navList
+       navList: navList,
+       deptList: deptList
      });
      obj.getNext(null,null);
   },

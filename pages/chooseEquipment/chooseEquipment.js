@@ -88,9 +88,18 @@ Page({
   next: (e) => {
     var navList = obj.data.navList;
     var nav = e.currentTarget.dataset.dept;
+    var deptindex = e.currentTarget.dataset.deptindex;
     navList.push(nav);
+
+    // 清空机构选中状态
+    var deptList = obj.data.deptList;
+    deptList.forEach((dept, index) => {
+      dept.checked = false;
+    });
+    deptList[deptindex].checked = true;
     obj.setData({
-      navList: navList
+      navList: navList,
+      deptList: deptList
     });
 
     // 清空设已有设备列表
