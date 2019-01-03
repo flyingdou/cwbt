@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/chooseUser/chooseUser",
     "pages/history/history",
     "pages/spareChoosed/spareChoosed",
     "pages/spareCost/spareCost",
@@ -12,7 +13,6 @@
     "pages/chooseEquipment/chooseEquipment",
     "pages/supervise/supervise",
     "pages/chooseDept/chooseDept",
-    "pages/chooseUser/chooseUser",
     "pages/releaseSupervision/releaseSupervision",
     "pages/releaseSupervise/releaseSupervise",
     "pages/boatPosition/boatPosition",
