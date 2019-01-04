@@ -23,7 +23,6 @@ input{
   position: relative;
 }
 
-
 .searchDiv{
   background: white;
 }

@@ -224,9 +224,11 @@ search: () => {
     })
     return;
   }
+  var navList = obj.data.navList || [];
+
 
   var param = {
-    deptId: app.user.deptId,
+    deptId: navList[navList.length-1].seq_id,
     spareName: spareName
   };
 
