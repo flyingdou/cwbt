@@ -1,5 +1,15 @@
 <!-- 页面开始 -->
 <view class = 'content'>
+      <!-- 搜索框 -->
+      <view class='searchDiv'>
+            <view class='search'>
+                  <input type='text' placeholder='搜索' bindinput='inputChange' data-key = 'spareName'></input>
+                  <view class='searchIcon' bindtap='search'>
+                        <image src='../../icon/search.png' mode='aspectFill'></image>
+                  </view>
+            </view>
+      </view>
+
       <!-- 导航栏 -->
       <view class = 'navBar'>
             <view class='preNav' wx:for = '{{navList}}' wx:key = '' wx:for-item='nav' bindtap='up' data-index = '{{index}}' >
@@ -43,6 +53,56 @@
                         <radio checked='{{boat.checked}}' color='rgba(54,123,240,1)'></radio>
                   </view>
             </view>
+      </view>
+
+
+      <!-- 模糊查询出的结果 -->
+      <view class='spareList'>
+            <!-- spare -->
+            <view class='spare {{(index > 0 && spareList[index-1].model != item.model) ? "xfill" : ""}}' wx:for = '{{spareList}}' wx:key = '' bindtap = 'goto' data-link = '../../pages/spareRecord/spareRecord?spareId={{item.id}}'>
+                  <view class='line'>
+                        <view class='tv'>
+                              <view class='title'>备件名称</view>
+                              <view class='value'>{{item.name}}</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>型号</view>
+                              <view class='value'>{{item.model}}</view>
+                        </view>
+                  </view>
+
+
+                  <view class='line'>
+                        <view class='tv'>
+                              <view class='title'>备件数量</view>
+                              <view class='value'>{{item.number || 0}}</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>所属船舶</view>
+                              <view class='value'>{{item.boatName}}</view>
+                        </view>
+                  </view>
+
+
+                  <view class='line'>
+                        <view class='tv'>
+                              <view class='title'>所属部门</view>
+                              <view class='value'>{{item.boatDeptName}}</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>创建时间</view>
+                              <view class='value'>{{item.createtime}}</view>
+                        </view>
+                  </view>
+
+
+            </view>
+
+            
+      
       </view>
 
 

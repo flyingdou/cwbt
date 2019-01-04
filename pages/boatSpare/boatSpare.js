@@ -188,5 +188,85 @@ Page({
       url: link
     });
 
+  },
+
+
+/**
+ * inputChange
+ */
+inputChange: (e) => {
+  var key = e.currentTarget.dataset.key;
+  var value = e.detail.value;
+  var dou = {};
+  dou[key] = value;
+
+  // 如果查询字段为空，则清空已查询出来的备件结果
+  if (!value) {
+    dou.spareList = [];
   }
+
+  obj.setData(dou);
+
+},
+
+
+/**
+ * search
+ */
+search: () => {
+  // 校验参数
+  var spareName = obj.data.spareName || '';
+  if (!spareName) {
+    wx.showModal({
+      title: '提示',
+      content: '请输入备件名称查询！',
+      showCancel: false
+    })
+    return;
+  }
+
+  var param = {
+    deptId: app.user.deptId,
+    spareName: spareName
+  };
+
+  var reqUrl = util.getRequestURL('getSpareBySearch.we');
+
+  // loading
+  wx.showLoading({
+    title: '加载中',
+  })
+
+  // request
+  wx.request({
+    url: reqUrl,
+    dataType: 'json',
+    data: {
+      json: encodeURI(JSON.stringify(param))
+    },
+    success: (res) => {
+      res = res.data;
+      if (res.success) {
+        obj.setData({
+          spareList: res.spareList
+        });
+      }
+    },
+    complete: (com) => {
+      wx.hideLoading();
+    }
+  })
+
+},
+
+/**
+ * goto
+ */
+goto: (e) => {
+  var link = e.currentTarget.dataset.link;
+  wx.navigateTo({
+    url: link,
+  })
+},
+
 })

@@ -9,6 +9,7 @@
                   </view>
             </view>
       </view>
+      
       <!-- 导航栏 -->
       <view class = 'navBar'>
             <view class='preNav' wx:for = '{{navList}}' wx:key = '' wx:for-item='nav' bindtap='up' data-index = '{{index}}' >
