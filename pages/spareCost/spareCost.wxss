@@ -1,22 +1,3 @@
-Page{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: auto;
-  background: rgba(245,245,245,1);
-}
-
-image{
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.content{
-  width: 100%;
-  height: 100%;
-}
-
 .spare{
   margin: 20rpx;
   padding: 20rpx;
@@ -37,13 +18,6 @@ image{
 
 .title{
   padding-right: 20rpx;
-  font-size: 28rpx;
-  color: rgba(51,51,51,1);
-}
-
-.value{
-  font-size: 28rpx;
-  color: rgba(153,153,153,1);
 }
 
 .line{

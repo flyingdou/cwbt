@@ -19,60 +19,30 @@
             <view class='remark'>
                   <view class='title'>{{supervise.contents[0].userName}}要求：</view>
                   <view class='task-white'>
-                      <view class='content-box'>
+                      <view class='content-box value'>
                         {{supervise.contents[0].content}}
                       </view>
                   </view>
                   <view class="bottom">
                     <view class='bottom-left'>
-                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].recUsers.length-1}}'> 、</text></text>
+                      接收人: <text class='value' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].recUsers.length-1}}'> 、</text></text>
                     </view>
-                    <!--<view class='bottom-left' wx:if='{{supervise.boat}}'>
-                      所属船舶: <text style='color: rgba(153, 153, 153, 1);'>
-                      {{supervise.boat}}</text>
-                    </view>-->
                   </view>
                   <view class="afk">
                     <view class='bottom-left'>
-                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].fwdUsers.length-1}}'> 、</text></text>
+                      抄送人: <text class='value' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].fwdUsers.length-1}}'> 、</text></text>
                     </view>
                   </view>
                   <view class="ask">
-                    <view class='bottom-right'>
+                    <view class='value'>
                       {{supervise.contents[0].auto_date}} 
                     </view>
-                    <!--<view class='bottom-left' wx:if='{{supervise.boat}}'>
-                      所属船舶: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.boat}}</text>
-                    </view>-->
+                    
                   </view>
                   <view class="bottom margin-top20">
-                    <!--<view class='bottom-left' wx:if='{{supervise.device}}'>
-                      设备: <text style='color: rgba(153, 153, 153, 1);'>{{supervise.device}}</text>
-                    </view>
-                    <view class='bottom-left' wx:if='{{!supervise.device}}'>
-                    </view>
-                    <view class='bottom-right'>
-                      {{supervise.contents[0].auto_date}} 
-                    </view>-->
+                    
                   </view>
             </view>
-
-            <!-- <view class='remark'>
-                  <view class='title'>备注:</view>
-                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
-                  
-            </view> -->
-
-            <!-- preview -->
-            <!-- <view class='preview'>
-                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
-                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
-                  </view>
-
-                  <view class='pic'>
-                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
-                  </view>
-            </view> -->
       </view>
 </view>
 
@@ -87,11 +57,6 @@
             <view class='up-title'>
                   转发
             </view>
-
-            <!-- <view class='line'>
-                  <view class='title'>转发人</view>
-                  <view class='value'>华文</view>
-            </view> -->
             
             <!-- 内容 -->
             <view class='remark' wx:for='{{supervise.contents}}' wx:key='' wx:if='{{index > 0}}' 
@@ -119,28 +84,10 @@
                   </view>
             </view>
 
-            <!-- <view class='remark'>
-                  <view class='title'>备注:</view>
-                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
-                  
-            </view> -->
 
-            <!-- preview -->
-            <!-- <view class='preview'>
-                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
-                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
-                  </view>
-
-                  <view class='pic'>
-                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
-                  </view>
-            </view> -->
       </view>
 </view>
 
-
-<!-- 填充高度 -->
-<!-- <view style='height: 20rpx;' wx:if='{{superviseFeedback}}'></view> -->
 <!-- 反馈内容(hidden控制不显示) -->
 <view class='content' wx:if='{{!loadingStatus && superviseFeedback && hidden}}'>
 
@@ -185,22 +132,6 @@
                   </view>
             </view>
 
-            <!-- <view class='remark'>
-                  <view class='title'>备注:</view>
-                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark'></textarea>
-                  
-            </view> -->
-
-            <!-- preview -->
-            <!-- <view class='preview'>
-                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
-                        <image src='{{item.tempFilePath}}' mode='aspectFill' ></image>
-                  </view>
-
-                  <view class='pic'>
-                        <image src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
-                  </view>
-            </view> -->
       </view>
 </view> 
 
@@ -211,6 +142,4 @@
 <view class='buttons' wx:if='{{supervise.creatorId != userId && supervise.status == 0 && superviseFeedback == 0 && isRecUser}}'>
       <view class='button scanButton' bindtap='reSend' wx:if='{{userPriv == 2}}'>转发</view>
       <view class='button photoButton' bindtap='implement'>执行</view>
-      <!-- <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view> -->
-      <!-- <view class='button finshButton' bindtap='finsh'>保存</view> -->
 </view> 

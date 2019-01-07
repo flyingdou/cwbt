@@ -1,29 +1,9 @@
-/* defaul-css */
-Page{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(245,245,245,1);
-}
-
-image{
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-
 textarea{
   font-size: 28rpx;
   text-align: left;
   padding: 20rpx;
   background: rgba(245,245,245,1);
   margin: 20rpx auto;
-}
-
-.content{
-  width: 100%;
-  height: 100%;
 }
 
 /* 页面css */
@@ -56,22 +36,10 @@ textarea{
   padding-right: 20rpx;
 }
 
-
 .moreIcon{
   width: 26rpx;
   height: 26rpx;
 }
-
-.title{
-  font-size: 28rpx;
-  color: rgba(51,51,51,1);
-}
-
-.value{
-  font-size: 28rpx;
-  color: rgba(153, 153, 153, 1);
-}
-
 
 .remark{
   background: white;

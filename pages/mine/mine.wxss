@@ -1,23 +1,10 @@
 Page{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
   background: #F0F0F2;
-}
-
-image{
-  display: block;
-  width: 100%;
-  height: auto;
 }
 
 /* 我的页面 */
 .content{
   position: relative;
-  width: 100%;
-  height: 100%;
-  
 }
 
 .background{

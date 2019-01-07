@@ -1,17 +1,3 @@
-Page{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background:rgba(245,245,245,1);
-}
-
-image{
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 .content{
   background: white;
   padding: 0 4%;
@@ -28,13 +14,6 @@ image{
 
 .title{
   width: 50%;
-  font-size: 28rpx;
-  color: rgba(51, 51, 51, 1);
-}
-
-.value{
-  font-size: 28rpx;
-  color: rgba(153, 153, 153, 1);
 }
 
 .remark{

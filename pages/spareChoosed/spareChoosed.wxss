@@ -1,15 +1,9 @@
 Page{
-  margin: 0;
-  padding: 0;
-  width: 100%;
   height: auto;
-  background: rgba(245,245,245,1);
 }
 
 .content{
   position: relative;
-  width: 100%;
-  height: 100%;
 }
 
 .spareList{
@@ -28,16 +22,6 @@ Page{
   justify-content:space-between;
   align-items:center;
   padding:10rpx 0;
-}
-
-.title{
-  font-size: 28rpx;
-  color: rgba(51,51,51,1);
-}
-
-.value{
-  font-size: 28rpx;
-  color: rgba(153,153,153,1);
 }
 
 .right{

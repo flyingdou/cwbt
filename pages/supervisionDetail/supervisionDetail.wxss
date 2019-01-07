@@ -1,17 +1,3 @@
-Page{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background:rgba(245,245,245,1);
-}
-
-image{
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 .content{
   background: white;
   margin: 0 4%;
@@ -36,13 +22,6 @@ image{
 
 .title{
   width: 50%;
-  font-size: 28rpx;
-  color: rgba(51, 51, 51, 1);
-}
-
-.value{
-  font-size: 28rpx;
-  color: rgba(153, 153, 153, 1);
 }
 
 .remark{
@@ -146,10 +125,8 @@ image{
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20rpx;
-  font-size: 28rpx;
   word-break: break-all;
   word-wrap: break-word;
-  color: rgba(153, 153, 153, 1);
 }
 
 .bottom{
@@ -179,10 +156,6 @@ image{
   margin-top: 20rpx;
 }
 
-.bottom-right{
-  color: rgba(153, 153, 153, 1);
-}
-
 .add-content{
   margin-left: 20rpx;
   padding: 0 10rpx;
@@ -202,7 +175,7 @@ image{
 .taskTitle{
   padding: 20rpx 0;
   font-size: 28rpx;
-  color: rgba(51,51,51,1);
+  color: rgb(51, 51, 51);
 }
 
 .task-white{

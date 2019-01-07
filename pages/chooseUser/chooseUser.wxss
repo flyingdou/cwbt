@@ -1,25 +1,9 @@
-/* default css */
-Page{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  background:rgba(245,245,245,1);
-}
-
-image{
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 input{
   font-size: 28rpx;
   color: rgba(153,153,153,1);
 }
 
 .content{
-  width: 100%;
-  height: 100%;
   position: relative;
 }
 
