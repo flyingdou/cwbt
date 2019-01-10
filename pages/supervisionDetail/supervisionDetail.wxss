@@ -2,6 +2,7 @@
   background: white;
   margin: 0 4%;
   padding: 0 4%;
+  height: auto;
 }
 
 .line{
