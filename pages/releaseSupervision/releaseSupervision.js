@@ -30,6 +30,9 @@ Page({
 		}
 		
 		obj.setData(dou);
+
+    // 清除缓存数据
+    obj.clear();
 		
   },
 
@@ -59,6 +62,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    
 
   },
 
@@ -96,11 +100,10 @@ Page({
    */
   init: () => {
     var dou = {};
-    dou.recUsers = wx.getStorageSync('recUsers') || [];
-    dou.copyUsers = wx.getStorageSync('copyUsers') || [];
+    dou.recUsers = wx.getStorageSync('recUsers').chooseUsers || [];
+    dou.copyUsers = wx.getStorageSync('copyUsers').chooseUsers || [];
     dou.content = wx.getStorageSync('content') || '';
     obj.setData(dou);
-
   },
 
 
@@ -139,7 +142,7 @@ Page({
   },
 
   /**
-   * send、发送督导
+   * send、发起督导
    */
   send: () => {
 		 // 校验参数
@@ -149,8 +152,6 @@ Page({
 		 
 		 // 数据校验通过，调用发起、转发督导接口
 		 var param = obj.data.param;
-		//  console.log(param);
-		//  return;
 		 
 		 wx.showLoading({
 		 	title: '处理中...',
@@ -166,12 +167,8 @@ Page({
 		 	},
 		 	success: (res) => {
 		 		if (res.data.success) {
-          // 操作成功，移除缓存数据
-          wx.removeStorageSync('recUsers');
-          wx.removeStorageSync('copyUsers');
-          wx.removeStorageSync('content');
-          wx.removeStorageSync('upUsers');
-          
+          // 移除页面数据
+          obj.clear();
           wx.showModal({
             title: '提示',
             content: '发送成功！',
@@ -256,6 +253,16 @@ Page({
 		obj.data.param = param;
     return true;
 
+  },
+
+  /**
+   * 移除缓存数据
+   */
+  clear: () => {
+    wx.removeStorageSync('recUsers');
+    wx.removeStorageSync('copyUsers');
+    wx.removeStorageSync('content');
+    wx.removeStorageSync('upUsers');
   },
 
   

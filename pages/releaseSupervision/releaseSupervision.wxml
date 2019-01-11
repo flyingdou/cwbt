@@ -4,25 +4,35 @@
         <view class = 'choose'> 
                 <!-- 接收人 --> 
                 <view class = 'chooseLine' bindtap='choose' data-type = 'rec'> 
-                        <view class='left'> 
-                  <view class = 'title tv'>接收人:</view> 
-                  <view class='value' wx:for = '{{recUsers}}' wx:key = ''>{{item.user_name}}<text wx:if = '{{index != (recUsers.length -1)}}'>、</text></view> 
-            </view> 
-                        <view class = 'moreIcon'> 
-                                <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
-                        </view> 
-                </view> 
+                      <view class='left'> 
+                            <view class = 'title tv'>接收人:</view> 
+                            <view class='value long_text'>
+                                  <block wx:for = '{{recUsers}}' wx:key = ''>
+                                         {{item.user_name}}
+                                         <block wx:if = '{{index != (recUsers.length -1)}}'>、</block>
+                                  </block> 
+                            </view>
+                      </view> 
+                      <view class = 'moreIcon'> 
+                            <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
+                      </view> 
+        </view> 
                  
                 <!-- 抄送 --> 
-                <view class = 'chooseLine' bindtap='choose' data-type = 'copy'> 
-                        <view class='left'> 
-                  <view class = 'title tv'>抄送:</view> 
-                  <view class='value' wx:for = '{{copyUsers}}' wx:key = ''>{{item.user_name}}<text wx:if = '{{index != (copyUsers.length -1)}}'>、</text></view> 
-            </view> 
-                        <view class = 'moreIcon'> 
-                                <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
-                        </view> 
-                </view> 
+                <view class = 'chooseLine' bindtap='choose' data-type = 'copy'>
+                      <view class='left'> 
+                            <view class = 'title tv'>抄送人:</view> 
+                            <view class='value long_text'>
+                                  <block wx:for = '{{copyUsers}}' wx:key = ''>
+                                         {{item.user_name}}
+                                         <block wx:if = '{{index != (copyUsers.length -1)}}'>、</block>
+                                  </block> 
+                            </view>
+                      </view> 
+                      <view class = 'moreIcon'> 
+                            <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
+                      </view> 
+                   </view> 
         </view> 
          
         <!-- 内容区 --> 

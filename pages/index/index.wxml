@@ -59,7 +59,7 @@
         <image src='{{base_img_url}}/logo2.jpg' mode='aspectFill'></image>
       </swiper-item>
       <swiper-item class='radius'> 
-        <image src='{{base_img_url}}/logo3.jpg' mode='aspectFill'></image>
+        <image src='{{base_img_url}}/test1.gif' mode='aspectFill'></image>
       </swiper-item>
     </swiper>
   </view>

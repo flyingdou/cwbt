@@ -83,7 +83,8 @@ Page({
     var isHidden = false;
     var reqUrl = util.getRequestURL('getSpareByCode.we');
     var param = {
-      code: obj.data.code
+      code: obj.data.code,
+      dept_id: app.user.deptId
     };
 
     // loadding
