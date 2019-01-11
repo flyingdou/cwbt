@@ -2,23 +2,6 @@
 <view class='content'>
       <!-- 选择发送部门 -->
       <view class='choose'>
-            <!--<view class='title'>选择统计部门：</view>-->
-            <!-- pickers -->
-            <!--<view class='pickers'>
-                  <view class='valuess'>
-                        <view class='lp value' wx:for = '{{lt}}' wx:key=''>
-                              {{item.dept_name}}
-                        </view>
-                  </view>
-
-                  <picker wx:for = '{{arrayList}}' wx:key = '' wx:for-item = 'array' bindchange='pickerChange' range='{{array}}' value='{{0}}' range-key='dept_name' data-arrayIndex = '{{index}}'>
-                          <view class='value'>
-                                {{arrayList[index][indexList[index]].dept_name || "请选择"}} 
-                          </view>
-                  </picker>
-            </view>-->
-
-
             <!-- 选择部门 -->
             <view class='timeDiv' bindtap='toSelectDeptPage'>
                   <view class='title'>
@@ -44,9 +27,6 @@
                         </view>
 
                         <view class='right' bindtap='showMark' data-key='startDate'>
-                              <!--<picker mode = 'date' bindchange='dateChange' data-key = 'startDate'>
-                                      
-                              </picker>-->
                               <view class='value'>{{startDate ? startDate : "请选择"}}</view>
                               <!-- moreIcon -->
                               <view class='moreIcon'>
@@ -66,9 +46,6 @@
                         </view>
 
                         <view class='right' bindtap='showMark' data-key='endDate'>
-                              <!--<picker mode = 'date' bindchange='dateChange' data-key = 'endDate' >
-                                      
-                              </picker>-->
                               <view class='value'>{{endDate ? endDate : "请选择"}}</view>
                               <!-- moreIcon -->
                               <view class='moreIcon'>
@@ -88,7 +65,7 @@
 
       <!-- 船舶统计列表 -->
       <view class='statisticsList'>
-            <radio-group bindchange = 'radioChange'>
+            <radio-group bindchange = 'radioChange' >
                   <view wx:if = '{{type == "handle"}}'>
                         <view class='pre preStatistics' wx:for = '{{statisticsList}}' wx:key='' bindtap='radioChange' data-index = '{{index}}'>
                               <view class='blocks'>
@@ -141,7 +118,7 @@
                               
                               <!-- radio选择 -->
                               <view class='radioDiv'>
-                                    <radio value='{{index}}' checked='{{item.checked}}'></radio>
+                                    <radio value='{{index}}' checked='{{item.checked}}' color='rgba(54, 123, 240, 1)'></radio>
                               
                               </view>
                         
@@ -174,13 +151,13 @@
                                             <!-- 已完成 -->
                                             <view class='tv'>
                                                   <view class='title'>验收</view>
-                                                  <view class='value'>{{item.number2}}</view>
+                                                  <view class='value'>{{item.number2 + item.number4}}</view>
                                             </view>
 
                                             <!-- 未完成 -->
                                             <view class='tv'>
                                                   <view class='title'>未验收</view>
-                                                  <view class='value'>{{item.number1}}</view>
+                                                  <view class='value'>{{item.number1 + item.number5}}</view>
                                             </view>
 
                                       </view>

@@ -52,11 +52,6 @@
                                           <view class='value'>{{item.finishtime || "未完成"}}</view>
                                     </view>
 
-                                    <!--<view class='line'>
-                                          <view class='title'></view>
-                                          <view class='value'></view>
-                                    </view>-->
-
                               </view>
 
                               <view class='line2'>
@@ -65,11 +60,6 @@
                                           <view class='title'>验收时间</view>
                                           <view class='value'>{{item.validdate || "未验收"}}</view>
                                     </view>
-
-                                    <!--<view class='line'>
-                                          <view class='title'></view>
-                                          <view class='value'></view>
-                                    </view>-->
 
                               </view>
 
@@ -84,7 +74,7 @@
                               </view>
                               
 
-                              <!-- 多选择 -->
+                              <!-- 多选 -->
                               <view class='choose'>
                                     <checkbox value='{{item.id}}' catchtap='ni' wx:if = '{{isGet && item.status == 1}}'></checkbox>
                               </view>
