@@ -13,8 +13,8 @@ Page({
           { title: '未完成', checkStatusKey: 'workstatus', checkStatus: 1 }
         ],
         valid: [
-          { title: '已验收', checkStatusKey: 'checkstatus', checkStatus: 2 },
-          { title: '未验收', checkStatusKey: 'checkstatus', checkStatus: 1 }
+          { title: '已验收', checkStatusKey: 'typeStatus', checkStatus: 1 },
+          { title: '未验收', checkStatusKey: 'typeStatus', checkStatus: 2 }
         ]
       }
   },
@@ -131,6 +131,15 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        if (obj.data.type == 'valid') {
+          res.data.list.forEach((item, i) => {
+            if ([2, 3].includes(item.checkstatus)) {
+              item.typeStatus = 1;
+            } else if ([1, 4].includes(item.checkstatus)) {
+              item.typeStatus = 2;
+            }
+          });
+        }
         obj.setData({
           list: res.data.list
         });
