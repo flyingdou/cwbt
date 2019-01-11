@@ -1,0 +1,30 @@
+/* tab页标题 */
+.tab-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.tab-title-item{
+  position: relative;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #BBB;
+  background-color: #FFF;
+}
+
+.tab-active-text{
+  color: #101010;
+}
+
+.tab-active-block{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -30rpx;
+  width: 60rpx;
+  height: 6rpx;
+  background-color: #67DDE0;
+}

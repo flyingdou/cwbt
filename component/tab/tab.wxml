@@ -1,0 +1,22 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
+
+<!-- tab页标题 -->
+<view class='tab-title'>
+  <view style='width: {{titleBlockWidth}}%;' 
+    class='tab-title-item {{tabIndex == index ? "tab-active-text" : ""}}' 
+    wx:for='{{titles}}' wx:key='' bindtap='changeTabIndex' data-index='{{index}}'>
+    {{item.title}}
+
+    <!-- 激活块 -->
+    <view class='tab-active-block' wx:if='{{tabIndex == index}}'></view>
+  </view>
+</view>
+
+<!-- tab页内容 -->
+<swiper class='tab-content' style='height: {{swiperItemHeight}}rpx;' current='{{tabIndex}}'
+  bindchange='changeTabIndex'>
+  <swiper-item style='overflow: scroll;' wx:for='{{titles}}' wx:key=''>
+    <slot name='{{index}}'></slot>
+  </swiper-item>
+</swiper>

@@ -7,7 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+      titles: {
+        handle: [
+          { title: '已完成', checkStatusKey: 'workstatus', checkStatus: 2 },
+          { title: '未完成', checkStatusKey: 'workstatus', checkStatus: 1 }
+        ],
+        valid: [
+          { title: '已验收', checkStatusKey: 'checkstatus', checkStatus: 2 },
+          { title: '未验收', checkStatusKey: 'checkstatus', checkStatus: 1 }
+        ]
+      }
   },
 
   /**
@@ -34,8 +43,14 @@ Page({
 
     // type
     if (options.type) {
-      obj.data.type = options.type;
+      obj.setData({
+        type: options.type
+      });
     }
+
+    obj.setData({
+      windowHeightRpx: util.getSystemInfo().windowHeightRpx
+    });
   },
 
   /**
