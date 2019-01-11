@@ -81,16 +81,29 @@ Page({
   init: () => {
     var navList = [];
     var types = obj.data.type;
-    var choosedUser = [];
     var key = '';
     if (types == 'rec') {
-       key = 'copyUsers';
+       key = 'recUsers';
     }
     if (types == 'copy') {
-      key = 'recUsers';
+       key = 'copyUsers';
     }
-    choosedUser = wx.getStorageSync(key) || [];
-    obj.data.choosedUser = choosedUser;
+    var dou = wx.getStorageSync(key) || {};
+    var deptUser = [];
+    var chooseDeptList = dou.chooseDeptList || [];
+    chooseDeptList.forEach((dept,index) => {
+      dept.userList.forEach((user,ui) => {
+        deptUser.push(user);
+      });
+    });
+
+    // 存储值
+    obj.setData({
+      choosedUser: dou.choosedUser  || [],
+      deptUser: deptUser,
+      chooseDeptList: chooseDeptList
+    });
+    
     var dept_id = app.user.deptId;
     var status = 0;
     obj.getNext(dept_id, status);
@@ -120,33 +133,28 @@ Page({
 	chooseDept: (e) => {
 		var deptList = obj.data.deptList;
 		var deptindex = e.currentTarget.dataset.deptindex;
-		 // 清空机构选中状态
+    var dept_id = deptList[deptindex].seq_id;
+
+		 // 机构状态处理
 		deptList.forEach((dept,index) => {
      if (index == deptindex) {
           if (dept.checked) {
             dept.checked = false;
-            wx.removeStorageSync('choosedeptindex');
-            obj.setData({
-              deptUser: []
-            });
+           // 移除当前机构
+            obj.removeDeptUser(dept_id);
           } else {
             dept.checked = true;
-            wx.setStorageSync('choosedeptindex', deptindex);
             // 选择部门下的用户
-            obj.getDeptUsers(deptList[deptindex].seq_id);
+            obj.getDeptUsers(dept_id);
           }
-      } else {
-        dept.checked = false;
       }
 
 		});
    
-		
 		obj.setData({
 			deptList: deptList
 		});
 		
-
 	},
 	
 	
@@ -192,16 +200,8 @@ Page({
 			success: (res) => {
 				res = res.data;
 				if (res.success) {
-          var deptList = obj.data.deptList;
-          if (res.userList.length <= 0) {
-             var choosedeptindex = wx.getStorageSync('choosedeptindex');
-             deptList[choosedeptindex].checked = false;
-
-          }
-					 obj.setData({
-						 deptUser: res.userList,
-             deptList: deptList
-					 });
+           // 将查询到的用户添加到deptUser
+           obj.addDeptUser(dept_id, res.userList);
 				}
 			},
 			complete: (com) => {
@@ -209,6 +209,63 @@ Page({
 			}
 		});
 	},
+
+  /**
+   * 向deptUser中添加用户
+   */
+  addDeptUser: (dept_id, userList) => {
+     var chooseDeptList = obj.data.chooseDeptList || [];
+     // 已有选中的部门用户
+     var deptUser = obj.data.deptUser || [];
+     userList.forEach((user,index) => {
+       deptUser.push(user);
+     });
+
+     var douDept = {
+      userList: userList,
+      dept_id: dept_id
+     };
+     chooseDeptList.push(douDept);
+     obj.setData({
+       deptUser: deptUser,
+       chooseDeptList: chooseDeptList
+     });
+  },
+
+  /**
+   * 移除某一部门下的用户
+   */
+  removeDeptUser: (dept_id) => {
+    var chooseDeptList = obj.data.chooseDeptList || [];
+    var forChooseDeptList = chooseDeptList;
+
+    // 命中的部门
+    var deptUser = obj.data.deptUser || [];
+    var forDeptUser = deptUser;
+
+    forChooseDeptList.forEach((dept,index) => {
+      if (dept.dept_id == dept_id) {
+          // 已选中的用户
+          dept.userList.forEach((user,ui) => {
+            forDeptUser.forEach((du, di) => {
+              if (user.user_id == du.user_id) {
+                  // 删除当前用户
+                  deptUser.splice(di,1);
+              }
+            });
+          });
+
+          // 在chooseDeptList中移除当前大项
+          chooseDeptList.splice(index,1);
+      }
+    });
+    
+    // 存储数据
+    obj.setData({
+      chooseDeptList: chooseDeptList,
+      deptUser: deptUser
+    });
+  },
 
   /**
    * 向上选择部门
@@ -266,10 +323,6 @@ Page({
     // 取出当前模式下，被选中的用户
     var chooseList = wx.getStorageSync(obj.data.type + 'Users') || [];
 
-
-    // 取出当前模式下被选中的部门
-    var choosedeptindex = wx.getStorageSync('choosedeptindex');
-
     wx.showLoading({
       title: '加载中',
     })
@@ -284,26 +337,31 @@ Page({
         if (res.success) {
            var dou = {};
            
-           var deptUser = [];
+           // 当前已被选中的用户
+           var indexs = obj.data.indexs || [];
            // 标记当前已被选中的用户
            for (var c in chooseList) {
              for (var u in res.userList) {
                if (chooseList[c].user_id == res.userList[u].user_id) {
                  res.userList[u].checked = true;
-                 deptUser.push(res.userList[u]);
+                 indexs.push(u);
                }
              }
            }
 
-           // 标记当前已被选中的部门
-          if (choosedeptindex || parseInt(choosedeptindex) >= 0) {
-              res.deptList[choosedeptindex].checked = true;
-              // 查询当前部门用户
-              obj.getDeptUsers(res.deptList[choosedeptindex].seq_id);
-           }
+          // 标记当前已被选中的部门
+           var chooseDeptList = obj.data.chooseDeptList || [];
+           chooseDeptList.forEach((chooseDept,index) => {
+              res.deptList.forEach((dept) => {
+                if (chooseDept.dept_id == dept.seq_id) {
+                   dept.checked = true;
+                  //  obj.getDeptUsers(dept.seq_id);
+                }
+              });
+           });
            dou.deptList = res.deptList;
            dou.userList = res.userList;
-           dou.deptUser = deptUser;
+           dou.indexs = indexs;
            if (status == 0) {
              navList.push(res.dept);
              dou.navList = navList;
@@ -397,7 +455,11 @@ Page({
     deptUser.forEach((user,index) => {
       chooseUsers.push(user);
     });
-    
+
+    // 勾选中的部门
+    var chooseDeptList = obj.data.chooseDeptList || [];
+    var dou = {};
+
     if (chooseUsers.length < 1) {
       wx.showModal({
         title: '提示',
@@ -406,11 +468,13 @@ Page({
       })
       return;
     }
-
+    
+    dou.chooseUsers = chooseUsers;
+    dou.chooseDeptList = chooseDeptList;
     // 将值存储起来
     var key = obj.data.type;
     key = key + 'Users';
-    wx.setStorageSync(key, chooseUsers);
+    wx.setStorageSync(key, dou);
 
     wx.navigateBack({
       delta: 1,

@@ -25,7 +25,7 @@
             <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = ''>
 
                   <view class='left' bindtap = 'chooseDept' data-deptindex = '{{index}}'>
-                        <radio checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></radio>
+                        <checkbox checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></checkbox>
                         <view class='deptName'>{{dept.dept_name}}</view>
                         <view class='personCount'>（{{dept.personCount}}）</view>
                   </view>
