@@ -24,23 +24,22 @@
                       </view>
                   </view>
                   <view class="bottom">
-                    <view class='bottom-left'>
-                      接收人: <text class='value' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].recUsers.length-1}}'> 、</text></text>
-                    </view>
+                    <view class='bottom-left'>接收人: <text class='value' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].recUsers.length-1}}'> 、</text></text></view>
                   </view>
                   <view class="afk">
-                    <view class='bottom-left'>
-                      抄送人: <text class='value' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].fwdUsers.length-1}}'> 、</text></text>
-                    </view>
+                    <view class='bottom-left'>抄送人: <text class='value' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].fwdUsers.length-1}}'> 、</text></text></view>
                   </view>
                   <view class="ask">
                     <view class='value'>
                       {{supervise.contents[0].auto_date}} 
                     </view>
-                    
                   </view>
-                  <view class="bottom margin-top20">
-                    
+                  <!-- 附件 -->
+                  <view class='title'>附件：</view>
+                  <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
+                      <view class='content-box value' wx:for='{{supervise.contents[0].attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='0' data-subindex='{{attachmentIndex}}'>
+                        {{attachment.filename}}
+                      </view>
                   </view>
             </view>
       </view>
@@ -68,23 +67,24 @@
                       </view>
                   </view>
                   <view class="bottom">
-                    <view class='bottom-left'>
-                      接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>{{recUser.userName}}<text wx:if = '{{recUserIndex != item.recUsers.length-1}}'> 、</text></text>
-                    </view>
+                    <view class='bottom-left'>接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>{{recUser.userName}}<text wx:if = '{{recUserIndex != item.recUsers.length-1}}'> 、</text></text></view>
                   </view>
                   <view class="afk">
-                    <view class='bottom-left'>
-                      抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{fwdUserIndex != item.fwdUsers.length-1}}'> 、</text></text>
-                    </view>
+                    <view class='bottom-left'>抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{fwdUserIndex != item.fwdUsers.length-1}}'> 、</text></text></view>
                   </view>
                   <view class="ask">
                     <view class='bottom-right'>
                       {{item.auto_date}} 
                     </view>
                   </view>
+                  <!-- 附件 -->
+                  <view class='title'>附件：</view>
+                  <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
+                      <view class='content-box value' wx:for='{{item.attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='{{index}}' data-subindex='{{attachmentIndex}}'>
+                        {{attachment.filename}}
+                      </view>
+                  </view>
             </view>
-
-
       </view>
 </view>
 
