@@ -48,6 +48,8 @@ Page({
    */
   onShow: function () {
     obj.init();
+    // 获取附件数据
+    obj.getAttachment();
 
   },
 
@@ -104,6 +106,31 @@ Page({
     dou.copyUsers = wx.getStorageSync('copyUsers').chooseUsers || [];
     dou.content = wx.getStorageSync('content') || '';
     obj.setData(dou);
+  },
+
+  /**
+   * 获取附件数据
+   */
+  getAttachment(){
+     var attachments = obj.data.attachments || [];
+     var filexs = wx.getStorageSync('filexs') || '';
+     console.log(filexs);
+     if (filexs) {
+        filexs = JSON.parse(filexs);
+        filexs.forEach((file,index) => {
+          attachments.push(file);
+        });
+
+        // 清除本次存储的sessionStorage
+        wx.removeStorageSync('filexs');
+     }
+
+     // 将值存储起来
+     obj.setData({
+       attachments: attachments
+     });
+
+     
   },
 
 
@@ -167,7 +194,7 @@ Page({
 		 	},
 		 	success: (res) => {
 		 		if (res.data.success) {
-          // 移除页面数据
+          // 移除页面缓存数据
           obj.clear();
           wx.showModal({
             title: '提示',
@@ -263,6 +290,17 @@ Page({
     wx.removeStorageSync('copyUsers');
     wx.removeStorageSync('content');
     wx.removeStorageSync('upUsers');
+    wx.removeStorageSync('filexs');
+  },
+
+  /**
+   * 添加附件
+   */
+  goto(e) {
+     var link = e.currentTarget.dataset.link;
+     wx.navigateTo({
+       url: link,
+     })
   },
 
   

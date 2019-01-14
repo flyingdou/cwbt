@@ -56,6 +56,22 @@
                     </view>
               </view>
         </view> 
+
+        <!-- 附件 -->
+        <view class='attachments'>
+              <view class='tagName'>附件:</view>
+              <view class='file' wx:for = '{{attachments}}' wx:for-item = 'file' wx:key = ''>
+                    <view class='title'>{{file.filename}}</view>
+              </view>
+
+              <!-- 添加附件标识 -->
+              <view class='addFile' bindtap='goto' data-link = '../../pages/uploadFile/uploadFile'>
+                    <view class='imgDiv'>
+                          <image src='../../icon/addFile.png' mode='aspectFill'></image>
+                    </view>
+                    <view class='title imgTitle'>添加附件</view>
+              </view>
+        </view>
  
  
     <!-- 发送按钮 --> 

@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/index/index",
     "pages/releaseSupervision/releaseSupervision",
+    "pages/index/index",
     "pages/chooseUser/chooseUser",
     "pages/history/history",
     "pages/spareChoosed/spareChoosed",
@@ -37,6 +37,7 @@
     "pages/mine/mine",
     "pages/updatePWD/updatePWD",
     "pages/shipList/shipList",
+    "pages/uploadFile/uploadFile",
     "pages/uploadPic/uploadPic"
   ],
   "window":{

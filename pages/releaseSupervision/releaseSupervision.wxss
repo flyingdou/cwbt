@@ -102,3 +102,41 @@ textarea{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/** 附件 **/
+.attachments{
+  background: white;
+  margin: 20rpx 0;
+}
+
+.tagName{
+  font-size: 28rpx;
+  padding: 20rpx;
+}
+
+.file{
+  margin-left: 80rpx;
+  padding:15rpx 0rpx;
+  border-bottom:2rpx solid rgba(245,245,245,1);
+}
+
+.file:last-child{
+  border-bottom: none;
+  padding-bottom: 20rpx;
+}
+
+.addFile{
+  padding: 20rpx;
+}
+
+.imgDiv{
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto;
+}
+
+.imgTitle{
+  padding-top: 10rpx;
+  text-align: center;
+}
+
