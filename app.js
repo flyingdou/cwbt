@@ -55,7 +55,7 @@ App({
     base_forward_url: 'https://cwbt.castlc.cn/cwbt/test/login',
     base_req_url: 'http://cwbt.castlc.cn/cwbt/api/cwbtMP/',
     upload_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/uploadFile',
-    download_url: 'https://cwbt.castlc.cn/picture/',
+    download_url: 'https://cwbt.castlc.cn/file/',
     logo: 'https://cwbt.castlc.cn/picture/shipLogo123.jpg',
     base_img_url_backup: 'https://fish.ecartoon.com.cn/picture',
     base_req_url_backup: 'http://192.168.0.176:8080/hqwl/api/cwbtMP/',

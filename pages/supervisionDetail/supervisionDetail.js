@@ -91,17 +91,20 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
-        obj.setData({
-          supervise: res.data
-        });
         res.data.contents.forEach(function (item) {
           item.recUsers.forEach(function (recUser) {
+            if (item.attachment) {
+              item.attachmentJson = JSON.parse(item.attachment);
+            }
             if (app.user.id == recUser.id) {
               obj.setData({
                 isRecUser: true
               });
             }
           });
+        });
+        obj.setData({
+          supervise: res.data
         });
       },
       fail: function (e) {
@@ -180,6 +183,103 @@ Page({
     var deviceNumber = obj.data.supervise.deviceNumber ? `&deviceNumber=${obj.data.supervise.deviceNumber}` : "";
     wx.navigateTo({
       url: `../supervise/supervise?id=${obj.data.id}&creator=${obj.data.supervise.creator}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.supervise.contents)}`
+    });
+  },
+
+  /**
+   * 打开文件
+   */
+  openFile(e) {
+    var prohibit = e.currentTarget.dataset.prohibit;
+    if (prohibit) {
+      return;
+    }
+
+    wx.showLoading({
+      title: '文件加载中',
+      mask: true
+    });
+
+    // 取页面索引参数
+    var parentindex = e.currentTarget.dataset.parentindex;
+    var subindex = e.currentTarget.dataset.subindex;
+    // 有文件缓存, 直接读取文件
+    var file = obj.data.supervise.contents[parentindex].attachmentJson[subindex];
+    var file_cache = wx.getStorageSync("file_cache") || {};
+    if (file_cache[file.filename]) {
+      file = file_cache[file.filename];
+      // 打开文档(预览图片)
+      obj.openDocument(file);
+      return;
+    }
+
+    // 没有文件缓存, 重新下载文件
+    var url = app.constant.download_url + file.filename;
+    wx.downloadFile({
+      url: encodeURI(url),
+      success(download_res) {
+        if (download_res.statusCode === 200) {
+          file.filePath = download_res.tempFilePath;
+          obj.saveFile(file, file_cache);
+        } else {
+          wx.hideLoading();
+          util.tipsMessage('网络异常！');
+          console.log(download_res);
+        }
+      }
+    });
+  },
+
+  /**
+   * 保存文件
+   */
+  saveFile(file, file_cache) {
+    var FileSystemManager = wx.getFileSystemManager();
+    FileSystemManager.saveFile({
+      tempFilePath: file.filePath,
+      filePath: wx.env.USER_DATA_PATH + '/' + file.filename,
+      success(saveFile_res) {
+        // 文件属性存入缓存
+        file.filePath = saveFile_res.savedFilePath;
+        file_cache[file.filename] = file;
+        wx.setStorageSync('file_cache', file_cache);
+        // 打开文档(预览图片)
+        obj.openDocument(file);
+      }
+    });
+  },
+
+  /**
+   * 调用微信打开文档api(或预览图片)
+   */
+  openDocument(file) {
+    // 预览图片
+    if (file.filetype === 'pic') {
+      wx.previewImage({
+        current: file.filePath,
+        urls: [ file.filePath ],
+        success() {
+          wx.hideLoading();
+        },
+        fail() {
+          wx.hideLoading();
+          util.tipsMessage('图片格式错误！');
+        }
+      });
+      return;
+    }
+    // 新开页面打开文档
+    wx.openDocument({
+      filePath: file.filePath,
+      fileType: file.filetype,
+      success() {
+        wx.hideLoading();
+      },
+      fail(e) {
+        wx.hideLoading();
+        util.tipsMessage('微信小程序暂不支持打开该格式文件！');
+        console.log(e);
+      }
     });
   }
 })
