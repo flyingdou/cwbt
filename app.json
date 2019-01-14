@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/releaseSupervision/releaseSupervision",
     "pages/index/index",
+    "pages/releaseSupervision/releaseSupervision",
     "pages/chooseUser/chooseUser",
     "pages/history/history",
     "pages/spareChoosed/spareChoosed",

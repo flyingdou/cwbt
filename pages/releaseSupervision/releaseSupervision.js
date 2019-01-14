@@ -256,16 +256,25 @@ Page({
 		for (var r in recUsers) {
 			  recUser.push(recUsers[r].user_id);
 		}
+    // 接收者
 		param.recUser = recUser.join(',');
 		
 		var coypUser = [];
 		for (var c in copyUsers) {
 				coypUser.push(copyUsers[c].user_id);
 		}
+    // 抄送者
 		param.fwdUser = coypUser.join(',');
-		
-    
+	  
+    // 督导类容
 		param.content = content;
+
+    // 附件
+    var attachments = obj.data.attachments;
+    if (attachments && attachments.length > 0) {
+       param.attachment = attachments;
+    }
+
     // 发起督导
     if (!id) {
       param.creator = app.user.id;
