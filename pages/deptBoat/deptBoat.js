@@ -136,6 +136,10 @@ Page({
      var param = {};
 
      var navList = obj.data.navList || [];
+     if (dept_id) {
+       // 初次访问该接口标识
+       param.init = 1;
+     }
      dept_id = dept_id || navList[navList.length -1].seq_id;
      param.dept_id = dept_id;
      

@@ -298,6 +298,10 @@ Page({
     var navList = obj.data.navList || [];
     var reqUrl = util.getRequestURL('getDepartmentUser.we');
     var param = {};
+    if (dept_id) {
+      // 初次请求该接口
+      param.init = 1;
+    }
     dept_id = dept_id || navList[navList.length - 1].seq_id;
     param.dept_id = dept_id;
     param.type = 'nextDept';
@@ -308,7 +312,6 @@ Page({
     for (var c in choosedUser) {
       choosedUserIds.push(choosedUser[c].user_id);
     }
-    
 
     var upUsers = wx.getStorageSync('upUsers') || [];
     if (upUsers.length > 0) {
