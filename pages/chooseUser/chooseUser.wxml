@@ -33,7 +33,7 @@
                   <view class='right' bindtap='next' data-dept = '{{dept}}' data-deptindex = '{{index}}'>
                           <view class='next'>
                                 <view class='nextImg'>
-                                      <image src='../../icon/next@2x.png' mode='aspectFill'></image>
+                                      <image src='../../icon/peoples.png' mode='aspectFill'></image>
                                 </view>
                                 <view class='nextFont'>下级</view>
                           </view>

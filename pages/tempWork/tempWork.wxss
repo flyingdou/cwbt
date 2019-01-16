@@ -5,6 +5,7 @@ textarea{
 .content{
   background: white;
   padding: 0 4%;
+  height: auto;
 }
 
 .block1{

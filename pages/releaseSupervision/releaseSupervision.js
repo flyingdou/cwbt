@@ -114,7 +114,6 @@ Page({
   getAttachment(){
      var attachments = obj.data.attachments || [];
      var filexs = wx.getStorageSync('filexs') || '';
-     console.log(filexs);
      if (filexs) {
         filexs = JSON.parse(filexs);
         filexs.forEach((file,index) => {
