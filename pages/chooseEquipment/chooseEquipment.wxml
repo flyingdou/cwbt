@@ -45,11 +45,19 @@
             </view>
       </view>
 
-
+     
+      <!-- title -->
+      <view class='TagTitle'  wx:if = '{{equipmentList && equipmentList.length > 0}}'>航汛716设备一览表</view>
       <!-- 当前船舶的设备 -->
       <view class='userList' wx:if = '{{equipmentList && equipmentList.length > 0}}'>
             <view class='preUser' wx:for = '{{equipmentList}}' wx:for-item = 'equipment' wx:key = '' data-index = '{{index}}' bindtap='equipmentChange'>
-                  <view class='userName'>{{equipment.name}}</view>
+                  <!-- icon -->
+                  <view class='left'>
+                          <view class='iconDiv'>
+                                <image src='{{base_img_url}}/shipLogo1.jpg' mode='aspectFill'></image>
+                          </view>
+                          <view class='userName'>{{equipment.name}}</view>
+                  </view>
                   <view class='choose'>
                         <radio checked='{{equipment.checked}}'  color = 'rgba(54, 123, 240, 1)'></radio>
                   </view>

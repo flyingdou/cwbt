@@ -93,6 +93,8 @@
 
 .userName{
   font-size: 28rpx;
+  padding-left:20rpx;
+
 }
 
 .douFill{
@@ -116,4 +118,20 @@
    background:rgba(38,130,255,1);
    box-shadow:0px 5px 10px rgba(255,114,114,0.1);
    border-radius: 8rpx;
+}
+
+.TagTitle{
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.left{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.iconDiv{
+  width: 100rpx;
+  height: 100rpx;
+  overflow: hidden;
 }

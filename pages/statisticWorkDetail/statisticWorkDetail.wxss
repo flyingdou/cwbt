@@ -5,10 +5,11 @@ Page{
 .content{
   background: white;
   padding: 0 4%;
+  height: auto;
 }
 
 .block1{
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
 }
 
 .line{
@@ -139,4 +140,12 @@ Page{
   font-size: 18rpx;
   padding: 10rpx 0;
   text-align: center;
+}
+
+.tagTitle{
+  font-size:28rpx;
+  text-align:center;
+  background:#ff4401;
+  color:white;
+  padding:20rpx;
 }

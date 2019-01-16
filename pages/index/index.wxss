@@ -113,11 +113,11 @@ Page{
 }
 
 .pics{
-  padding: 20rpx 40rpx;
+  /* padding: 20rpx 0rpx; */
 }
 
 .radius{
-  border-radius: 10rpx;
+  /* border-radius: 10rpx; */
   overflow: hidden;
 }
 

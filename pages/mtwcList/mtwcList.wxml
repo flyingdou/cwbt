@@ -47,7 +47,7 @@
                             <view class='tag' wx:if='{{item.status == 9}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                                        <view class='statusFont'>已领取</view>
+                                        <view class='statusFont'>已审批</view>
                                   </view>
                             </view>
                             <!-- 图标 -->

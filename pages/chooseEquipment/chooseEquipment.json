@@ -1,6 +1,6 @@
 {
   "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "选择设备",
-  "navigationBarTextStyle": "black"
+  "navigationBarBackgroundColor": "#000",
+  "navigationBarTitleText": "设备/机构选择",
+  "navigationBarTextStyle": "white"
 }

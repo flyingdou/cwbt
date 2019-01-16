@@ -47,11 +47,12 @@
                           <!-- 图标 -->
                           <view class='tag' wx:if = '{{item.status == 9 && !isUpdate}}'>
                                 <view class='tagDiv'>
-                                      <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                                      <view class='statusFont'>被领取</view>
+                                      <!-- <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                      <view class='statusFont'>已领取</view> -->
+                                      <view class='statusFont'>【张三已领取】</view>
                                 </view>
 
-                                <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-id='{{item.id}}' data-index = '{{index}}'>取消</view>
+                                <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-id='{{item.id}}' data-index = '{{index}}'>撤销领取</view>
                           </view>
                           
 

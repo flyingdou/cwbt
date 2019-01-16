@@ -1,6 +1,6 @@
 {
   "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "统计详情",
-  "navigationBarTextStyle": "black"
+  "navigationBarBackgroundColor": "#000",
+  "navigationBarTitleText": "工作详情",
+  "navigationBarTextStyle": "white"
 }

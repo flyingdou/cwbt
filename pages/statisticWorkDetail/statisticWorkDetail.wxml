@@ -1,4 +1,6 @@
 <!-- 页面开始 -->
+<!-- title -->
+<view class='tagTitle'>工作卡详情</view>
 <view class='content'>
       <!-- block1 -->
       <view class='block1'>
@@ -57,9 +59,8 @@
 
 </view>
 
-<!-- 填充高度 -->
-<view style="margin-top: 20rpx;"></view>
 
+<view class='tagTitle'>工作卡执行情况</view>
 <view class="content"> 
   <!-- block1 -->
       <view class='block1'>
@@ -100,12 +101,12 @@
       </view>
 </view>
 
-<!-- 填充高度 -->
-<view style="margin-top: 20rpx;"></view>
 
+<view class='tagTitle'>工作卡验收情况</view>
 <view class="content"> 
   <!-- block1 -->
       <view class='block1'>
+            
 
             <view class='line'>
                   <view class='title'>验收人</view>

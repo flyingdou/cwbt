@@ -1,6 +1,6 @@
 {
   "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "工作验收",
-  "navigationBarTextStyle": "black"
+  "navigationBarBackgroundColor": "#000",
+  "navigationBarTitleText": "工作卡验收列表",
+  "navigationBarTextStyle": "white"
 }

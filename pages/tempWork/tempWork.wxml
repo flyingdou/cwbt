@@ -161,7 +161,7 @@
                         <view wx:if = '{{!hasGot}}'>
                               <!-- 管理端、委外维修 -->
                               <view wx:if = '{{user_priv == 2 && workDetail.overhaul_function == 1}}'>
-                                    <view class='button gotButton' bindtap='Got' >领取</view>
+                                    <view class='button gotButton' bindtap='Got' >审批</view>
                               </view>
 
                               <!-- 船舶端 -->
@@ -180,19 +180,19 @@
 </view>
 
 
-<modal class = 'myModal' id="modal" hidden="{{isHidden}}" title="领取工作卡" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" catchtouchmove='myTouchMove' >
+<modal class = 'myModal' id="modal" hidden="{{isHidden}}" title="审批意见" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" catchtouchmove='myTouchMove' >
       
       <!-- 预计完成时间 -->
       <view class='pickerDiv'>
                 <picker mode="date" value="{{expectedtime}}" start="{{startDate}}" end="{{endDate}}" bindchange="inputChange" data-key='expectedtime'>
-                        <view class="picker">预计完成时间: {{expectedtime}}</view>
+                        <view class="picker">计划完成时间: {{expectedtime}}</view>
                 </picker>
       </view> 
 
       <!-- 领取备注 -->
       <view class='inputDiv'>
-           <view class='xd'>备注信息：</view>
-           <input type='text' class="xdInput" placeholder='请输入领取备注！' maxlength='-1' bindinput='inputChange' data-key = 'collectNote'></input>
+           <view class='xd'>意见：</view>
+           <input type='text' class="xdInput" placeholder='请输入审批意见！' maxlength='-1' bindinput='inputChange' data-key = 'collectNote'></input>
       </view>
       
   </modal>

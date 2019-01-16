@@ -15,6 +15,11 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    var base_img_url = app.constant.base_img_url;
+    obj.setData({
+      base_img_url: base_img_url
+    });
+    
     // 初始化页面数据
     obj.init();
 
