@@ -7,7 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    blocksDiv1: [[
+      { name: '我发起的', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../supervisionList/supervisionList?queryType=1' },
+      { name: '我执行的', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../supervisionList/supervisionList?queryType=2' },
+      { name: '抄送我的', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../supervisionList/supervisionList?queryType=3' }
+    ]],
+    blocksDiv2: [[
+      { name: '发起督导', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../releaseSupervision/releaseSupervision' }
+    ]]
   },
 
   /**
@@ -15,10 +22,6 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-
-    if (options.queryType) {
-      obj.data.queryType = options.queryType;
-    }
   },
 
   /**
@@ -32,7 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getSupervisionList();
+
   },
 
   /**
@@ -63,40 +66,13 @@ Page({
 
   },
 
+  /**
+   * 跳转页面
+   */
   goto: function (e) {
     var link = e.currentTarget.dataset.link;
     wx.navigateTo({
       url: link
     });
   },
-
-  /**
-   * 查询督导列表数据
-   */
-  getSupervisionList: function () {
-    wx.showLoading({
-      title: '数据加载中',
-      mask: true
-    });
-    var url = util.getRequestURL('getSupervisionList.we');
-    var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv, queryType: obj.data.queryType };
-    wx.request({
-      url: url,
-      dataType:'json',
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      success: function (res) {
-        wx.hideLoading();
-        obj.setData({
-          supervisionList: res.data
-        });
-      },
-      fail: function (e) {
-        wx.hideLoading();
-        util.tipsMessage('网络异常！');
-        console.log(e);
-      }
-    });
-  }
 })

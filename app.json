@@ -31,6 +31,7 @@
     "pages/supervisionList/supervisionList",
     "pages/supervisionDetail/supervisionDetail",
     "pages/superviseFeedback/superviseFeedback",
+    "pages/superviseSwitch/superviseSwitch",
     "pages/logs/logs",
     "pages/workCardDetail/workCardDetail",
     "pages/Tlist/Tlist",
@@ -43,7 +44,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#000000",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle":"#FFFFFF"
   },
   "tabBar": {

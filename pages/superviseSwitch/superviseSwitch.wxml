@@ -1,0 +1,31 @@
+<!-- 督导管理 -->
+<view class='blocks' wx:if='{{blocksDiv1 && blocksDiv1.length > 0}}'>
+  <view class='blocks-title'>督导管理</view>
+  <view class='blocks-content' wx:for='{{blocksDiv1}}' wx:key='' wx:for-item='blockDiv'>
+    <view class='blocks-item' wx:for='{{blockDiv}}' wx:key='' bindtap='{{item.fun}}' data-link='{{item.link}}'>
+      <view class='blocks-icon'>
+        <image src='{{item.iconPath}}'></image>
+        <view class='blocks-count' wx:if = '{{item.count}}'>{{filter.toFixed(workCount[item.count], 0)}}</view>
+      </view>
+      <view class='blocks-memo'>
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 发起督导 -->
+<view class='blocks' wx:if='{{blocksDiv2 && blocksDiv2.length > 0}}'>
+  <view class='blocks-title'>发起督导</view>
+  <view class='blocks-content' wx:for='{{blocksDiv2}}' wx:key='' wx:for-item='blockDiv'>
+    <view class='blocks-item' wx:for='{{blockDiv}}' wx:key='' bindtap='{{item.fun}}' data-link='{{item.link}}'>
+      <view class='blocks-icon'>
+        <image src='{{item.iconPath}}'></image>
+        <view class='blocks-count' wx:if = '{{item.count}}'>{{filter.toFixed(workCount[item.count], 0)}}</view>
+      </view>
+      <view class='blocks-memo'>
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+</view>

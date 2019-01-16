@@ -64,7 +64,7 @@
     </swiper>
   </view>
 
-  <!-- 日常处理 -->
+  <!-- 现场工作 -->
   <view class='blocks' wx:if='{{blocksDiv2 && blocksDiv2.length > 0}}'>
     <view class='blocks-title'>现场工作</view>
     <view class='blocks-content' wx:for='{{blocksDiv2}}' wx:key='' wx:for-item='blockDiv'>
@@ -79,7 +79,7 @@
     </view>
   </view>
 
-  <!-- 日常应用 -->
+  <!-- 现场工作 -->
   <view class='blocks' wx:if='{{blocksDiv1 && blocksDiv1.length > 0}}'>
     <view class='blocks-title'>日常管理</view>
     <view class='blocks-content' wx:for='{{blocksDiv1}}' wx:key='' wx:for-item='blockDiv'>
