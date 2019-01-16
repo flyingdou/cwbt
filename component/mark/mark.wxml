@@ -4,10 +4,10 @@
 <!--使用animation属性指定需要执行的动画-->
 <view animation="{{animationData}}" class="drawer_box" hidden="{{!showModalStatus}}">
   <!--drawer content-->
-  <view class="btns" data-statu="close">
+  <!-- <view class="btns" data-statu="close">
     <view class='btn-cancel' bindtap='tap' data-type='cancel'>取消</view>
     <view class='btn-success' bindtap='tap' data-type='success'>确定</view>
-  </view>
+  </view> -->
   <!-- <view class="drawer_title">弹窗标题</view> -->
   <view class="drawer_content">
     <calendar bindCalendar='saveSelectValue'></calendar>

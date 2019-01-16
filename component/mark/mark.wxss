@@ -92,11 +92,6 @@
 	line-height: 30px;
 }
  
-input {
-	font: 12px "microsoft yahei";
-	background: #fff;
-	color:#000 ;
-}
 radio{
 	margin-right: 20px;
 }

@@ -88,7 +88,7 @@
       </view>
 </view>
 
-<!-- 反馈内容(hidden控制不显示) -->
+<!-- 反馈内容(hidden控制不显示, 反馈内容暂不显示) -->
 <view class='content' wx:if='{{!loadingStatus && superviseFeedback && hidden}}'>
 
       <!-- block1 -->

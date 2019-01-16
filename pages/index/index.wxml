@@ -80,7 +80,7 @@
   </view>
 
   <!-- 日常应用 -->
-  <view class='blocks'>
+  <view class='blocks' wx:if='{{blocksDiv1 && blocksDiv1.length > 0}}'>
     <view class='blocks-title'>日常管理</view>
     <view class='blocks-content' wx:for='{{blocksDiv1}}' wx:key='' wx:for-item='blockDiv'>
       <view class='blocks-item' wx:for='{{blockDiv}}' wx:key='' bindtap='{{item.fun}}' data-link='{{item.link}}' data-key = '{{item.pkey}}' data-value = '{{item.pvalue}}' data-userpriv = '{{item.userpriv}}' data-message='功能暂无！'>

@@ -37,6 +37,7 @@ Component({
     saveSelectValue: function (e) {
       var value = e.detail.value ? e.detail.value : e.currentTarget.dataset.value;
       this.setData({ value: value });
+      this.tap({ currentTarget: { dataset: { type: 'success' } } });
     },
     /**
      * 按钮点击触发

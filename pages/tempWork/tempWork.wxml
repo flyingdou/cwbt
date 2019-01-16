@@ -184,9 +184,9 @@
       
       <!-- 预计完成时间 -->
       <view class='pickerDiv'>
-                <picker mode="date" value="{{expectedtime}}" start="{{startDate}}" end="{{endDate}}" bindchange="inputChange" data-key='expectedtime'>
+                <view value="{{expectedtime}}" start="{{startDate}}" end="{{endDate}}" bindchange="inputChange" data-key='expectedtime' bindtap='showMark'>
                         <view class="picker">计划完成时间: {{expectedtime}}</view>
-                </picker>
+                </view>
       </view> 
 
       <!-- 领取备注 -->
@@ -197,4 +197,5 @@
       
   </modal>
 
-
+<!-- 日历选择组件 -->
+<mark showModalStatus='{{showMark}}' bindMark='dateChange'></mark>

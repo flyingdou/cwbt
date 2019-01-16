@@ -13,7 +13,8 @@ Page({
     photos:[],
     status:0,
     handle:0,
-    isHidden: true
+    isHidden: true,
+    showMark: false
   },
 
   /**
@@ -192,6 +193,33 @@ Page({
     dou[key] = e.detail.value;
     obj.setData(dou);
    
+  },
+
+  /**
+ * 弹起日历
+ */
+  showMark: function (e) {
+    var key = e.currentTarget.dataset.key;
+    obj.setData({
+      dateKey: key,
+      showMark: true,
+      isHidden: true
+    });
+  },
+
+  /**
+   * 时间选择器改变
+   */
+  dateChange: (e) => {
+    var key = obj.data.dateKey;
+    var dou = {
+      showMark: false,
+      isHidden: false
+    };
+    if (e.detail.value) {
+      dou[key] = e.detail.value;
+    }
+    obj.setData(dou);
   },
 
 
