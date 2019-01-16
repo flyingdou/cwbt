@@ -1,8 +1,5 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#000",
   "navigationBarTitleText": "数字机务",
-  "navigationBarTextStyle": "white",
   "usingComponents": {
     "mark": "../../component/mark/mark"
   }

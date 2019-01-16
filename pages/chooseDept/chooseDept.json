@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "选择部门",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "选择部门"
 }

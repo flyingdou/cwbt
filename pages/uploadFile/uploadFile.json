@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "上传附件",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "上传附件"
 }

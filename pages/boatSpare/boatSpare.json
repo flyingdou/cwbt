@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "备件查询",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "备件查询"
 }

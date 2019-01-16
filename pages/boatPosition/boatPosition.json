@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "船舶位置",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "船舶位置"
 }

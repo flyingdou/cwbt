@@ -16,6 +16,16 @@ Page({
   onLoad: function (options) {
     obj = this;
     // obj.init();
+
+    // 设置导航栏颜色
+    wx.setNavigationBarColor({
+      backgroundColor: '#348BFF',
+      frontColor: '#ffffff',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    });
   },
 
   /**

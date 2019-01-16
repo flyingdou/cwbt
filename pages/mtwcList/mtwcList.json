@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "外委工作单列表",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "外委工作单列表"
 }

@@ -37,12 +37,28 @@ Page({
   onShow: function () {
     // 判断用户是否登录
     if (app.user.id) {
+      wx.setNavigationBarColor({ 
+        backgroundColor: '#000000',
+        frontColor: '#ffffff',
+        animation: {
+          duration: 400,
+          timingFunc: 'easeIn'
+        }
+      });
       obj.setData({
         isLogin: false,
         userPriv: app.user.userPriv
       });
       wx.showTabBar();
     } else {
+      wx.setNavigationBarColor({ 
+        backgroundColor: '#348BFF',
+        frontColor: '#ffffff',
+        animation: {
+          duration: 400,
+          timingFunc: 'easeIn'
+        }
+      });
       obj.setData({
         isLogin: true,
         password: ''
@@ -178,6 +194,11 @@ Page({
    * 登录
    */
   login: (e) => {
+    // 校验账号，密码是否填写
+    if (!obj.data.account || !obj.data.password) {
+      util.tipsMessage('请输入账号密码！');
+      return;
+    }
     // 获取参数，校验参数，生成json
     var param = {}, encryptedData = null;
     if (e.type == 'getuserinfo') {
@@ -207,9 +228,17 @@ Page({
         encryptedData: encryptedData
       },
       success: (res) => {
-        wx.hideLoading();
         console.log(res);
+        wx.hideLoading();
         if (res.data.success) {
+          wx.setNavigationBarColor({ 
+            backgroundColor: '#000000',
+            frontColor: '#ffffff',
+            animation: {
+              duration: 400,
+              timingFunc: 'easeIn'
+            }
+          });
           util.tipsMessage('登录成功！');
           app.user = res.data.user;
           wx.setStorageSync('user', res.data.user);

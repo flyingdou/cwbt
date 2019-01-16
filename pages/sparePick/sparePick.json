@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "领用备件",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "领用备件"
 }

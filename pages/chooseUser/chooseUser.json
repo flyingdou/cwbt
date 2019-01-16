@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "选择人员",
-  "navigationBarTextStyle": "black"
+  "navigationBarTitleText": "选择人员"
 }
