@@ -72,7 +72,7 @@ Page({
    * 初始化页面数据
    */
   init: () => {
-    var src = 'https://cwbt.castlc.cn/cwbt/upload/upload.jsp';
+    var src = 'https://cwbt.castlc.cn/cwbt/cwbt/upload/upload.jsp';
     obj.setData({
       src: src
     });

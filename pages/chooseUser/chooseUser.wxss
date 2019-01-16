@@ -89,8 +89,8 @@ input{
 }
 
 .nextImg{
-  width: 32rpx;
-  height: 27rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .nextFont{
