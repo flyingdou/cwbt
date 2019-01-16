@@ -5,7 +5,7 @@
       <view class='list'>
             
                 <view class='pre' wx:for = '{{workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type + "&status=" + item.status : "../tempWork/tempWork?id=" + item.id}}' data-index='{{index}}'>
+                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type + "&status=" + item.status : "../tempWork/tempWork?id=" + item.id + "&status=" + item.status}}' data-index='{{index}}'>
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 4 || item.status == 9 || item.feedback == 2}}'></view>
                             <view class='line1'>

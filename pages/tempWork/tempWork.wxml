@@ -103,7 +103,7 @@
 
                   <view class='remark'>
                         <view class='title'>异常描述:</view>
-                        <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe'></textarea>
+                        <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe' disabled='{{user_priv == 2 ? true : false}}'></textarea>
                   </view>
 
             </view>
@@ -111,6 +111,17 @@
             <view class='remark' wx:if = '{{user_priv == 3}}'>
                   <view class='title'>维修反馈情况:</view>
                   <textarea placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark}}' wx:if = '{{isHidden}}'></textarea>
+                  
+            </view>
+
+            <view class='line' wx:if = '{{user_priv == 2}}'>
+                  <view class='title'>预计完成时间</view>
+                  <view class='value'>{{workDetail.expectedtime}}</view>
+            </view>
+
+            <view class='remark' wx:if = '{{user_priv == 2}}'>
+                  <view class='title'>审批意见:</view>
+                  <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.collect_note}}' disabled></textarea>
                   
             </view>
 
@@ -160,14 +171,14 @@
                         <!-- 领取button -->
                         <view wx:if = '{{!hasGot}}'>
                               <!-- 管理端、委外维修 -->
-                              <view wx:if = '{{user_priv == 2 && workDetail.overhaul_function == 1}}'>
+                              <view wx:if = '{{(!status || status > 1) && user_priv == 2 && workDetail.overhaul_function == 1}}'>
                                     <view class='button gotButton' bindtap='Got' >审批</view>
                               </view>
 
                               <!-- 船舶端 -->
-                              <view wx:if = '{{user_priv == 3 && workDetail.overhaul_function == 0}}'>
+                              <!--<view wx:if = '{{user_priv == 3 && workDetail.overhaul_function == 0}}'>
                                     <view class='button gotButton' bindtap='Got' >领取</view>
-                              </view> 
+                              </view>--> 
                         </view>
                   </view>
                   
