@@ -86,11 +86,11 @@
       <view class='blocks-item' wx:for='{{blockDiv}}' wx:key='' bindtap='{{item.fun}}' data-link='{{item.link}}' data-key = '{{item.pkey}}' data-value = '{{item.pvalue}}' data-userpriv = '{{item.userpriv}}' data-message='功能暂无！'>
         <view class='blocks-icon'>
           <image src='{{item.iconPath}}'></image>
+          <view class='blocks-count' wx:if = '{{item.count}}'>{{filter.toFixed(workCount[item.count], 0)}}</view>
         </view>
         <view class='blocks-memo'>
           {{item.name}}
         </view>
-        <view class='blocks-count' wx:if = '{{item.count}}'>{{filter.toFixed(workCount[item.count], 0)}}</view>
       </view>
     </view>
   </view>

@@ -122,10 +122,11 @@ Page{
 }
 
 .blocks{
-  padding: 20rpx 40rpx;
+  padding: 20rpx 0;
 }
 
 .blocks-title{
+  padding: 0 40rpx;
   font-size: 32rpx;
   font-family: PingFang-SC-Bold;
   font-weight: bold;
@@ -136,15 +137,16 @@ Page{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 20rpx 0;
+  padding-top: 30rpx;
 }
 
 .blocks-item{
-  position: relative;
-  margin-right: 13.14%;
+  width: 25%;
 }
 
 .blocks-icon{
+  position: relative;
+  margin: 0 auto;
   width: 100rpx;
   height: 100rpx;
   text-align: center;
@@ -154,6 +156,7 @@ Page{
 }
 
 .blocks-memo{
+  margin: 0 auto;
   margin-top: 20rpx;
   font-size: 24rpx;
   font-family: PingFang-SC-Medium;
