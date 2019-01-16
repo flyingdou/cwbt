@@ -208,6 +208,7 @@ Page({
       },
       success: (res) => {
         wx.hideLoading();
+        console.log(res);
         if (res.data.success) {
           util.tipsMessage('登录成功！');
           app.user = res.data.user;
