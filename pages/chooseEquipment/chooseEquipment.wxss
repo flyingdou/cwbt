@@ -76,7 +76,6 @@
 .userList{
   background:white;
   padding:20rpx;
-  margin:20rpx 0;
 }
 
 .preUser{
@@ -123,6 +122,9 @@
 .TagTitle{
   font-size: 28rpx;
   text-align: center;
+  background: #ff4401;
+  color: white;
+  padding: 20rpx;
 }
 
 .left{

@@ -170,6 +170,22 @@ Page({
       valid_remark: obj.data.validRemark,
     };
 
+    // 驳回的情况
+    if (param.status == 3) {
+      var valid = obj.data.valid;
+      var subParam = {
+        creator: app.user.id,
+        content: param.valid_remark,
+        recUser: valid.operator_id,
+        sourceWork: valid.workcardid
+      };
+      param.supervision = subParam;
+    }
+
+    // 测试数据
+    // console.log(param);
+    // return;
+
 
     wx.showLoading({
       title: '处理中',
@@ -213,7 +229,7 @@ Page({
     for (var i = 0; i < photos.length; i++) {
       imgs.push(app.constant.base_img_url + '/' + photos[i].name);
     }
-    console.log(imgs);
+    // console.log(imgs);
     var index = e.currentTarget.dataset.index;
     // 预览开始
     wx.previewImage({

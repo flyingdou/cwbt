@@ -9,7 +9,7 @@
 
                   <view class='tv'>
                         <view class='title'>作业人员</view>
-                        <view class='value'>{{valid.opeartor}}</view>
+                        <view class='value'>{{valid.operator}}</view>
                   </view>
             </view>
 
@@ -74,7 +74,7 @@
       
       <!-- 验收意见 -->
       <view class='inputDiv'>
-           <textarea placeholder='{{status == 2 ? "请输入验收意见！" : "请输入驳回意见！"}}' class='validRemark'  maxlength='-1' placeholder-class='placeHolder' value = '{{validRemark}}' bindinput='inputChange' data-key = 'validRemark' ></textarea>
+           <textarea placeholder='{{status == 2 ? "请输入验收意见！" : "请输入驳回意见, 验收意见将作为新生成的督导的内容。"}}' class='validRemark'  maxlength='-1' placeholder-class='placeHolder' value = '{{validRemark}}' bindinput='inputChange' data-key = 'validRemark' ></textarea>
       </view>
       
   </modal>

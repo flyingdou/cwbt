@@ -105,13 +105,14 @@
   width: 160rpx;
 }
 
-.placeHolder{
-
-}
-
 .validRemark{
   padding-top: 20rpx;
   width: auto;
+}
+
+
+textarea{
+  height: 500rpx;
 }
 
 
