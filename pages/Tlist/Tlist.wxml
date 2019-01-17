@@ -4,7 +4,7 @@
       <view class='List'>
            <checkbox-group bindchange = 'chooseChange'>
                     <!-- 每一个 -->
-                    <view class='pre' wx:for = '{{taskList}}' wx:key = '' bindtap='goto' data-index = '{{index}}'>
+                    <view class='pre' wx:for = '{{taskList}}' wx:key = '' bindtap='goto' data-index = '{{index}}' style='background:{{item.color}}'>
                           
                           <!-- 第一行 -->
                           <view class='line div'>
@@ -46,19 +46,20 @@
 
                           <!-- 图标 -->
                           <view class='tag' wx:if = '{{item.status == 9 && !isUpdate}}'>
-                                <view class='tagDiv'>
-                                      <!-- <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                                      <view class='statusFont'>已领取</view> -->
-                                      <view class='statusFont'>【张三已领取】</view>
-                                </view>
-
+                                <!-- 撤销领取 -->
                                 <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-id='{{item.id}}' data-index = '{{index}}'>撤销领取</view>
+					  
+					                  <!-- 他人领取 -->
+                            <view wx:else class='tagDiv'>
+                                  <view class='statusFont'>【{{item.collector}}已领取】</view>
+                            </view>
+					  
                           </view>
                           
 
                           <!-- 多选择 -->
                           <view class='choose'>
-                                <checkbox value='{{item.id}}' catchtap='ni' wx:if = '{{isGet && item.status == 1}}'></checkbox>
+                                <checkbox value='{{item.id}}'  color = 'rgba(54, 123, 240, 1)' catchtap='ni' wx:if = '{{item.status == 1}}'></checkbox>
                           </view>
 
                     </view>
@@ -69,9 +70,10 @@
 
       <!-- 底部按钮 -->
       <view class='footer' wx:if = '{{!isUpdate}}'>
-            <view class='button chooseTask' wx:if = '{{!isGet}}' bindtap='chooseStart'>领取任务</view>
+		<view class='button chooseTask' bindtap='getTask' data-status = '9'>领取任务</view>
+            <!-- <view class='button chooseTask' wx:if = '{{!isGet}}' bindtap='chooseStart'>领取任务</view>
             <view class='button get' wx:if = '{{isGet}}' data-status = '9' bindtap='getTask'>完成</view>
-            <view class='button cancel' wx:if = '{{isGet}}' bindtap='undo'>取消</view>
+            <view class='button cancel' wx:if = '{{isGet}}' bindtap='undo'>取消</view> -->
       </view>
 
       <!-- 底部填充 -->
