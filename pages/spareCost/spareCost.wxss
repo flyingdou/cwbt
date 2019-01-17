@@ -56,3 +56,18 @@
   border-radius: 5rpx;
   text-align: center;
 }
+
+.background-bolck{
+  height: 20rpx;
+  background-color: rgba(245,245,245,1);
+}
+
+.add-btn{
+  margin-top: 20rpx;
+  padding: 20rpx 50rpx;
+  font-size: 28rpx;
+  color: white;
+  background: #2682FF;
+  border-radius: 5rpx;
+  text-align: center;
+}

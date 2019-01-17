@@ -11,26 +11,31 @@
                   <view class='value'>{{spare.number}}</view>
             </view>
 
-            <view class='tv'>
-                  <view class='title'>使用数量:</view>
-                  <view class='value'>
-                        <input type='number' value = '{{costCount}}' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount'>5</input>
-                  </view>
-            </view>
-
-            <view class='line'>
+            <block wx:for='{{spareoutList}}' wx:key=''>
+                  <view class='background-bolck'></view>
                   <view class='tv'>
-                        <view class='title'>消耗地点:</view>
-                        <view class='value'>{{equipment.name}}</view>
-                  </view>
-
-                  <view class='right' bindtap='chooseDevice'>
-                        <view class='value'>选择</view>
-                        <view class='moreIcon'>
-                              <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                        <view class='title'>使用数量:</view>
+                        <view class='value'>
+                              <input type='number' value = '{{costCount}}' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount' data-name='number' data-index='{{index}}'>5</input>
                         </view>
                   </view>
-            </view>
+
+                  <view class='line'>
+                        <view class='tv'>
+                              <view class='title'>消耗地点:</view>
+                              <view class='value'>{{item.equipment.name}}</view>
+                        </view>
+
+                        <view class='right' bindtap='chooseDevice' data-index='{{index}}'>
+                              <view class='value'>选择</view>
+                              <view class='moreIcon'>
+                                    <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                              </view>
+                        </view>
+                  </view>
+            </block>
+
+            <view class='add-btn' bindtap='addSpareout'>添加使用地点</view>
       </view>
 
 

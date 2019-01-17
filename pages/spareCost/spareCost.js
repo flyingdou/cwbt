@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    spareoutList: []
   },
 
   /**
@@ -15,11 +15,15 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var spare = options.spare;
-    obj.setData({
-      spare: JSON.parse(decodeURI(spare))
-    });
 
+    if (options.spare) {
+      var spare = JSON.parse(decodeURI(options.spare));
+      obj.setData({
+        spare: spare
+      });
+    }
+    
+    obj.addSpareout();
   },
 
   /**
@@ -75,21 +79,41 @@ Page({
    * inputChange
    */
   inputChange: (e) => {
-    var dou = {};
-    dou[e.currentTarget.dataset.key] = e.detail.value;
-    obj.setData(dou);
+    var spareoutList = obj.data.spareoutList;
+    spareoutList[e.currentTarget.dataset.index][e.currentTarget.dataset.key] = e.detail.value;
+    spareoutList[e.currentTarget.dataset.index][e.currentTarget.dataset.name] = e.detail.value;
+    obj.setData({
+      spareoutList: spareoutList
+    });
+  },
+
+  /**
+   * 添加备件消耗记录
+   */
+  addSpareout() {
+    var spareoutList = obj.data.spareoutList;
+    var spare = obj.data.spare;
+    var spareout = { spareid: spare.spareid, createperson: app.user.id, updateperson: app.user.id, status: 7, isdel: 0, tableid: 2 };
+    if (spareoutList.length == 0) {
+      spareout.id = spare.id;
+    }
+    spareoutList.push(spareout);
+    obj.setData({
+      spareoutList: spareoutList
+    });
   },
 
   /**
    * 扫码查询设备
    */
-  chooseDevice: () => {
+  chooseDevice: (e) => {
     // var number = '121600110801100';
     // obj.getEquipment(number);
+    var index = e.currentTarget.dataset.index;
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
-        obj.getEquipment(res.result);
+        obj.getEquipment(res.result, index);
       },
       fail: (f) => {
         wx.showModal({
@@ -102,7 +126,7 @@ Page({
     
   },
 
-  getEquipment: (number) => {
+  getEquipment: (number, index) => {
     var reqUrl = util.getRequestURL('getWcEquipmentcardByNumber.we');
 
     // loading
@@ -119,8 +143,11 @@ Page({
       success: (res) => {
         res = res.data;
         if (res) {
+          var spareoutList = obj.data.spareoutList;
+          spareoutList[index].equipment = res;
+          spareoutList[index].inequipment = res.id;
           obj.setData({
-            equipment: res
+            spareoutList: spareoutList
           });
         }
       },
@@ -142,7 +169,7 @@ Page({
         return;
      }
 
-     var param = obj.data.param;
+     var param = { spareoutList: obj.data.spareoutList };
      var reqUrl = util.getRequestURL('saveSpareout.we');
 
      // loading
@@ -188,51 +215,46 @@ Page({
    * 校验数据
    */
   checkParam: () => {
-    var param = {};
+    var result = true, sumCount = 0;
+    var spareoutList = obj.data.spareoutList;
 
-    var costCount = obj.data.costCount;
-    if (!costCount) {
-      wx.showModal({
-        title: '提示',
-        content: '请输入备件使用数量！',
-        showCancel: false
-      })
-      return false;
-    }
+    spareoutList.forEach(function (item, i) {
+      var costCount = item.costCount;
+      if (!costCount) {
+        wx.showModal({
+          title: '提示',
+          content: '请输入备件使用数量！',
+          showCancel: false
+        })
+        result = false;
+      }
 
+      var equipment = item.equipment;
+      if (!equipment) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择消耗地点！',
+          showCancel: false
+        })
+        result = false;
+      }
+
+      sumCount += parseInt(item.costCount);
+    });
+
+    
     var spare = obj.data.spare;
-    if (costCount > spare.number) {
+    if (sumCount > spare.number) {
       wx.showModal({
         title: '提示',
         content: '备件使用数量，不可大于备件总数！',
         showCancel: false
       })
-      return false;
+      result = false;
     }
-    
+  
 
-    var equipment = obj.data.equipment;
-    if (!equipment) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择消耗地点！',
-        showCancel: false
-      })
-      return false;
-    }
-
-    param.id = spare.id;
-    param.updateperson = app.user.id;
-    param.number = costCount;
-    param.inequipment = equipment.id;
-    param.status = 7; // 消耗
-    param.isdel = 0; // 是否删除
-    param.spareid = spare.spareid;
-    
-    obj.data.param = param;
-    console.log(param);
-
-    return true;
+    return result;
 
   },
 

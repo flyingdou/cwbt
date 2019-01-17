@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isHidden: true
   },
 
   /**
@@ -80,7 +80,7 @@ Page({
   init: () => {
     var spareList = [];
     var dou = {};
-    var isHidden = false;
+    var isHidden = true;
     var reqUrl = util.getRequestURL('getSpareByCode.we');
     var param = {
       code: obj.data.code,
@@ -104,7 +104,7 @@ Page({
         if (res.success) {
           spareList = res.spareList;
           if (spareList.length > 1) {
-             isHidden = false;
+            isHidden = false;
           }
           dou.spare = spareList[0] || {};
           dou.spareList = spareList;
@@ -184,11 +184,13 @@ Page({
   pick: () => {
     var spare = obj.data.spare;
     var param = {
-      createperson: app.user.id,
-      spareid: spare.id,
-      status: 8, // 领取
-      isdel: 1, // 是否删除
-      tableid: 2 // 关联表id 
+      spareout: {
+        createperson: app.user.id,
+        spareid: spare.id,
+        status: 8, // 领取
+        isdel: 1, // 是否删除
+        tableid: 2 // 关联表id 
+      }
     };
 
     var reqUrl = util.getRequestURL('saveSpareout.we');
