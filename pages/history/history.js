@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+     startTime: '请选择开始时间！',
+     endTime: '请选择结束时间！',
+     showModalStatus: false
   },
 
   /**
@@ -19,7 +21,7 @@ Page({
     obj.setData({
       equipmentid: equipmentid
     });
-    obj.init();
+    obj.getData();
   },
 
   /**
@@ -75,11 +77,23 @@ Page({
   /**
    * 初始化页面数据
    */
-  init: () => {
+  getData: () => {
     var reqUrl = util.getRequestURL('getEquipmentWorkRecord.we');
     var param = {
       equipmentId: obj.data.equipmentid
     };
+
+    // 开始时间
+    var startTime = obj.data.startTime;
+    if (startTime && startTime.indexOf('请') < 0) {
+       param.startTime = startTime;
+    }
+
+    // 结束时间
+    var endTime = obj.data.endTime;
+    if (endTime && endTime.indexOf('请') < 0) {
+      param.endTime = endTime;
+    }
 
     // loading
     wx.showLoading({
@@ -102,6 +116,33 @@ Page({
         wx.hideLoading();
       }
     })
+  },
+
+  /**
+   * 选择时间
+   */
+  chooseDate(e) {
+    var key = e.currentTarget.dataset.key;
+    obj.setData({
+      showModalStatus: true,
+      dateKey: key
+    });
+  },
+
+  /**
+   * 日历组件返回日期
+   */
+  saveSelectValue(res) {
+     var key = obj.data.dateKey;
+     var dou = {};
+     dou[key] = res.detail.value;
+     dou.showModalStatus = false;
+     obj.setData(dou);
+
+     // 选择了结束时间，自动查询
+     if (key == 'endTime') {
+       obj.getData();
+     }
   },
 
 

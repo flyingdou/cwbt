@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "维保记录"
+  "navigationBarTitleText": "维保记录",
+  "usingComponents": {
+    "mark": "../../component/mark/mark"
+  }
 }
