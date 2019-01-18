@@ -13,7 +13,7 @@
       <!-- 下级组织机构 -->
       <view wx:if = '{{deptList && deptList.length > 0}}' class='deptList'>
             <!-- preDept -->
-            <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = '' bindtap='next' data-dept = '{{dept}}' data-deptindex = '{{index}}'>
+            <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = ''>
 
                   <view class='left'>
                         <radio checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></radio>
@@ -27,7 +27,7 @@
 
                   </view>
 
-                  <view class='right'>
+                  <view class='right' bindtap='next' data-dept = '{{dept}}' data-deptindex = '{{index}}'>
                         <view class='next'>
                               <view class='nextImg'>
                                     <image src='../../icon/next@2x.png' mode='aspectFill'></image>
