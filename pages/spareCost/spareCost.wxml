@@ -11,7 +11,7 @@
                   <view class='value'>{{spare.number}}</view>
             </view>
 
-            <block wx:for='{{spareoutList}}' wx:key=''>
+            <view wx:for='{{spareoutList}}' wx:key='' catchlongpress='removeSpareout' data-index='{{index}}'>
                   <view class='background-bolck'></view>
                   <view class='tv'>
                         <view class='title'>使用数量:</view>
@@ -33,7 +33,7 @@
                               </view>
                         </view>
                   </view>
-            </block>
+            </view>
 
             <view class='add-btn' bindtap='addSpareout'>添加使用地点</view>
       </view>

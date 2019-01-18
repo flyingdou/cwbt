@@ -104,6 +104,29 @@ Page({
   },
 
   /**
+   * 移除备件消耗记录
+   */
+  removeSpareout(e) {
+    var index = e.currentTarget.dataset.index;
+    if (index == 0) {
+      return;
+    }
+    wx.showModal({
+      title: '提示',
+      content: '是否确定删除？',
+      success(message_res) {
+        if (message_res.confirm) {
+          var spareoutList = obj.data.spareoutList;
+          spareoutList.splice(index, 1);
+          obj.setData({
+            spareoutList: spareoutList
+          });
+        }
+      } 
+    });
+  },
+
+  /**
    * 扫码查询设备
    */
   chooseDevice: (e) => {
