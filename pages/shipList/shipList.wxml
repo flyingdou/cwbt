@@ -7,17 +7,19 @@
                                       <!-- image -->
                                       <view class='line'>
                                             <view class='imageDiv'>
-                                                  <image src='{{base_img_url}}/{{item.image}}'></image>
+                                                  <image src='{{base_domain}}/{{item.image}}' mode='aspectFill'></image>
                                             </view>
                                       </view>
 
-                                      <view class='line'>
-                                            <view class='title'>{{item.name}}</view>
-                                      </view>
+                                      <view class='dou'>
+                                            <view class='line'>
+                                                  <view class='title'>{{item.name}}</view>
+                                            </view>
 
-                                      <view class='line'>
-                                            <view class='value'>所属部门</view>
-                                            <view class='value'>{{item.deptName}}</view>
+                                            <view class='line'>
+                                                  <view class='value'>所属部门</view>
+                                                  <view class='value'>{{item.deptName}}</view>
+                                            </view>
                                       </view>
                                 </view>
 

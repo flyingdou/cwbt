@@ -19,7 +19,6 @@
   justify-content: flex-start;
   align-items: center;
   padding: 20rpx 0;
-  padding-right: 40rpx;
 }
 
 .title{
@@ -30,7 +29,14 @@
   padding-left: 20rpx;
 }
 
+.left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .imageDiv{
   width: 120rpx;
   height: 120rpx;
+  margin-right: 20rpx;
 }
