@@ -25,7 +25,11 @@
             <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = ''>
 
                   <view class='left' bindtap = 'chooseDept' data-deptindex = '{{index}}'>
+                        <view class='deptImage'>
+                              <image src='{{base_img_url}}/shipLogo1.jpg'></image>
+                        </view>
                         <checkbox checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></checkbox>
+                       
                         <view class='deptName'>{{dept.dept_name}}</view>
                         <view class='personCount'>（{{dept.personCount}}）</view>
                   </view>
@@ -50,7 +54,11 @@
             <!-- checkboxGroup -->
             <checkbox-group>
                     <view class='preUser' wx:for = '{{userList}}' wx:for-item = 'user' wx:key = '' bindtap='checkboxChange' data-index = '{{index}}'>
-                          <view class='userName'>{{user.user_name}}</view>
+
+                          <view class='left'>
+                                <view class='userImage'>彬</view>
+                                <view class='userName'>{{user.user_name}}</view>
+                          </view>
                           <view class='checkBox'>
                                 <checkbox checked='{{user.checked}}' color='rgba(54, 123, 240, 1'></checkbox>
                           </view>

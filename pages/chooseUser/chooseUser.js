@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    base_img_url: app.constant.base_img_url
   },
 
   /**

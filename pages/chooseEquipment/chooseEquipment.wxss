@@ -52,6 +52,11 @@
   align-items: center;
 }
 
+.deptImage{
+   width: 80rpx;
+   height: 80rpx;
+}
+
 .deptName{
   padding-left: 20rpx;
 }
@@ -132,8 +137,20 @@
   justify-content: flex-start;
 }
 
+.info{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .iconDiv{
   width: 100rpx;
   height: 100rpx;
   overflow: hidden;
+  border-radius: 50%;
+}
+
+.boatImage{
+   width: 120rpx;
+   height: 120rpx;
 }

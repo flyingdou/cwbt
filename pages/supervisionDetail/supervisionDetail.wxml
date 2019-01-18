@@ -7,17 +7,17 @@
       <view class='block1' data-link = '../superviseFeedback/superviseFeedback?id={{supervise.contents[0].id}}&source=supervision' bindtap='goto'>
 
             <view class='up-title'>
-                  发起
+                  {{supervise.creator}}发起
             </view>
 
-            <view class='line'>
+            <!-- <view class='line'>
                   <view class='title'>发起人</view>
                   <view class='value'>{{supervise.creator}}</view>
-            </view>
+            </view> -->
             
             <!-- 内容 --> 
             <view class='remark'>
-                  <view class='title'>{{supervise.contents[0].userName}}要求：</view>
+                  <view class='title'>内容：</view>
                   <view class='task-white'>
                       <view class='content-box value'>
                         {{supervise.contents[0].content}}
@@ -53,14 +53,16 @@
       <!-- block1 -->
       <view class='block1'>
 
-            <view class='up-title'>
-                  转发
-            </view>
+            
             
             <!-- 内容 -->
             <view class='remark' wx:for='{{supervise.contents}}' wx:key='' wx:if='{{index > 0}}' 
               data-link = '../superviseFeedback/superviseFeedback?id={{item.id}}&source=forward' bindtap='goto'>
-                  <view class='title'>{{item.userName}}要求：</view>
+              <view class='up-title'>
+                  {{item.userName}}转发
+              </view>
+
+                  <view class='title'>内容：</view>
                   <view class='task-white'>
                       <view class='content-box value'>
                         {{item.content}}

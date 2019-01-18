@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+     base_domain: app.constant.base_domain
   },
 
   /**

@@ -9,7 +9,7 @@ Page({
   data: {
     blocksDiv1: [[
       { name: '我发起的', fun: 'goto', iconPath: '../../icon/send.png', link: '../supervisionList/supervisionList?queryType=1' },
-      { name: '我执行的', fun: 'goto', iconPath: '../../icon/execute.png', link: '../supervisionList/supervisionList?queryType=2' },
+      { name: '我接收的', fun: 'goto', iconPath: '../../icon/execute.png', link: '../supervisionList/supervisionList?queryType=2' },
       { name: '抄送我的', fun: 'goto', iconPath: '../../icon/copy.png', link: '../supervisionList/supervisionList?queryType=3' }
     ]],
     blocksDiv2: [[
