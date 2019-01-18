@@ -168,6 +168,19 @@ Page({
   },
 
   /**
+   * 移除人员
+   */
+  removeUser(e) {
+    var key = e.currentTarget.dataset.key;
+    var index = e.currentTarget.dataset.index;
+    var users = obj.data[key];
+    users.splice(index, 1);
+    var data = {};
+    data[key] = users;
+    obj.setData(data);
+  },
+
+  /**
    * send、发起督导
    */
   send: () => {

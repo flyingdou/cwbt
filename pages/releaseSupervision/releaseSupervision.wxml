@@ -1,37 +1,53 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
 <!-- 页面开始 --> 
 <view class='content'> 
         <!-- 选择区 --> 
         <view class = 'choose'> 
                 <!-- 接收人 --> 
-                <view class = 'chooseLine' bindtap='choose' data-type = 'rec'> 
+                <view class = 'chooseLine' data-type = 'rec'> 
                       <view class='left'> 
-                            <view class = 'title tv'>接收人:</view> 
+                            <view class = 'title tv tvv'>接收人:</view> 
                             <view class='value long_text'>
                                   <block wx:for = '{{recUsers}}' wx:key = ''>
-                                         {{item.user_name}}
-                                         <block wx:if = '{{index != (recUsers.length -1)}}'>、</block>
+                                         <view class='user-name' catchtap='removeUser' data-index='{{index}}' data-key='recUsers'>
+                                           <view class='small_text'>{{filter.showNameLast(item.user_name)}}<view class='close'><image src='../../icon/close.png' mode='aspectFill'></image></view></view>
+                                           <view>{{item.user_name}}</view>
+                                         </view>
                                   </block> 
+                                  <block>
+                                        <view class='user-name' bindtap='choose' data-type = 'rec'>
+                                           <view class='small_text add-block'><image src='../../icon/add2.png' mode='aspectFill'></image></view>
+                                         </view>
+                                  </block>
                             </view>
                       </view> 
-                      <view class = 'moreIcon'> 
+                      <!--<view class = 'moreIcon'> 
                             <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
-                      </view> 
+                      </view>--> 
         </view> 
                  
                 <!-- 抄送 --> 
                 <view class = 'chooseLine' bindtap='choose' data-type = 'copy'>
                       <view class='left'> 
-                            <view class = 'title tv'>抄送人:</view> 
+                            <view class = 'title tv tvv'>抄送人:</view> 
                             <view class='value long_text'>
                                   <block wx:for = '{{copyUsers}}' wx:key = ''>
-                                         {{item.user_name}}
-                                         <block wx:if = '{{index != (copyUsers.length -1)}}'>、</block>
+                                         <view class='user-name' catchtap='removeUser' data-index='{{index}}' data-key='copyUsers'>
+                                           <view class='small_text'>{{filter.showNameLast(item.user_name)}}<view class='close'><image src='../../icon/close.png' mode='aspectFill'></image></view></view>
+                                           <view>{{item.user_name}}</view>
+                                         </view>
                                   </block> 
+                                  <block>
+                                        <view class='user-name' bindtap='choose' data-type = 'copy'>
+                                           <view class='small_text add-block'><image src='../../icon/add2.png' mode='aspectFill'></image></view>
+                                         </view>
+                                  </block>
                             </view>
                       </view> 
-                      <view class = 'moreIcon'> 
+                      <!--<view class = 'moreIcon'> 
                             <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
-                      </view> 
+                      </view>-->
                    </view> 
         </view> 
          

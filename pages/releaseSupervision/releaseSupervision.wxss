@@ -18,7 +18,7 @@ textarea{
 	display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20rpx 0;
+  padding-bottom: 20rpx;
   border-bottom:1rpx solid rgba(245,245,245,1);
 }
 
@@ -35,6 +35,10 @@ textarea{
 
 .tv{
   padding-right: 20rpx;
+}
+
+.tvv{
+  margin-top: 20rpx;
 }
 
 .moreIcon{
@@ -98,9 +102,40 @@ textarea{
 }
 
 .long_text{
+  padding-right: 20rpx;
   max-width: 80%;
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.user-name{
+  float: left;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.small_text{
+  position: relative;
+  margin: 0 auto;
+  width: 60rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #FFFFFF;
+  background-color: rgba(54, 123, 240, 1);
+  border-radius: 50%;
+}
+
+.add-block{
+  background-color: #FFFFFF;
+}
+
+.close{
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 
 /** 附件 **/
