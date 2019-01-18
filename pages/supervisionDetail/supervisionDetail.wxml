@@ -62,7 +62,7 @@
               data-link = '../superviseFeedback/superviseFeedback?id={{item.id}}&source=forward' bindtap='goto'>
                   <view class='title'>{{item.userName}}要求：</view>
                   <view class='task-white'>
-                      <view class='content-box'>
+                      <view class='content-box value'>
                         {{item.content}}
                       </view>
                   </view>
@@ -73,7 +73,7 @@
                     <view class='bottom-left'>抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{fwdUserIndex != item.fwdUsers.length-1}}'> 、</text></text></view>
                   </view>
                   <view class="ask">
-                    <view class='bottom-right'>
+                    <view class='value'>
                       {{item.auto_date}} 
                     </view>
                   </view>
