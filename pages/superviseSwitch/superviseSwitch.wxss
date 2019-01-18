@@ -1,5 +1,6 @@
 .blocks{
   padding: 20rpx 0;
+  background: white;
 }
 
 .blocks-title{

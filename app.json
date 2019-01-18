@@ -45,7 +45,7 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "",
-    "navigationBarTextStyle":"#FFFFFF"
+    "navigationBarTextStyle":"white"
   },
   "tabBar": {
     "list": [

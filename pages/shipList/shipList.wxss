@@ -29,3 +29,8 @@
 .value{
   padding-left: 20rpx;
 }
+
+.imageDiv{
+  width: 120rpx;
+  height: 120rpx;
+}

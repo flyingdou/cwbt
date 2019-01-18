@@ -4,16 +4,16 @@ var obj = null;
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据su
    */
   data: {
     blocksDiv1: [[
-      { name: '我发起的', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../supervisionList/supervisionList?queryType=1' },
-      { name: '我执行的', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../supervisionList/supervisionList?queryType=2' },
-      { name: '抄送我的', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../supervisionList/supervisionList?queryType=3' }
+      { name: '我发起的', fun: 'goto', iconPath: '../../icon/send.png', link: '../supervisionList/supervisionList?queryType=1' },
+      { name: '我执行的', fun: 'goto', iconPath: '../../icon/execute.png', link: '../supervisionList/supervisionList?queryType=2' },
+      { name: '抄送我的', fun: 'goto', iconPath: '../../icon/copy.png', link: '../supervisionList/supervisionList?queryType=3' }
     ]],
     blocksDiv2: [[
-      { name: '发起督导', fun: 'goto', iconPath: '../../icon/index-icon/dudao.png', link: '../releaseSupervision/releaseSupervision' }
+      { name: '发起督导', fun: 'goto', iconPath: '../../icon/launch.png', link: '../releaseSupervision/releaseSupervision' }
     ]]
   },
 

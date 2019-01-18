@@ -4,6 +4,13 @@
             <radio-group bindchange = 'choose' >
                           <view class='pre' wx:for = '{{boatList}}' wx:key = '' bindtap='choose' data-index='{{index}}'>
                                 <view class='left'>
+                                      <!-- image -->
+                                      <view class='line'>
+                                            <view class='imageDiv'>
+                                                  <image src='{{base_img_url}}/{{item.image}}'></image>
+                                            </view>
+                                      </view>
+
                                       <view class='line'>
                                             <view class='title'>{{item.name}}</view>
                                       </view>
