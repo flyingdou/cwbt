@@ -1,147 +1,196 @@
-<!-- 填充高度 -->
-<view style='height: 20rpx;'></view>
-<!-- 页面开始 -->
-<view class='content' wx:if='{{!loadingStatus}}'>
+<tab titles='{{titles}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}'>
+  <view class='tab1' slot='0'>
+    <!-- 填充高度 -->
+    <view style='height: 20rpx;'></view>
+    <!-- 页面开始 -->
+    <view class='content' wx:if='{{!loadingStatus}}'>
 
-      <!-- block1 -->
-      <view class='block1' data-link = '../superviseFeedback/superviseFeedback?id={{supervise.contents[0].id}}&source=supervision' bindtap='goto'>
+          <!-- block1 -->
+          <view class='block1' data-link='../superviseFeedback/superviseFeedback?id={{supervise.contents[0].id}}&source=supervision'>
 
-            <view class='up-title'>
-                  {{supervise.creator}}发起
-            </view>
+                <view class='up-title'>
+                      {{supervise.creator}}发起
+                </view>
 
-            <!-- <view class='line'>
-                  <view class='title'>发起人</view>
-                  <view class='value'>{{supervise.creator}}</view>
-            </view> -->
-            
-            <!-- 内容 --> 
-            <view class='remark'>
-                  <view class='title'>内容：</view>
-                  <view class='task-white'>
-                      <view class='content-box value'>
-                        {{supervise.contents[0].content}}
+                <!-- <view class='line'>
+                      <view class='title'>发起人</view>
+                      <view class='value'>{{supervise.creator}}</view>
+                </view> -->
+                
+                <!-- 内容 --> 
+                <view class='remark'>
+                      <view class='title'>内容：</view>
+                      <view class='task-white'>
+                          <view class='content-box value'>
+                            {{supervise.contents[0].content}}
+                          </view>
                       </view>
-                  </view>
-                  <view class="bottom">
-                    <view class='bottom-left'>接收人: <text class='value' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].recUsers.length-1}}'> 、</text></text></view>
-                  </view>
-                  <view class="afk">
-                    <view class='bottom-left'>抄送人: <text class='value' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].fwdUsers.length-1}}'> 、</text></text></view>
-                  </view>
-                  <view class="ask">
-                    <view class='value'>
-                      {{supervise.contents[0].auto_date}} 
-                    </view>
-                  </view>
-                  <!-- 附件 -->
-                  <view class='title'>附件：</view>
-                  <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
-                      <view class='content-box value' wx:for='{{supervise.contents[0].attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='0' data-subindex='{{attachmentIndex}}'>
-                        {{attachment.filename}}
+                      <view class="bottom">
+                        <view class='bottom-left'>接收人: <text class='value' wx:for='{{supervise.contents[0].recUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].recUsers.length-1}}'> 、</text></text></view>
                       </view>
-                  </view>
-            </view>
-      </view>
-</view>
-
-<!-- 填充高度 -->
-<view style='height: 20rpx;' wx:if='{{supervise.contents.length > 1}}'></view>
-<!-- 页面开始 -->
-<view class='content' wx:if='{{!loadingStatus && supervise.contents.length > 1}}'>
-
-      <!-- block1 -->
-      <view class='block1'>
-
-            
-            
-            <!-- 内容 -->
-            <view class='remark' wx:for='{{supervise.contents}}' wx:key='' wx:if='{{index > 0}}' 
-              data-link = '../superviseFeedback/superviseFeedback?id={{item.id}}&source=forward' bindtap='goto'>
-              <view class='up-title'>
-                  {{item.userName}}转发
-              </view>
-
-                  <view class='title'>内容：</view>
-                  <view class='task-white'>
-                      <view class='content-box value'>
-                        {{item.content}}
+                      <view class="afk">
+                        <view class='bottom-left'>抄送人: <text class='value' wx:for='{{supervise.contents[0].fwdUsers}}' wx:key=''>{{item.userName}}<text wx:if = '{{index != supervise.contents[0].fwdUsers.length-1}}'> 、</text></text></view>
                       </view>
-                  </view>
-                  <view class="bottom">
-                    <view class='bottom-left'>接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>{{recUser.userName}}<text wx:if = '{{recUserIndex != item.recUsers.length-1}}'> 、</text></text></view>
-                  </view>
-                  <view class="afk">
-                    <view class='bottom-left'>抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{fwdUserIndex != item.fwdUsers.length-1}}'> 、</text></text></view>
-                  </view>
-                  <view class="ask">
-                    <view class='value'>
-                      {{item.auto_date}} 
-                    </view>
-                  </view>
-                  <!-- 附件 -->
-                  <view class='title'>附件：</view>
-                  <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
-                      <view class='content-box value' wx:for='{{item.attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='{{index}}' data-subindex='{{attachmentIndex}}'>
-                        {{attachment.filename}}
-                      </view>
-                  </view>
-            </view>
-      </view>
-</view>
-
-<!-- 反馈内容(hidden控制不显示, 反馈内容暂不显示) -->
-<view class='content' wx:if='{{!loadingStatus && superviseFeedback && hidden}}'>
-
-      <!-- block1 -->
-      <view class='block1'>
-
-            <view class='up-title'>
-                  反馈
-            </view>
-
-            <view class='line'>
-                        <view class='title'>反馈人</view>
-                        <view class='value'>{{superviseFeedback.opeartor}}</view>
-            </view>
-
-            <view class='line'>
-                        <view class='title'>反馈时间</view>
-                        <view class='value'>{{superviseFeedback.auto_date}}</view>
-            </view>
-
-            <!-- 作业内容 -->
-            <view class='taskList'>
-                  <view class='taskTitle'>情况描述</view>
-                  
-                  <!-- 工作内容 -->
-                  <view class='task'>
-                        <view class='ta'>{{superviseFeedback.remark}}</view>
-                  </view>
-                  
-            </view>
-
-            <!-- 作业照片 -->
-            <view class='picsList'>
-                  <view class='taskTitle'>现场照片</view>
-                  <view class='pics'>
-                        <view class='pre' wx:for = '{{superviseFeedback.image}}' wx:key=''>
-                              <view class='pic' bindtap='preview' data-index = '{{index}}'>
-                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
-                              </view>
-                              <view class='picTime'>{{item.pic_time}}</view>
+                      <view class="ask">
+                        <view class='value'>
+                          {{supervise.contents[0].auto_date}} 
                         </view>
+                      </view>
+                      <!-- 附件 -->
+                      <view class='title'>附件：</view>
+                      <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
+                          <view class='content-box value' wx:for='{{supervise.contents[0].attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='0' data-subindex='{{attachmentIndex}}'>
+                            {{attachment.filename}}
+                          </view>
+                      </view>
+                </view>
+          </view>
+    </view>
+
+    <!-- 填充高度 -->
+    <view style='height: 20rpx;' wx:if='{{supervise.contents.length > 1}}'></view>
+    <!-- 页面开始 -->
+    <view class='content' wx:if='{{!loadingStatus && supervise.contents.length > 1}}'>
+
+          <!-- block1 -->
+          <view class='block1'>
+                <!-- 内容 -->
+                <view class='remark' wx:for='{{supervise.contents}}' wx:key='' wx:if='{{index > 0}}' data-link='../superviseFeedback/superviseFeedback?id={{item.id}}&source=forward'>
+                  <view class='up-title'>
+                      {{item.userName}}转发
                   </view>
-            </view>
 
-      </view>
-</view> 
+                      <view class='title'>内容：</view>
+                      <view class='task-white'>
+                          <view class='content-box value'>
+                            {{item.content}}
+                          </view>
+                      </view>
+                      <view class="bottom">
+                        <view class='bottom-left'>接收人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>{{recUser.userName}}<text wx:if = '{{recUserIndex != item.recUsers.length-1}}'> 、</text></text></view>
+                      </view>
+                      <view class="afk">
+                        <view class='bottom-left'>抄送人: <text style='color: rgba(153, 153, 153, 1);' wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>{{fwdUser.userName}}<text wx:if = '{{fwdUserIndex != item.fwdUsers.length-1}}'> 、</text></text></view>
+                      </view>
+                      <view class="ask">
+                        <view class='value'>
+                          {{item.auto_date}} 
+                        </view>
+                      </view>
+                      <!-- 附件 -->
+                      <view class='title'>附件：</view>
+                      <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
+                          <view class='content-box value' wx:for='{{item.attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='{{index}}' data-subindex='{{attachmentIndex}}'>
+                            {{attachment.filename}}
+                          </view>
+                      </view>
+                </view>
+          </view>
+    </view>
 
-<!-- 填充高度 -->
-<view class='fill'></view>
+    <!-- 反馈内容(hidden控制不显示, 反馈内容暂不显示) -->
+    <view class='content' wx:if='{{!loadingStatus && superviseFeedback && hidden}}'>
 
-<!-- 底部按钮 -->
-<view class='buttons' wx:if='{{supervise.creatorId != userId && supervise.status == 0 && superviseFeedback == 0 && isRecUser}}'>
-      <view class='button scanButton' bindtap='reSend' wx:if='{{userPriv == 2}}'>转发</view>
-      <view class='button photoButton' bindtap='implement'>执行</view>
-</view> 
+          <!-- block1 -->
+          <view class='block1'>
+
+                <view class='up-title'>
+                      反馈
+                </view>
+
+                <view class='line'>
+                            <view class='title'>反馈人</view>
+                            <view class='value'>{{superviseFeedback.opeartor}}</view>
+                </view>
+
+                <view class='line'>
+                            <view class='title'>反馈时间</view>
+                            <view class='value'>{{superviseFeedback.auto_date}}</view>
+                </view>
+
+                <!-- 作业内容 -->
+                <view class='taskList'>
+                      <view class='taskTitle'>情况描述</view>
+                      
+                      <!-- 工作内容 -->
+                      <view class='task'>
+                            <view class='ta'>{{superviseFeedback.remark}}</view>
+                      </view>
+                      
+                </view>
+
+                <!-- 作业照片 -->
+                <view class='picsList'>
+                      <view class='taskTitle'>现场照片</view>
+                      <view class='pics'>
+                            <view class='pre' wx:for = '{{superviseFeedback.image}}' wx:key=''>
+                                  <view class='pic' bindtap='preview' data-index = '{{index}}'>
+                                        <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                                  </view>
+                                  <view class='picTime'>{{item.pic_time}}</view>
+                            </view>
+                      </view>
+                </view>
+
+          </view>
+    </view> 
+
+    <!-- 填充高度 -->
+    <view class='fill'></view>
+
+    <!-- 底部按钮 -->
+    <view class='buttons' wx:if='{{supervise.creatorId != userId && supervise.status == 0 && superviseFeedback == 0 && isRecUser}}'>
+          <view class='button scanButton' bindtap='reSend' wx:if='{{userPriv == 2}}'>转发</view>
+          <view class='button photoButton' bindtap='implement'>执行</view>
+    </view> 
+  </view>
+
+  <view slot='1'>
+    <!-- 页面开始 -->
+    <view class='content' wx:if='{{superviseFeedback && superviseFeedback.length > 0}}'>
+          <view style='height: 20rpx;'></view>
+          <view class='up' wx:for='{{superviseFeedback}}' wx:key=''>
+                <view class='line'>
+                      <view class='tv'>
+                            <view class='title'>反馈人</view>
+                            <view class='value'>{{item.opeartor}}</view>
+                      </view>
+                </view>
+
+                <view class='line'>
+                      <view class='tv'>
+                            <view class='title'>反馈时间</view>
+                            <view class='value'>{{item.auto_date}}</view>
+                      </view>
+                </view>
+
+                <!-- 作业内容 -->
+                <view class='taskList'>
+                      <view class='taskTitle'>情况描述</view>
+                      
+                      <!-- 工作内容 -->
+                      <view class='task'>
+                            <view class='ta'>{{item.remark}}</view>
+                      </view>
+                      
+                </view>
+
+                <!-- 作业照片 -->
+                <view class='picsList'>
+                      <view class='taskTitle'>现场照片</view>
+                      <view class='pics'>
+                            <view class='pre' wx:for = '{{item.image}}' wx:key='' wx:for-item='subItem' wx:for-index='subIndex'>
+                                  <view class='pic' bindtap='preview' data-index = '{{subIndex}}' data-feedindex = '{{index}}'>
+                                        <image src='{{base_img_url}}/{{subItem.name}}' mode='aspectFill'></image>
+                                  </view>
+                                  <view class='picTime'>{{subItem.pic_time}}</view>
+                            </view>
+                      </view>
+                </view>
+
+
+
+          </view>
+    </view>
+  </view>
+</tab>

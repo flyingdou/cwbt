@@ -43,12 +43,4 @@
 
 
       </view>
-
-      <!-- 底部功能按钮 -->
-      <!-- <view class='footer'>
-            <view class='checkButton' bindtap='valid'>验收</view>
-      </view> -->
-
-
-
 </view>

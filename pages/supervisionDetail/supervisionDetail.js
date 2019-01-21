@@ -7,7 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_img_url: app.constant.base_img_url
+    base_img_url: app.constant.base_img_url,
+    titles: [
+      { title: '督导流程' },
+      { title: '督导反馈' }
+    ]
   },
 
   /**
@@ -33,6 +37,10 @@ Page({
     obj.setData({
       userId: app.user.id,
       userPriv: app.user.userPriv
+    });
+
+    obj.setData({
+      windowHeightRpx: util.getSystemInfo().windowHeightRpx
     });
   },
 
