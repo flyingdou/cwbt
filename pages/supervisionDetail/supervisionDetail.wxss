@@ -1,3 +1,9 @@
+.tab1{
+  position: relative;
+  height: 100%;
+  overflow: scroll;
+}
+
 .content{
   background: white;
   margin: 0 4%;
