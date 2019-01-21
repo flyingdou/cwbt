@@ -15,8 +15,15 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var type = options.type;
-    obj.data.type = type;
+    var key = options.key;
+    var value = options[key];
+    if (value) {
+      value = JSON.parse(value);
+    }
+    var dou = {};
+    dou[key] = value;
+    dou.key = key;
+    obj.setData(dou);
 
     // 初始化页面数据
     obj.init();
@@ -80,16 +87,9 @@ Page({
    */
   init: () => {
     var navList = [];
-    var types = obj.data.type;
-    var key = '';
-    if (types == 'rec') {
-       key = 'recUsers';
-    }
-    if (types == 'copy') {
-       key = 'copyUsers';
-    }
-    var dou = wx.getStorageSync(key) || {};
+    var key = obj.data.key;
     var deptUser = [];
+    var dou = obj.data[key];
     var chooseDeptList = dou.chooseDeptList || [];
     chooseDeptList.forEach((dept,index) => {
       dept.userList.forEach((user,ui) => {
@@ -324,7 +324,9 @@ Page({
     param.choosedUserIds = choosedUserIds;
 
     // 取出当前模式下，被选中的用户
-    var chooseList = wx.getStorageSync(obj.data.type + 'Users') || [];
+    // var chooseList = wx.getStorageSync(obj.data.type + 'Users') || [];
+    var key = obj.data.key;
+    var chooseList = obj.data[key].chooseUsers;
 
     wx.showLoading({
       title: '加载中',
@@ -444,12 +446,14 @@ Page({
    */
   choose: () => {
     var userList = obj.data.userList || [];
-    var chooseUsers = [];
+    var key = obj.data.key;
+    var hv = obj.data[key];
+    var chooseUsers = hv.chooseUsers || [];
 
     // 勾选的用户
     for (var u in userList) {
       if (userList[u].checked) {
-        chooseUsers.push(userList[u]);
+          chooseUsers.push(userList[u]);
       }
     }
 
@@ -471,13 +475,19 @@ Page({
       })
       return;
     }
-    
-    dou.chooseUsers = chooseUsers;
-    dou.chooseDeptList = chooseDeptList;
+   
+    var douValue = {};
+    douValue.chooseUsers = chooseUsers;
+    douValue.chooseDeptList = chooseDeptList;
     // 将值存储起来
-    var key = obj.data.type;
-    key = key + 'Users';
-    wx.setStorageSync(key, dou);
+    key = key + 'Dou';
+    dou[key] = douValue;
+    
+    // 将值存储到上个页面
+    var pages = getCurrentPages();
+    // 获取上一页面对象
+    var prePage = pages[pages.length -2];
+    prePage.setData(dou);
 
     wx.navigateBack({
       delta: 1,

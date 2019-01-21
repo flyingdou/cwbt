@@ -102,8 +102,6 @@ Page({
    */
   init: () => {
     var dou = {};
-    dou.recUsers = wx.getStorageSync('recUsers').chooseUsers || [];
-    dou.copyUsers = wx.getStorageSync('copyUsers').chooseUsers || [];
     dou.content = wx.getStorageSync('content') || '';
     obj.setData(dou);
   },
@@ -137,8 +135,10 @@ Page({
    * choose
    */
   choose: (e) => {
-    var type = e.currentTarget.dataset.type;
-    var jumpUrl = '../../pages/chooseUser/chooseUser?type=' + type;
+    var key = e.currentTarget.dataset.key;
+    var douKey = key + 'Dou';
+    var douValue = obj.data[douKey] || '';
+    var jumpUrl = '../../pages/chooseUser/chooseUser?' + key + '=' + JSON.stringify(douValue) + '&key=' + key;
     var contents = obj.data.contents || [];
     var upUsers = [];
     if (contents.length > 0) {
@@ -173,10 +173,10 @@ Page({
   removeUser(e) {
     var key = e.currentTarget.dataset.key;
     var index = e.currentTarget.dataset.index;
-    var users = obj.data[key];
+    var data = obj.data;
+    var users = data[key].chooseUsers;
     users.splice(index, 1);
-    var data = {};
-    data[key] = users;
+    data[key].chooseUsers = users;
     obj.setData(data);
   },
 

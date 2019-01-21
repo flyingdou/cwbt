@@ -1,3 +1,5 @@
+<!-- 引入过滤器 -->
+<wxs src = '../../utils/filters.wxs' module = 'filter'></wxs>
 <!-- 页面开始 -->
 <view class = 'content'>
       <!-- 搜索框 -->
@@ -19,21 +21,28 @@
       </view>
 
       
+      <!-- deptListTitle -->
+      <view class='deptListTitle userListTitle' wx:if = '{{deptList && deptList.length > 0}}' >{{navList[navList.length-1].dept_name}}下属机构</view>
       <!-- 下级组织机构 -->
       <view wx:if = '{{deptList && deptList.length > 0}}' class='deptList'>
             <!-- preDept -->
             <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = ''>
 
+                  <!-- left -->
                   <view class='left' bindtap = 'chooseDept' data-deptindex = '{{index}}'>
                         <view class='deptImage'>
                               <image src='{{base_img_url}}/shipLogo1.jpg'></image>
                         </view>
-                        <checkbox checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></checkbox>
+
+                        <view class='checkDiv'>
+                              <checkbox checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></checkbox>
+                        </view>
                        
                         <view class='deptName'>{{dept.dept_name}}</view>
                         <view class='personCount'>（{{dept.personCount}}）</view>
                   </view>
 
+                  <!-- right -->
                   <view class='right' bindtap='next' data-dept = '{{dept}}' data-deptindex = '{{index}}'>
                           <view class='next'>
                                 <view class='nextImg'>
@@ -49,6 +58,8 @@
       </view>
 
 
+      <!-- userListTitle -->
+      <view class='userListTitle' wx:if = '{{userList && userList.length > 0}}'>{{navList[navList.length-1].dept_name}}下属人员</view>
       <!-- 当前机构的人员 -->
       <view class='userList' wx:if = '{{userList && userList.length > 0}}'>
             <!-- checkboxGroup -->
@@ -56,7 +67,7 @@
                     <view class='preUser' wx:for = '{{userList}}' wx:for-item = 'user' wx:key = '' bindtap='checkboxChange' data-index = '{{index}}'>
 
                           <view class='left'>
-                                <view class='userImage'>彬</view>
+                                <view class='userImage'>{{filter.cut_name(user.user_name)}}</view>
                                 <view class='userName'>{{user.user_name}}</view>
                           </view>
                           <view class='checkBox'>

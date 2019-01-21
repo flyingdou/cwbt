@@ -168,8 +168,13 @@ var filters = {
        res = "委外维修";
      }
      return res;
-      
-    }
+    },
+
+    cut_name: function (value) {
+      var value = value + '';
+      value = value.substring(value.length -1);
+      return value;
+    },
 
 }
 
@@ -192,5 +197,6 @@ module.exports = {
   getPriceStr:filters.getPriceStr,
   month2Year: filters.month2Year,
   jobProperties: filters.jobProperties,
-  overhaul: filters.overhaul
+  overhaul: filters.overhaul,
+  cut_name: filters.cut_name
 }

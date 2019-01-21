@@ -185,3 +185,14 @@ input{
   align-items: center;
 }
 
+.checkDiv{
+  padding-left: 40rpx;
+}
+
+.userListTitle{
+  font-size: 32rpx;
+  color: white;
+  background: #ff4401;
+  padding: 20rpx 0;
+  text-align: center;
+}

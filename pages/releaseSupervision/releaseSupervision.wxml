@@ -5,18 +5,18 @@
         <!-- 选择区 --> 
         <view class = 'choose'> 
                 <!-- 接收人 --> 
-                <view class = 'chooseLine' data-type = 'rec'> 
+                <view class = 'chooseLine'> 
                       <view class='left'> 
                             <view class = 'title tv tvv'>接收人:</view> 
                             <view class='value long_text'>
-                                  <block wx:for = '{{recUsers}}' wx:key = ''>
-                                         <view class='user-name' catchtap='removeUser' data-index='{{index}}' data-key='recUsers'>
+                                  <block wx:for = '{{recUsersDou.chooseUsers}}' wx:key = ''>
+                                         <view class='user-name' catchtap='removeUser' data-index='{{index}}' data-key='recUsersDou'>
                                            <view class='small_text'>{{filter.showNameLast(item.user_name)}}<view class='close'><image src='../../icon/close.png' mode='aspectFill'></image></view></view>
                                            <view>{{item.user_name}}</view>
                                          </view>
                                   </block> 
                                   <block>
-                                        <view class='user-name' bindtap='choose' data-type = 'rec'>
+                                        <view class='user-name' bindtap='choose' data-key = 'recUsers'>
                                            <view class='small_text add-block'><image src='../../icon/add2.png' mode='aspectFill'></image></view>
                                          </view>
                                   </block>
@@ -28,18 +28,18 @@
         </view> 
                  
                 <!-- 抄送 --> 
-                <view class = 'chooseLine' bindtap='choose' data-type = 'copy'>
+                <view class = 'chooseLine'>
                       <view class='left'> 
                             <view class = 'title tv tvv'>抄送人:</view> 
                             <view class='value long_text'>
-                                  <block wx:for = '{{copyUsers}}' wx:key = ''>
-                                         <view class='user-name' catchtap='removeUser' data-index='{{index}}' data-key='copyUsers'>
+                                  <block wx:for = '{{copyUsersDou.chooseUsers}}' wx:key = ''>
+                                         <view class='user-name' catchtap='removeUser' data-index='{{index}}' data-key='copyUsersDou'>
                                            <view class='small_text'>{{filter.showNameLast(item.user_name)}}<view class='close'><image src='../../icon/close.png' mode='aspectFill'></image></view></view>
                                            <view>{{item.user_name}}</view>
                                          </view>
                                   </block> 
                                   <block>
-                                        <view class='user-name' bindtap='choose' data-type = 'copy'>
+                                        <view class='user-name' bindtap='choose' data-key = 'copyUsers'>
                                            <view class='small_text add-block'><image src='../../icon/add2.png' mode='aspectFill'></image></view>
                                          </view>
                                   </block>
