@@ -189,6 +189,59 @@ Page({
 
 
   /**
+   * 查询部门下属船舶(递归查询)
+   */
+  getDeptBoatList(e) {
+     // 清空现有设备列表
+     obj.clearEquipment();
+
+     var dept = e.currentTarget.dataset.dept;
+     var deptindex = e.currentTarget.dataset.deptindex;
+     // 设置值的对象
+     var dou = {};
+     dou.chooseDept = dept;
+
+     // 更改选中状态
+     var deptList = obj.data.deptList;
+     deptList.forEach((dept,index) => {
+        dept.checked = false;
+     });
+     deptList[deptindex].checked = true;
+     dou.deptList = deptList;
+
+     // 请求数据
+     var reqUrl = util.getRequestURL('getBoatRecursionByDept.we');
+     var param = {
+       id: dept.seq_id
+     };
+
+     // loading
+     wx.showLoading({
+       title: '加载中',
+     })
+
+     // request
+     wx.request({
+       url: reqUrl,
+       dataType: 'json',
+       data: {
+         json: JSON.stringify(param)
+       },
+       success (res) {
+         res = res.data;
+         if (res.success) {
+            dou.boatList = res.boatList;
+         }
+       },
+       complete (com) {
+         obj.setData(dou);
+         wx.hideLoading();
+       }
+     })
+  },
+
+
+  /**
    * 选择船舶
    */
   boatChange: (e) => {

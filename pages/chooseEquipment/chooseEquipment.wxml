@@ -15,7 +15,7 @@
             <!-- preDept -->
             <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = ''>
 
-                  <view class='left'>
+                  <view class='left' bindtap='getDeptBoatList' data-dept = '{{dept}}' data-deptindex = '{{index}}'>
                         <radio checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></radio>
 
                         <view class='info'>
@@ -41,25 +41,34 @@
       
       </view>
 
+      <!-- boatListTitle -->
+      <view class='boatListTitle' wx:if = '{{boatList && boatList.length > 0}}'>{{chooseDept.dept_name}}下属船舶</view>
 
       <!-- 当前机构的船舶 -->
       <view class='userList' wx:if = '{{boatList && boatList.length > 0}}'>
-            <view class='preUser' wx:for = '{{boatList}}' wx:for-item = 'boat' wx:key = '' data-index = '{{index}}' bindtap='boatChange'>
-                  <!-- 船舶图片 -->
-                  <view class='boatImage'>
-                        <image src='{{base_domain}}/{{boat.image}}' mode='aspectFill'></image>
+            <view class='preUser' wx:for = '{{boatList}}' wx:for-item = 'boat' wx:key = '' data-index = '{{index}}' bindtap='boatChange' >
+
+                  <!-- left -->
+                  <view class='left'>
+                        <!-- 船舶图片 -->
+                        <view class='boatImage'>
+                              <image src='{{base_domain}}/{{boat.image}}' mode='aspectFill'></image>
+                        </view>
+
+                        <view class='userName'>{{boat.name}}</view>
                   </view>
 
-                  <view class='userName'>{{boat.name}}</view>
+                  <!-- right -->
                   <view class='choose'>
                         <radio checked='{{boat.checked}}' color = 'rgba(54, 123, 240, 1)'></radio>
                   </view>
+
             </view>
       </view>
 
      
       <!-- title -->
-      <view class='TagTitle'  wx:if = '{{equipmentList && equipmentList.length > 0}}'>航汛716设备一览表</view>
+      <view class='TagTitle'  wx:if = '{{equipmentList && equipmentList.length > 0}}'>{{boat.name}}设备一览表</view>
       <!-- 当前船舶的设备 -->
       <view class='userList' wx:if = '{{equipmentList && equipmentList.length > 0}}'>
             <view class='preUser' wx:for = '{{equipmentList}}' wx:for-item = 'equipment' wx:key = '' data-index = '{{index}}' bindtap='equipmentChange'>

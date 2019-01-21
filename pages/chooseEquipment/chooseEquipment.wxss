@@ -159,3 +159,11 @@
    width: 120rpx;
    height: 120rpx;
 }
+
+.boatListTitle{
+  font-size: 32rpx;
+  color: white;
+  background: #ff4401;
+  text-align: center;
+  padding: 20rpx 0;
+}
