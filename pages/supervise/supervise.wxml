@@ -64,9 +64,9 @@
       <!-- footer -->
       <view class='footer'>
             <view class='button scanButton' wx:if = '{{deviceNumber && isScan}}' bindtap='scan'>扫描条码</view>
-            <view class='button photo' wx:if = '{{status == 0}}' bindtap='photo'>拍照</view>
-            <view class='button uploadPic' wx:if = '{{status == 1}}' bindtap='uploadPictures'>上传照片</view>
-            <view class='button finish' wx:if = '{{status == 2}}' bindtap='finishSupervise'>完成</view>
+            <view class='button photo' wx:if = '{{showCamera}}' bindtap='photo'>拍照</view>
+            <view class='button uploadPic' wx:if = '{{showUpload}}' bindtap='uploadPictures'>上传照片</view>
+            <view class='button finish' wx:if = '{{showFinish}}' bindtap='finishSupervise'>完成</view>
       </view>
 
 
