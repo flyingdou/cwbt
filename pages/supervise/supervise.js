@@ -61,6 +61,11 @@ Page({
          dou.code = code;
      }
 
+     var type = options.type;
+     if (type) {
+        dou.type = type;
+     }
+
      obj.setData(dou);
 
   },
@@ -305,7 +310,6 @@ Page({
     param.opeartor = app.user.id;
 
     var supervisionId = obj.data.id;
-    var type = 'supervision';
     var contents = obj.data.contents;
     
     var supervisionId = obj.data.id;
@@ -313,13 +317,12 @@ Page({
         item.recUsers.forEach((sub, subIndex) => {
             if (sub.id == app.user.id) {
                supervisionId = item.id;
-               type = 'forward';
             }
         });
     });
     
     param.supervisionId = supervisionId;
-    param.type = type;
+    param.type = obj.data.type;
     // 编码
     param.code = obj.data.code;
 
