@@ -22,45 +22,40 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+     var dou = {};
      var contents = options.contents;
      if (contents) {
-        contents = JSON.parse(contents);
-        obj.setData({
-          contents: contents
-        });
+        dou.contents = JSON.parse(contents);
      }
 
      var creator = options.creator;
      if (creator) {
-       obj.setData({
-         creator: creator
-       });
+         dou.creator = creator;
      }
 
      if (options.boat) {
-       obj.setData({
-         boat: options.boat
-       });
+         dou.boat = boat;
      }  
 
      if (options.device) {
-       obj.setData({
-         device: options.device
-       });
+        dou.device = device;
      }
 
     if (options.deviceNumber) {
-      obj.setData({
-        deviceNumber: options.deviceNumber
-      });
+        dou.deviceNumber = deviceNumber;
     }
 
      var id = options.id;
      if (id) {
-       obj.setData({
-         id:id
-       });
+        dou.id = id;
      }
+
+     var code = options.code;
+     if (code) {
+         dou.code = code;
+     }
+
+     obj.setData(dou);
 
   },
 
@@ -323,6 +318,8 @@ Page({
     
     param.supervisionId = supervisionId;
     param.type = type;
+    // 编码
+    param.code = obj.data.code;
 
     wx.showLoading({
       title: '处理中',
@@ -336,7 +333,6 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
-         wx.hideLoading();
          res = res.data;
          if (res.success) {
            // 数据执行成功
@@ -355,11 +351,13 @@ Page({
          }
       },
       fail: (e) => {
-        wx.hideLoading();
         wx.showModal({
           title: '提示',
           content: '网络异常！',
         })
+      },
+      complete: (com) => {
+        wx.hideLoading();
       }
     })
   },

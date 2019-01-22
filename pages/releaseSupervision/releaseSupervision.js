@@ -16,18 +16,25 @@ Page({
   onLoad: function (options) {
     obj = this;
 		var dou = {};
+
+    // 已有的督导内容
 		var contents = options.contents || '';
-		var id = options.id;
-		// 已有的督导内容
 		if (contents) {
 				contents = JSON.parse(contents);
 				dou.contents = contents;
 		}
 		
 		// 已有的督导id
+    var id = options.id;
 		if (id) {
 			dou.id = id;
 		}
+
+    // 已有code
+    var code = options.code;
+    if (code) {
+      dou.code = code;
+    }
 		
 		obj.setData(dou);
 
@@ -241,8 +248,15 @@ Page({
    * 校验参数
    */
   checkParam: () => {
-    var recUsers = obj.data.recUsers || [];
-    var copyUsers = obj.data.copyUsers || [];
+    var recUsers = [];
+    if (obj.data.recUsersDou) {
+       recUsers = obj.data.recUsersDou.chooseUsers;
+    }
+    
+    var copyUsers = [];
+    if (obj.data.copyUsersDou) {
+      copyUsers = obj.data.copyUsersDou.chooseUsers;
+    }
     var content = wx.getStorageSync('content') || null;
 		var id = obj.data.id || null;
     if (recUsers.length < 1) {
@@ -296,6 +310,8 @@ Page({
       param.id = id;
       param.supervisionId = id;
       param.opeartor = app.user.id;
+      // 转发时必有code
+      param.code = obj.data.code;
 		}
 		
 		obj.data.param = param;
