@@ -83,7 +83,7 @@ Page({
    */
   getSupervisionContentList: function () {
     var url = util.getRequestURL('getSupervisionContentList.we');
-    var param = { code: obj.data.code };
+    var param = { code: obj.data.code, userId: app.user.id };
     wx.request({
       url: url,
       data: {
@@ -121,7 +121,7 @@ Page({
    */
   getSuperviseFeedback: function () {
     var url = util.getRequestURL('getSupervisFeedBack.we');
-    var param = { code: obj.data.code };
+    var param = { code: obj.data.code, userId: app.user.id };
     wx.request({
       url: url,
       data: {
