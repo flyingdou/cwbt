@@ -105,6 +105,9 @@ Page({
         obj.setData({
           supervise: res.data
         });
+
+        // 查询当前用户是否执行过督导
+        obj.getSuperviseFeedbackCount();
       },
       fail: function (e) {
         util.tipsMessage('网络异常！');
@@ -130,6 +133,29 @@ Page({
         }); 
         obj.setData({
           superviseFeedback: res.data
+        });
+      },
+      fail: function (e) {
+        util.tipsMessage('网络异常！');
+        console.log(e);
+      }
+    });
+  },
+
+  /**
+   * 查询当前用户是否执行过督导
+   */
+  getSuperviseFeedbackCount: function () {
+    var url = util.getRequestURL('getSupervisFeedBackCount.we');
+    var param = { supervisionId: obj.data.supervise.id, userId: app.user.id };
+    wx.request({
+      url: url,
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: function (res) {
+        obj.setData({
+          superviseFeedbackCount: res.data
         });
       },
       fail: function (e) {
