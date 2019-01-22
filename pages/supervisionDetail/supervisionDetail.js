@@ -147,7 +147,7 @@ Page({
    */
   getSuperviseFeedbackCount: function () {
     var url = util.getRequestURL('getSupervisFeedBackCount.we');
-    var param = { supervisionId: obj.data.supervise.id, userId: app.user.id };
+    var param = { code: obj.data.code, userId: app.user.id };
     wx.request({
       url: url,
       data: {
