@@ -5,9 +5,10 @@
       <view class='list'>
             
                 <view class='pre' wx:for = '{{supervisionList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '../supervisionDetail/supervisionDetail?code={{item.code}}'>
+                      <view class='line' bindtap='goto' data-link = '../supervisionDetail/supervisionDetail?id={{item.id}}&code={{item.code}}'>
                             <!-- 填充高度 -->
-                            <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
+                            <!-- <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view> -->
+
                             <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>发起人</view>
@@ -64,8 +65,8 @@
                                   </view>
                             </view>
 
-                            <!-- 图标 -->
-                            <view class='tag' wx:if='{{item.status == 1}}'>
+                            <!-- 图标(暂不显示) -->
+                            <view class='tag' wx:if='{{item.status == 1 && false}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                                         <view class='statusFont'>已反馈</view>
