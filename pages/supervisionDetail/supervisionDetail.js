@@ -20,8 +20,8 @@ Page({
   onLoad: function (options) {
     obj = this;
 
-    if (options.id) {
-      obj.data.id = options.id;
+    if (options.code) {
+      obj.data.code = options.code;
     }
 
     if (options.sort) {
@@ -56,7 +56,7 @@ Page({
    */
   onShow: function () {
     obj.getSupervisionContentList();
-    obj.getSupervisFeedBackCount();
+    obj.getSuperviseFeedback();
   },
 
   /**
@@ -92,7 +92,7 @@ Page({
    */
   getSupervisionContentList: function () {
     var url = util.getRequestURL('getSupervisionContentList.we');
-    var param = { supervisionId: obj.data.id }
+    var param = { code: obj.data.code };
     wx.request({
       url: url,
       data: {
@@ -125,15 +125,18 @@ Page({
   /**
    * 查询督导反馈
    */
-  getSupervisFeedBackCount: function () {
-    var url = util.getRequestURL('getSupervisFeedBackCount.we');
-    var param = { supervisionId: obj.data.id, userId: app.user.id, source: 1 }
+  getSuperviseFeedback: function () {
+    var url = util.getRequestURL('getSupervisFeedBack.we');
+    var param = { code: obj.data.code };
     wx.request({
       url: url,
       data: {
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        res.data.forEach(function (item) {
+          item.image = JSON.parse(item.image);
+        }); 
         obj.setData({
           superviseFeedback: res.data
         });
@@ -149,13 +152,13 @@ Page({
    * 图片预览
    */
   preview: (e) => {
+    var feedindex = e.currentTarget.dataset.feedindex;
+    var index = e.currentTarget.dataset.index;
     var imgs = [];
-    var photos = obj.data.superviseFeedback.image;
+    var photos = obj.data.superviseFeedback[feedindex].image;
     for (var i = 0; i < photos.length; i++) {
       imgs.push(app.constant.base_img_url + '/' + photos[i].name);
     }
-    // console.log(imgs);
-    var index = e.currentTarget.dataset.index;
     // 预览开始
     wx.previewImage({
       current: imgs[index],
