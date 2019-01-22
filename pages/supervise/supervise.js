@@ -14,7 +14,13 @@ Page({
       { id: 1, name: "异常" }
     ],
     deviceStatus: 0,
-    isScan: true
+    isScan: true,
+    // 展示完成按钮
+    showFinish: true,
+    // 展示拍照按钮
+    showCamera: true,
+    // 展示上传照片按钮
+    showUpload: false
   },
 
   /**
@@ -158,7 +164,6 @@ Page({
   * 拍照
   */
   photo: () => {
-    var status = obj.data.status;
     var photo = {};
     var photos = obj.data.photos;
     wx.chooseImage({
@@ -166,23 +171,19 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['camera'],
       success: (res) => {
-        status = 1;
         var timex = util.formatTime(new Date());
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
-        console.log(res);
 
         photos.push(photo);
         obj.setData({
-          status: status,
-          photos: photos
+          photos: photos,
+          // 拍照以后，展示上传按钮，拍照按钮可以隐藏
+          showUpload: true,
+          showCamera: false
         });
       },
     })
-
-    obj.setData({
-      status: status
-    });
   },
 
 
@@ -210,13 +211,13 @@ Page({
     var index = e.currentTarget.dataset.index;
     var photos = obj.data.photos;
     photos.splice(index, 1);
-    var status = obj.data.status;
+    var showCamera = false;
     if (photos.length == 0) {
-      status = 0;
+       showCamera = true;
     }
     obj.setData({
       photos: photos,
-      status: status
+      showCamera: showCamera
     });
 
   },
@@ -225,7 +226,8 @@ Page({
    * 上传图片
    */
   uploadPics: (i) => {
-    var status = obj.data.status;
+    var showCamera = false;
+    var showUpload = true;
     var photos = obj.data.photos;
     var count = photos.length;
     var reqUrl = app.constant.upload_url;
@@ -257,9 +259,9 @@ Page({
         console.log(i);
         i++;
         if (i >= count) {
-          status = 2;
           obj.setData({
-            status: status
+              showCamera: false,
+              showUpload: false
           });
           console.log('图片上传完成！');
           return;
