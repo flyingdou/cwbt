@@ -26,6 +26,7 @@
                   <view class='remark' wx:for = '{{contents}}' wx:key=''>
                         <view class='title'>{{item.userName}}要求：</view>
                         <view class='value'>{{item.content}}</view>
+                        <view class='value tright'>{{item.auto_date}}</view>
                   </view>
                   
             </view>

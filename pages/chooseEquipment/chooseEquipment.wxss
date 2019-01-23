@@ -158,6 +158,8 @@
 .boatImage{
    width: 120rpx;
    height: 120rpx;
+   border-radius:10rpx;
+   overflow:hidden;
 }
 
 .boatListTitle{

@@ -41,7 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    obj.isChooseAll();
   },
 
   /**
@@ -391,10 +391,12 @@ Page({
 		 var key = obj.data.key;
 		 var hv = obj.data[key] || {};
 		 var hasUsers = hv.chooseUsers || [];
-
+     
+		 // 在页面勾选第一个用户
      if (hasUsers.length == 0) {
         hasUsers.push(userList[index]);
      } else {
+			 // 多次勾选用户
         var count = 0;
         hasUsers.forEach(function (item, i) {
           if (item.user_id == userList[index].user_id) {
@@ -422,93 +424,8 @@ Page({
      }
       
       obj.setData(dou);
-
-
-		 
-		 // 已有数据的
-		 // hasUsers.forEach((has, h) => {
-			//  // 两者id相等
-			//  if (has.user_id == userList[index].user_id) {
-			// 	   if (userList[index].checked) {
-			// 				indexs.forEach((ind, i) => {
-			// 					if (ind == index) {
-			// 						indexs.splice(i,1);
-			// 					}
-			// 				});
-			// 				// 移除
-			// 				console.log('1');
-			// 				userList[index].checked = false;
-			// 				userList[index].remove = true;
-			// 				userList[index].add = false;
-			// 				has.checked = false;
-			// 				has.remove = true;
-			// 				has.add = false;
-			// 		 } else {
-			// 			  console.log('2');
-			// 				indexs.push(index);
-			// 				userList[index].checked = true;
-			// 				userList[index].remove = false;
-			// 				userList[index].add = true;
-			// 				has.checked = true;
-			// 				has.remove = false;
-			// 				has.add = true;
-			// 		 }
-			//  } else {
-			// 	  if (userList[index].checked) {
-			// 			indexs.forEach((ind, i) => {
-			// 				if (ind == index) {
-			// 					 indexs.splice(i,1);
-			// 				}
-			// 			});
-			// 			// 移除
-			// 			console.log('3');
-			// 			userList[index].checked = false;
-			// 			userList[index].remove = true;
-			// 			userList[index].add = false;
-			// 		} else {
-			// 			console.log('4');
-			// 			indexs.push(index);
-			// 			// 增加
-			// 			userList[index].checked = true;
-			// 			userList[index].remove = false;
-			// 			userList[index].add = true;
-			// 		}
-			//  }
-		 // });
-		 
-		 // // 新增数据
-		 // if (hasUsers.length <= 0) {
-			// 	if (userList[index].checked) {
-			// 		indexs.forEach((ind, i) => {
-			// 			if (ind == index) {
-			// 				 indexs.splice(i,1);
-			// 			}
-			// 		});
-			// 		// 移除
-			// 		console.log('5');
-			// 		userList[index].checked = false;
-			// 		userList[index].remove = true;
-			// 		userList[index].add = false;
-			// 	} else  {
-			// 		console.log('6');
-			// 		indexs.push(index);
-			// 		// 增加
-			// 		userList[index].checked = true;
-			// 		userList[index].remove = false;
-			// 		userList[index].add = true;
-			// 	}
-		 // }
-      
-      // 存储数据
-			// var dou = {};
-			// dou.indexs = indexs;
-			// dou.userList = userList;
-			// if (hv) {
-			// 	hv.chooseUsers = hasUsers;
-			// 	dou[key] = hv;
-			// }
-			
-      // obj.setData(dou);
+      // 判断全选状态
+      obj.isChooseAll();
 
   },
 
@@ -520,27 +437,55 @@ Page({
     var chooseAll = obj.data.chooseAll || false;
     var indexs = obj.data.indexs || [];
     var userList = obj.data.userList || [];
+		// 判断当前是否有数据
+		var key = obj.data.key;
+		var hv = obj.data[key] || {};
+		var hasUsers = hv.chooseUsers || [];
+		// 给重叠部分标记
     if (chooseAll) {
       chooseAll = false;
-      for (var u in userList) {
-        userList[u].checked = false;
-      }
+      userList.forEach((user,u) => {
+				user.checked = false;
+				hasUsers.forEach((has,h) => {
+					if (has.user_id == user.user_id) {
+						  has.isDel = true;
+					}
+				});
+			});
+        
       indexs = [];
     } else {
+			var addIndexs = [];
       chooseAll = true;
-      for (var u in userList) {
-        userList[u].checked = true;
-        indexs.push(u);
-      }
+			userList.forEach((user,u) => {
+				user.checked = true;
+				indexs.push(user);
+				var count = 0;
+				hasUsers.forEach((has,h) => {
+					if (has.user_id == user.user_id) {
+						  has.isDel = false;
+							count++;
+					} 
+				});
+				if (count == 0) {
+					addIndexs.push(u);
+				}
+				user.isDel = false;
+			});
+			
+			addIndexs.forEach((ai,i) => {
+				hasUsers.push(userList[ai]);
+			});
+      
     }
-
-    obj.setData({
-      chooseAll: chooseAll,
-      indexs: indexs,
-      userList: userList
-    });
-
-
+		var dou = { chooseAll: chooseAll, indexs: indexs, userList: userList };
+		if (hv) {
+		  hv.chooseUsers = hasUsers;
+		  dou[key] = hv;
+		}
+		 
+		 obj.setData(dou);
+    
   },
 
 
@@ -560,50 +505,6 @@ Page({
         }
       });
     }
-
-		var chooseUserStr = JSON.stringify(chooseUsers);
-    // 从上个页面传递过来的已近被选中的人
-    var hasUsers = JSON.parse(chooseUserStr);
-		
-		console.log('userList: ' + JSON.stringify(userList));
-		console.log('hasUsers: ' + JSON.stringify(hasUsers));
-
-    
-		
-		// 删除
-		var removeIndexs = [];
-		hasUsers.forEach((has,h) => {
-			if (has.remove) {
-				  has.remove = false;
-				  console.log('remove: ' + JSON.stringify(has) + ', h: ' + h);
-				  removeIndexs.push(h);
-			}
-		});
-		
-		removeIndexs.forEach((ri,li) => {
-			chooseUsers.splice(ri-li,1);
-		});
-		
-		// 添加
-		hasUsers.forEach((has,h) => {
-			if (has.add) {
-				 // 移除此字段
-				 has.add = false;
-				 console.log('add: ' + JSON.stringify(has));
-				 chooseUsers.push(has);
-			}
-		});
-		
-		
-		
-		// 勾选的用户
-		userList.forEach((user,u) => {
-			if (user.add) {
-				 user.add = false;
-				 chooseUsers.push(user);
-			}
-		});
-		
 
 
     // 勾选的部门中的用户
@@ -643,6 +544,29 @@ Page({
     })
 
 
+  },
+
+  /**
+   * 全选状态处理
+   */
+  isChooseAll() {
+    var userList = obj.data.userList || [];
+    var hasLen = 0;
+    var chooseAll = false;
+    userList.forEach((user,u) => {
+      if (user.checked) {
+         hasLen++;
+      }
+    });
+
+    if (userList.length == hasLen && hasLen > 0) {
+        chooseAll = true;
+    }
+
+    obj.setData({
+      chooseAll: chooseAll
+    });
+    
   },
 
   /**
