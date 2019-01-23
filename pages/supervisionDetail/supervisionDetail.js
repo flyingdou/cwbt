@@ -245,8 +245,11 @@ Page({
     var boat = obj.data.supervise.boat ? `&boat=${obj.data.supervise.boat}` : "";
     var device = obj.data.supervise.device ? `&device=${obj.data.supervise.device}` : "";
     var deviceNumber = obj.data.supervise.deviceNumber ? `&deviceNumber=${obj.data.supervise.deviceNumber}` : "";
+    var contents = obj.data.supervise.contents;
+    var type = contents[contents.length -1].type;
+    console.log(type);
     wx.navigateTo({
-      url: `../supervise/supervise?id=${obj.data.id}&code=${obj.data.code}&creator=${obj.data.supervise.contents[0].userName}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.supervise.contents)}`
+      url: `../supervise/supervise?id=${obj.data.id}&code=${obj.data.code}&type=${type}&creator=${obj.data.supervise.contents[0].userName}${boat}${device}${deviceNumber}&contents=${JSON.stringify(obj.data.supervise.contents)}`
     });
   },
 
