@@ -39,6 +39,14 @@
                           </view>
                       </view>
                 </view>
+
+                <!-- 图标 -->
+                <view class='tag' wx:if='{{supervise.status == 3}}'>
+                      <view class='tagDiv'>
+                            <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                            <view class='statusFont'>已终止</view>
+                      </view>
+                </view>
           </view>
     </view>
 
@@ -78,6 +86,14 @@
                           <view class='content-box value' wx:for='{{item.attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='{{index}}' data-subindex='{{attachmentIndex}}'>
                             {{attachment.filename}}
                           </view>
+                      </view>
+                      
+                      <!-- 图标 -->
+                      <view class='tag' wx:if='{{supervise.status == 3}}'>
+                            <view class='tagDiv'>
+                                  <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                  <view class='statusFont'>已终止</view>
+                            </view>
                       </view>
                 </view>
           </view>
@@ -134,9 +150,15 @@
     <view class='fill'></view>
 
     <!-- 底部按钮 -->
-    <view class='buttons' wx:if='{{isRecUser && supervise.status == 0 && superviseFeedbackCount == 0}}'>
-          <view class='button scanButton' bindtap='reSend'>转发</view>
-          <view class='button photoButton' bindtap='implement'>执行</view>
+    <view class='buttons' wx:if='{{userId == supervise.creatorId}}'>
+      <view class='button scanButton' bindtap='updateSuperviseStatus' data-status='2' wx:if='{{supervise.status == 0 && supervise.contents.length < 2 && superviseFeedback.length < 1}}'>撤回</view>
+      <view class='button photoButton' bindtap='updateSuperviseStatus' data-status='3' wx:if='{{supervise.status == 0}}'>冻结</view>
+    </view> 
+
+    <!-- 底部按钮 -->
+    <view class='buttons' wx:if='{{isRecUser && supervise.status == 0 && superviseFeedbackCount == 0 && supervise.status != 3}}'>
+      <view class='button scanButton' bindtap='reSend'>转发</view>
+      <view class='button photoButton' bindtap='implement'>执行</view>
     </view> 
   </view>
 

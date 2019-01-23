@@ -194,6 +194,42 @@ Page({
   },
 
   /**
+   * 修改督导状态
+   */
+  updateSuperviseStatus(e) {
+    wx.showLoading({
+      title: '程序处理中',
+      mask: true
+    });
+    var status = e.currentTarget.dataset.status;
+    var url = util.getRequestURL('updateSuperviseStatus.we');
+    var param = { code: obj.data.code, status: status };
+    wx.request({
+      url: url,
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success(res) {
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示',
+          content: '操作成功',
+          showCancel: false,
+          complete() {
+            wx.navigateBack({
+              delt: 1
+            });
+          }
+        });
+      },
+      fail(e) {
+        wx.hideLoading();
+        util.tipsMessage('网络异常！');
+      }
+    });
+  },
+
+  /**
    * 转发
    */
   reSend: function (e) {
