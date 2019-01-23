@@ -388,24 +388,94 @@ Page({
      var index = e.currentTarget.dataset.index;
      var indexs = obj.data.indexs || [];
      var userList = obj.data.userList;
-     
-      if (userList[index].checked) {
-        userList[index].checked = false;
-        for (var i in indexs) {
-          if (indexs[i] == index) {
-            indexs.splice(i, 1);
-          }
-        }
-      } else {
-        userList[index].checked = true;
-        indexs.push(index);
-      }
+		 var key = obj.data.key;
+		 var hv = obj.data[key];
+		 var hasUsers = hv.chooseUsers || [];
+		 
+		 // 已有数据的
+		 hasUsers.forEach((has, h) => {
+			 // 两者id相等
+			 if (has.user_id == userList[index].user_id) {
+				   if (userList[index].checked) {
+							indexs.forEach((ind, i) => {
+								if (ind == index) {
+									indexs.splice(i,1);
+								}
+							});
+							// 移除
+							console.log('1');
+							userList[index].checked = false;
+							userList[index].remove = true;
+							userList[index].add = false;
+							has.checked = false;
+							has.remove = true;
+							has.add = false;
+					 } else {
+						  console.log('2');
+							indexs.push(index);
+							userList[index].checked = true;
+							userList[index].remove = false;
+							userList[index].add = true;
+							has.checked = true;
+							has.remove = false;
+							has.add = true;
+					 }
+			 } else {
+				  if (userList[index].checked) {
+						indexs.forEach((ind, i) => {
+							if (ind == index) {
+								 indexs.splice(i,1);
+							}
+						});
+						// 移除
+						console.log('3');
+						userList[index].checked = false;
+						userList[index].remove = true;
+						userList[index].add = false;
+					} else {
+						console.log('4');
+						indexs.push(index);
+						// 增加
+						userList[index].checked = true;
+						userList[index].remove = false;
+						userList[index].add = true;
+					}
+			 }
+		 });
+		 
+		 // 新增数据
+		 if (hasUsers.length <= 0) {
+				if (userList[index].checked) {
+					indexs.forEach((ind, i) => {
+						if (ind == index) {
+							 indexs.splice(i,1);
+						}
+					});
+					// 移除
+					console.log('5');
+					userList[index].checked = false;
+					userList[index].remove = true;
+					userList[index].add = false;
+				} else  {
+					console.log('6');
+					indexs.push(index);
+					// 增加
+					userList[index].checked = true;
+					userList[index].remove = false;
+					userList[index].add = true;
+				}
+		 }
       
       // 存储数据
-      obj.setData({
-        indexs: indexs,
-        userList: userList
-      });
+			var dou = {};
+			dou.indexs = indexs;
+			dou.userList = userList;
+			if (hv) {
+				hv.chooseUsers = hasUsers;
+				dou[key] = hv;
+			}
+			
+      obj.setData(dou);
 
   },
 
@@ -447,15 +517,52 @@ Page({
   choose: () => {
     var userList = obj.data.userList || [];
     var key = obj.data.key;
-    var hv = obj.data[key];
+    var hv = obj.data[key] || {};
     var chooseUsers = hv.chooseUsers || [];
+		var chooseUserStr = JSON.stringify(chooseUsers);
+    // 从上个页面传递过来的已近被选中的人
+    var hasUsers = JSON.parse(chooseUserStr);
+		
+		console.log('userList: ' + JSON.stringify(userList));
+		console.log('hasUsers: ' + JSON.stringify(hasUsers));
 
-    // 勾选的用户
-    for (var u in userList) {
-      if (userList[u].checked) {
-          chooseUsers.push(userList[u]);
-      }
-    }
+    
+		
+		// 删除
+		var removeIndexs = [];
+		hasUsers.forEach((has,h) => {
+			if (has.remove) {
+				  has.remove = false;
+				  console.log('remove: ' + JSON.stringify(has) + ', h: ' + h);
+				  removeIndexs.push(h);
+			}
+		});
+		
+		removeIndexs.forEach((ri,li) => {
+			chooseUsers.splice(ri-li,1);
+		});
+		
+		// 添加
+		hasUsers.forEach((has,h) => {
+			if (has.add) {
+				 // 移除此字段
+				 has.add = false;
+				 console.log('add: ' + JSON.stringify(has));
+				 chooseUsers.push(has);
+			}
+		});
+		
+		
+		
+		// 勾选的用户
+		userList.forEach((user,u) => {
+			if (user.add) {
+				 user.add = false;
+				 chooseUsers.push(user);
+			}
+		});
+		
+
 
     // 勾选的部门中的用户
     var deptUser = obj.data.deptUser || [];
