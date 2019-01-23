@@ -386,96 +386,129 @@ Page({
   checkboxChange: (e) => {
     // 选中的下标数组
      var index = e.currentTarget.dataset.index;
-     var indexs = obj.data.indexs || [];
+     var indexs = [];
      var userList = obj.data.userList;
 		 var key = obj.data.key;
-		 var hv = obj.data[key];
+		 var hv = obj.data[key] || {};
 		 var hasUsers = hv.chooseUsers || [];
+
+     if (hasUsers.length == 0) {
+        hasUsers.push(userList[index]);
+     } else {
+        var count = 0;
+        hasUsers.forEach(function (item, i) {
+          if (item.user_id == userList[index].user_id) {
+            item.isDel = !item.isDel;
+            count++;
+          }
+        });
+        if (count == 0) {
+          hasUsers.push(userList[index]);
+        }
+     }
+
+     hasUsers.forEach(function (item, i) {
+      if (!item.isDel) {
+        indexs.push(item.user_id);
+      }
+     });
+
+     userList[index].checked = !userList[index].checked
+
+     var dou = { indexs: indexs, userList: userList };
+     if (hv) {
+       hv.chooseUsers = hasUsers;
+       dou[key] = hv;
+     }
+      
+      obj.setData(dou);
+
+
 		 
 		 // 已有数据的
-		 hasUsers.forEach((has, h) => {
-			 // 两者id相等
-			 if (has.user_id == userList[index].user_id) {
-				   if (userList[index].checked) {
-							indexs.forEach((ind, i) => {
-								if (ind == index) {
-									indexs.splice(i,1);
-								}
-							});
-							// 移除
-							console.log('1');
-							userList[index].checked = false;
-							userList[index].remove = true;
-							userList[index].add = false;
-							has.checked = false;
-							has.remove = true;
-							has.add = false;
-					 } else {
-						  console.log('2');
-							indexs.push(index);
-							userList[index].checked = true;
-							userList[index].remove = false;
-							userList[index].add = true;
-							has.checked = true;
-							has.remove = false;
-							has.add = true;
-					 }
-			 } else {
-				  if (userList[index].checked) {
-						indexs.forEach((ind, i) => {
-							if (ind == index) {
-								 indexs.splice(i,1);
-							}
-						});
-						// 移除
-						console.log('3');
-						userList[index].checked = false;
-						userList[index].remove = true;
-						userList[index].add = false;
-					} else {
-						console.log('4');
-						indexs.push(index);
-						// 增加
-						userList[index].checked = true;
-						userList[index].remove = false;
-						userList[index].add = true;
-					}
-			 }
-		 });
+		 // hasUsers.forEach((has, h) => {
+			//  // 两者id相等
+			//  if (has.user_id == userList[index].user_id) {
+			// 	   if (userList[index].checked) {
+			// 				indexs.forEach((ind, i) => {
+			// 					if (ind == index) {
+			// 						indexs.splice(i,1);
+			// 					}
+			// 				});
+			// 				// 移除
+			// 				console.log('1');
+			// 				userList[index].checked = false;
+			// 				userList[index].remove = true;
+			// 				userList[index].add = false;
+			// 				has.checked = false;
+			// 				has.remove = true;
+			// 				has.add = false;
+			// 		 } else {
+			// 			  console.log('2');
+			// 				indexs.push(index);
+			// 				userList[index].checked = true;
+			// 				userList[index].remove = false;
+			// 				userList[index].add = true;
+			// 				has.checked = true;
+			// 				has.remove = false;
+			// 				has.add = true;
+			// 		 }
+			//  } else {
+			// 	  if (userList[index].checked) {
+			// 			indexs.forEach((ind, i) => {
+			// 				if (ind == index) {
+			// 					 indexs.splice(i,1);
+			// 				}
+			// 			});
+			// 			// 移除
+			// 			console.log('3');
+			// 			userList[index].checked = false;
+			// 			userList[index].remove = true;
+			// 			userList[index].add = false;
+			// 		} else {
+			// 			console.log('4');
+			// 			indexs.push(index);
+			// 			// 增加
+			// 			userList[index].checked = true;
+			// 			userList[index].remove = false;
+			// 			userList[index].add = true;
+			// 		}
+			//  }
+		 // });
 		 
-		 // 新增数据
-		 if (hasUsers.length <= 0) {
-				if (userList[index].checked) {
-					indexs.forEach((ind, i) => {
-						if (ind == index) {
-							 indexs.splice(i,1);
-						}
-					});
-					// 移除
-					console.log('5');
-					userList[index].checked = false;
-					userList[index].remove = true;
-					userList[index].add = false;
-				} else  {
-					console.log('6');
-					indexs.push(index);
-					// 增加
-					userList[index].checked = true;
-					userList[index].remove = false;
-					userList[index].add = true;
-				}
-		 }
+		 // // 新增数据
+		 // if (hasUsers.length <= 0) {
+			// 	if (userList[index].checked) {
+			// 		indexs.forEach((ind, i) => {
+			// 			if (ind == index) {
+			// 				 indexs.splice(i,1);
+			// 			}
+			// 		});
+			// 		// 移除
+			// 		console.log('5');
+			// 		userList[index].checked = false;
+			// 		userList[index].remove = true;
+			// 		userList[index].add = false;
+			// 	} else  {
+			// 		console.log('6');
+			// 		indexs.push(index);
+			// 		// 增加
+			// 		userList[index].checked = true;
+			// 		userList[index].remove = false;
+			// 		userList[index].add = true;
+			// 	}
+		 // }
       
       // 存储数据
-			var dou = {};
-			dou.indexs = indexs;
-			dou.userList = userList;
-			if (hv) {
-				hv.chooseUsers = hasUsers;
-				dou[key] = hv;
-			}
+			// var dou = {};
+			// dou.indexs = indexs;
+			// dou.userList = userList;
+			// if (hv) {
+			// 	hv.chooseUsers = hasUsers;
+			// 	dou[key] = hv;
+			// }
 			
-      obj.setData(dou);
+      // obj.setData(dou);
 
   },
 
@@ -518,7 +551,16 @@ Page({
     var userList = obj.data.userList || [];
     var key = obj.data.key;
     var hv = obj.data[key] || {};
-    var chooseUsers = hv.chooseUsers || [];
+    var _chooseUsers = hv.chooseUsers || [];
+    var chooseUsers = [];
+    if (_chooseUsers.length > 0) {
+      _chooseUsers.forEach(function(item, i) {
+        if (!item.isDel) {
+          chooseUsers.push(item);
+        }
+      });
+    }
+
 		var chooseUserStr = JSON.stringify(chooseUsers);
     // 从上个页面传递过来的已近被选中的人
     var hasUsers = JSON.parse(chooseUserStr);
