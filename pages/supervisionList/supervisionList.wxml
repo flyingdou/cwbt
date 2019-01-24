@@ -69,7 +69,7 @@
                             <view class='tag' wx:if='{{item.status != 0}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                                        <view class='statusFont' wx:if='{{item.status == 1}}'>已反馈</view>
+                                        <!-- <view class='statusFont' wx:if='{{item.status == 1}}'>已反馈</view> -->
                                         <view class='statusFont' wx:if='{{item.status == 2}}'>已撤回</view>
                                         <view class='statusFont' wx:if='{{item.status == 3}}'>已冻结</view>
                                   </view>
