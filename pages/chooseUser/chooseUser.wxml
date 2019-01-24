@@ -83,9 +83,9 @@
       <!-- footer -->
       <view class='footer'>
             <view class='chooseAllLine' bindtap='chooseAll'>
-                  <view class='chooseAll'>全选</view>
+                  <view class='chooseAll' >全选</view>
                   <view class='checkBox'>
-                        <checkbox checked='{{checkAll}}'  color='rgba(54, 123, 240, 1'></checkbox>
+                        <checkbox checked='{{chooseAll}}'  color='rgba(54, 123, 240, 1'></checkbox>
                   </view>
             </view>
 

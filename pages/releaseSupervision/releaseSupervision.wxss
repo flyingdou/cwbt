@@ -175,3 +175,7 @@ textarea{
   text-align: center;
 }
 
+.tright{
+  text-align: right;
+}
+

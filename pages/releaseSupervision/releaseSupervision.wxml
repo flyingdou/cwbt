@@ -69,6 +69,7 @@
                     <view class='remarkContent' wx:for = '{{contents}}' wx:key='' wx:for-item = 'content'>
                           <view class='remarkTitle'>{{content.userName}}要求：</view>
                           <view class='remarkValue'>{{content.content}}</view>
+                          <view class='remarkValue tright'>{{content.auto_date}}</view>
                     </view>
               </view>
         </view> 
