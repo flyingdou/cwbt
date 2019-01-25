@@ -128,8 +128,8 @@
   text-align: center;
   line-height: 1.4rem;
   font-size: 22rpx;
-  color: #FFF;
-  background-color: rgba(38,130,255,1);
+  color: black;
+  background-color: #ccc;
   border-radius: 4rpx;
 }
 

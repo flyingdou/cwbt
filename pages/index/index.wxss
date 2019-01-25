@@ -151,8 +151,9 @@ Page{
   height: 100rpx;
   text-align: center;
   line-height: 100rpx;
-  background: rgba(232,232,232,1);
+  background: #67DDE0;
   border-radius: 20rpx;
+  color: white;
 }
 
 .blocks-memo{

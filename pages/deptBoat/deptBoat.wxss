@@ -77,7 +77,7 @@
 
 .preUser{
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-start;
   align-items:center;
   padding:20rpx 0;
   border-bottom:1rpx solid rgba(245,245,245,1);
@@ -89,6 +89,7 @@
 
 .userName{
   font-size: 28rpx;
+  padding-left: 20rpx;
 }
 
 .douFill{
@@ -99,4 +100,10 @@
 .deptImage{
   width: 100rpx;
   height: 100rpx;
+}
+
+.boatImage{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
 }

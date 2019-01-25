@@ -277,3 +277,8 @@
   background-color: rgba(38,130,255,1);
   border-radius: 10rpx;
 }
+
+.tagUser{
+  color: #ff4401;
+  padding-right: 20rpx;
+}

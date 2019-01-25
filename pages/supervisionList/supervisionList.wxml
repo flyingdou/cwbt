@@ -9,16 +9,24 @@
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status != 0}}'></view>
 
+                            <view class='tagLine'>
+                                  <view class='tagTitleLine'>
+                                        <view class='tagTitle'>2019-01-24 15:30 督办事项</view>
+                                        <view class='tagTitle'></view>
+                                  </view>
+                                  <view class='tagValue'>查看发动机参数</view>
+                            </view>
+
+
                             <view class='line1'>
                                   <view class='tv left'>
-                                        <view class='title'>发起人</view>
+                                        <view class='title'>发送人</view>
                                         <view class='value'>{{item.creator}}</view>
                                   </view>
 
-                                  <view class='tv right'>
-                                        <!-- <view class='title'>发起时间</view> -->
+                                  <!-- <view class='tv right'>
                                         <view class='value'>{{item.auto_date}}</view>
-                                  </view>
+                                  </view> -->
 
                             </view>
 
@@ -39,7 +47,7 @@
 
                             <!--<view class='lineFill' hidden='{{!item.boat && !item.device}}'></view>-->
 
-                            <view class='line1'>
+                            <!-- <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>接收人</view>
                                         <view class='value long-text'>
@@ -49,11 +57,11 @@
                                           </block>
                                         </view>
                                   </view>
-                            </view>
+                            </view> -->
 
                             <view class='lineFill'></view>
 
-                            <view class='line1'>
+                            <!-- <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>抄送人</view>
                                         <view class='value long-text'>
@@ -63,7 +71,7 @@
                                           </block>
                                         </view>
                                   </view>
-                            </view>
+                            </view> -->
 
                             <!-- 图标 -->
                             <view class='tag' wx:if='{{item.status != 0}}'>

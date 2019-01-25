@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "督导流程",
+  "navigationBarTitleText": "督办流程",
   "usingComponents": {
   	"tab": "../../component/tab/tab"
   }

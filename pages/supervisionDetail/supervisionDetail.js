@@ -9,8 +9,8 @@ Page({
   data: {
     base_img_url: app.constant.base_img_url,
     titles: [
-      { title: '督导流程' },
-      { title: '督导反馈' }
+      { title: '督办过程' },
+      { title: '督办结果' }
     ]
   },
 

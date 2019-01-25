@@ -78,8 +78,8 @@
 
 .tagTitle{
    font-size: 28rpx;
-   color: white;
-   background: #ff4401;
+   color: black;
+   background: #cdf;
    padding: 20rpx 0;
    text-align: center;
 

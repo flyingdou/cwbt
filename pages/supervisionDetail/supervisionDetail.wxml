@@ -9,7 +9,7 @@
           <view class='block1' data-link='../superviseFeedback/superviseFeedback?id={{supervise.contents[0].id}}&source=supervision'>
 
                 <view class='up-title'>
-                      {{supervise.contents[0].userName}}发起
+                      <text class='tagUser'>{{supervise.contents[0].userName}}</text>发起
                 </view>
                 
                 <!-- 内容 --> 
@@ -32,7 +32,7 @@
                         </view>
                       </view>
                       <!-- 附件 -->
-                      <view class='title'>附件：</view>
+                      <view class='title' wx:if = '{{supervise.contents[0].attachmentJson.length > 0}}'>附件：</view>
                       <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
                           <view class='content-box value' wx:for='{{supervise.contents[0].attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='0' data-subindex='{{attachmentIndex}}'>
                             {{attachment.filename}}
@@ -44,7 +44,7 @@
                 <view class='tag' wx:if='{{supervise.status == 3}}'>
                       <view class='tagDiv'>
                             <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                            <view class='statusFont'>已终止</view>
+                            <view class='statusFont'>已冻结</view>
                       </view>
                 </view>
           </view>
@@ -60,7 +60,7 @@
                 <!-- 内容 -->
                 <view class='remark' wx:for='{{supervise.contents}}' wx:key='' wx:if='{{index > 0}}' data-link='../superviseFeedback/superviseFeedback?id={{item.id}}&source=forward'>
                   <view class='up-title'>
-                      {{item.userName}}转发
+                      <text class='tagUser'>{{item.userName}}</text>督办
                   </view>
 
                       <view class='title'>内容：</view>
@@ -81,7 +81,7 @@
                         </view>
                       </view>
                       <!-- 附件 -->
-                      <view class='title'>附件：</view>
+                      <view class='title' wx:if = '{{item.attachmentJson.length > 0}}'>附件：</view>
                       <view class='task-white' catchtap='openFile' data-prohibit='prohibit'>
                           <view class='content-box value' wx:for='{{item.attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='{{index}}' data-subindex='{{attachmentIndex}}'>
                             {{attachment.filename}}
@@ -92,7 +92,7 @@
                       <view class='tag' wx:if='{{supervise.status == 3}}'>
                             <view class='tagDiv'>
                                   <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                                  <view class='statusFont'>已终止</view>
+                                  <view class='statusFont'>已冻结</view>
                             </view>
                       </view>
                 </view>
@@ -110,12 +110,12 @@
                 </view>
 
                 <view class='line'>
-                            <view class='title'>反馈人</view>
+                            <view class='title'>执行人</view>
                             <view class='value'>{{superviseFeedback.opeartor}}</view>
                 </view>
 
                 <view class='line'>
-                            <view class='title'>反馈时间</view>
+                            <view class='title'>执行时间</view>
                             <view class='value'>{{superviseFeedback.auto_date}}</view>
                 </view>
 
@@ -174,14 +174,14 @@
             <view class='up'>
                   <view class='line'>
                         <view class='tv'>
-                              <view class='title'>反馈人</view>
+                              <view class='title'>执行人</view>
                               <view class='value'>{{item.opeartor}}</view>
                         </view>
                   </view>
 
                   <view class='line'>
                         <view class='tv'>
-                              <view class='title'>反馈时间</view>
+                              <view class='title'>执行时间</view>
                               <view class='value'>{{item.auto_date}}</view>
                         </view>
                   </view>
