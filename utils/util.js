@@ -97,7 +97,7 @@ function preview (e) {
    var itemList = e.currentTarget.dataset.itemlist;
    // 图片字段
    var key = e.currentTarget.dataset.key;
-   // 照片前缀
+   // 图片前缀
    var prefix = e.currentTarget.dataset.prefix;
    var urls = [];
    itemList.forEach((item,i) => {
@@ -105,7 +105,7 @@ function preview (e) {
      var image = prefix + item[key];
      urls.push(image);
    });
-   console.log(urls);
+  //  console.log(urls);
    var currentUrl = urls[index] || '';
    wx.previewImage({
      current: currentUrl,

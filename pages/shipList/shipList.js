@@ -163,6 +163,14 @@ Page({
     wx.navigateTo({
       url: url,
     })
-  }
+  },
+
+  /**
+   * 图片预览
+   */
+  preview (e) {
+    util.preview(e);
+  },
+
 
 })
