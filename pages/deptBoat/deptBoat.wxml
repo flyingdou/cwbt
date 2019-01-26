@@ -42,12 +42,34 @@
 
       <!-- 当前机构的船舶 -->
       <view class='userList' wx:if = '{{boatList && boatList.length > 0}}'>
-                    <view class='preUser' wx:for = '{{boatList}}' wx:for-item = 'boat' wx:key = '' data-index = '{{index}}'>
-                          <view class='boatImage' catchtap='preview' data-index = '{{index}}' data-key = 'image' data-prefix = '{{base_domain}}' data-itemlist = '{{boatList}}'>
-                                <image src='{{base_domain}}/{{boat.image}}' mode='aspectFill'></image>
-                          </view>
-                          <view class='userName'>{{boat.name}}</view>
-                    </view>
+            <view class='preUser' wx:for = '{{boatList}}' wx:for-item = 'boat' wx:key = '' data-index = '{{index}}'>
+            <!-- left -->
+            <view class = 'left'>
+                  <view class='boatImage' catchtap='preview' data-index = '{{index}}' data-key = 'image' data-prefix = '{{base_domain}}' data-itemlist = '{{boatList}}'>
+                        <image src='{{base_domain}}/{{boat.image}}' mode='aspectFill'></image>
+                  </view>
+            </view>
+            <!-- right -->
+            <view class = 'boatRight'>
+                  <view class='upLine'>
+                        <view class = 'userName'>{{boat.name}}</view>
+                        <view class = 'boatModule'>{{boat.shiptype}}</view>
+                  </view>
+                  
+                  <view class = 'boatLine'>
+                        <view class = 'tv'>
+                              <view class = 'value'>装船总功率</view>
+                              <view class = 'value'>{{boat.power}}<text class='unit'>(KW)</text></view>
+                        </view>
+
+                        <view class = 'tv'>
+                              <view class = 'value'>船舶总吨数</view>
+                              <view class = 'value'>{{boat.weight}}<text class='unit'>(T)</text></view>
+                        </view>
+                  </view>
+            </view>
+					  
+        </view>
       </view>
 
       <!-- fill -->
