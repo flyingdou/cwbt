@@ -6,7 +6,7 @@
                                 <view class='left'>
                                       <!-- image -->
                                       <view class='line'>
-                                            <view class='imageDiv'>
+                                            <view class='imageDiv' catchtap='preview' data-index = '{{index}}' data-key = 'image' data-prefix = '{{base_domain}}' data-itemlist = '{{boatList}}'>
                                                   <image src='{{base_domain}}/{{item.image}}' mode='aspectFill'></image>
                                             </view>
                                       </view>

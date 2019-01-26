@@ -97,15 +97,27 @@ function preview (e) {
    var itemList = e.currentTarget.dataset.itemlist;
    // 图片字段
    var key = e.currentTarget.dataset.key;
-   // 照片前缀
+   // 图片前缀
    var prefix = e.currentTarget.dataset.prefix;
+
+
    var urls = [];
-   itemList.forEach((item,i) => {
-     // 图片URL
-     var image = prefix + item[key];
-     urls.push(image);
-   });
-   console.log(urls);
+   // 预览数据类型,不传默认为多张图片预览，传参了即为单张图片预览
+   var type = e.currentTarget.dataset.type;
+   if (type) {
+      // 单张预览
+      var image = prefix + itemList[key];
+      urls.push(image);
+   } else {
+      // 多张预览
+      itemList.forEach((item, i) => {
+        // 图片URL
+        var image = prefix + item[key];
+        urls.push(image);
+      });
+   }
+  
+  //  console.log(urls);
    var currentUrl = urls[index] || '';
    wx.previewImage({
      current: currentUrl,

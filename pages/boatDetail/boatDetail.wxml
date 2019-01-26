@@ -1,0 +1,117 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- 大块 -->
+      <view class='blocks'>
+            <!-- 船舶基本信息 -->
+            <view class='block'>
+                  <view class='cardTitle'>基本信息</view>
+                  <view class='nextLines'>
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+                        
+                  </view>
+            </view>
+
+
+            <!-- 主要项目 -->
+            <view class='block'>
+                  <view class='cardTitle'>主要项目</view>
+                  <view class='nextLines'>
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+                        
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+                        
+                  </view>
+            </view>
+
+
+            <!-- 船体部分 -->
+            <view class='block'>
+                  <view class='cardTitle'>船体部分</view>
+                  <view class='nextLines'>
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+                        
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+
+                        <view class='tv'>
+                              <view class='title'>名称</view>
+                              <view class='value'>航汛716</view>
+                        </view>
+                        
+                  </view>
+            </view>
+
+             <!-- 船体图片 -->
+            <view class='block'>
+                  <view class='cardTitle'>船体图片</view>
+                  <!-- boatImage -->
+                  <view class='boatImage' catchtap='preview' data-key = 'image' data-type = 'single' data-itemlist = '{{boat}}' data-prefix = '{{base_domain}}'>
+                        <image src = '{{base_domain}}/upload/pcfiles/image/boat1_1.jpg' mode='aspectFill'></image>
+                  </view>
+            </view>
+            
+
+
+      </view>
+
+
+</view>
