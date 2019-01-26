@@ -1,0 +1,46 @@
+.blocks{
+  margin: 20rpx;
+  border-radius: 10rpx;
+}
+
+.block{
+  padding: 20rpx;
+  margin-bottom: 40rpx;
+  background: white;
+}
+
+.cardTitle{
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.nextLines{
+  padding: 10rpx 0;
+}
+
+.tv{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1rpx solid rgba(245,245,245,1);
+  padding: 20rpx 0;
+}
+
+.tv:last-child{
+  border: none;
+}
+
+.title{
+   width: 25%;
+}
+
+.value{
+  width: 75%;
+}
+
+.boatImage{
+  width: 100%;
+  height: 300rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+}
