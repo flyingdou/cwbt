@@ -179,6 +179,13 @@ Page({
 
   },
 
+  /**
+   * 预览图片
+   */
+  preview(e) {
+    util.preview(e);
+  },
+
 
 
 })

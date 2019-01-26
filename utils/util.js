@@ -87,6 +87,36 @@ function getOverhaul (overhaul) {
 
 
 
+/**
+ * 图片预览
+ */
+function preview (e) {
+   // 当前被点击的图片下标
+   var index = e.currentTarget.dataset.index;
+   // 预览的数据列表
+   var itemList = e.currentTarget.dataset.itemlist;
+   // 图片字段
+   var key = e.currentTarget.dataset.key;
+   // 照片前缀
+   var prefix = e.currentTarget.dataset.prefix;
+   var urls = [];
+   itemList.forEach((item,i) => {
+     // 图片URL
+     var image = prefix + item[key];
+     urls.push(image);
+   });
+   console.log(urls);
+   var currentUrl = urls[index] || '';
+   wx.previewImage({
+     current: currentUrl,
+     urls: urls,
+   })
+}
+
+
+
+
+
 
 
 
@@ -97,4 +127,5 @@ module.exports = {
   getRequestURL: getRequestURL,
   formatDate: formatDate,
   getOverhaul: getOverhaul,
+  preview: preview
 }
