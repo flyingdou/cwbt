@@ -39,8 +39,10 @@
   text-align: center;
   line-height: 100rpx;
   background: rgba(232,232,232,1);
-  border-radius: 20rpx;
-  overflow: hidden;
+}
+
+.radius{
+  border-radius:20rpx;
 }
 
 .blocks-memo{

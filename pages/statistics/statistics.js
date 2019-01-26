@@ -293,6 +293,10 @@ Page({
     if (e.detail.value) {
       dou[key] = e.detail.value;
     }
+    if (e.detail.values) {
+      dou.startDate = e.detail.values[0];
+      dou.endDate = e.detail.values[1]; 
+    }
     obj.setData(dou);
   },
 

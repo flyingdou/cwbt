@@ -8,9 +8,9 @@ Page({
    */
   data: {
     blocksDiv1: [[
-      { name: '我发起的', fun: 'goto', iconPath: '../../icon/send.png', link: '../supervisionList/supervisionList?queryType=1' },
-      { name: '我接收的', fun: 'goto', iconPath: '../../icon/execute.png', link: '../supervisionList/supervisionList?queryType=2' },
-      { name: '抄送我的', fun: 'goto', iconPath: '../../icon/copy.png', link: '../supervisionList/supervisionList?queryType=3' }
+      { name: '我发起的', count: 'createCount', fun: 'goto', iconPath: '../../icon/send.png', link: '../supervisionList/supervisionList?queryType=1' },
+      { name: '我接收的', count: 'recCount', fun: 'goto', iconPath: '../../icon/execute.png', link: '../supervisionList/supervisionList?queryType=2' },
+      { name: '抄送我的', count: 'fwdCount', fun: 'goto', iconPath: '../../icon/copy.png', link: '../supervisionList/supervisionList?queryType=3' }
     ]],
     blocksDiv2: [[
       { name: '发起督导', fun: 'goto', iconPath: '../../icon/launch.png', link: '../releaseSupervision/releaseSupervision' }
@@ -35,7 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    obj.getSupervisionCategoryCount();
   },
 
   /**
@@ -67,6 +67,29 @@ Page({
   },
 
   /**
+   * 查询督导类别数量
+   */
+  getSupervisionCategoryCount() {
+    var url = util.getRequestURL('getSupervisionCategoryCount.we');
+    var param = { userId: app.user.id };
+    wx.request({
+      url: url,
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success(res) {
+        obj.setData({
+          categoryCount: res.data
+        });
+      },
+      fail(e) {
+        util.tipsMessage('网络异常！');
+        console.log(e);
+      }
+    });
+  },
+
+  /**
    * 跳转页面
    */
   goto: function (e) {
@@ -74,5 +97,5 @@ Page({
     wx.navigateTo({
       url: link
     });
-  },
+  }
 })

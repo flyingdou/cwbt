@@ -82,6 +82,10 @@ Page({
    * 查询督导内容列表
    */
   getSupervisionContentList: function () {
+    wx.showLoading({
+      title: '数据加载中',
+      mask: true
+    });
     var url = util.getRequestURL('getSupervisionContentList.we');
     var param = { code: obj.data.code, userId: app.user.id };
     wx.request({
@@ -108,8 +112,11 @@ Page({
 
         // 查询当前用户是否执行过督导
         obj.getSuperviseFeedbackCount();
+
+        wx.hideLoading();
       },
       fail: function (e) {
+        wx.hideLoading();
         util.tipsMessage('网络异常！');
         console.log(e);
       }

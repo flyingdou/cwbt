@@ -45,6 +45,10 @@ var filters = {
     return distance + 'm';
   },
 
+  checkSupervisionParent: function (code) {
+    return code.indexOf("_") < 0;
+  },
+
   distanceUpperCase: function (distance) {
     if (!distance) {
       return '0M';
@@ -187,6 +191,7 @@ module.exports = {
   overflow_hidden: filters.overflow_hidden,
   showNameLast: filters.showNameLast,
   distance: filters.distance,
+  checkSupervisionParent: filters.checkSupervisionParent,
   distanceUpperCase: filters.distanceUpperCase,
   week_cn: filters.week_cn,
   getWeatherImg: filters.getWeatherImg,

@@ -1,3 +1,6 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
+
 <tab titles='{{titles}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}'>
   <view class='tab1' slot='0'>
     <!-- 填充高度 -->
@@ -9,7 +12,7 @@
           <view class='block1' data-link='../superviseFeedback/superviseFeedback?id={{supervise.contents[0].id}}&source=supervision'>
 
                 <view class='up-title'>
-                      <text class='tagUser'>{{supervise.contents[0].userName}}</text>发起
+                      <text class='tagUser'>{{supervise.contents[0].userName}}</text> <block wx:if='{{filter.checkSupervisionParent(supervise.contents[0].code)}}'>发起</block> <block wx:else>督办</block>
                 </view>
                 
                 <!-- 内容 --> 

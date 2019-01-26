@@ -1,3 +1,6 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
+
 <view class='date-show'>
    <view class='date-show-left' bindtap='preYear'>
        <image src='../../icon/left.png' mode='aspectFit'></image>
@@ -22,7 +25,7 @@
          <view class='date-box'>
              <view wx:for='{{dateArr}}' wx:key='' data-date='{{item.isToday}}' bindtap='changeDate'>            
                  <view class='date-head {{activeDay == item.isToday ? "activeDay" : ""}}'>
-                     <view class='{{activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : "") }}'>{{item.dateNum}}</view>
+                     <view class='{{activeDay && (activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : ""))}}'>{{item.dateNum}}</view>
                  </view>
                  <!-- <view class='date-weight'>{{item.weight}}</view> -->
              </view>

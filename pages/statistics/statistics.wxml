@@ -22,40 +22,30 @@
             <view class='timeLine'>
                   <!-- 开始时间 -->
                   <view class='timeDiv'>
-                        <view class='title'>
+                    <view class='title'>
+                      选择时间：
+                    </view>
+                    <view class='timeDiv-timeright'>
+                      <view class='timeDiv-titles'>
+                          <view class='title'>
                               开始时间
-                        </view>
-
-                        <view class='right' bindtap='showMark' data-key='startDate'>
+                          </view>
+                          <view class='right' bindtap='showMark' data-key='startDate'>
                               <view class='value'>{{startDate ? startDate : "请选择"}}</view>
-                              <!-- moreIcon -->
-                              <view class='moreIcon'>
-                                    <image mode='aspectFill' src='../../icon/more@2x.png'></image>
-                              </view>
+                          </view>
                         </view>
-                  
-                  </view>
 
+                        <view class='middle'>至</view>
 
-
-                  <!-- 结束时间 -->
-
-                  <view class='timeDiv'>
-                        <view class='title'>
+                        <view class='timeDiv-values'>
+                          <view class='title'>
                               结束时间
+                          </view>
+                          <view class='right value-margin' bindtap='showMark' data-key='endDate'>
+                                <view class='value'>{{endDate ? endDate : "请选择"}}</view>
+                          </view>
                         </view>
-
-                        <view class='right' bindtap='showMark' data-key='endDate'>
-                              <view class='value'>{{endDate ? endDate : "请选择"}}</view>
-                              <!-- moreIcon -->
-                              <view class='moreIcon'>
-                                    <image mode='aspectFill' src='../../icon/more@2x.png'></image>
-                              </view>
-                        
-                        </view>
-
-
-
+                    </view>
                   </view>
               
             </view>
@@ -187,4 +177,4 @@
 </view>
 
 <!-- 日历选择组件 -->
-<mark showModalStatus='{{showMark}}' bindMark='dateChange'></mark>
+<mark showModalStatus='{{showMark}}' multiple='{{true}}' bindMark='dateChange'></mark>

@@ -19,6 +19,10 @@ Page({
     if (options.queryType) {
       obj.data.queryType = options.queryType;
     }
+
+    if (options.queryType == 1) {
+      wx.setNavigationBarTitle({title: '我发起的督导'});
+    }
   },
 
   /**

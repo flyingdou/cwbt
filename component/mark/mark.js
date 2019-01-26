@@ -5,6 +5,7 @@ Component({
    */
   properties: {
     showModalStatus: Boolean, // 是否显示弹出框
+    multiple: Boolean
   },
 
   /**
@@ -12,19 +13,6 @@ Component({
    */
   data: {
     
-  },
-
-  attached: function () {
-    var obj = this;
-    // wx.request({
-    //   url: app.constant.base_req_url + 'getDepartmentListByParent.we',
-    //   data: {
-    //     json: JSON.stringify({ parentId: 21 })
-    //   },
-    //   success: function (res) {
-    //     obj.setData({ list: res.data });
-    //   }
-    // })
   },
 
   /**
@@ -35,9 +23,8 @@ Component({
      * 保存用户选择的值
      */
     saveSelectValue: function (e) {
-      var value = e.detail.value ? e.detail.value : e.currentTarget.dataset.value;
-      this.setData({ value: value });
-      this.tap({ currentTarget: { dataset: { type: 'success' } } });
+      e.currentTarget.dataset.type = 'success';
+      this.tap(e);
     },
     /**
      * 按钮点击触发
@@ -76,9 +63,12 @@ Component({
           type: btn_type,
         } // detail对象，提供给事件监听函数
         if (btn_type == 'success') {
-          myEventDetail.value = this.data.value;
-        } else {
-          this.setData({ value: null });
+          if (e.detail.value) {
+            myEventDetail.value = e.detail.value;
+          }
+          if (e.detail.values) {
+            myEventDetail.values = e.detail.values;
+          }
         }
         var myEventOption = {} // 触发事件的选项
         this.triggerEvent('Mark', myEventDetail, myEventOption);

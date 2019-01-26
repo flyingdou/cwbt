@@ -86,10 +86,29 @@ picker{
   align-items: center;
 }
 
-.right{
+.middle{
+  margin-left: 20rpx;
+  font-size: 28rpx;
+}
+
+.timeDiv-timeright{
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-left: 20rpx;
+}
+
+.title{
+  padding-left: 20rpx;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.right{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
 .statisticsList{

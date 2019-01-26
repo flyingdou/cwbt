@@ -5,7 +5,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    
+    multiple: Boolean
   },
 
   /**
@@ -29,6 +29,14 @@ Component({
   attached: function () {
     // 初始化日历
     this.dateInit();
+  },
+
+  pageLifetimes: {
+    show() {
+      if (this.data.multiple) {
+        this.dateInit();
+      }
+    }
   },
 
   /**
@@ -152,6 +160,8 @@ Component({
     });
    },
    changeDate: function (e) {
+     // 选择单日期
+    if (!this.data.multiple) {
      var today = e.currentTarget.dataset.date;
      if (today) {
       this.setData({
@@ -161,6 +171,30 @@ Component({
       var myEventOption = {} // 触发事件的选项
       this.triggerEvent('Calendar', myEventDetail, myEventOption);
      }
+    } else {
+      var activeDays = this.data.activeDays || [];
+      var today = e.currentTarget.dataset.date;
+      if (!today) {
+        return;
+      }
+      if (activeDays.length == 1) {
+        activeDays.push(today);
+
+        // 传递数据到父组件
+        var values = activeDays.sort();
+        var myEventDetail = { values: values } // detail对象，提供给事件监听函数
+        var myEventOption = {} // 触发事件的选项
+        this.triggerEvent('Calendar', myEventDetail, myEventOption);
+      } else {
+        if (!activeDays[0]) {
+          activeDays.push(today);
+        }
+        this.setData({
+          activeDay: today,
+          activeDays: activeDays
+        });
+      }
+    }
    }
   }
 })
