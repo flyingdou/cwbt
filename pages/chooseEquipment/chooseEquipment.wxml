@@ -42,7 +42,7 @@
       </view>
 
       <!-- boatListTitle -->
-      <view class='boatListTitle' wx:if = '{{boatList && boatList.length > 0}}'>{{chooseDept.dept_name}}下属船舶</view>
+      <view class='boatListTitle' wx:if = '{{boatList && boatList.length > 0}}'>{{navList[navList.length-1].dept_name}}下属船舶</view>
 
       <!-- 当前机构的船舶 -->
       <view class='userList' wx:if = '{{boatList && boatList.length > 0}}'>
@@ -91,6 +91,7 @@
 
       <!-- footer -->
       <view class='footer'>
+            <view class='back' catchtap='back' wx:if = '{{navList.length > 1}}'>返回上一级</view>
             <view class='scan' bindtap='scan'>扫码选择设备</view>
       </view>
 

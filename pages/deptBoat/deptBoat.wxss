@@ -137,3 +137,12 @@
 .unit{
   padding-left: 10rpx;
 }
+
+.boatListTitle{
+  font-size: 32rpx;
+  color: black;
+  background: #ccc;
+  text-align: center;
+  padding: 20rpx 0;
+}
+

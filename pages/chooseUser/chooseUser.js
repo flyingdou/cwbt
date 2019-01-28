@@ -290,6 +290,22 @@ Page({
     obj.getNext(null, null);
   },
 
+  /**
+   * 返回上一级
+   */
+  back: () => {
+    // 清空storage中的值
+    wx.removeStorageSync('chooseUsers');
+    var navList = obj.data.navList;
+
+    // 移除数组中做最后一个元素
+    var doux = navList.slice(0, navList.length - 1);
+    obj.setData({
+      navList: doux
+    });
+    obj.getNext(null, null);
+  },
+
 
   /**
    * 查询下级数据

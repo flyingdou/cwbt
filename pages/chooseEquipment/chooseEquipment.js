@@ -139,6 +139,24 @@ Page({
     obj.getData(null, null);
   },
 
+  /**
+   * 点击返回上一级按钮
+   */
+  back () {
+    var navList = obj.data.navList;
+    // 移除navList中的最后一个节点
+    var doux = navList.slice(0, navList.length -1);
+    obj.setData({
+      navList: doux
+    });
+
+    // 清空设已有设备列表
+    obj.clearEquipment();
+
+    obj.getData(null, null);
+
+  },
+
 
   /**
    * 查询数据

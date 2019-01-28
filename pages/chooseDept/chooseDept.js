@@ -128,6 +128,23 @@ Page({
     obj.getNext(null, null);
   },
 
+  /**
+   * 向上选择部门
+   */
+  back () {
+    // 清空storage中的值
+    wx.removeStorageSync('chooseUsers');
+    var navList = obj.data.navList;
+    
+    // 截取最后一个元素以前的元素
+    var doux = navList.slice(0, navList.length -1);
+    obj.setData({
+      navList: doux
+    });
+
+    obj.getNext(null, null);
+  },
+
 
   /**
    * 查询下级数据

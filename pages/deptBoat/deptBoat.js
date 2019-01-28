@@ -127,6 +127,20 @@ Page({
     obj.getData(null, null);
   },
 
+  /**
+   * 点击返回上一级
+   */
+  back () {
+    var navList = obj.data.navList;
+    // 从navList中删除最后的节点
+    var doux = navList.slice(0, navList.length -1);
+    obj.setData({
+      navList: doux
+    });
+
+    obj.getData(null, null);
+  },
+
 
   /**
    * 查询数据

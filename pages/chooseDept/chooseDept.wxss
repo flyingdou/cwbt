@@ -146,3 +146,7 @@
   width: 100%;
   height: 180rpx;
 }
+
+.backButtons{
+  bottom: 160rpx;
+}

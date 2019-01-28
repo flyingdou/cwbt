@@ -116,6 +116,21 @@ Page({
     obj.getData(null, null);
   },
 
+  /**
+   * 返回上一级
+   */
+  back: () => {
+    var navList = obj.data.navList;
+  
+    // 移除数组中做最后一个元素
+    var doux = navList.slice(0, navList.length -1);
+    obj.setData({
+      navList: doux
+    });
+    obj.getData(null, null);
+  },
+
+
 
   /**
    * 查询数据
