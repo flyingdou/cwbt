@@ -7,8 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
-
+    currentPage: 1,
+    pageSize: 20,
+    taskList: []
   },
 
   /**
@@ -111,7 +112,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    obj.data.currentPage++;
+    obj.init();
   },
 
   /**
@@ -160,6 +162,10 @@ Page({
         executor_id: app.user.id
       };
     } 
+
+    // 分页
+    param.currentPage = obj.data.currentPage;
+    param.pageSize = obj.data.pageSize;
     
     // console.log(param);
     // return;
@@ -173,8 +179,10 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
+          var taskList = obj.data.taskList;
+          taskList = taskList.concat(res.workCardList);
           obj.setData({
-            taskList: res.workCardList,
+            taskList: taskList,
             isGet: false
           });
         }

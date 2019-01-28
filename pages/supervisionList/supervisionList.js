@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentPage: 1,
+    pageSize: 20
   },
 
   /**
@@ -64,7 +65,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    obj.data.currentPage++;
+    obj.getSupervisionList();
   },
 
   goto: function (e) {
@@ -83,7 +85,7 @@ Page({
       mask: true
     });
     var url = util.getRequestURL('getSupervisionList.we');
-    var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv, queryType: obj.data.queryType };
+    var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv, queryType: obj.data.queryType, currentPage: obj.data.currentPage, pageSize: obj.data.pageSize };
     wx.request({
       url: url,
       dataType:'json',
