@@ -107,12 +107,16 @@ function preview (e) {
    if (type) {
       // 单张预览
       var image = prefix + itemList[key];
+      // 解决图片链接有中文字符的情况下，部分机型预览图片失败的问题
+      image = encodeURI(image);
       urls.push(image);
    } else {
       // 多张预览
       itemList.forEach((item, i) => {
         // 图片URL
         var image = prefix + item[key];
+        // 解决图片链接有中文字符的情况下，部分机型预览图片失败的问题
+        image = encodeURI(image);
         urls.push(image);
       });
    }

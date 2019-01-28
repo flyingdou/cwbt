@@ -180,6 +180,19 @@ var filters = {
       return value;
     },
 
+    /**
+     * 字符非空判断
+     */
+    notEmpty: function (value) {
+      var flag = false;
+      if (value && value != "" && value != " " && value != "null" && value != "undefined") {
+          flag = true;
+      }
+      return flag;
+    },
+
+
+
 }
 
 // 暴露接口
@@ -203,5 +216,6 @@ module.exports = {
   month2Year: filters.month2Year,
   jobProperties: filters.jobProperties,
   overhaul: filters.overhaul,
-  cut_name: filters.cut_name
+  cut_name: filters.cut_name,
+  notEmpty: filters.notEmpty
 }

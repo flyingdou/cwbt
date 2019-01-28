@@ -7,15 +7,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_domain: app.constant.base_domain,
-    boat: { 'image':'/upload/pcfiles/image/boat1_1.jpg'}
+    base_domain: app.constant.base_domain
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+     obj = this;
 
+     // 存储上一页面传递过来的参数
+     var dou = {};
+     var id = options.id;
+     if (id) {
+        dou.id = id;
+     }
+     var number = options.number;
+     if (number) {
+        dou.number = number;
+     }
+     obj.setData(dou);
+
+     obj.init();
   },
 
   /**
@@ -73,4 +86,44 @@ Page({
   preview (e) {
     util.preview(e);
   },
+
+  /**
+   * 初始化页面数据
+   */
+  init () {
+    var id = obj.data.id || 23;
+    var param =  {
+      id: id
+    };
+    var reqUrl = util.getRequestURL('getBoatDetail.we');
+
+    // loading
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    // request
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success (res) {
+        res = res.data;
+        if (res.success) {
+          obj.setData({
+            boat: res.boatDetail
+          });
+        } else {
+          console.log(res.message);
+        }
+      },
+      complete (com) {
+        wx.hideLoading();
+      }
+    })
+  },
+
+
 })

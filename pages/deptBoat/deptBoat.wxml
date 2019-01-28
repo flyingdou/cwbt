@@ -50,7 +50,7 @@
                   </view>
             </view>
             <!-- right -->
-            <view class = 'boatRight'>
+            <view class = 'boatRight' bindtap='goto' data-link = '../../pages/boatDetail/boatDetail?id={{boat.id}}'>
                   <view class='upLine'>
                         <view class = 'userName'>{{boat.name}}</view>
                         <view class = 'boatModule'>{{boat.shiptype}}</view>

@@ -1,3 +1,5 @@
+<!-- 引入过滤器 -->
+<wxs src = '../../utils/filters.wxs' module = 'filter'></wxs>
 <!-- 页面开始 -->
 <view class='content'>
       <!-- 大块 -->
@@ -6,39 +8,44 @@
             <view class='block'>
                   <view class='cardTitle'>基本信息</view>
                   <view class='nextLines'>
-                        <view class='tv'>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.name)}}'>
                               <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                              <view class='value'>{{boat.name}}</view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.number)}}'>
+                              <view class='title'>编码</view>
+                              <view class='value'>{{boat.number}}</view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.theshiptype)}}'>
+                              <view class='title'>船舶类型</view>
+                              <view class='value'>{{boat.theshiptype}}</view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.shiptype)}}'>
+                              <view class='title'>船型</view>
+                              <view class='value'>{{boat.shiptype}}</view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.constructiontime)}}'>
+                              <view class='title'>构建时间</view>
+                              <view class='value'>{{boat.constructiontime}}<text class='unit'>年</text></view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.papermoney)}}'>
+                              <view class='title'>账面原值</view>
+                              <view class='value'>{{boat.papermoney}}</view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.power)}}'>
+                              <view class='title'>装船总功率</view>
+                              <view class='value'>{{boat.power}}<text class='unit'>(KW)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.weight)}}'>
+                              <view class='title'>船舶总吨数</view>
+                              <view class='value'>{{boat.weight}}<text class='unit'>(T)</text></view>
                         </view>
                         
                   </view>
@@ -49,24 +56,34 @@
             <view class='block'>
                   <view class='cardTitle'>主要项目</view>
                   <view class='nextLines'>
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.putkeeldete)}}'>
+                              <view class='title'>龙骨安放时间</view>
+                              <view class='value'>{{boat.putkeeldete}}</view>
                         </view>
                         
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.buildcompletiondate)}}'>
+                              <view class='title'>建造完工时间</view>
+                              <view class='value'>{{boat.buildcompletiondate}}</view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.shipfactory)}}'>
+                              <view class='title'>船舶制造厂</view>
+                              <view class='value'>{{boat.shipfactory}}</view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.shipreform)}}'>
+                              <view class='title'>船舶改造厂</view>
+                              <view class='value'>{{boat.shipreform}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.shippeople)}}'>
+                              <view class='title'>船舶所有人</view>
+                              <view class='value'>{{boat.shippeople}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.shipregistration)}}'>
+                              <view class='title'>船检登记号</view>
+                              <view class='value'>{{boat.shipregistration}}</view>
                         </view>
                         
                   </view>
@@ -77,24 +94,94 @@
             <view class='block'>
                   <view class='cardTitle'>船体部分</view>
                   <view class='nextLines'>
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
-                        </view>
-                        
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.total_length)}}'>
+                              <view class='title'>总长</view>
+                              <view class='value'>{{boat.total_length}}<text class='unit'>(m)</text></view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.boat_length)}}'>
+                              <view class='title'>船长</view>
+                              <view class='value'>{{boat.boat_length}}<text class='unit'>(m)</text></view>
                         </view>
 
-                        <view class='tv'>
-                              <view class='title'>名称</view>
-                              <view class='value'>航汛716</view>
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.fullloadwater)}}'>
+                              <view class='title'>满载排水线</view>
+                              <view class='value'>{{boat.fullloadwater}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.width)}}'>
+                              <view class='title'>船宽</view>
+                              <view class='value'>{{boat.width}}<text class='unit'>(m)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.max_width)}}'>
+                              <view class='title'>最大船宽</view>
+                              <view class='value'>{{boat.max_width}}<text class='unit'>(m)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.typedeep)}}'>
+                              <view class='title'>型深</view>
+                              <view class='value'>{{boat.typedeep}}<text class='unit'>(m)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.height)}}'>
+                              <view class='title'>最大船高</view>
+                              <view class='value'>{{boat.height}}<text class='unit'>(m)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.lightdraft)}}'>
+                              <view class='title'>空载吃水</view>
+                              <view class='value'>{{boat.lightdraft}}<text class='unit'>(m)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.loadeddraft)}}'>
+                              <view class='title'>满载吃水</view>
+                              <view class='value'>{{boat.loadeddraft}}<text class='unit'>(m)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.loadeddisplacement)}}'>
+                              <view class='title'>满载排水量</view>
+                              <view class='value'>{{boat.loadeddisplacement}}<text class='unit'>(T)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.loaddisplacement)}}'>
+                              <view class='title'>空载排水量</view>
+                              <view class='value'>{{boat.loaddisplacement}}<text class='unit'>(T)</text></view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.structuraltype)}}'>
+                              <view class='title'>结构形式</view>
+                              <view class='value'>{{boat.structuraltype}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.lightcorridor)}}'>
+                              <view class='title'>航区</view>
+                              <view class='value'>{{boat.lightcorridor}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.jetsegment)}}'>
+                              <view class='title'>急流航段</view>
+                              <view class='value'>{{boat.jetsegment}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.hullmaterial)}}'>
+                              <view class='title'>船体材料</view>
+                              <view class='value'>{{boat.hullmaterial}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.quantityofhold)}}'>
+                              <view class='title'>货仓数量</view>
+                              <view class='value'>{{boat.quantityofhold}}</view>
+                        </view>
+
+                        <view class='tv' wx:if = '{{filter.notEmpty(boat.typeofcargocover)}}'>
+                              <view class='title'>货仓盖形式</view>
+                              <view class='value'>{{boat.typeofcargocover}}</view>
+                        </view>
+
+                         <view class='tv' wx:if = '{{filter.notEmpty(boat.watertightbulkhead)}}'>
+                              <view class='title'>水密横舱壁数</view>
+                              <view class='value'>{{boat.watertightbulkhead}}</view>
                         </view>
                         
                   </view>
@@ -102,13 +189,16 @@
 
              <!-- 船体图片 -->
             <view class='block'>
-                  <view class='cardTitle'>船体图片</view>
+                  <view class='cardTitle'>船舶图片</view>
                   <!-- boatImage -->
                   <view class='boatImage' catchtap='preview' data-key = 'image' data-type = 'single' data-itemlist = '{{boat}}' data-prefix = '{{base_domain}}'>
                         <image src = '{{base_domain}}/upload/pcfiles/image/boat1_1.jpg' mode='aspectFill'></image>
                   </view>
             </view>
-            
+
+
+            <!-- 填充高度 -->
+            <view class='douFill'></view>
 
 
       </view>

@@ -186,6 +186,16 @@ Page({
     util.preview(e);
   },
 
+  /**
+   * 跳转到下一页面
+   */
+  goto (e) {
+    var link = e.currentTarget.dataset.link;
+    wx.navigateTo({
+      url: link,
+    })
+  },
+
 
 
 })

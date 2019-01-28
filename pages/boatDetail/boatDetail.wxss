@@ -31,11 +31,7 @@
 }
 
 .title{
-   width: 25%;
-}
-
-.value{
-  width: 75%;
+   width: 28%;
 }
 
 .boatImage{
@@ -43,4 +39,15 @@
   height: 300rpx;
   margin: 0 auto;
   margin-top: 30rpx;
+}
+
+.unit{
+  font-size: 28rpx;
+  padding-left: 10rpx;
+  color: rgba(128,128,128,1);
+}
+
+.douFill{
+  width: 100%;
+  height: 50rpx;
 }
