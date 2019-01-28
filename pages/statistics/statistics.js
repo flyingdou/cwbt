@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showMark: false
+    showMark: false,
+    startDate: '请选择',
+    endDate: '请选择'
   },
 
   /**

@@ -49,6 +49,38 @@
   background: white;
 }
 
+.timeDiv{
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.middle{
+  margin-left: 20rpx;
+  font-size: 28rpx;
+}
+
+.timeDiv-timeright{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 20rpx;
+}
+
+.title{
+  padding-left: 20rpx;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.right{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
 .line{
   display: flex;
   justify-content: space-between;

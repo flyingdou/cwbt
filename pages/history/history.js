@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-     startTime: '请选择开始时间！',
-     endTime: '请选择结束时间！',
+     startTime: '请选择',
+     endTime: '请选择',
      showModalStatus: false
   },
 
@@ -135,14 +135,11 @@ Page({
   saveSelectValue(res) {
      var key = obj.data.dateKey;
      var dou = {};
-     dou[key] = res.detail.value;
+     dou.startTime = res.detail.values[0];
+     dou.endTime = res.detail.values[1];
      dou.showModalStatus = false;
      obj.setData(dou);
-
-     // 选择了结束时间，自动查询
-     if (key == 'endTime') {
-       obj.getData();
-     }
+     obj.getData();
   },
 
 

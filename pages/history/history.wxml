@@ -1,34 +1,32 @@
 <view class=' content'>
       <!-- 选择查询时间 -->
       <view class='times'>
-            <!-- startTime -->
-            <view class='line' bindtap='chooseDate' data-key = 'startTime'>
-                  <!-- tv -->
-                  <view class='tv'>
-                        <view class='title'>开始时间:</view>
+            <!-- 开始时间 -->
+            <view class='timeDiv' bindtap='chooseDate' data-key='startDate'>
+              <view class='title'>
+                选择时间：
+              </view>
+              <view class='timeDiv-timeright'>
+                <view class='timeDiv-titles'>
+                    <view class='title'>
+                        开始时间
+                    </view>
+                    <view class='right' bindtap='chooseDate' data-key='startDate'>
                         <view class='value'>{{startTime}}</view>
+                    </view>
                   </view>
 
-                  <!-- moreIcon -->
-                  <view class='moreIcon'>
-                        <image src='../../icon/more@2x.png' mode='aspectFill'></image>
-                  </view>
+                  <view class='middle'>至</view>
 
-            </view>
-            
-            <!-- endTime -->
-            <view class='line' bindtap='chooseDate' data-key = 'endTime'>
-                  <!-- tv -->
-                  <view class='tv'>
-                        <view class='title'>结束时间:</view>
-                        <view class='value'>{{endTime}}</view>
+                  <view class='timeDiv-values'>
+                    <view class='title'>
+                        结束时间
+                    </view>
+                    <view class='right value-margin' bindtap='chooseDate' data-key='endDate'>
+                          <view class='value'>{{endTime}}</view>
+                    </view>
                   </view>
-
-                  <!-- moreIcon -->
-                  <view class='moreIcon'>
-                        <image src='../../icon/more@2x.png' mode='aspectFill'></image>
-                  </view>
-
+              </view>
             </view>
       </view>
 
@@ -51,4 +49,4 @@
 </view>
 
 <!-- 日历组件 -->
-<mark showModalStatus = '{{showModalStatus}}' bindMark = 'saveSelectValue'></mark>
+<mark showModalStatus = '{{showModalStatus}}' multiple='{{true}}' bindMark = 'saveSelectValue'></mark>
