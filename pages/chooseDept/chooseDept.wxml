@@ -23,12 +23,7 @@
                           <view class='deptName'>{{dept.dept_name}}</view>
                           <view class='personCount'>（{{dept.deptCount}}）</view> 
                     </view>
-
-                    <!-- <view class='right' bindtap='next' data-dept = '{{dept}}' wx:if='{{dept.deptCount && dept.deptCount > 0}}'>
-                          <view class='next'>
-                                <image src='../../icon/more@2x.png' mode='aspectFill'></image>
-                          </view>
-                    </view> -->
+        
 
                     <view class='right' bindtap='next' data-dept = '{{dept}}' wx:if = '{{dept.deptCount && dept.deptCount > 0}}'>
                         <view class='next'>
@@ -59,6 +54,10 @@
                   <view class='title'>已选择:<text wx:if = '{{deptObj}}'>{{deptObj.dept_name}}</text></view>
                   <view class='sure' bindtap='choose'>确定</view>
             </view>
+      </view>
+
+      <view class='backButtons'>
+            <view class='back' catchtap='back' wx:if = '{{navList.length > 1}}'>返回上一级</view>
       </view>
 
 

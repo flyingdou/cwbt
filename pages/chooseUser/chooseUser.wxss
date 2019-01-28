@@ -191,8 +191,12 @@ input{
 
 .userListTitle{
   font-size: 32rpx;
-  color: white;
-  background: #ff4401;
+  color: black;
+  background: #ccc;
   padding: 20rpx 0;
   text-align: center;
+}
+
+.backButtons{
+  bottom: 180rpx;
 }

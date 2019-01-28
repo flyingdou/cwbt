@@ -38,3 +38,22 @@ image{
   color: rgba(128,128,128,1);
 }
 
+/* 返回上一级按钮样式 */
+.backButtons{
+  position: fixed;
+  left: 0;
+  bottom: 40rpx;
+  width: 100%;
+  display: flex;
+}
+
+.back{
+  font-size: 28rpx;
+  color: white;
+  background: black;
+  text-align: center;
+  padding: 10rpx 20rpx;
+  margin: 0 auto;
+  border-radius: 10rpx;
+}
+

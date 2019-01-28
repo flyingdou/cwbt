@@ -41,6 +41,7 @@
 
 
       <!-- 当前机构的船舶 -->
+      <view class='boatListTitle' wx:if = '{{boatList && boatList.length > 0}}'>{{navList[navList.length-1].dept_name}}下属船舶</view>
       <view class='userList' wx:if = '{{boatList && boatList.length > 0}}'>
             <view class='preUser' wx:for = '{{boatList}}' wx:for-item = 'boat' wx:key = '' data-index = '{{index}}'>
             <!-- left -->
@@ -74,6 +75,11 @@
 
       <!-- fill -->
       <view class='douFill'></view>
+
+      <!-- 返回上一级 -->
+      <view class='backButtons' wx:if = '{{navList.length > 1}}'>
+            <view class='back' catchtap='back'>返回上一级</view>
+      </view>
 
 
 
