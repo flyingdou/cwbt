@@ -36,7 +36,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    obj.setData({
+      currentPage: 1,
+      pageSize: 20
+    });
   },
 
   /**
@@ -65,7 +68,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    obj.data.currentPage++;
+    obj.getEquipmentList();
   },
 
   /**
@@ -291,9 +295,15 @@ Page({
    */
   getEquipmentList: () => {
     var boat = obj.data.boat;
+    if (!boat || boat == '') {
+       return;
+    }
+    var equipmentList = obj.data.equipmentList || [];
     var reqUrl = util.getRequestURL('getEquipmentList.we');
     var param = {
-      boat_number: boat.number
+      boat_number: boat.number,
+      currentPage: obj.data.currentPage,
+      pageSize: obj.data.pageSize
     };
 
     // loading
@@ -310,8 +320,9 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
+          equipmentList = equipmentList.concat(res.equipmentList);
           obj.setData({
-            equipmentList: res.equipmentList
+            equipmentList: equipmentList
           });
         } else {
           console.log('程序异常！');

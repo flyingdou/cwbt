@@ -15,7 +15,6 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
-    
   },
 
   /**
@@ -29,6 +28,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 设置默认分页参数
+    obj.setData({
+      currentPage: 1,
+      pageSize: 20,
+      validList: []
+    });
     obj.init();
   },
 
@@ -57,7 +62,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+     obj.data.currentPage++;
+     obj.init();
   },
 
   /**
@@ -140,20 +146,26 @@ Page({
    * 初始化页面数据
    */
   init: () => {
-    var validList = [];
+    var validList = obj.data.validList || [];
     // 发起请求
     var reqUrl = util.getRequestURL('getWorkfeedbackList.we');
+    var param = {
+      dept_id: app.user.deptId,
+      userId: app.user.id,
+      currentPage: obj.data.currentPage,
+      pageSize: obj.data.pageSize
+    };
     wx.request({
       url: reqUrl,
       data: {
-        dept_id: app.user.deptId,
-        userId: app.user.id
+        json: encodeURI(JSON.stringify(param))
       },
       dataType: 'json',
       success: (res) => {
         res = res.data;
         if (res.success) {
-            validList = res.workfeedbackList;
+            // 两个数组结果拼接
+            validList = validList.concat(res.workfeedbackList);
             var isAll = {
               id: "0",
               checked: false

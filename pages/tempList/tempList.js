@@ -23,7 +23,7 @@ Page({
     obj.setData({
       userPriv: app.user.userPriv,
       overhaul: overhaul,
-      user_id: app.user.id,
+      user_id: app.user.id
     });
   },
 
@@ -38,6 +38,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    obj.setData({
+      currentPage: 1,
+      pageSize: 20,
+      workCardList: []
+    });
     this.getWorkCardList();
   },
 
@@ -66,7 +71,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+      obj.data.currentPage++;
+      obj.getWorkCardList();
   },
 
   /**
@@ -75,14 +81,6 @@ Page({
   goto: function (e) {
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.workCardList[index];
-    // if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
-    //     wx.showModal({
-    //       title: '提示',
-    //       content: '该任务已被他人领取，请选择其他任务！',
-    //       showCancel: false
-    //     })
-    //     return;
-    // }
     var link = e.currentTarget.dataset.link;
     wx.navigateTo({
       url: link
@@ -93,12 +91,15 @@ Page({
    * 查询临时工作卡列表数据
    */
   getWorkCardList: function () {
+    var workCardList = obj.data.workCardList || [];
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
     var param = { 
       userPriv: app.user.userPriv, 
       deptId: app.user.deptId, 
       status: [1,9], // 未完成、被领取的
-      overhaul_function: obj.data.overhaul 
+      overhaul_function: obj.data.overhaul,
+      currentPage: obj.data.currentPage,
+      pageSize: obj.data.pageSize
       };
     wx.request({
       url: url,
@@ -106,8 +107,9 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        workCardList = workCardList.concat(res.data);
         obj.setData({
-          workCardList: res.data
+          workCardList: workCardList
         });
       },
       fail: function (e) {

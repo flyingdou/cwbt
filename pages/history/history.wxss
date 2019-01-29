@@ -111,10 +111,9 @@
 .tagTitle{
    font-size: 28rpx;
    color: black;
-   background: #cdf;
+   background: #ccc;
    padding: 20rpx 0;
    text-align: center;
-
 }
 
 

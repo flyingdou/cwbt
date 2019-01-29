@@ -40,6 +40,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    obj.setData({
+      currentPage: 1,
+      pageSize: 20
+    });
     this.getWorkCardList();
   },
 
@@ -68,7 +72,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+     // 上拉加载，分页查询
+     obj.data.currentPage++;
+     obj.getWorkCardList();
   },
 
   goto: function (e) {
@@ -92,16 +98,25 @@ Page({
    * 查询管理端临时工作卡列表数据
    */
   getWorkCardList: function () {
+    var workCardList = obj.data.workCardList || [];
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
-    var param = { userPriv: app.user.userPriv, deptId: app.user.deptId, status: [1, 2, 4, 9, 14], overhaul_function: obj.data.type };
+    var param = { 
+            userPriv: app.user.userPriv,
+            deptId: app.user.deptId, 
+            status: [1, 2, 4, 9, 14], 
+            overhaul_function: obj.data.type,
+            currentPage: obj.data.currentPage,
+            pageSize: obj.data.pageSize 
+      };
     wx.request({
       url: url,
       data: {
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        workCardList = workCardList.concat(res.data);
         obj.setData({
-          workCardList: res.data
+          workCardList: workCardList
         });
       },
       fail: function (e) {

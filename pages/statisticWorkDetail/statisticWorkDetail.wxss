@@ -145,7 +145,6 @@ Page{
 .tagTitle{
   font-size:28rpx;
   text-align:center;
-  background:#ff4401;
-  color:white;
+  background:#ccc;
   padding:20rpx;
 }
