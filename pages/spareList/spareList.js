@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentPage: 1,
+    pageSize: 20
   },
 
   /**
@@ -34,6 +35,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    obj.data.list = [];
+    obj.data.currentPage = 1;
     obj.queryData();
   },
 
@@ -62,7 +65,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    obj.data.currentPage++;
+    obj.queryData();
   },
 
   /**
@@ -70,7 +74,7 @@ Page({
    */
   queryData: function () {
     var url = util.getRequestURL('getSpareByBoat.we');
-    var param = { boatId: obj.data.boatId };
+    var param = { boatId: obj.data.boatId, currentPage: obj.data.currentPage, pageSize: obj.data.pageSize };
 
     // 测试数据
     // console.log(param);
@@ -85,8 +89,10 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        var list = obj.data.list || [];
+        list = list.concat(res.data);
         obj.setData({
-          list: res.data
+          list: list
         });
       },
       fail: function (e) {

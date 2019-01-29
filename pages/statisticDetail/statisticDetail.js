@@ -93,14 +93,18 @@ Page({
    */
   onReachBottom: function () {
 
-  },
+  },  
 
   /**
    * 查询数据
    */
   queryData: function () {
+    wx.showLoading({
+      title: '查询中',
+      mask: true
+    });
     var url = util.getRequestURL('statisticsdetails.we');
-    var param = { boatid: obj.data.boatId };
+    var param = { boatid: obj.data.boatId, currentPage: obj.data.currentPage, pageSize: obj.data.pageSize };
     var style = 0;
     if (obj.data.startDate) {
       param.begintime = obj.data.startDate;
@@ -143,8 +147,10 @@ Page({
         obj.setData({
           list: res.data.list
         });
+        wx.hideLoading();
       },
       fail: function (e) {
+        wx.hideLoading();
         util.tipsMessage('网络异常！');
         console.log(e);
       },

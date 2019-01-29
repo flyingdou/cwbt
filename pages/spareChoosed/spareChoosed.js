@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentPage: 1,
+    pageSize: 20
   },
 
   /**
@@ -29,6 +30,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    obj.data.currentPage = 1;
+    obj.data.spareList = [];
     // 初始化页面数据
     obj.init();
   },
@@ -58,7 +61,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    obj.data.currentPage++;
+    obj.init();
   },
 
   /**
@@ -75,7 +79,9 @@ Page({
     var reqUrl = util.getRequestURL('getSparePickList.we');
     var param = {
       user_id: app.user.id,
-      status: 8 // 被领取
+      status: 8, // 被领取
+      currentPage: obj.data.currentPage,
+      pageSize: obj.data.pageSize
     };
 
     // loading
@@ -92,8 +98,8 @@ Page({
       success: (res) => {
         res = res.data;
         var dou = {};
-        var spareList = res.sparePickList || [];
-        dou.spareList = spareList;
+        var spareList = obj.data.spareList || [];
+        dou.spareList = spareList.concat(res.sparePickList);
         if (res.success) {
           obj.setData(dou);
         }

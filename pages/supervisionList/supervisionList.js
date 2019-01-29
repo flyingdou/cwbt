@@ -37,6 +37,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    obj.data.supervisionList = [];
+    obj.data.currentPage = 1;
     this.getSupervisionList();
   },
 
@@ -94,8 +96,10 @@ Page({
       },
       success: function (res) {
         wx.hideLoading();
+        var supervisionList = obj.data.supervisionList || [];
+        supervisionList = supervisionList.concat(res.data);
         obj.setData({
-          supervisionList: res.data
+          supervisionList: supervisionList
         });
       },
       fail: function (e) {

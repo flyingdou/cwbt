@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentPage: 1,
+    pageSize: 20
   },
 
   /**
@@ -34,6 +35,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    obj.data.list = [];
+    obj.data.currentPage = 1;
     obj.queryData();
   },
 
@@ -62,22 +65,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    obj.data.currentPage++;
+    obj.queryData();
   },
 
   /**
    * 数据
    */
-  queryData: function () {
+  queryData: function (reset) {
     var url = util.getRequestURL('getSpareRecordBySpare.we');
-    var param = { spareId: obj.data.spareId };
-
-    // 测试数据
-    // console.log(param);
-    
-    wx.showLoading({
-      title: '加载中',
-    })
+    var param = { spareId: obj.data.spareId, currentPage: obj.data.currentPage, pageSize: obj.data.pageSize };
     wx.request({
       url: url,
       dataType:'json',
@@ -85,8 +82,10 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        var list = obj.data.list || [];
+        list = list.concat(res.data);
         obj.setData({
-          list: res.data
+          list: list
         });
       },
       fail: function (e) {
@@ -94,7 +93,7 @@ Page({
         console.log(e);
       },
       complete: (xe) =>{
-        wx.hideLoading();
+        
       }
     });
   }

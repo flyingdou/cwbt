@@ -58,30 +58,37 @@ Component({
     /**
      * 改变tab页签当前索引
      */
-  changeTabIndex: function (e) {
-    // 用户滑动触发
-    if (e.detail.source === "touch") {
-      var index = e.detail.current;
-      this.setData({
-        tabIndex: index
-      })
-    }
+    changeTabIndex: function (e) {
+      // 用户滑动触发
+      if (e.detail.source === "touch") {
+        var index = e.detail.current;
+        this.setData({
+          tabIndex: index
+        });
+        this.addEvent(index);
+      }
 
-    // 用户点击tab页标题触发
-    if (e.currentTarget.dataset.index || e.currentTarget.dataset.index === 0) {
-      var index = e.currentTarget.dataset.index;
-      this.setData({
-        tabIndex: index
-      })
+      // 用户点击tab页标题触发
+      if (e.currentTarget.dataset.index || e.currentTarget.dataset.index === 0) {
+        var index = e.currentTarget.dataset.index;
+        this.setData({
+          tabIndex: index
+        });
+        this.addEvent(index);
+      }
+    },
 
+    /**
+     * 设定抛出事件
+     */
+    addEvent: function(index) {
       // 注册一个标题点击事件
       var myEventDetail = {
         index: index
       }
       var myEventOption = {} // 触发事件的选项
-      this.triggerEvent('TitleTap', myEventDetail, myEventOption)
+      this.triggerEvent('Change', myEventDetail, myEventOption)
     }
-  }
   // methods end
   }
 })
