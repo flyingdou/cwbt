@@ -25,24 +25,7 @@
     </view>
     <!-- 填充高度 -->
     <view style='height: 60rpx;'></view>
-    <!-- 操作按钮块 -->
-    <!-- <view class='blocks'> -->
-      <!-- <view class='block' bindtap='goto' data-link='../../pages/Tlist/Tlist?isUpdate=true' data-message='功能暂无！'>
-        <image class='block-icon' src='../../icon/2930@2x.png' mode='widthFix'></image>
-        <view class='block-text'>未验收工作</view> -->
-        <!-- <view class='block-count'>0</view> -->
-      <!-- </view> -->
-      <!-- <view class='block' bindtap='getEquipmentInfo' data-link='../equipmentInfo/equipmentInfo' data-message='功能暂无！'>
-        <image class='block-icon' src='../../icon/2918@2x.png' mode='widthFix'></image>
-        <view class='block-text'>查询设备信息</view> -->
-        <!-- <view class='block-count'>5</view> -->
-      <!-- </view> -->
-      <!-- <view class='block' bindtap='goto' data-link='../switch/switch' data-key = 'choose' data-value = 'chooseStatistics' data-priv = '2' data-message='暂无权限！'>
-        <!-- <image class='block-icon' src='../../icon/2917@2x.png' mode='widthFix'></image> -->
-        <!-- <image class='block-icon' src='../../icon/statistics.png' mode='widthFix'></image>
-        <view class='block-text'>统计</view>
-      </view>
-    </view> --> 
+   
   </view>
   <!-- 填充高度 -->
   <view style='height: 260rpx;'></view>
@@ -73,17 +56,33 @@
           </view>
   </view>
 
-  <view class='tool-line'>
+  <!-- 点击版本号，弹出版本更新信息 -->
+  <view class='tool-line' catchtap='showModal'>
           <view class='line'>
                 <view class='line-left'>
                       <image class='line-left-icon' src='../../icon/version.png' mode='widthFix'></image>
                       <view class='line-left-text'>版本号</view>
                 </view>
                 <view class='line-right line-right-text'>
-                      1.5.0
+                      V{{update.version}}
                 </view>
           </view>
   </view>
+
+  <!-- 弹出层 -->
+  <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = 'V{{update.version}}更新内容' confirm-text = ' ' cancel-text = ' ' bindconfirm = 'confirm' bindcancel = 'cancel'>
+              <view class='block'>
+
+                    <!-- detailList -->
+                    <view class='detailList'>
+                          <view class='' wx:for = '{{update.detailList}}' wx:key = ''>
+                                <view class='detail'>{{item.detail}}</view>
+                          </view>
+                    </view>
+              
+                </view>
+      
+  </modal>
 
   
 </view>

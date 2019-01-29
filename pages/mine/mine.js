@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 隐藏弹出框
+    hidden: true
 
   },
 
@@ -15,7 +17,7 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    // obj.init();
+   
 
     // 设置导航栏颜色
     wx.setNavigationBarColor({
@@ -26,6 +28,9 @@ Page({
         timingFunc: 'easeIn'
       }
     });
+
+    // 查询版本信息
+    obj.getEdition();
   },
 
   /**
@@ -147,6 +152,53 @@ Page({
        url: url,
      })
   },
+
+  /**
+  * 触发弹出层
+  */
+  showModal() {
+    obj.setData({
+      hidden: false
+    });
+  },
+
+  /**
+   * 点击确定按钮
+   */
+  confirm() {
+    obj.setData({
+      hidden: true
+    });
+  },
+
+  /**
+   * 点击取消按钮
+   */
+  cancel() {
+    obj.setData({
+      hidden: true
+    });
+  },
+
+  /**
+   * 查询最新的版本信息
+   */
+  getEdition () {
+    var reqUrl = util.getRequestURL('getEdition.we');
+    // request
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      success (res) {
+        res = res.data;
+        if (res.success) {
+          obj.setData({
+            update: res.update
+          });
+        }
+      },
+    })
+   },
 
   
 

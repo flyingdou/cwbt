@@ -1,7 +1,6 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/edition/edition",
     "pages/boatDetail/boatDetail",
     "pages/releaseSupervision/releaseSupervision",
     "pages/chooseUser/chooseUser",
