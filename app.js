@@ -51,6 +51,10 @@ App({
     
     
   },
+
+  /**
+   * 常量
+   */
   constant: {
     isDev: true,
     base_img_url: 'https://cwbt.castlc.cn/picture',
@@ -61,9 +65,17 @@ App({
     download_url: 'https://cwbt.castlc.cn/file/',
     logo: 'https://cwbt.castlc.cn/picture/shipLogo123.jpg',
     base_img_url_backup: 'https://fish.ecartoon.com.cn/picture',
-    base_req_url_backup: 'http://192.168.0.106:8080/cwbt/api/cwbtMP/',
+    base_req_url_backup: 'http://192.168.0.176:8080/cwbt/api/cwbtMP/',
     base_req_url_backup_1: 'https://cwbt.castlc.cn/cwbt/test/login?url=http://47.92.101.196:8080/cwbt/api/cwbtMP/',
     upload_url_backup: 'https://fish.ecartoon.com.cn/uploadFile',
     download_url_backup: 'https://cwbt.castlc.cn/file/',
+  },
+
+  /**
+   * 分页对象
+   */
+  pageInfo: {
+    currentPage: 1,
+    pageSize: 20
   }
 })

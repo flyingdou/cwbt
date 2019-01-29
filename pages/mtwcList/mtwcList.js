@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentPage: app.pageInfo.currentPage,
+    pageSize: app.pageInfo.pageSize
   },
 
   /**
@@ -40,10 +41,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    obj.setData({
-      currentPage: 1,
-      pageSize: 20
-    });
+    obj.data.currentPage = app.pageInfo.currentPage;
+    obj.data.workCardList = [];
     this.getWorkCardList();
   },
 

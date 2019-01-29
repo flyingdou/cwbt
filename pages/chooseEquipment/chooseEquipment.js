@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-     base_domain: app.constant.base_domain
+    base_domain: app.constant.base_domain,
+    currentPage: app.pageInfo.currentPage,
+    pageSize: app.pageInfo.pageSize
   },
 
   /**
@@ -36,10 +38,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    obj.setData({
-      currentPage: 1,
-      pageSize: 20
-    });
+    
   },
 
   /**

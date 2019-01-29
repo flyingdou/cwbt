@@ -104,7 +104,7 @@ Page({
       mask: true
     });
     var url = util.getRequestURL('statisticsdetails.we');
-    var param = { boatid: obj.data.boatId, currentPage: obj.data.currentPage, pageSize: obj.data.pageSize };
+    var param = { boatid: obj.data.boatId };
     var style = 0;
     if (obj.data.startDate) {
       param.begintime = obj.data.startDate;

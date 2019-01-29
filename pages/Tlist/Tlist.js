@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentPage: 1,
-    pageSize: 20,
+    currentPage: app.pageInfo.currentPage,
+    pageSize: app.pageInfo.pageSize,
     taskList: []
   },
 

@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentPage: app.pageInfo.currentPage,
+    pageSize: app.pageInfo.pageSize
   },
 
   /**
@@ -29,11 +30,8 @@ Page({
    */
   onShow: function () {
     // 设置默认分页参数
-    obj.setData({
-      currentPage: 1,
-      pageSize: 20,
-      validList: []
-    });
+    obj.data.currentPage = app.pageInfo.currentPage;
+    obj.data.validList = [];
     obj.init();
   },
 
