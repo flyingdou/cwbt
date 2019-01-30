@@ -53,20 +53,13 @@
             <!-- right -->
             <view class = 'boatRight' bindtap='goto' data-link = '../../pages/boatDetail/boatDetail?id={{boat.id}}'>
                   <view class='upLine'>
-                        <view class = 'userName'>{{boat.name}}</view>
+                        <view class = 'userName'>{{boat.name}}-</view>
                         <view class = 'boatModule'>{{boat.shiptype}}</view>
                   </view>
                   
                   <view class = 'boatLine'>
-                        <view class = 'tv'>
-                              <view class = 'value'>装船总功率</view>
-                              <view class = 'value'>{{boat.power}}<text class='unit'>(KW)</text></view>
-                        </view>
-
-                        <view class = 'tv'>
-                              <view class = 'value'>船舶总吨数</view>
-                              <view class = 'value'>{{boat.weight}}<text class='unit'>(T)</text></view>
-                        </view>
+                        <view class='value'>装船总功率：<text  decode='{{true}}'>{{boat.power}}</text><text class='unit'>(KW)</text></view>
+                        <view class='value'>船舶总吨数：<text  decode='{{true}}'>{{boat.weight}}</text><text class='unit'>(T)</text></view>
                   </view>
             </view>
 					  
