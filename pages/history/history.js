@@ -135,12 +135,16 @@ Page({
   saveSelectValue(res) {
      var key = obj.data.dateKey;
      var dou = {};
-     dou.startTime = res.detail.values[0];
-     dou.endTime = res.detail.values[1];
-     dou.showModalStatus = false;
-     obj.setData(dou);
-     obj.getData();
-  },
-
+     if (res.detail.values) {
+       dou.startTime = res.detail.values[0];
+       dou.endTime = res.detail.values[1];
+       dou.showModalStatus = false;
+       obj.setData(dou);
+       obj.getData();
+     } else {
+      dou.showModalStatus = false;
+      obj.setData(dou);
+     }
+  }
 
 })
