@@ -129,6 +129,7 @@ Page({
      var reqUrl = util.getRequestURL('updatePassword.we');
      wx.showLoading({
        title: '处理中...',
+       mask: true
      })
      wx.request({
        url: reqUrl,

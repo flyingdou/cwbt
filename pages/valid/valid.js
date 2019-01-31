@@ -189,6 +189,7 @@ Page({
 
     wx.showLoading({
       title: '处理中',
+      mask: true
     })
     wx.request({
       url: reqUrl,

@@ -90,6 +90,7 @@ Page({
     // loadding
     wx.showLoading({
       title: '加载中...',
+      mask: true
     })
 
     // 发起微信请求
@@ -198,6 +199,7 @@ Page({
     // loading
     wx.showLoading({
       title: '处理中...',
+      mask: true
     })
 
     // 请求数据

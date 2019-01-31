@@ -98,6 +98,7 @@ Page({
     // loading
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
 
     // 发起微信请求

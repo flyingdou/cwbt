@@ -175,6 +175,7 @@ Page({
     // loading
     wx.showLoading({
       title: '加载中...',
+      mask: true
     })
 
     wx.request({
@@ -239,6 +240,7 @@ Page({
      // loading
      wx.showLoading({
        title: '加载中',
+       mask: true
      })
 
      // request
@@ -308,6 +310,7 @@ Page({
     // loading
     wx.showLoading({
       title: '加载中...',
+      mask: true
     })
 
     wx.request({

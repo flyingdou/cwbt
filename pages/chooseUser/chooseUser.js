@@ -187,7 +187,8 @@ Page({
 		
 		// loading
 		wx.showLoading({
-			title: '处理中'
+			title: '处理中',
+      mask: true
 		});
 	  
 		// 发起requset请求
@@ -346,6 +347,7 @@ Page({
 
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     wx.request({
       url: reqUrl,
@@ -649,6 +651,7 @@ Page({
     // loading
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
 
     // request

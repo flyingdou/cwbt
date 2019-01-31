@@ -155,6 +155,7 @@ Page({
     // loading
     wx.showLoading({
       title: '加载中...',
+      mask: true
     })
     
     wx.request({
@@ -198,6 +199,7 @@ Page({
      // loading
      wx.showLoading({
        title: '处理中...',
+       mask: true
      })
 
      // 发起请求

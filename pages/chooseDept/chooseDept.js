@@ -180,6 +180,7 @@ Page({
 
     wx.showLoading({
       title: '加载中...',
+      mask: true
     })
     wx.request({
       url: reqUrl,
