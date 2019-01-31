@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "督导事项"
+  "navigationBarTitleText": "督导事项",
+  "usingComponents": {
+    "tab": "../../component/tab/tab"
+  }
 }

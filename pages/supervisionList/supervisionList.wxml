@@ -3,9 +3,66 @@
 
 <!-- 页面开始 -->
 <view class='content'>
-      <checkbox-group bindchange = 'checkboxChange'> 
+      <tab wx:if = '{{(queryType == 1 || queryType == 2) && windowHeightRpx}}'  titles='{{titles[queryType]}}' height='{{windowHeightRpx}}'>
+      
+       <view class='list' wx:for='{{titles[queryType]}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
 
-      <view class='list'>
+       <!-- <checkbox-group bindchange = 'checkboxChange'>
+       </checkbox-group>  -->
+            
+                <view class='pre' wx:for = '{{titles[queryType][tabIndex].supervisionList}}' wx:key=''>
+                      <view class='line' bindtap='goto' data-link = '../supervisionDetail/supervisionDetail?id={{item.id}}&code={{item.code}}'>
+                            <!-- 填充高度 -->
+                            <view style='height: 20rpx;' wx:if='{{item.status != 0}}'></view>
+
+                            <view class='tagLine'>
+                                  <view class='tagTitleLine'>
+                                        <view class='tagTitle'>{{item.auto_date}} 督办事项</view>
+                                        <view class='tagTitle blueButton'>查看进展</view>
+                                  </view>
+                                  <view class='tagValue'>查看发动机参数</view>
+                            </view>
+
+
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>
+                                          <block wx:if='{{filter.checkSupervisionParent(item.code)}}'>发送人</block>
+                                          <block wx:else>督办人</block>
+                                        </view>
+                                        <view class='value'>{{item.creator}}</view>
+                                  </view>
+
+                            </view>
+
+                            
+
+                            <!-- 图标 -->
+                            <view class='tag' wx:if='{{item.status != 0}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont' wx:if='{{item.status == 1}}'>已完结</view>
+                                        <view class='statusFont' wx:if='{{item.status == 2}}'>已撤回</view>
+                                        <view class='statusFont' wx:if='{{item.status == 3}}'>已冻结</view>
+                                  </view>
+                            </view>
+                      </view>
+
+                </view>
+
+      </view>
+
+      <!-- 填充 -->
+      <view class='douFill'></view>
+
+      </tab>
+
+
+
+      
+      
+       <view wx:if = '{{queryType == 3}}' class='list' >
+
             
                 <view class='pre' wx:for = '{{supervisionList}}' wx:key=''>
                       <view class='line' bindtap='goto' data-link = '../supervisionDetail/supervisionDetail?id={{item.id}}&code={{item.code}}'>
@@ -30,54 +87,9 @@
                                         <view class='value'>{{item.creator}}</view>
                                   </view>
 
-                                  <!-- <view class='tv right'>
-                                        <view class='value'>{{item.auto_date}}</view>
-                                  </view> -->
-
                             </view>
 
-                            <view class='lineFill'></view>
-
-                            <!--<view class='line1' hidden='{{!item.boat && !item.device}}'>
-                                  <view class='tv left' wx:if='{{item.boat}}'>
-                                        <view class='title'>所属船舶</view>
-                                        <view class='value'>{{item.boat}}</view>
-                                  </view>
-
-                                  <view class='tv right' wx:if='{{item.device}}'>
-                                        <view class='title'>设备</view>
-                                        <view class='value'>{{item.device}}</view>
-                                  </view>
-                                  
-                            </view>-->
-
-                            <!--<view class='lineFill' hidden='{{!item.boat && !item.device}}'></view>-->
-
-                            <!-- <view class='line1'>
-                                  <view class='tv left'>
-                                        <view class='title'>接收人</view>
-                                        <view class='value long-text'>
-                                          <block wx:for='{{item.recUsers}}' wx:key='' wx:for-item='recUser' wx:for-index='recUserIndex'>
-                                            {{recUser.userName}}
-                                            <block wx:if='{{recUserIndex != item.recUsers.length-1}}'>、</block>
-                                          </block>
-                                        </view>
-                                  </view>
-                            </view> -->
-
-                            <view class='lineFill'></view>
-
-                            <!-- <view class='line1'>
-                                  <view class='tv left'>
-                                        <view class='title'>抄送人</view>
-                                        <view class='value long-text'>
-                                          <block wx:for='{{item.fwdUsers}}' wx:key='' wx:for-item='fwdUser' wx:for-index='fwdUserIndex'>
-                                            {{fwdUser.userName}}
-                                            <block wx:if='{{fwdUserIndex != item.fwdUsers.length-1}}'>、</block>
-                                          </block>
-                                        </view>
-                                  </view>
-                            </view> -->
+                            
 
                             <!-- 图标 -->
                             <view class='tag' wx:if='{{item.status != 0}}'>
@@ -96,24 +108,9 @@
 
       <!-- 填充 -->
       <view class='douFill'></view>
-      
-      <!-- 功能按钮 -->
-      <view class='footer'>
-            <!-- 全选按钮 -->
-            <!-- <checkbox-group bindchange = 'chooseAll'>
-                  <view class='isAll'>
-                        <checkbox value = '{{isAll.id}}' checked='{{isAll.checked}}'>全选</checkbox>
-                  </view>
-            </checkbox-group> -->
-            
-            <!-- 验收按钮 -->
-            <!-- <view class='valid' bindtap='goto' data-link='../releaseSupervision/releaseSupervision' wx:if='{{userPriv == 2}}'>发起督导</view> -->
-            
-      
-      </view>
 
 
-      </checkbox-group>
+
       
 
 
