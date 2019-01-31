@@ -4,7 +4,7 @@
             <!-- 开始时间 -->
             <view class='timeDiv' bindtap='chooseDate' data-key='startDate'>
               <view class='title'>
-                选择时间：
+                搜索时间：
               </view>
               <view class='timeDiv-timeright'>
                 <view class='timeDiv-titles'>

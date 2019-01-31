@@ -157,6 +157,9 @@ Page({
    * picker、输入框取值
    */
   pickerChange: (e) => {
+    if (!obj.checkValid()) {
+       return;
+    }
     var key = e.currentTarget.dataset.key;
     var dou = {};
     dou[key] = e.detail.value;
@@ -200,6 +203,9 @@ Page({
    * 拍照
    */
   photo: () => {
+    if (!obj.checkValid()) {
+       return;
+    }
     var isPhoto = false;
     var isUpload = obj.data.isUpload;
     var photo = {};
@@ -344,6 +350,9 @@ Page({
    * 调用上传方法
    */
   uploadPictures: () => {
+    if (!obj.checkValid()) {
+        return;
+    }
     obj.uploadPics();
   },
 
@@ -584,7 +593,24 @@ Page({
       }
     })
 
-  }
+  },
+
+  /**
+   * 校验是否已经设备条码
+   */
+  checkValid () {
+    var isScan = obj.data.isScan;
+    if (!isScan) {
+      wx.showModal({
+        title: '提示',
+        content: '请先验证设备条码！',
+      })
+      return false;
+    } else {
+      return true;
+    }
+
+  },
 
 
 

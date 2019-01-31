@@ -6,7 +6,6 @@
                   <view class='nav {{index == (navList.length-1) ? "current" : ""}}' data-deptid='{{nav.seq_id}}'>{{nav.dept_name}}</view>
                   <text wx:if = '{{index < (navList.length-1)}}' class='nav' decode='ture'>&gt;</text>
             </view>
-            
       </view>
 
       
@@ -92,7 +91,7 @@
       <!-- footer -->
       <view class='footer'>
             <view class='back' catchtap='back' wx:if = '{{navList.length > 1}}'>返回上一级</view>
-            <view class='scan' bindtap='scan'>扫码选择设备</view>
+            <view class='scan' bindtap='scan'>扫码选设备</view>
       </view>
 
 

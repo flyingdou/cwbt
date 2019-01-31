@@ -24,6 +24,9 @@ Page({
     if (options.queryType == 1) {
       wx.setNavigationBarTitle({title: '我发起的督导'});
     }
+    if (options.queryType == 2) {
+      wx.setNavigationBarTitle({ title: '督办事项' });
+    }
   },
 
   /**
