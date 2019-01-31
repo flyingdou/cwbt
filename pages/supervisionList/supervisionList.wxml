@@ -20,7 +20,7 @@
                                         <view class='tagTitle'>{{item.auto_date}} 督办事项</view>
                                         <view class='tagTitle blueButton'>查看进展</view>
                                   </view>
-                                  <view class='tagValue'>查看发动机参数</view>
+                                  <view class='tagValue'>{{item.content}}</view>
                             </view>
 
 
@@ -74,7 +74,7 @@
                                         <view class='tagTitle'>{{item.auto_date}} 督办事项</view>
                                         <view class='tagTitle blueButton'>查看进展</view>
                                   </view>
-                                  <view class='tagValue'>查看发动机参数</view>
+                                  <view class='tagValue'>{{item.content}}</view>
                             </view>
 
 
