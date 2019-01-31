@@ -44,6 +44,14 @@
                 </view>
 
                 <!-- 图标 -->
+                <view class='tag' wx:if='{{supervise.status == 1}}'>
+                      <view class='tagDiv'>
+                            <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                            <view class='statusFont'>已完结</view>
+                      </view>
+                </view>
+
+                <!-- 图标 -->
                 <view class='tag' wx:if='{{supervise.status == 3}}'>
                       <view class='tagDiv'>
                             <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
@@ -89,6 +97,14 @@
                           <view class='content-box value' wx:for='{{item.attachmentJson}}' wx:key='' wx:for-item='attachment' wx:for-index='attachmentIndex' catchtap='openFile' data-parentindex='{{index}}' data-subindex='{{attachmentIndex}}'>
                             {{attachment.filename}}
                           </view>
+                      </view>
+
+                      <!-- 图标 -->
+                      <view class='tag' wx:if='{{supervise.status == 1}}'>
+                            <view class='tagDiv'>
+                                  <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                  <view class='statusFont'>已完结</view>
+                            </view>
                       </view>
                       
                       <!-- 图标 -->
@@ -155,6 +171,7 @@
     <!-- 底部按钮 -->
     <view class='buttons' wx:if='{{userId == supervise.creatorId}}'>
       <view class='button scanButton' bindtap='updateSuperviseStatus' data-status='2' wx:if='{{supervise.status == 0 && supervise.contents.length < 2 && superviseFeedback.length < 1}}'>撤回</view>
+      <view class='button scanButton' bindtap='updateSuperviseStatus' data-status='1' wx:if='{{supervise.status == 0 && supervise.contents.length > 1 && superviseFeedback.length > 0}}'>完结</view>
       <view class='button photoButton' bindtap='updateSuperviseStatus' data-status='3' wx:if='{{supervise.status == 0}}'>冻结</view>
     </view> 
 
