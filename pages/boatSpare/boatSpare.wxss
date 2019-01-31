@@ -157,3 +157,8 @@ input{
 .xfill{
   margin-top: 40rpx;
 }
+
+.deptImage{
+  width: 100rpx;
+  height: 100rpx;
+}
