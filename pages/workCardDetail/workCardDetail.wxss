@@ -1,5 +1,6 @@
 Page{
   position: relative;
+  height: auto;
 }
 
 .content{

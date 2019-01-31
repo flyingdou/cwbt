@@ -130,3 +130,11 @@ margin-left:20rpx;
 background: rgba(153,153,153,1);
 color: white;
 }
+
+.blueButton{
+  color:white;
+  background:rgba(38,130,255,1);
+  padding:10rpx 20rpx;
+  font-size:24rpx;
+  border-radius:5rpx;
+}

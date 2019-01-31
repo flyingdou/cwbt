@@ -15,7 +15,7 @@
                             <view class='tagLine'>
                                   <view class='tagTitleLine'>
                                         <view class='tagTitle'>2019-01-24 15:30 督办事项</view>
-                                        <view class='tagTitle'></view>
+                                        <view class='tagTitle blueButton'>查看进展</view>
                                   </view>
                                   <view class='tagValue'>查看发动机参数</view>
                             </view>
