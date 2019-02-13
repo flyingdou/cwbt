@@ -26,6 +26,11 @@
             <view class='preDept' wx:for = '{{deptList}}' wx:for-item = 'dept' wx:key = '' bindtap='next' data-dept = '{{dept}}' data-deptindex = '{{index}}'>
 
                   <view class='left'>
+                        <!-- image -->
+                        <view class='deptImage' catchtap='preview' data-itemList = '{{deptList}}' data-index = '{{index}}' data-key = 'image' data-prefix = '{{base_domain}}'>
+                              <image src='{{base_domain}}/{{dept.image}}' mode='aspectFill'></image>
+                        </view>
+
                         <radio checked='{{dept.checked}}'  color = 'rgba(54, 123, 240, 1)'></radio>
                         <view class='deptName'>{{dept.dept_name}}</view>
                   </view>

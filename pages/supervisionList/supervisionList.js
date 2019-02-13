@@ -8,7 +8,17 @@ Page({
    */
   data: {
     currentPage: app.pageInfo.currentPage,
-    pageSize: app.pageInfo.pageSize
+    pageSize: app.pageInfo.pageSize,
+    titles: {
+      1: [
+        { title: '进行中', checkStatusKey: 'workstatus', checkStatus: 2 },
+        { title: '已完结', checkStatusKey: 'workstatus', checkStatus: 1 }
+      ],
+      2: [
+        { title: '待办事项', checkStatusKey: 'typeStatus', checkStatus: 1 },
+        { title: '已办事项', checkStatusKey: 'typeStatus', checkStatus: 2 }
+      ]
+    }
   },
 
   /**
@@ -16,9 +26,10 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    var dou = {};
 
     if (options.queryType) {
-      obj.data.queryType = options.queryType;
+       dou.queryType = options.queryType;
     }
 
     if (options.queryType == 1) {
@@ -27,6 +38,13 @@ Page({
     if (options.queryType == 2) {
       wx.setNavigationBarTitle({ title: '督办事项' });
     }
+
+    dou.windowHeightRpx = util.getSystemInfo().windowHeightRpx;
+
+    obj.setData(dou);
+
+    obj.getSupervisionList(0);
+    obj.getSupervisionList(1);
   },
 
   /**
@@ -41,8 +59,6 @@ Page({
    */
   onShow: function () {
     obj.data.currentPage = app.pageInfo.currentPage;
-    obj.data.supervisionList = [];
-    this.getSupervisionList();
   },
 
   /**
@@ -64,14 +80,13 @@ Page({
    */
   onPullDownRefresh: function () {
 
-  },
+},
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
     obj.data.currentPage++;
-    obj.getSupervisionList();
   },
 
   goto: function (e) {
@@ -84,13 +99,13 @@ Page({
   /**
    * 查询督导列表数据
    */
-  getSupervisionList: function () {
+  getSupervisionList: function (status) {
     wx.showLoading({
       title: '数据加载中',
       mask: true
     });
     var url = util.getRequestURL('getSupervisionList.we');
-    var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv, queryType: obj.data.queryType, currentPage: obj.data.currentPage, pageSize: obj.data.pageSize };
+    var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv, queryType: obj.data.queryType, status: status };
     wx.request({
       url: url,
       dataType:'json',
@@ -99,11 +114,19 @@ Page({
       },
       success: function (res) {
         wx.hideLoading();
-        var supervisionList = obj.data.supervisionList || [];
-        supervisionList = supervisionList.concat(res.data);
-        obj.setData({
-          supervisionList: supervisionList
-        });
+        
+       var queryType = obj.data.queryType;
+       if (queryType == 1 || queryType == 2) {
+            var titles = obj.data.titles;
+            titles[queryType][status].supervisionList = res.data;
+            obj.setData({
+              titles: titles
+            });
+       } else {
+         obj.setData({
+           supervisionList: res.data
+         });
+       }
       },
       fail: function (e) {
         wx.hideLoading();
