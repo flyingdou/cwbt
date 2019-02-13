@@ -230,6 +230,7 @@ Page({
       success: (res) => {
         console.log(res);
         wx.hideLoading();
+
         if (res.data.success) {
           wx.setNavigationBarColor({ 
             backgroundColor: '#000000',
@@ -239,7 +240,10 @@ Page({
               timingFunc: 'easeIn'
             }
           });
-          util.tipsMessage('登录成功！');
+
+          // 登录成功后直接进入页面不需要提示
+          // util.tipsMessage('登录成功！');
+
           app.user = res.data.user;
           wx.setStorageSync('user', res.data.user);
           wx.setStorageSync('account', obj.data.account);
