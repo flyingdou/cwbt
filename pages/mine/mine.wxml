@@ -31,6 +31,19 @@
   <view style='height: 260rpx;'></view>
 
   <view class='tool-line'>
+        <!-- 联系我们 -->
+        <view class='line' bindtap='contact'>
+              <view class='line-left'>
+                    <image class='line-left-icon' src='../../icon/phone.png' mode='widthFix'></image>
+                    <view class='line-left-text'>联系我们</view>
+              </view>
+              <view class='line-right'>
+                    <image class='line-right-icon' src='../../icon/more@2x.png' mode='widthFix'></image>
+              </view>
+        </view>
+  </view>
+
+  <view class='tool-line'>
         <!-- 修改密码 -->
         <view class='line' bindtap='updatePassword'>
               <view class='line-left'>
@@ -43,7 +56,6 @@
         </view>
   </view>
 
-  <!-- 底部操作栏 -->
   <view class='tool-line'>
           <view class='line' bindtap='cancellation'>
                 <view class='line-left'>

@@ -8,8 +8,8 @@ Page({
    */
   data: {
     // 隐藏弹出框
-    hidden: true
-
+    hidden: true,
+    phoneNumber: '15527930302'
   },
 
   /**
@@ -118,6 +118,15 @@ Page({
     // 数据校验通过
     wx.navigateTo({
       url: link
+    });
+  },
+
+  /**
+   * 联系我们
+   */
+  contact: () => {
+    wx.makePhoneCall({
+      phoneNumber: obj.data.phoneNumber
     });
   },
 
