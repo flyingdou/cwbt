@@ -12,6 +12,7 @@
     "pages/spareList/spareList",
     "pages/boatSpare/boatSpare",
     "pages/deptBoat/deptBoat",
+    "pages/deptBoat2/deptBoat2",
     "pages/chooseEquipment/chooseEquipment",
     "pages/supervise/supervise",
     "pages/chooseDept/chooseDept",
