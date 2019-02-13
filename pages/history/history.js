@@ -92,7 +92,7 @@ Page({
     // 结束时间
     var endTime = obj.data.endTime;
     if (endTime && endTime.indexOf('请') < 0) {
-      param.endTime = endTime;
+      param.endTime = endTime + " 23:59:59";
     }
 
     // loading
