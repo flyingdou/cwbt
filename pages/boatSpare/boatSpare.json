@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "备件查询"
+  "navigationBarTitleText": "备件查询",
+  "usingComponents": {
+    "noData": "../../component/noData/noData"
+  }
 }

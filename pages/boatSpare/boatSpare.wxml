@@ -63,6 +63,7 @@
 
       <!-- 模糊查询出的结果 -->
       <view class='spareList'>
+            <noData wx:if='{{spareList && spareList.length <= 0}}'></noData>
             <!-- spare -->
             <view class='spare {{(index > 0 && spareList[index-1].model != item.model) ? "xfill" : ""}}' wx:for = '{{spareList}}' wx:key = '' bindtap = 'goto' data-link = '../../pages/spareRecord/spareRecord?spareId={{item.id}}'>
                   <view class='line'>
