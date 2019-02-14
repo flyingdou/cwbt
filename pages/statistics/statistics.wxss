@@ -66,12 +66,11 @@ picker{
 
 .sure{
   font-size:28rpx;
+  margin:0 20rpx;
   padding:10rpx 20rpx;
   color:white;
   background:#27CDFF;
   text-align:center;
-  margin:0 auto;
-  width:15%;
   border-radius:5rpx;
 }
 

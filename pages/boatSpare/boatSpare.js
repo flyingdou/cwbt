@@ -1,6 +1,5 @@
 var app = getApp();
 var util = require('../../utils/util.js');
-var obj = null;
 Page({
 
   /**
@@ -14,7 +13,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    obj = this;
+    var obj = this;
+    var dou = {};
+    // 设置navList的值
+    var navList = options.navList;
+    var nav = options.nav;
+    if (navList) {
+      navList = JSON.parse(navList);
+      nav = JSON.parse(nav);
+      navList.push(nav);
+      dou.navList = navList;
+    }
+    obj.setData(dou);
     // 初始化页面数据
     obj.init();
   },
@@ -30,7 +40,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+  
   },
 
   /**
@@ -64,9 +74,15 @@ Page({
   /**
    * 初始化页面数据
    */
-  init: () => {
-    var dept_id = app.user.deptId;
-    var status = 0;
+  init () {
+    var obj = this;
+    var navList = obj.data.navList;
+    var dept_id = null;
+    var status = null;
+    if (!navList) {
+      dept_id = app.user.deptId;
+      status = 0;
+    }
     obj.getData(dept_id, status);
 
   },
@@ -74,31 +90,42 @@ Page({
   /**
    * 点击机构，查询下级
    */
-  next: (e) => {
+  next (e) {
+    var obj = this;
     var navList = obj.data.navList;
     var nav = e.currentTarget.dataset.dept;
     var deptList = obj.data.deptList;
     var deptindex = e.currentTarget.dataset.deptindex;
-    navList.push(nav);
+    // navList.push(nav);
 
     // 重置机构选中状态
-    deptList.forEach((dept,index) => {
-      dept.checked = false;
-    });
-    deptList[deptindex].checked = true;
-    obj.setData({
-      navList: navList,
-      deptList: deptList
-    });
+    // deptList.forEach((dept,index) => {
+    //   dept.checked = false;
+    // });
+    // deptList[deptindex].checked = true;
+    // obj.setData({
+    //   navList: navList,
+    //   deptList: deptList
+    // });
 
-    obj.getData(null, null);
+    // obj.getData(null, null);
+
+    // 重载当前页面
+    var link = '../../pages/boatSpare/boatSpare?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav);
+    wx.navigateTo({
+      url: link,
+      success(){
+        // console.log('跳转成功');
+      }
+    })
 
   },
 
   /**
    * 向上选择部门
    */
-  up: (e) => {
+  up (e) {
+    var obj = this;
     var index = e.currentTarget.dataset.index;
     var navList = obj.data.navList;
 
@@ -107,35 +134,20 @@ Page({
       return;
     }
 
-    // 非当前部门，截取选中处之前的
-    var doux = navList.slice(0, index + 1);
-    obj.setData({
-      navList: doux
-    });
+    // 非当前部门，返回选中的部门层级
+    var backIndex = navList.length - 1 - index;
+    wx.navigateBack({
+      delta: backIndex
+    })
 
-    obj.getData(null, null);
   },
-
-  /**
-   * 返回上一级
-   */
-  back: () => {
-    var navList = obj.data.navList;
-  
-    // 移除数组中做最后一个元素
-    var doux = navList.slice(0, navList.length -1);
-    obj.setData({
-      navList: doux
-    });
-    obj.getData(null, null);
-  },
-
 
 
   /**
    * 查询数据
    */
-  getData: (dept_id, status) => {
+  getData (dept_id, status) {
+    var obj = this;
     var reqUrl = util.getRequestURL('getDepartmentBoat.we');
     var param = {};
 
@@ -185,7 +197,8 @@ Page({
   /**
    * 选择船舶
    */
-  boatChange: (e) => {
+  boatChange (e) {
+    var obj = this;
     var index = e.currentTarget.dataset.index;
     var link = e.currentTarget.dataset.link;
     var boatList = obj.data.boatList;
@@ -210,7 +223,8 @@ Page({
 /**
  * inputChange
  */
-inputChange: (e) => {
+inputChange (e) {
+  var obj = this;
   var key = e.currentTarget.dataset.key;
   var value = e.detail.value;
   var dou = {};
@@ -229,7 +243,8 @@ inputChange: (e) => {
 /**
  * search
  */
-search: () => {
+search () {
+  var obj = this;
   // 校验参数
   var spareName = obj.data.spareName || '';
   if (!spareName) {
@@ -280,7 +295,7 @@ search: () => {
 /**
  * goto
  */
-goto: (e) => {
+goto (e) {
   var link = e.currentTarget.dataset.link;
   wx.navigateTo({
     url: link,

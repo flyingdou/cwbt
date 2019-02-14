@@ -68,13 +68,4 @@
 
       <!-- fill -->
       <view class='douFill'></view>
-
-      <!-- 返回上一级 -->
-      <view class='backButtons' wx:if = '{{navList.length > 1}}'>
-            <view class='back' catchtap='back'>返回上一级</view>
-      </view>
-
-
-
-
 </view>

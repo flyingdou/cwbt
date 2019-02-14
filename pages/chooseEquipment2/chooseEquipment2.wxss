@@ -1,39 +1,14 @@
-input{
-  font-size: 28rpx;
-  color: rgba(153,153,153,1);
-}
-
 .content{
   position: relative;
 }
 
-.searchDiv{
-  background: white;
-}
-
-.search{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 20rpx;
-  padding: 15rpx 20rpx;
-  border-radius: 20rpx;
-  background: rgba(245,245,245,1);
-}
-
-.searchIcon{
-  width: 32rpx;
-  height: 32rpx;
-  padding: 10rpx;
-}
-
 .navBar{
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 40rpx 20rpx;
+  padding: 20rpx;
   background: white;
-  margin-bottom: 20rpx;
   border-radius: 5rpx;
 }
 
@@ -75,6 +50,16 @@ input{
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 50%;
+}
+
+.right{
+  width: 50%;
+}
+
+.deptImage{
+   width: 80rpx;
+   height: 80rpx;
 }
 
 .deptName{
@@ -101,7 +86,6 @@ input{
 .userList{
   background:white;
   padding:20rpx;
-  margin:20rpx 0;
 }
 
 .preUser{
@@ -118,6 +102,8 @@ input{
 
 .userName{
   font-size: 28rpx;
+  padding-left:20rpx;
+
 }
 
 .douFill{
@@ -125,47 +111,72 @@ input{
   height: 180rpx;
 }
 
-.spareList{
-   margin: 20rpx 0;
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 20rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.spare{
+.scan{
+   float: right;
+   font-size: 28rpx;
+   text-align: center;
+   color: white;
+   margin: 0 20rpx;
+   padding: 20rpx 20rpx;
+   background:rgba(38,130,255,1);
+   box-shadow:0px 5px 10px rgba(255,114,114,0.1);
+   border-radius: 8rpx;
+}
+
+.back{
+  float: left;
+  padding: 20rpx 30rpx;
+  margin: 0 20rpx;
+  border-radius: 8rpx;
+}
+
+.TagTitle{
+  font-size: 28rpx;
+  text-align: center;
+  background: #ccd;
+  color: black;
   padding: 20rpx;
-  border-radius: 10rpx;
-  background: white;
 }
 
-.line{
+.left{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.info{
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10rpx 0;
 }
 
-.tv{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 50%;
-}
-
-.value{
-  padding-left: 20rpx;
-  width: 60%;
-}
-
-.xfill{
-  margin-top: 40rpx;
-}
-
-.deptImage{
+.iconDiv{
   width: 100rpx;
   height: 100rpx;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
-.tagName{
+.boatImage{
+   width: 120rpx;
+   height: 120rpx;
+   border-radius:10rpx;
+   overflow:hidden;
+}
+
+.boatListTitle{
   font-size: 32rpx;
+  color: black;
+  background: #ccc;
   text-align: center;
   padding: 20rpx 0;
-  background: white;
 }

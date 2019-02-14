@@ -1,6 +1,5 @@
 var app = getApp();
 var util = require('../../utils/util.js');
-var obj = null;
 Page({
 
   /**
@@ -9,7 +8,6 @@ Page({
   data: {
     base_img_url: app.constant.base_img_url,
     base_domain: app.constant.base_domain,
-    currentPage: app.pageInfo.currentPage,
     pageSize: app.pageInfo.pageSize
   },
 
@@ -17,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    obj = this;
+    var obj = this;
     var dou = {};
     var navList = options.navList;
     var nav = options.nav;
@@ -47,10 +45,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   var dou = {};
-   dou.isEquipment = false;
-   dou.currentPage = app.pageInfo.currentPage;
-   obj.setData(dou);
+    var obj = this;
+    var dou = {};
+    var isLoad = obj.data.isLoad;
+    if (isLoad) {
+       obj.data.isLoad = false;
+    } else {
+       if (obj.data.isOut) {
+         obj.data.isOut = false;
+       } else {
+         var navList = obj.data.navList;
+         navList.splice(navList.length - 1, 1);
+         dou.navList = navList;
+       }
+    }
+    // 分页参数
+    dou.currentPage=app.pageInfo.currentPage;
+    dou.isEquipment = false;
+    obj.setData(dou);
   },
 
   /**
@@ -79,11 +91,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var obj = this;
     if (obj.data.isEquipment) {
       obj.data.currentPage++;
       obj.getEquipmentList();
     }
-
   },
 
   /**
@@ -98,7 +110,8 @@ Page({
   /**
    * 初始化页面数据
    */
-  init: () => {
+  init: function () {
+    var obj = this;
     var navList = obj.data.navList;
     var dept_id = null;
     var status = null;
@@ -113,7 +126,8 @@ Page({
   /**
    * 点击机构，查询下级
    */
-  next: (e) => {
+  next(e) {
+    var obj = this;
     var navList = obj.data.navList;
     var nav = e.currentTarget.dataset.dept;
     var deptindex = e.currentTarget.dataset.deptindex;
@@ -149,7 +163,8 @@ Page({
   /**
    * 向上选择部门
    */
-  up: (e) => {
+  up(e) {
+    var obj = this;
     var index = e.currentTarget.dataset.index;
     var navList = obj.data.navList;
 
@@ -183,7 +198,8 @@ Page({
   /**
    * 查询数据
    */
-  getData: (dept_id, status) => {
+  getData: function (dept_id, status) {
+    var obj = this;
     var reqUrl = util.getRequestURL('getDepartmentBoat.we');
     var param = {};
 
@@ -233,6 +249,7 @@ Page({
    * 查询部门下属船舶(递归查询)
    */
   getDeptBoatList(e) {
+     var obj = this;
      // 清空现有设备列表
      obj.clearEquipment();
 
@@ -243,14 +260,16 @@ Page({
      dou.chooseDept = dept;
 
      // 更改选中状态
-     var deptList = obj.data.deptList;
-     if (deptList) {
-       deptList.forEach((dept, index) => {
-         dept.checked = false;
-       });
-       deptList[deptindex].checked = true;
-       dou.deptList = deptList;
-     }
+      var deptList = e.currentTarget.dataset.deptlist;
+      if (deptList && deptList.length > 0) {
+        deptList.forEach((dept, index) => {
+          dept.checked = false;
+        });
+
+        deptList[deptindex].checked = true;
+        dou.deptList = deptList;
+      }
+     
 
      // 请求数据
      var reqUrl = util.getRequestURL('getBoatRecursionByDept.we');
@@ -275,10 +294,11 @@ Page({
          res = res.data;
          if (res.success) {
             dou.boatList = res.boatList;
+            console.log(dou);
+            obj.setData(dou);
          }
        },
        complete (com) {
-         obj.setData(dou);
          wx.hideLoading();
        }
      })
@@ -288,7 +308,8 @@ Page({
   /**
    * 选择船舶
    */
-  boatChange: (e) => {
+  boatChange: function (e) {
+    var obj = this;
     var index = e.currentTarget.dataset.index;
     var boatList = obj.data.boatList;
     // 清空所有选中
@@ -315,7 +336,8 @@ Page({
   /**
    * 查询船舶的设备列表
    */
-  getEquipmentList: () => {
+  getEquipmentList: function () {
+    var obj = this;
     var boat = obj.data.boat;
     if (!boat || boat == '') {
        return;
@@ -364,7 +386,8 @@ Page({
   /**
    * 设备改变
    */
-  equipmentChange: (e) => {
+  equipmentChange: function (e) {
+    var obj = this;
      var index = e.currentTarget.dataset.index;
      var equipmentList = obj.data.equipmentList;
      // 清空设备的选中状态
@@ -389,8 +412,12 @@ Page({
   /**
    * 跳转到设备详情页面
    */
-  goto: (equipment_number) => {
+  goto: function (equipment_number) {
+    var obj = this;
     var url = '../../pages/equipmentInfo/equipmentInfo?code=' + equipment_number;
+    obj.setData({
+      isOut: true
+    });
     wx.navigateTo({
       url: url,
     })
@@ -401,7 +428,8 @@ Page({
  /**
   * 清空设备列表
   */
- clearEquipment: () => {
+ clearEquipment: function () {
+   var obj = this;
    obj.setData({
      equipmentList: []
    });
@@ -411,7 +439,8 @@ Page({
  /**
   * 扫码查询
   */
- scan: () => {
+ scan: function ()  {
+   var obj = this;
    wx.scanCode({
      onlyFromCamera: true,
      success:(res) => {

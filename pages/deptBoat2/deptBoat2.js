@@ -19,9 +19,14 @@ Page({
     var dou = {};
     // 传入数据
     var navList = options.navList;
+    var nav = options.nav;
     if (navList) {
-        dou.navList = JSON.parse(navList);
+        navList = JSON.parse(navList);
+        nav = JSON.parse(nav);
+        navList.push(nav);
+        dou.navList = navList;
      }
+     dou.isLoad = true;
      obj.setData(dou);
      // 初始化页面数据
      obj.init();
@@ -39,7 +44,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var isLoad = obj.data.isLoad;
+    if (isLoad) {
+       obj.data.isLoad = false;
+    } else {
+       var navList = obj.data.navList;
+       // 删掉navList的末级
+       navList.splice(navList.length-1,1);
+      //  console.log(navList);
+       obj.setData({
+         navList: navList
+       });
+    }
   },
 
   /**
@@ -103,24 +119,13 @@ Page({
     var nav = e.currentTarget.dataset.dept;
     var deptList = obj.data.deptList;
     var deptindex = e.currentTarget.dataset.deptindex;
-    navList.push(nav);
-
-    // 重置机构选中状态
-    deptList.forEach((dept,index) => {
-      dept.checked = false;
-    });
-    deptList[deptindex].checked = true;
-    // obj.setData({
-    //    navList: navList,
-    //    deptList: deptList
-    // });
 
     // 重载当前页面
-    var link = '../../pages/deptBoat2/deptBoat2?navList=' + JSON.stringify(navList);
+    var link = '../../pages/deptBoat2/deptBoat2?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav);
     wx.navigateTo({
       url: link,
       success (res) {
-         console.log('跳转成功');
+        //  console.log('跳转成功');
       }
     })
     
@@ -140,28 +145,12 @@ Page({
     }
 
     // 非当前部门，截取选中处之前的
-    var doux = navList.slice(0, index + 1);
-    obj.setData({
-      navList: doux
-    });
+    var backLevel = navList.length -1 - index;
+    wx.navigateBack({
+      delta: backLevel
+    })
 
-    obj.getData(null, null);
   },
-
-  /**
-   * 点击返回上一级
-   */
-  back () {
-    var navList = obj.data.navList;
-    // 从navList中删除最后的节点
-    var doux = navList.slice(0, navList.length -1);
-    obj.setData({
-      navList: doux
-    });
-
-    obj.getData(null, null);
-  },
-
 
   /**
    * 查询数据

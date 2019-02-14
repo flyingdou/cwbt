@@ -15,10 +15,19 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var type = options.type;
-    obj.data.type = type;
-
+    var dou = {};
+    // 设置navList的值
+    var navList = options.navList;
+    var nav = options.nav;
+    if (navList) {
+       navList = JSON.parse(navList);
+       nav = JSON.parse(nav);
+       navList.push(nav);
+       dou.navList = navList;
+    }
     // 初始化页面数据
+    dou.isLoad = true;
+    obj.setData(dou);
     obj.init();
   },
 
@@ -33,6 +42,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var dou = {};
+    
+    var isLoad = obj.data.isLoad;
+    var navList = obj.data.navList;
+    if (isLoad) {
+       dou.isLoad = false;
+    } else {
+      navList.splice(navList.length - 1, 1);
+      dou.navList = navList;
+    }
+    obj.setData(dou);
+    
 
   },
 
@@ -68,24 +89,16 @@ Page({
    * 初始化页面数据
    */
   init: () => {
-    var navList = [];
-    var types = obj.data.type;
-    var choosedUser = [];
-    var key = '';
-    if (types == 'rec') {
-       key = 'copyUsers';
+    var navList = obj.data.navList;
+    var dept_id = null;
+    var status = null;
+    if (!navList) {
+       dept_id = app.user.deptId;
+       status = 0;
     }
-    if (types == 'copy') {
-      key = 'recUsers';
-    }
-    choosedUser = wx.getStorageSync(key) || [];
-    obj.data.choosedUser = choosedUser;
-    var dept_id = app.user.deptId;
-    var status = 0;
+
     obj.getNext(dept_id, status);
     
-    
-   
   },
 
 
@@ -94,23 +107,26 @@ Page({
    * next,查询下级部门中的人员
    */
   next: (e) => {
-    // 清空storage中的值
-    wx.removeStorageSync('chooseUsers');
-     var navList = obj.data.navList;
-     var nav = e.currentTarget.dataset.dept;
-     navList.push(nav);
-     obj.setData({
-       navList: navList
-     });
-     obj.getNext(null,null);
+
+    var navList = obj.data.navList;
+    var nav = e.currentTarget.dataset.dept;
+
+    var link = '../../pages/chooseDept/chooseDept?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav);
+
+    // 重载当前页面
+    wx.navigateTo({
+      url: link,
+      success() {
+        // console.log('跳转成功');
+      },
+    })
+    
   },
 
   /**
    * 向上选择部门
    */
   up: (e) => {
-    // 清空storage中的值
-    wx.removeStorageSync('chooseUsers');
     var index = e.currentTarget.dataset.index;
     var navList = obj.data.navList;
 
@@ -120,29 +136,20 @@ Page({
     }
 
     // 非当前部门，截取选中处之前的
-    var doux = navList.slice(0, index + 1);
-    obj.setData({
-      navList: doux
-    });
+    // var doux = navList.slice(0, index + 1);
+    // obj.setData({
+    //   navList: doux
+    // });
     
-    obj.getNext(null, null);
-  },
+    // obj.getNext(null, null);
 
-  /**
-   * 向上选择部门
-   */
-  back () {
-    // 清空storage中的值
-    wx.removeStorageSync('chooseUsers');
-    var navList = obj.data.navList;
-    
-    // 截取最后一个元素以前的元素
-    var doux = navList.slice(0, navList.length -1);
-    obj.setData({
-      navList: doux
-    });
+    // 非当前部门，跳转到选中的部门层级
+    var backIndex = navList.length - 1 - index;
 
-    obj.getNext(null, null);
+    wx.navigateBack({
+      delta: backIndex
+    })
+
   },
 
 
@@ -292,15 +299,7 @@ Page({
   },
 
 
-  choose: () => {
-    // var userList = obj.data.userList || [];
-    // var chooseUsers = [];
-    // for (var u in userList) {
-    //   if (userList[u].checked) {
-    //     chooseUsers.push(userList[u]);
-    //   }
-    // }
-    
+  choose: () => {   
     if (!obj.data.deptObj) {
       wx.showModal({
         title: '提示',
@@ -311,14 +310,12 @@ Page({
     }
 
     // 将值存储起来
-    // var key = obj.data.type;
-    // key = key + 'Users';
-    // wx.setStorageSync(key, chooseUsers);
     var deptObj = obj.data.deptObj;
     wx.setStorageSync('deptObj', deptObj);
 
+    var backIndex = obj.data.navList.length;
     wx.navigateBack({
-      delta: 1,
+      delta: backIndex,
     })
 
 
