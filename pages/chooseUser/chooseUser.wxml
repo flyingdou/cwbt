@@ -95,11 +95,6 @@
             </view>
       </view>
 
-       <!-- 返回上一级按钮 -->
-      <view class='backButtons'>
-            <view class='back' catchtap='back' wx:if = '{{navList.length > 1}}'>返回上一级</view>
-      </view>
-
 
 
 </view>

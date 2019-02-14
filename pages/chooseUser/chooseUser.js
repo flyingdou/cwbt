@@ -1,6 +1,5 @@
 var app = getApp();
 var util = require('../../utils/util.js');
-var obj = null;
 Page({
 
   /**
@@ -14,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    obj = this;
+    var obj = this;
     var key = options.key;
     var value = options[key];
     if (value) {
@@ -23,6 +22,16 @@ Page({
     var dou = {};
     dou[key] = value;
     dou.key = key;
+
+    var navList = options.navList;
+    var nav = options.nav;
+
+    if (navList) {
+      navList = JSON.parse(navList);
+      nav = JSON.parse(nav);
+      navList.push(nav);
+      dou.navList = navList;
+    }
     obj.setData(dou);
 
     // 初始化页面数据
@@ -41,7 +50,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var obj = this;
+    var dou = {};
+    var isLoad = obj.data.isLoad;
+    var navList = obj.data.navList;
+
+    obj.setData(dou);
     obj.isChooseAll();
+
   },
 
   /**
@@ -85,8 +101,9 @@ Page({
   /**
    * 初始化页面数据
    */
-  init: () => {
-    var navList = [];
+  init () {
+    var obj = this;
+    var navList = obj.data.navList;
     var key = obj.data.key;
     var deptUser = [];
     var dou = obj.data[key];
@@ -104,8 +121,12 @@ Page({
       chooseDeptList: chooseDeptList
     });
     
-    var dept_id = app.user.deptId;
-    var status = 0;
+    var dept_id = null;
+    var status = null;
+    if (!navList) {
+       dept_id = app.user.deptId;
+       status = 0;
+    }
     obj.getNext(dept_id, status);
     
   },
@@ -115,22 +136,27 @@ Page({
   /**
    * next,查询下级部门中的人员
    */
-  next: (e) => {
+  next (e) {
+    var obj = this;
     // 清空storage中的值
     wx.removeStorageSync('chooseUsers');
      var navList = obj.data.navList;
      var nav = e.currentTarget.dataset.dept;
-     navList.push(nav);
-     obj.setData({
-       navList: navList
-     });
-     obj.getNext(null,null);
+
+    var key = obj.data.key;
+    var value = obj.data[key] || '';
+    // 重载当前页面
+    var link = '../../pages/chooseUser/chooseUser?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav) + '&' + key + '=' + JSON.stringify(value) + '&key=' + key;
+    wx.navigateTo({
+      url: link,
+    })
   },
 	
 	/**
 	 * 选择整个部门下的人员
 	 */
-	chooseDept: (e) => {
+	chooseDept(e) {
+    var obj = this;
 		var deptList = obj.data.deptList;
 		var deptindex = e.currentTarget.dataset.deptindex;
     var dept_id = deptList[deptindex].seq_id;
@@ -161,7 +187,8 @@ Page({
 	/**
 	 * 选择部门下的用户
 	 */
-	getDeptUsers: (dept_id) => {
+	getDeptUsers (dept_id) {
+    var obj = this;
 		var reqUrl = util.getRequestURL('getDeptUser.we');
 		var param = {
 			dept_id: dept_id,
@@ -214,7 +241,8 @@ Page({
   /**
    * 向deptUser中添加用户
    */
-  addDeptUser: (dept_id, userList) => {
+  addDeptUser (dept_id, userList) {
+     var obj = this;
      var chooseDeptList = obj.data.chooseDeptList || [];
      // 已有选中的部门用户
      var deptUser = obj.data.deptUser || [];
@@ -271,7 +299,8 @@ Page({
   /**
    * 向上选择部门
    */
-  up: (e) => {
+  up (e) {
+    var obj = this;
     // 清空storage中的值
     wx.removeStorageSync('chooseUsers');
     var index = e.currentTarget.dataset.index;
@@ -282,36 +311,19 @@ Page({
       return;
     }
 
-    // 非当前部门，截取选中处之前的
-    var doux = navList.slice(0, index + 1);
-    obj.setData({
-      navList: doux
-    });
-    
-    obj.getNext(null, null);
-  },
-
-  /**
-   * 返回上一级
-   */
-  back: () => {
-    // 清空storage中的值
-    wx.removeStorageSync('chooseUsers');
-    var navList = obj.data.navList;
-
-    // 移除数组中做最后一个元素
-    var doux = navList.slice(0, navList.length - 1);
-    obj.setData({
-      navList: doux
-    });
-    obj.getNext(null, null);
+    // 非当前部门，返回选中的部门层级
+    var backIndex = navList.length - 1 - index;
+    wx.navigateBack({
+      delta: backIndex
+    })
   },
 
 
   /**
    * 查询下级数据
    */
-  getNext: (dept_id, status) => {
+  getNext (dept_id, status) {
+    var obj = this;
     var navList = obj.data.navList || [];
     var reqUrl = util.getRequestURL('getDepartmentUser.we');
     var param = {};
@@ -341,7 +353,6 @@ Page({
     param.choosedUserIds = choosedUserIds;
 
     // 取出当前模式下，被选中的用户
-    // var chooseList = wx.getStorageSync(obj.data.type + 'Users') || [];
     var key = obj.data.key;
     var chooseList = obj.data[key].chooseUsers;
 
@@ -401,8 +412,9 @@ Page({
   /**
    * checkboxChange
    */
-  checkboxChange: (e) => {
-    // 选中的下标数组
+  checkboxChange (e)  {
+     var obj = this;
+     // 选中的下标数组
      var index = e.currentTarget.dataset.index;
      var indexs = [];
      var userList = obj.data.userList;
@@ -451,7 +463,8 @@ Page({
   /**
    * chooseAll
    */
-  chooseAll: () => {
+  chooseAll () {
+    var obj = this;
     var chooseAll = obj.data.chooseAll || false;
     var indexs = obj.data.indexs || [];
     var userList = obj.data.userList || [];
@@ -510,7 +523,8 @@ Page({
   /**
    * 点击确定时
    */
-  choose: () => {
+  choose () {
+    var obj = this;
     var userList = obj.data.userList || [];
     var key = obj.data.key;
     var hv = obj.data[key] || {};
@@ -568,6 +582,7 @@ Page({
    * 全选状态处理
    */
   isChooseAll() {
+    var obj = this;
     var userList = obj.data.userList || [];
     var hasLen = 0;
     var chooseAll = false;
@@ -591,7 +606,8 @@ Page({
    * inputChange
    */
 
-  inputChange: (e) => {
+  inputChange (e) {
+    var obj = this;
     var key = e.currentTarget.dataset.key;
     var dou = {};
     dou[key] = e.detail.value;
@@ -612,7 +628,8 @@ Page({
   /**
    * 模糊查询用户
    */
-  search: () => {
+  search () {
+    var obj = this;
     // 校验数据
     var searchName = obj.data.searchName || '';
     if (!searchName) {

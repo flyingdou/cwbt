@@ -103,24 +103,13 @@ Page({
     var nav = e.currentTarget.dataset.dept;
     var deptList = obj.data.deptList;
     var deptindex = e.currentTarget.dataset.deptindex;
-    navList.push(nav);
-
-    // 重置机构选中状态
-    deptList.forEach((dept,index) => {
-      dept.checked = false;
-    });
-    deptList[deptindex].checked = true;
-    // obj.setData({
-    //    navList: navList,
-    //    deptList: deptList
-    // });
 
     // 重载当前页面
-    var link = '../../pages/deptBoat2/deptBoat2?navList=' + JSON.stringify(navList);
+    var link = '../../pages/deptBoat2/deptBoat2?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav);
     wx.navigateTo({
       url: link,
       success (res) {
-         console.log('跳转成功');
+        //  console.log('跳转成功');
       }
     })
     
@@ -139,29 +128,12 @@ Page({
       return;
     }
 
-    // 非当前部门，截取选中处之前的
-    var doux = navList.slice(0, index + 1);
-    obj.setData({
-      navList: doux
-    });
-
-    obj.getData(null, null);
+    // 非当前部门，跳转到选中的层级
+    var backLevel = navList.length - 1 - index;
+    wx.navigateBack({
+      delta: backLevel
+    })
   },
-
-  /**
-   * 点击返回上一级
-   */
-  back () {
-    var navList = obj.data.navList;
-    // 从navList中删除最后的节点
-    var doux = navList.slice(0, navList.length -1);
-    obj.setData({
-      navList: doux
-    });
-
-    obj.getData(null, null);
-  },
-
 
   /**
    * 查询数据
