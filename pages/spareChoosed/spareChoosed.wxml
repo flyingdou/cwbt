@@ -1,6 +1,7 @@
 <!-- 页面开始 -->
 <view class='content'>
       
+      <noData wx:if='{{!spareList || spareList.length <= 0}}'></noData>
       <!-- spareList -->
       <view class='spareList' wx:if = '{{spareList && spareList.length > 0}}'>
             <view class='preSpare' wx:for = '{{spareList}}' wx:for-item = 'spare' wx:key = '' data-index = '{{index}}' bindtap='spareCost'>
@@ -23,7 +24,7 @@
 
       <!-- footer -->
       <view class='footer'>
-            <view class='pick' bindtap='scan'>领用备件</view>
+            <view class='pick' bindtap='scan'>扫码领备件</view>
       </view>
 
 

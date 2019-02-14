@@ -3,6 +3,7 @@
       <!-- 列表 -->
       <view class='List'>
            <checkbox-group bindchange = 'chooseChange'>
+                    <noData wx:if='{{!taskList || taskList.length <= 0}}'></noData>
                     <!-- 每一个 -->
                     <view class='pre' wx:for = '{{taskList}}' wx:key = '' bindtap='goto' data-index = '{{index}}' style='background:{{item.color}}'>
                           

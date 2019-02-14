@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "维保记录",
   "usingComponents": {
-    "mark": "../../component/mark/mark"
+    "mark": "../../component/mark/mark",
+    "noData": "../../component/noData/noData"
   }
 }

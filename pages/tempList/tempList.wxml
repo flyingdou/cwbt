@@ -2,7 +2,7 @@
 <view class='content'>
 
       <view class='list'>
-            
+                <noData wx:if='{{!workCardList || workCardList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{workCardList}}' wx:key=''>
                       <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}' data-index = '{{index}}'>
                             <!-- 填充高度 -->

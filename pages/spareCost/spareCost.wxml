@@ -7,8 +7,13 @@
             </view>
 
             <view class='tv'>
-                  <view class='title'>备件数量:</view>
+                  <view class='title'>剩余数量:</view>
                   <view class='value'>{{spare.number}}</view>
+            </view>
+
+            <view class='tv'>
+                  <view class='title'>已使用数量:</view>
+                  <view class='value'>{{inputCount}}</view>
             </view>
 
             <view wx:for='{{spareoutList}}' wx:key='' catchlongpress='removeSpareout' data-index='{{index}}'>
@@ -22,12 +27,12 @@
 
                   <view class='line'>
                         <view class='tv'>
-                              <view class='title'>消耗地点:</view>
+                              <view class='title'>使用地点:</view>
                               <view class='value'>{{item.equipment.name}}</view>
                         </view>
 
                         <view class='right' bindtap='chooseDevice' data-index='{{index}}'>
-                              <view class='value'>选择</view>
+                              <view class='value'>扫设备码</view>
                               <view class='moreIcon'>
                                     <image src='../../icon/more@2x.png' mode='aspectFill'></image>
                               </view>
@@ -35,7 +40,7 @@
                   </view>
             </view>
 
-            <view class='add-btn' bindtap='addSpareout'>添加使用地点</view>
+            <view class='add-btn' bindtap='addSpareout'><view class='btn-block'>+添加使用地点</view></view>
       </view>
 
 

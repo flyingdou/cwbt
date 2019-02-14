@@ -4,6 +4,7 @@
             <!-- 列表 -->
             <view class='List' wx:for='{{titles[type]}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
                <checkbox-group bindchange = 'chooseChange'>
+                        <noData wx:if='{{!tabItem.count || tabItem.count <= 0}}'></noData>
                         <!-- 每一个 -->
                         <view class='pre' wx:for = '{{list}}' wx:key='' bindtap='goto' data-index = '{{index}}' data-link='../statisticWorkDetail/statisticWorkDetail?workId={{item.workid}}' wx:if='{{item[tabItem.checkStatusKey] == tabItem.checkStatus}}'>
                               

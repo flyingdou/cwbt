@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "领用备件"
+  "navigationBarTitleText": "领取备件记录列表",
+  "usingComponents": {
+    "noData": "../../component/noData/noData"
+  }
 }

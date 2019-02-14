@@ -3,7 +3,7 @@
       <checkbox-group bindchange = 'checkboxChange'> 
 
       <view class='list'>
-            
+                <noData wx:if='{{!list || list.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{list}}' wx:key=''>
                       <view class='line' bindtap='goto' data-link = '../spareRecord/spareRecord?spareId={{item.id}}' data-index='{{index}}'>
                             <!-- 填充高度 -->

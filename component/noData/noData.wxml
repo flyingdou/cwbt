@@ -1,0 +1,10 @@
+<!-- 内容 -->
+<view class='wraper' style='width: {{windowWidthRpx}}rpx; height: {{windowHeightRpx}}rpx;'>
+  <view class='block'>
+  	<view class='image'>
+	    <image src='../../icon/noData.png' mode='widthFix'>
+	    </image>
+	  </view>
+	  <view class='text'>暂无数据</view>
+  </view>
+</view>

@@ -33,6 +33,7 @@
       <!-- 结果 -->
       <view class='weui-cell-third'>
             <view class='tagTitle'>维保记录</view>
+            <noData wx:if='{{!list || list.length <= 0}}'></noData>
             <block wx:for="{{list}}" wx:key="">
                   <view class='weui-cell-list'>
                         <view class='weui-cell-circle'></view>  

@@ -9,7 +9,7 @@
 
        <!-- <checkbox-group bindchange = 'checkboxChange'>
        </checkbox-group>  -->
-            
+                <noData wx:if='{{!titles[queryType][tabIndex].supervisionList || titles[queryType][tabIndex].supervisionList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{titles[queryType][tabIndex].supervisionList}}' wx:key=''>
                       <view class='line' bindtap='goto' data-link = '../supervisionDetail/supervisionDetail?id={{item.id}}&code={{item.code}}'>
                             <!-- 填充高度 -->
@@ -63,7 +63,7 @@
       
        <view wx:if = '{{queryType == 3}}' class='list' >
 
-            
+                <noData wx:if='{{!supervisionList || supervisionList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{supervisionList}}' wx:key=''>
                       <view class='line' bindtap='goto' data-link = '../supervisionDetail/supervisionDetail?id={{item.id}}&code={{item.code}}'>
                             <!-- 填充高度 -->

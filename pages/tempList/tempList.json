@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "缺陷工作记录表"
+  "navigationBarTitleText": "缺陷工作记录表",
+  "usingComponents": {
+    "noData": "../../component/noData/noData"
+  }
 }

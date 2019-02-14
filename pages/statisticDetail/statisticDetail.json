@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "统计详情",
   "usingComponents": {
-  	"tab": "../../component/tab/tab"
+  	"tab": "../../component/tab/tab",
+  	"noData": "../../component/noData/noData"
   }
 }

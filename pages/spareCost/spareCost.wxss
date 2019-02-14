@@ -39,8 +39,9 @@
 }
 
 .footer{
-  position: absolute;
+  position: fixed;
   left: 0;
+  bottom: 20rpx;
   padding-top: 50rpx;
   width: 100%;
   display: flex;
@@ -49,7 +50,8 @@
 }
 
 .cost{
-  padding: 20rpx 50rpx;
+  width: 80%;
+  padding: 20rpx;
   font-size: 28rpx;
   color: white;
   background: #2682FF;
@@ -63,11 +65,17 @@
 }
 
 .add-btn{
+  display: flex;
+  justify-content: center;
   margin-top: 20rpx;
   padding: 20rpx 50rpx;
   font-size: 28rpx;
   color: white;
+  text-align: center;
+}
+
+.btn-block{
+  padding: 20rpx 60rpx;
   background: #2682FF;
   border-radius: 5rpx;
-  text-align: center;
 }

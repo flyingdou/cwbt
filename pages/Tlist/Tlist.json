@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "工作任务"
+  "navigationBarTitleText": "工作任务",
+  "usingComponents": {
+    "noData": "../../component/noData/noData"
+  }
 }

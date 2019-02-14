@@ -136,16 +136,33 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
+        var titles = obj.data.titles;
+        var count1 = 0, count2 = 0;
         if (obj.data.type == 'valid') {
           res.data.list.forEach((item, i) => {
             if ([2, 3].includes(item.checkstatus)) {
               item.typeStatus = 1;
+              count1++;
             } else if ([1, 4].includes(item.checkstatus)) {
               item.typeStatus = 2;
+              count2++;
             }
+            titles.valid[0].count = count1;
+            titles.valid[1].count = count2;
+          });
+        } else {
+          res.data.list.forEach((item, i) => {
+            if ([2].includes(item.workstatus)) {
+              count1++;
+            } else if ([1].includes(item.workstatus)) {
+              count2++;
+            }
+            titles.handle[0].count = count1;
+            titles.handle[1].count = count2;
           });
         }
         obj.setData({
+          titles: titles,
           list: res.data.list
         });
         wx.hideLoading();

@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "督导事项",
   "usingComponents": {
-    "tab": "../../component/tab/tab"
+    "tab": "../../component/tab/tab",
+    "noData": "../../component/noData/noData"
   }
 }

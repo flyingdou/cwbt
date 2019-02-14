@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    spareoutList: []
+    spareoutList: [],
+    inputCount: 0
   },
 
   /**
@@ -19,7 +20,8 @@ Page({
     if (options.spare) {
       var spare = JSON.parse(decodeURI(options.spare));
       obj.setData({
-        spare: spare
+        spare: spare,
+        showCount: spare.number
       });
     }
     
@@ -69,13 +71,6 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-  /**
    * inputChange
    */
   inputChange: (e) => {
@@ -85,12 +80,36 @@ Page({
     obj.setData({
       spareoutList: spareoutList
     });
+
+    // 每次修改数量时計算备件数量
+    var key = e.currentTarget.dataset.key;
+    if (key == 'costCount') {
+      obj.calculateCount();
+    }
+  },
+
+  /**
+   * 計算备件数量
+   */
+  calculateCount: () => {
+    var inputCount = 0;
+    obj.data.spareoutList.forEach(function (item, i) {
+      if (item.costCount && !isNaN(item.costCount)) {
+        inputCount += parseInt(item.costCount);
+      }
+    });
+    obj.setData({
+      inputCount: inputCount
+    });
   },
 
   /**
    * 添加备件消耗记录
    */
   addSpareout() {
+    if (obj.data.showCount <= 0) {
+      return;
+    }
     var spareoutList = obj.data.spareoutList;
     var spare = obj.data.spare;
     var spareout = { spareid: spare.spareid, createperson: app.user.id, updateperson: app.user.id, status: 7, isdel: 0, tableid: 2 };
@@ -121,6 +140,9 @@ Page({
           obj.setData({
             spareoutList: spareoutList
           });
+
+          // 删除备件消耗记录时重新计算备件数量
+          obj.calculateCount();
         }
       } 
     });
@@ -258,7 +280,7 @@ Page({
       if (!equipment) {
         wx.showModal({
           title: '提示',
-          content: '请选择消耗地点！',
+          content: '请选择使用地点！',
           showCancel: false
         })
         result = false;
@@ -272,7 +294,7 @@ Page({
     if (sumCount > spare.number) {
       wx.showModal({
         title: '提示',
-        content: '备件使用数量，不可大于备件总数！',
+        content: '备件使用数量，不可大于备件剩余数量！',
         showCancel: false
       })
       result = false;

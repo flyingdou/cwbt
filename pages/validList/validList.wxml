@@ -3,7 +3,7 @@
       <checkbox-group bindchange = 'checkboxChange'> 
 
       <view class='list'>
-            
+                <noData wx:if='{{!validList || validList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{validList}}' wx:key = ''>
                       <view class='line' bindtap='goto' data-id = '{{item.id}}'>
                             <view class='line1'>
