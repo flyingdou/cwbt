@@ -213,7 +213,7 @@ Page({
       redUrl = redUrl + '&isRollback=true';
     }
 
-    wx.redirectTo({
+    wx.navigateTo({
       url: redUrl,
     })
   },

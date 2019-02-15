@@ -1,5 +1,16 @@
-<!-- 内容 -->
-<view class='wraper' style='width: {{windowWidthRpx}}rpx; height: {{windowHeightRpx}}rpx;'>
+<!-- 垂直居中 -->
+<view class='wraper' style='width: {{windowWidthRpx}}rpx; height: {{windowHeightRpx}}rpx;' wx:if='{{!special}}'>
+  <view class='block'>
+  	<view class='image'>
+	    <image src='../../icon/noData.png' mode='widthFix'>
+	    </image>
+	  </view>
+	  <view class='text'>暂无数据</view>
+  </view>
+</view>
+
+<!-- 不居中 -->
+<view class='special-wraper' wx:if='{{special}}'>
   <view class='block'>
   	<view class='image'>
 	    <image src='../../icon/noData.png' mode='widthFix'>
