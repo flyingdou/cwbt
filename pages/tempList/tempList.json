@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "缺陷工作记录表",
   "usingComponents": {
-    "noData": "../../component/noData/noData"
+    "noData": "../../component/noData/noData",
+    "tab": "../../component/tab/tab"
   }
 }

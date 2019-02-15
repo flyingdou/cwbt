@@ -29,6 +29,7 @@ Page({
        });
     }
 
+
     var workCardId = options.id; // 工作卡id
     if (!workCardId) {
       workCardId = 48;
@@ -164,6 +165,13 @@ Page({
             hasGot: hasGot,
             user_priv: user_priv
           });
+
+          // 判断是否需要领取
+          if ((res.workDetail.overhaul_function == 0 && res.workDetail.status == 2) || (res.workDetail.overhaul_function == 1 && res.workDetail.status == 1)) {
+            obj.setData({
+              isRollback: true
+            });
+          }
         } 
         if (!res.success) {
           console.log('程序异常！');
@@ -385,23 +393,30 @@ Page({
    * 删除图片
    */
   deletePic: (e) => {
-    var isRollback = obj.data.isRollback;
-    var alreadyRoll = obj.data.alreadyRoll;
-    if (isRollback && !alreadyRoll) {
-      return;
-    }
-    var index = e.currentTarget.dataset.index;
-    var photos = obj.data.photos;
-    photos.splice(index, 1);
-    var isPhoto = true;
-    if (photos.length == 0) {
-      isPhoto = false;
-    }
-    obj.setData({
-      photos: photos,
-      isPhoto: isPhoto
+    // var isRollback = obj.data.isRollback;
+    // var alreadyRoll = obj.data.alreadyRoll;
+    // if (isRollback && !alreadyRoll) {
+    //   return;
+    // }
+    wx.showModal({
+      title: '提示',
+      content: '是否确认删除图片?',
+      success(result) {
+        if (result.confirm) {
+          var index = e.currentTarget.dataset.index;
+          var photos = obj.data.photos;
+          photos.splice(index, 1);
+          var isPhoto = true;
+          if (photos.length == 0) {
+            isPhoto = false;
+          }
+          obj.setData({
+            photos: photos,
+            isPhoto: isPhoto
+          });
+        }
+      }
     });
-
   },
 
   /**

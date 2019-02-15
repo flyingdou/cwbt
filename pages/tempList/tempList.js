@@ -26,6 +26,10 @@ Page({
       overhaul: overhaul,
       user_id: app.user.id
     });
+
+    obj.setData({
+      windowHeightRpx: util.getSystemInfo().windowHeightRpx
+    });
   },
 
   /**
@@ -40,8 +44,25 @@ Page({
    */
   onShow: function () {
     obj.data.currentPage = app.pageInfo.currentPage;
-    obj.data.workCardList = [];
-    this.getWorkCardList();
+    obj.setData({
+      titles: {
+        0: [
+          { title: '未完成'},
+          { title: '已完成'}
+        ],
+        1: [
+          { title: '未审批'},
+          { title: '已审批'}
+        ]
+      }
+    });
+    if (obj.data.overhaul == 0) {
+      this.getWorkCardList([1,9], 0);
+      this.getWorkCardList([2], 1);
+    } else {
+      this.getWorkCardList([1], 0);
+      this.getWorkCardList([9], 1);
+    }
   },
 
   /**
@@ -77,8 +98,9 @@ Page({
    * 跳转页面
    */
   goto: function (e) {
-    var index = e.currentTarget.dataset.index;
-    var workCard = obj.data.workCardList[index];
+    // var index = e.currentTarget.dataset.index;
+    // var tabindex = e.currentTarget.dataset.tabindex;
+    // var workCard = obj.data.titles[tabindex].workCardList[index];
     var link = e.currentTarget.dataset.link;
     wx.navigateTo({
       url: link
@@ -88,17 +110,19 @@ Page({
   /**
    * 查询临时工作卡列表数据
    */
-  getWorkCardList: function () {
-    var workCardList = obj.data.workCardList || [];
+  getWorkCardList: function (status, index) {
+    var overhaul = obj.data.overhaul;
+    var titles = obj.data.titles;
+    var workCardList = titles[index].workCardList || [];
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
     var param = { 
       userPriv: app.user.userPriv, 
       deptId: app.user.deptId, 
-      status: [1,9], // 未完成、被领取的
+      status: status, // 未完成、被领取的
       overhaul_function: obj.data.overhaul,
       currentPage: obj.data.currentPage,
       pageSize: obj.data.pageSize
-      };
+    };
     wx.request({
       url: url,
       data: {
@@ -106,8 +130,9 @@ Page({
       },
       success: function (res) {
         workCardList = workCardList.concat(res.data);
+        titles[overhaul][index].workCardList = workCardList;
         obj.setData({
-          workCardList: workCardList
+          titles: titles
         });
       },
       fail: function (e) {

@@ -39,6 +39,7 @@
     "pages/workCardDetail/workCardDetail",
     "pages/Tlist/Tlist",
     "pages/mine/mine",
+    "pages/proposal/proposal",
     "pages/updatePWD/updatePWD",
     "pages/shipList/shipList",
     "pages/uploadFile/uploadFile",

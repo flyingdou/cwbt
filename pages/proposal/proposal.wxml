@@ -1,0 +1,6 @@
+<view class='proposal'>
+  <textarea placeholder='请输入建议' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='inputChange' data-key='remark'></textarea>
+</view>
+<view class='btn-wraper'>
+	<view class='btn' bindtap='submit'>提交建议</view>
+</view>

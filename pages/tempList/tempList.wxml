@@ -1,10 +1,10 @@
 <!-- 页面开始 -->
 <view class='content'>
-
-      <view class='list'>
-                <noData wx:if='{{!workCardList || workCardList.length <= 0}}'></noData>
-                <view class='pre' wx:for = '{{workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}' data-index = '{{index}}'>
+  <tab titles='{{titles[overhaul]}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx && titles}}'>
+      <view class='list' wx:for='{{titles[overhaul]}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
+                <noData wx:if='{{!tabItem.workCardList || tabItem.workCardList.length <= 0}}'></noData>
+                <view class='pre' wx:for = '{{tabItem.workCardList}}' wx:key=''>
+                      <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}' data-index = '{{index}}' data-tabindex='{{tabIndex}}'>
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
                             <view class='line1'>
@@ -58,10 +58,10 @@
 
       </view>
 
-
+  </tab>
 
       <!-- 填充 -->
-      <view class='fill'></view>
+      <!-- <view class='fill'></view> -->
       
       <!-- 功能按钮 -->
       <view class='footer'>

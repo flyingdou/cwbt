@@ -1,0 +1,40 @@
+page{
+	background-color: #FFFFFF;
+}
+
+.proposal{
+  padding-top: 20rpx;
+  background-color: #FFFFFF;
+}
+
+.textareaClass{
+	margin: 0 auto;
+	padding: 20rpx 20rpx;
+	width: 90%;
+  font-size: 28rpx;
+  color: rgba(51, 51, 51, 1);
+  text-align: left;
+  background:rgba(245,245,245,1);
+  border-radius: 10rpx;
+}
+
+.placeholderClass{
+  font-size: 28rpx;
+  color: rgba(153, 153, 153, 1);
+  text-align: left;
+}
+
+.btn-wraper{
+	display: flex;
+	justify-content: center;
+	padding-top: 20rpx;
+}
+
+.btn{
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+  color: white;
+  background: #2682FF;
+  border-radius: 5rpx;
+  text-align: center;
+}
