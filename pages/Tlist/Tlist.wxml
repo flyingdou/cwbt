@@ -71,10 +71,7 @@
 
       <!-- 底部按钮 -->
       <view class='footer' wx:if = '{{!isUpdate}}'>
-		<view class='button chooseTask' bindtap='getTask' data-status = '9'>领取任务</view>
-            <!-- <view class='button chooseTask' wx:if = '{{!isGet}}' bindtap='chooseStart'>领取任务</view>
-            <view class='button get' wx:if = '{{isGet}}' data-status = '9' bindtap='getTask'>完成</view>
-            <view class='button cancel' wx:if = '{{isGet}}' bindtap='undo'>取消</view> -->
+		        <view class='button chooseTask' bindtap='getTask' data-status = '9'>领取任务</view>
       </view>
 
       <!-- 底部填充 -->

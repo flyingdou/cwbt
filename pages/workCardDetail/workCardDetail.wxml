@@ -49,6 +49,8 @@
                   </view>
             </view>
 
+      <!-- 已领取的才显示 -->
+      <view class='isShow' wx:if = '{{workCardStatus == 9}}'>
             <view class='line'>
                   <view class='title'>设备状况</view>
                   <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
@@ -82,7 +84,7 @@
 
             </view>
 
-            <view class='remark'>
+            <view class='remark'  wx:if = '{{hidden}}'>
                   <view class='title'>备注</view>
                   <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark}}'></textarea>
                   
@@ -107,31 +109,18 @@
 
             <!-- 底部按钮 -->
             <view class='buttons'>
-                  <!-- 修改时 -->
-                  <view wx:if = '{{isRollback}}'>
-                          <view wx:if = '{{!alreadyRoll}}'>
-                                <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='rollback'>撤回</view>
-                          </view>
-
-                          <view wx:if = '{{alreadyRoll}}'>
-                                <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                                <view wx:if = '{{isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                                <view  class='button finshButton' bindtap='update'>修改</view>
-                          </view>
-                          
-                  </view>
-
-                  <!-- 非修改时 -->
-                  <view wx:if = '{{!isRollback}}'>
-                        <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >设备条码验证</view>
-                        <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                        <view wx:if = '{{isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                        <view wx:if = '{{isScan}}' class='button finshButton' bindtap='finish'>完成</view>
-                  </view>
-                  
+                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
+                  <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures'>完成</view>
             </view>
+
+        </view>
       
       </view>
+
+      <!-- 弹出层 -->
+      <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = '提示' confirm-text = '确定' cancel-text = '取消' bindconfirm = 'confirm' bindcancel = 'cancel'>
+             <view class='block'>将要扫描设备条码，用以验证设备，确定吗？</view>
+      </modal>
 
 
 

@@ -12,7 +12,8 @@ Page({
     handleList: [],
     photos:[],
     status:0,
-    handle:0
+    handle:0,
+    hidden: true
   },
 
   /**
@@ -20,14 +21,10 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var isRollback = options.isRollback; // 是否撤回
-    if (isRollback) {
-       obj.setData({
-         isRollback: isRollback
-       });
-    }
-
-    var workCardId = options.workCardId; // 工作卡id
+    // 工作卡id
+    var workCardId = options.workCardId; 
+    // 工作卡状态
+    var workCardStatus = options.workCardStatus;
 
     obj.setData({
       workCardId: workCardId
@@ -181,7 +178,7 @@ Page({
           var scanTime = util.formatTime(new Date());
           obj.setData({
             isScan: isScan,
-            scanTime: scanTime
+            scanTime: scanTime,
           });
           // 修改为进行中
           obj.ongoing();
@@ -336,6 +333,7 @@ Page({
             showPhoto: false
           });
           console.log('图片上传完成！');
+          obj.finish();
           return;
         } else {
           // 图片还未传完，需要继续上传
@@ -353,7 +351,13 @@ Page({
     if (!obj.checkValid()) {
         return;
     }
-    obj.uploadPics();
+    var photos = obj.data.photos;
+    if (photos.length > 0) {
+        obj.uploadPics();
+    } else {
+        obj.finish();
+    }
+    
   },
 
   /**
@@ -603,13 +607,41 @@ Page({
     if (!isScan) {
       wx.showModal({
         title: '提示',
-        content: '请先验证设备条码！',
+        content: '请先验证设备条码',
       })
       return false;
     } else {
       return true;
     }
 
+  },
+
+  /**
+   * 确定是否需要填写执行情况
+   */
+  sure() {
+    obj.setData({
+      hidden: false
+    });
+  },
+
+  /**
+   * 点击确定按钮
+   */
+  confirm() {
+    obj.scanCode();
+    obj.setData({
+      hidden: true
+    });
+  },
+
+  /**
+   * 点击取消按钮
+   */
+  cancel() {
+    obj.setData({
+      hidden: true
+    });
   },
 
 
