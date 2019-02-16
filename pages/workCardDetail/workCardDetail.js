@@ -27,7 +27,8 @@ Page({
     var workCardStatus = options.workCardStatus;
 
     obj.setData({
-      workCardId: workCardId
+      workCardId: workCardId,
+      workCardStatus: workCardStatus
     })
     obj.init();
   },
