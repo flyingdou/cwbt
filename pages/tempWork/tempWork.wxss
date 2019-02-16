@@ -24,6 +24,11 @@ textarea{
   padding: 20rpx 0;
 }
 
+.task-value{
+  margin-top: 20rpx;
+  padding: 20rpx;
+}
+
 .textareaClass{
   padding-left: 20rpx;
   padding-top: 20rpx;
@@ -94,7 +99,13 @@ textarea{
   width: 100%;
 }
 
+.update-buttons{
+  display: flex;
+  justify-content: space-around;
+}
+
 .button{
+  flex: 1;
   font-size: 28rpx;
   text-align: center;
   padding: 20rpx 0;

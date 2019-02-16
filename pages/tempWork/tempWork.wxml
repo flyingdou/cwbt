@@ -70,13 +70,33 @@
             <view class='remark'>
                   <view class='title'>异常描述:</view>
                   <view class='task'>
-                        <view class='value' wx:if='{{!isRollback}}'>{{workDetail.exceptional_describe}}</view>
-                        <textarea wx:if='{{isHidden && isRollback}}' placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptional_describe' value='{{workDetail.exceptional_describe}}'></textarea>
+                        <view class='value task-value' wx:if='{{!showExceptionalInput}}'>{{workDetail.exceptional_describe}}</view>
+                        <textarea wx:if='{{isHidden && showExceptionalInput}}' placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptional_describe' value='{{workDetail.exceptional_describe}}'></textarea>
                   </view>
             </view>
              
             <!-- 船舶端可看 -->
-            <view class='line' wx:if = '{{user_priv == 3}}'> 
+            <!-- 维修后图片 -->
+            <view class='remark' wx:if='{{user_priv == 3 && showFeedbackPic}}'>
+                  <view class='title'>维修后图片:</view>
+                  
+                  <!-- 拍摄的照片 -->
+                  <view class='shot'>
+                        <view class='prePic' wx:for = '{{workDetail.feedbackimage}}' wx:key='' bindtap='previewShot'  data-index = '{{index}}'>
+                              <!-- 照片 -->
+                              <view class='shotPic'>
+                                    <image src='{{base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
+                              </view>
+                              
+                              <!-- 拍照时间 -->
+                              <view class='pic_time'>{{item.pic_time}}</view>
+
+                              
+                        </view>
+                  </view>
+            </view>
+
+            <view class='line' wx:if = '{{user_priv == 3 && showFeedbackInput}}'> 
                   <view class='title'>维修后设备状况</view>
                   <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
                           <view class='item'>
@@ -89,7 +109,7 @@
             </view>
             
             <!-- error -->
-            <view class='error' wx:if = '{{status != 0}}'>
+            <view class='error' wx:if = '{{user_priv == 3 && showFeedbackInput && status != 0}}'>
                   <view class='line'>
                         <view class='title'>维修方式</view>
                         <picker range='{{handleList}}' range-key='name' bindchange='pickerChange' data-key = 'handle'>
@@ -109,7 +129,7 @@
 
             </view>
 
-            <view class='remark' wx:if = '{{user_priv == 3}}'>
+            <view class='remark' wx:if = '{{user_priv == 3 && showFeedbackInput && hidden}}'>
                   <view class='title'>维修反馈情况:</view>
                   <textarea placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.remark}}' wx:if = '{{isHidden}}'></textarea>
                   
@@ -146,27 +166,17 @@
             <!-- 底部按钮 -->
             <view class='buttons'>
                   <!-- 修改时 -->
-                  <view wx:if = '{{isRollback}}'>
-                          <view wx:if = '{{!alreadyRoll}}'>
-                                <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='rollback'>撤回</view>
-                          </view>
-
-                          <view wx:if = '{{alreadyRoll}}'>
-                                <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                                <view wx:if = '{{isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                                <view  class='button finshButton' bindtap='update'>修改</view>
-                          </view>
-                          
+                  <view class='update-buttons' wx:if = '{{isRollback && user_priv == 3}}'>
+                        <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='uploadPictures' data-fun='updateWorkCard'>修改</view>
+                        <view wx:if = '{{isRollback}}' class='button finshButton' bindtap='deleteWorkCard'>删除</view>
                   </view>
 
                   <!-- 非修改时 -->
                   <view wx:if = '{{!isRollback}}'>
                         <!-- 船舶端，已领取 -->
                         <view wx:if = '{{hasGot && user_priv == 3}}'> 
-                              <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='scanCode' >扫描条码</view>
-                              <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
-                              <view wx:if = '{{isScan && isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                              <view wx:if = '{{isUpload}}' class='button finshButton' bindtap='finish'>完成</view>
+                              <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
+                              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures' data-fun='finish'>完成</view>
                         </view>
 
                         <!-- 领取button -->
@@ -211,3 +221,8 @@
 
 <!-- 日历选择组件 -->
 <mark showModalStatus='{{showMark}}' bindMark='dateChange'></mark>
+
+<!-- 弹出层 -->
+<modal catchtouchmove = 'true' hidden = '{{hidden}}' title = '提示' confirm-text = '确定' cancel-text = '取消' bindconfirm = 'confirm2' bindcancel = 'cancel2'>
+       <view class='block'>将要扫描设备条码，用以验证设备，确定吗？</view>
+</modal>

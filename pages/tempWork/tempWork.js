@@ -14,6 +14,7 @@ Page({
     status:0,
     handle:0,
     isHidden: true,
+    hidden: true,
     showMark: false
   },
 
@@ -146,6 +147,7 @@ Page({
         res = res.data;
         if (res.success) {
           res.workDetail.image = JSON.parse(res.workDetail.image);
+          res.workDetail.feedbackimage = JSON.parse(res.workDetail.feedbackimage);
           if (res.workFeedback) {
             var workFeedback = res.workFeedback;
             workFeedback.image = JSON.parse(workFeedback.image);
@@ -170,6 +172,24 @@ Page({
           if ((res.workDetail.overhaul_function == 0 && res.workDetail.status == 2) || (res.workDetail.overhaul_function == 1 && res.workDetail.status == 1)) {
             obj.setData({
               isRollback: true
+            });
+          }
+
+          if ((res.workDetail.overhaul_function == 0) || (res.workDetail.overhaul_function == 1 && res.workDetail.status == 9)) {
+            obj.setData({
+              showFeedbackInput: true
+            });
+          }
+
+          if ((res.workDetail.overhaul_function == 0 && res.workDetail.status == 2) || (res.workDetail.overhaul_function == 1 && res.workDetail.status == 9)) {
+            obj.setData({
+              showFeedbackPic: true
+            });
+          }
+
+          if (res.workDetail.overhaul_function == 1 && res.workDetail.status == 1) {
+            obj.setData({
+              showExceptionalInput: true
             });
           }
         } 
@@ -265,6 +285,34 @@ Page({
     }
   },
 
+  /**
+   * 确定是否需要填写执行情况
+   */
+  sure() {
+    obj.setData({
+      hidden: false
+    });
+  },
+
+  /**
+   * 点击确定按钮
+   */
+  confirm2() {
+    obj.scanCode();
+    obj.setData({
+      hidden: true
+    });
+  },
+
+  /**
+   * 点击取消按钮
+   */
+  cancel2() {
+    obj.setData({
+      hidden: true
+    });
+  },
+
 
 /**
  * 扫码
@@ -303,15 +351,15 @@ Page({
    */
   photo: () => {
     // 未领取时禁用
-    var hasGot = obj.data.hasGot;
-    if (!hasGot) {
-       wx.showModal({
-         title: '提示',
-         content: '请先领取工作！',
-         showCancel: false
-       })
-       return;
-    }
+    // var hasGot = obj.data.hasGot;
+    // if (!hasGot) {
+    //    wx.showModal({
+    //      title: '提示',
+    //      content: '请先领取工作！',
+    //      showCancel: false
+    //    })
+    //    return;
+    // }
     var isPhoto = false;
     var photo = {};
     var photos = obj.data.photos;
@@ -422,12 +470,18 @@ Page({
   /**
    * 上传图片
    */
-  uploadPics: (i) => {
+  uploadPics: (i, e) => {
+    var fun = e.currentTarget.dataset.fun;
     var photos = obj.data.photos;
     var count = photos.length;
     var reqUrl = app.constant.upload_url;
     if (!i) {
       i = 0;
+    }
+    if (!photos || photos.length <= 0) {
+      // 动态调用完成方法或修改工作卡方法
+      obj[fun]();
+      return;
     }
     // 已有照片，不上传
     if (!photos[i].tempFilePath) {
@@ -465,10 +519,12 @@ Page({
             isUpload: isUpload
           });
           console.log('图片上传完成！');
+          // 动态调用完成方法或修改工作卡方法
+          obj[fun]();
           return;
         } else {
           // 图片还未传完，需要继续上传
-          obj.uploadPics(i);
+          obj.uploadPics(i, e);
         }
       }
 
@@ -478,8 +534,8 @@ Page({
   /**
    * 调用上传方法
    */
-  uploadPictures: () => {
-    obj.uploadPics();
+  uploadPictures: (e) => {
+    obj.uploadPics(0, e);
   },
 
   /**
@@ -646,7 +702,7 @@ Page({
    */
   rollback: () => {
     var param = {
-      workcardId: obj.data.workCardId
+      workcardId: obj.data.workDetail.id
     };
 
     var reqUrl = util.getRequestURL('rollback.we');
@@ -785,12 +841,149 @@ Page({
         }
       }
     })
+  },
+
+  /**
+   * 删除工作卡
+   */
+  deleteWorkCard: function () {
+    wx.showModal({
+      title: '提示',
+      content: '确定删除?',
+      success(modal_res) {
+        if (modal_res.confirm) {
+          wx.showLoading({
+            title: '处理中',
+            mask: true
+          });
+          var url = util.getRequestURL('updateWorkCard.we');
+          var param = {id: obj.data.workDetail.id, isdel: 1};
+          wx.request({
+            url: url,
+            data: {
+              json: encodeURI(JSON.stringify(param))
+            },
+            success(res) {
+              wx.hideLoading();
+              util.tipsMessage('删除成功');
+              wx.navigateBack({
+                delta: 1
+              });
+            },
+            fail(e) {
+              wx.hideLoading();
+              util.tipsMessage('网络异常');
+              console.log(e);
+            }
+          });
+        }
+      }
+    });
+  },
+
+  /**
+   * 修改工作卡
+   */
+  updateWorkCard: function () {
+    wx.showLoading({
+      title: '处理中',
+      mask: true
+    });
+    var workDetail = obj.data.workDetail;
+    // 自行维修修改工作卡反馈, 委外维修修改工作卡异常反馈
+    if (workDetail.overhaul_function == 0) {
+        // 修改维修反馈情况（描述，备注）
+        var url = util.getRequestURL('updateWorkCard.we');
+        var param = {id: workDetail.id};
+        if (obj.data.remark) {
+          param.remark = obj.data.remark;
+        }
+        if (obj.data.status) {
+          param.status = obj.data.status;
+        }
+        if (param.remark || param.status) {
+          wx.request({
+            url: url,
+            data: {
+              json: encodeURI(JSON.stringify(param))
+            }
+          });
+        }
+        // 修改工作卡反馈图片
+        var url = util.getRequestURL('updateWorkfeedback.we');
+        var param = {id: workDetail.feedbackid};
+        if (!obj.data.photos || obj.data.photos.length <= 0) {
+           wx.hideLoading();
+            util.tipsMessage('修改成功');
+            wx.navigateBack({
+              delta: 1
+           });
+          return;
+        } else {
+          param.image = obj.data.photos.concat(workDetail.feedbackimage);
+          param.image.forEach(function(item, i) {
+            delete item.tempFilePath;
+          });
+          param.image = JSON.stringify(param.image);
+        }
+        wx.request({
+          url: url,
+          data: {
+            json: encodeURI(JSON.stringify(param))
+          },
+          success(res) {
+            wx.hideLoading();
+            util.tipsMessage('修改成功');
+            wx.navigateBack({
+              delta: 1
+            });
+          },
+          fail(e) {
+            wx.hideLoading();
+            util.tipsMessage('网络异常');
+            console.log(e);
+          }
+        });
+    } else {
+        // 委外维修修改异常反馈
+        // 修改异常反馈和异常描述
+        var url = util.getRequestURL('updateExceptionalFeedBack.we');
+        var param = {id: workDetail.exceptionid};
+        if ((!obj.data.photos || obj.data.photos.length <= 0) && !obj.data.exceptional_describe) {
+           wx.hideLoading();
+            util.tipsMessage('修改成功');
+            wx.navigateBack({
+              delta: 1
+           });
+          return;
+        } else {
+          param.exceptionalDescribe = obj.data.exceptional_describe;
+          param.image = obj.data.photos.concat(workDetail.image);
+          param.image.forEach(function(item, i) {
+            delete item.tempFilePath;
+          });
+          param.image = JSON.stringify(param.image);
+        }
+        wx.request({
+          url: url,
+          data: {
+            json: encodeURI(JSON.stringify(param))
+          },
+          success(res) {
+            wx.hideLoading();
+            util.tipsMessage('修改成功');
+            wx.navigateBack({
+              delta: 1
+            });
+          },
+          fail(e) {
+            wx.hideLoading();
+            util.tipsMessage('网络异常');
+            console.log(e);
+          }
+        });
+    }
   }
-
-
-
-
-
 
 
 })
