@@ -207,7 +207,7 @@ Page({
     }
 
     // 跳转传参
-    var redUrl = '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id + '&workCardStatus=' + workCard.status;
+    var redUrl = '../../pages/TlistDetail/TlistDetail?workCardId=' + workCard.id + '&workCardStatus=' + workCard.status;
     wx.navigateTo({
       url: redUrl,
     })

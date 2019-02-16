@@ -201,3 +201,9 @@ Page{
   padding: 10rpx 0;
   color: rgba(128,128,128,1);
 }
+
+.rightReserved{
+  font-size: 22rpx;
+  text-align: center;
+  color: black;
+}

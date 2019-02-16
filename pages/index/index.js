@@ -346,100 +346,6 @@ Page({
       chooseList: tempList2
     };
 
-    // 首页功能模块列表
-    var funList = [
-      {
-        "name": "工作任务",
-        "iconPath": "../../icon/2930@2x.png",
-        "count": "cycleWorkCount",
-        "link": "../shipList/shipList",
-        "key": "",
-        "value": "",
-        "fun": "goto"
-      },
-
-      {
-        "name": "临时任务",
-        "iconPath": "../../icon/2917@2x.png",
-        "count": "temporaryWorkCount",
-        "link": "../switch/switch",
-        "key": "choose",
-        "value": "chooseTemp",
-        "fun": "goto"
-      },
-
-      {
-        "name": "督导通知",
-        "iconPath": "../../icon/supervision.png",
-        "count": "supervisionCount",
-        "link": "../supervisionList/supervisionList",
-        "key": "",
-        "value": "",
-        "fun": "goto"
-      },
-
-      {
-        "name": "工作验收",
-        "iconPath": "../../icon/valid.png",
-        "count": "checkAcceptanceCount",
-        "link": "../validList/validList",
-        "key": "",
-        "value": "",
-        "fun": "goto"
-      },
-
-      {
-        "name": "临时工作",
-        "iconPath": "../../icon/tempWork.png",
-        "count": "mtwcCount",
-        "link": "../switch/switch",
-        "key": "choose",
-        "value": "chooseTemp2",
-        "fun": "goto"
-      },
-
-      {
-        "name": "督导",
-        "iconPath": "../../icon/supervise.png",
-        "count": "supervisionCount",
-        "link": "../supervisionList/supervisionList",
-        "key": "",
-        "value": "",
-        "fun":"goto"
-      },
-
-      {
-        "name": "未验收工作",
-        "iconPath": "../../icon/2918@2x.png",
-        "count": "",
-        "link": "../Tlist/Tlist?isUpdate=true",
-        "key": "",
-        "value": "",
-        "fun":"goto"
-      },
-
-      {
-        "name": "查看设备信息",
-        "iconPath": "../../icon/deviceDetail.png",
-        "count": "",
-        "link": "../equipmentInfo/equipmentInfo",
-        "key": "",
-        "value": "",
-        "fun": "getEquipmentInfo"
-      },
-
-      {
-        "name": "统计",
-        "iconPath": "../../icon/statistics.png",
-        "count": "",
-        "link": "../switch/switch",
-        "key": "choose",
-        "value": "chooseStatistics",
-        "fun": "goto"
-      }
-
-    ];
-
     var reqUrl = util.getRequestURL('getFuncs.we');
     var param = {};
     param.userId = app.user.id;
@@ -470,8 +376,7 @@ Page({
     obj.setData({
       chooseTemp: chooseTemp,
       chooseStatistics: chooseStatistics,
-      chooseTemp2: chooseTemp2,
-      funList: funList
+      chooseTemp2: chooseTemp2
     });
     
   },

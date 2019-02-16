@@ -35,7 +35,7 @@
       </view>
       
       <!-- 功能按钮 -->
-      <view class='footer'>
+      <view class='footer' wx:if='{{validList && validList.length > 0}}'>
             <checkbox-group bindchange = 'chooseAll'>
                   <!-- 全选按钮 -->
                   <view class='isAll'>
@@ -46,7 +46,6 @@
 
             <!-- 验收按钮 -->
             <view class='buttons'>
-                  <!-- <view class='button validNo' bindtap='valid' data-status = '3'>驳回</view> -->
                   <view class='button validYes' bindtap='valid' data-status = '2'>验收</view>
             </view>
             

@@ -96,8 +96,7 @@
 
   <!-- 弹出层 -->
   <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = 'V{{update.version}}更新内容' confirm-text = ' ' cancel-text = ' ' bindconfirm = 'confirm' bindcancel = 'cancel'>
-              <view class='block'>
-
+               <view class='block'>
                     <!-- detailList -->
                     <view class='detailList'>
                           <view class='' wx:for = '{{update.detailList}}' wx:key = ''>
@@ -106,6 +105,8 @@
                     </view>
               
                 </view>
+
+                <view class='rightReserved'>武汉至诚无限科技有限公司 All Right Reserved</view>
       
   </modal>
 

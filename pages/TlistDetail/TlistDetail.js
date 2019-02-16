@@ -8,11 +8,11 @@ Page({
    */
   data: {
     base_img_url: app.constant.base_img_url,
-    statusList: [],
+    statusList:[],
     handleList: [],
-    photos: [],
-    status: 0,
-    handle: 0,
+    photos:[],
+    status:0,
+    handle:0,
     hidden: true
   },
 
@@ -88,11 +88,11 @@ Page({
    */
   init: () => {
     var statusList = [
-      { id: 0, name: "正常" },
-      { id: 1, name: "异常" }
+      {id: 0,name:"正常"},
+      {id: 1,name: "异常"}
     ];
     var handleList = [
-      { id: 0, name: "请选择" },
+      { id: 0, name: "请选择" },  
       { id: 1, name: "自行维修" },
       { id: 2, name: "委外维修" }
     ];
@@ -134,11 +134,12 @@ Page({
           var level = res.workDetail.level;
           var dou = {};
           if (level == 'A' || level == 'B') {
+             // 非必须拍照
              dou.isPhoto = true;
              dou.isUpload = true;
           } else {
-            // 必须拍照的
-            dou.needPhoto = true;
+             // 必须拍照
+             dou.needPhoto = true;
           }
           dou.showPhoto = true;
           dou.workDetail = res.workDetail;
@@ -185,7 +186,7 @@ Page({
             scanTime: scanTime,
           });
           // 修改为进行中
-          // obj.ongoing();
+          obj.ongoing();
         } else {
           wx.showModal({
             title: '提示',
@@ -301,19 +302,11 @@ Page({
       i = 0;
     }
     // 已有照片，不上传
-    console.log('photos: ' + JSON.stringify(photos) + '& i: ' + i);
-    if (photos[i]) {
-        if (!photos[i].tempFilePath) {
-          i++;
-          obj.uploadPics(i);
-          return;
-        }
-    } else {
-      // 没有照片对象，则不传照片
-      obj.update();
+    if (!photos[i].tempFilePath) {
+      i++;
+      obj.uploadPics(i);
       return;
     }
-    
     // 开始上传图片
     wx.uploadFile({
       url: reqUrl,
@@ -345,7 +338,7 @@ Page({
             showPhoto: false
           });
           console.log('图片上传完成！');
-          obj.update();
+          obj.finish();
           return;
         } else {
           // 图片还未传完，需要继续上传
@@ -367,10 +360,211 @@ Page({
     if (photos.length > 0) {
         obj.uploadPics();
     } else {
-        obj.update();
+        obj.finish();
     }
     
   },
+
+  /**
+   * finish 保存数据
+   */
+  finish: () => {
+    // 校验数据
+    var status = obj.data.status;
+    var handle = obj.data.handle;
+    var workcardName = undefined;
+    if (status == 1) {
+      if (handle == 0) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择维修方式！',
+          showCancel: false
+        })
+        return;
+      }
+
+      // 校验拍照信息
+      var photos = obj.data.photos;
+      var needPhoto = obj.data.needPhoto;
+      if (needPhoto && photos.length < 1) {
+        wx.showModal({
+          title: '提示',
+          content: '该任务需要拍照！',
+          showCancel: false
+        })
+        return;
+      }
+      for (var x = 0; x < photos.length; x++) {
+        delete photos[x]['tempFilePath'];
+      }
+
+
+      var handleName = undefined;
+      if (handle == 1) {
+        handle = 0; // 自行维修
+        handleName = '自行维修';
+      }
+
+      if (handle == 2) {
+          handle = 1; // 委外维修
+          handleName = '委外维修';
+      }
+      workcardName = obj.data.workDetail.ename + '-' + handleName;
+    }
+
+    
+
+    
+    var userId = app.user.id;
+    var isError = status;
+
+    // 必填数据
+    var param = {
+      id: obj.data.workDetail.id,
+      executorId: userId, // 执行者id
+      image: photos, // 照片信息
+      isError: isError, // 设备状态，是否异常
+      scanTime: obj.data.scanTime,
+      equipmentId: obj.data.workDetail.eid
+    };
+
+    // 可选数据
+    // 备注信息
+    var remark = obj.data.remark;
+    if (remark) {
+      param.remark = remark;
+    }
+    
+    // 异常描述
+    var exceptionalDescribe = obj.data.exceptionalDescribe;
+    if (exceptionalDescribe) {
+      param.exceptionalDescribe = exceptionalDescribe;
+    }
+    
+    
+    // 维修方式
+    if (handle || handle == 0) {
+      param.overhaulFunction = handle; // 1自行维修，2委外维修
+    }
+
+    // 工作卡名称
+    if (workcardName) {
+      param.workcardName = workcardName;
+    }
+
+    // showLoding
+    wx.showLoading({
+      title: '处理中',
+      mask: true,
+    })
+    var reqUrl = util.getRequestURL('finish.we');
+    // 发起微信请求
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        // 隐藏Loading框
+        wx.hideLoading();
+        res = res.data;
+        if (res.success) {
+          wx.showModal({
+            title: '提示',
+            content: '工作完成，有待上级人员确认！',
+            showCancel: false,
+            success: (resx) => {
+              if (resx.confirm) {
+                wx.reLaunch({
+                  url: '../../pages/index/index',
+                })
+              }
+            },
+            
+
+          })
+          wx.reLaunch({
+            url: '../../pages/index/index',
+          })
+        } else {
+          console.log('程序异常！');
+        }
+      },
+      fail: (e) => {
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示',
+          content: '网络异常！',
+        })
+      }
+
+    })
+
+  },
+  
+  // 进行中
+  ongoing: () => {
+    var id = obj.data.workDetail.id;
+    var status = obj.data.workDetail.status;
+    if (status == 1) {
+      status = 9;
+    } else if (status == 9) {
+      status = 1;
+    }
+    
+    // 参数
+    var param = {
+      id: id,
+      status: status,
+      collectorpersonid: app.user.id
+    };
+
+    wx.request({
+      url: util.getRequestURL('updateWorkCard.we'),
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          obj.data.workDetail.status = param.status;
+        }
+      }
+    })
+
+
+  },
+
+
+  /**
+   * 撤回数据
+   */
+  rollback: () => {
+    var param = {
+      workcardId: obj.data.workCardId
+    };
+
+    var reqUrl = util.getRequestURL('rollback.we');
+    wx.request({
+      url: reqUrl,
+      dataType:'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          // 撤回成功
+          obj.setData({
+            alreadyRoll:true
+          });
+        }
+      }
+    })
+  },
+
 
   /**
    * 修改数据
@@ -465,5 +659,9 @@ Page({
       hidden: true
     });
   },
+
+
+
+
 
 })
