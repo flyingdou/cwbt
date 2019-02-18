@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "外委工作单列表",
+  "navigationBarTitleText": "",
   "usingComponents": {
     "noData": "../../component/noData/noData"
   }

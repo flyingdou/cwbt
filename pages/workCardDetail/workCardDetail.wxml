@@ -48,18 +48,6 @@
                         <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{item.mark}}</view>
                   </view>
             </view>
-
-            <!-- <view class='line'>
-                  <view class='title'>设备状况</view>
-                  <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
-                          <view class='item'>
-                                <view class='value'>{{status == 0 ? "正常" : "异常"}}</view>
-                                <view class='moreIcon'>
-                                      <image src='../../icon/more@2x.png'></image>
-                                </view>
-                          </view>
-                  </picker>
-            </view> -->
             
             <!-- error -->
             <view class='error' wx:if = '{{status != 0}}'>
@@ -82,7 +70,7 @@
 
             </view>
 
-            <view class='remark'  wx:if = '{{hidden}}'>
+            <view class='remark'>
                   <view class='title'>备注</view>
                   <textarea placeholder='请输入备注信息' disabled='{{workCardStatus == 1 ? "" : "disabled" }}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark}}'></textarea>
                   
@@ -108,15 +96,9 @@
             <!-- 底部按钮 -->
             <!-- 未验收的才能修改 -->
             <view class='buttons' wx:if = '{{workCardStatus == 1}}'>
-                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >修改执行情况</view>
-                  <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures'>完成</view>
+                  <view class='button finshButton' bindtap='uploadPictures'>修改</view>
             </view>
       
       </view>
-
-      <!-- 弹出层 -->
-      <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = '提示' confirm-text = '确定' cancel-text = '取消' bindconfirm = 'confirm' bindcancel = 'cancel'>
-             <view class='block'>将要扫描设备条码，用以验证设备，确定吗？</view>
-      </modal>
 
 </view>

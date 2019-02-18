@@ -57,7 +57,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
+        "text": "机务",
         "iconPath":"icon/tabBar-icon/home.png",
         "selectedIconPath":"icon/tabBar-icon/home-selected.png"
       },
@@ -69,7 +69,7 @@
       },
       {
         "pagePath": "pages/chooseEquipment/chooseEquipment",
-        "text": "设备信息",
+        "text": "设备档案",
         "iconPath": "icon/tabBar-icon/deviceInfo.png",
         "selectedIconPath": "icon/tabBar-icon/deviceInfo-selected.png"
       },

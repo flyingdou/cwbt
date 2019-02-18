@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "统计",
+  "navigationBarTitleText": "",
   "usingComponents": {
   	"mark": "../../component/mark/mark"
   }

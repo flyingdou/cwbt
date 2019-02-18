@@ -24,12 +24,21 @@ Page({
     obj.setData({
       userPriv: app.user.userPriv,
       overhaul: overhaul,
-      user_id: app.user.id
-    });
-
-    obj.setData({
+      user_id: app.user.id,
       windowHeightRpx: util.getSystemInfo().windowHeightRpx
     });
+
+    
+    var title = '';
+    if (overhaul == 0) {
+       title = '缺陷工作记录表(自行)';
+    } else {
+       title = '缺陷工作记录表(委外)';
+    }
+
+    wx.setNavigationBarTitle({
+      title: title,
+    })
   },
 
   /**
@@ -47,8 +56,8 @@ Page({
     obj.setData({
       titles: {
         0: [
-          { title: '未完成'},
-          { title: '已完成'}
+          { title: '未处理'},
+          { title: '已处理'}
         ],
         1: [
           { title: '未审批'},

@@ -50,7 +50,10 @@
             </view>
 
       <!-- 已领取的才显示 -->
-      <view class='isShow' wx:if = '{{workCardStatus == 9}}'>
+      <view class='isShow' wx:if = '{{workCardStatus == 9 && isScan}}'>
+            <!-- 提示文字 -->
+            <view class='tagName'>填写执行情况</view>
+            
             <view class='line'>
                   <view class='title'>设备状况</view>
                   <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
@@ -107,12 +110,14 @@
             <view class='fill'></view>
 
 
-            <!-- 底部按钮 -->
-            <view class='buttons'>
-                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
-                  <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures'>完成</view>
-            </view>
+            
 
+        </view>
+
+        <!-- 底部按钮 -->
+        <view class='buttons' wx:if = '{{workCardStatus == 9}}'>
+              <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
+              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures'>完成</view>
         </view>
       
       </view>

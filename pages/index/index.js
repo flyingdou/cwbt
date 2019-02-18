@@ -322,17 +322,17 @@ Page({
       { "name": "委外维修", "link": "../tempList/tempList?overhaul=1" },
     ];
     var chooseTemp = {
-      name:'维修方式',
+      name:'维修类别',
       chooseList: tempList
     };
 
      // 统计数据类型
      var statisticsList = [
-      { "name": "执行统计", "link": "../statistics/statistics?type=handle" },
-      { "name": "验收统计", "link": "../statistics/statistics?type=valid" },
+      { "name": "执行进度", "link": "../statistics/statistics?type=handle" },
+      { "name": "验收进度", "link": "../statistics/statistics?type=valid" },
     ];
     var chooseStatistics = {
-      name: '数据类型',
+      name: '进度类别',
       chooseList: statisticsList
     };
 
@@ -342,7 +342,7 @@ Page({
       { "name": "委外维修", "link": "../mtwcList/mtwcList?type=1" },
     ];
     var chooseTemp2 = {
-      name: '维修方式',
+      name: '维修类别',
       chooseList: tempList2
     };
 

@@ -12,8 +12,7 @@ Page({
     handleList: [],
     photos: [],
     status: 0,
-    handle: 0,
-    hidden: true
+    handle: 0
   },
 
   /**
@@ -158,55 +157,16 @@ Page({
    * picker、输入框取值
    */
   pickerChange: (e) => {
-    if (!obj.checkValid()) {
-       return;
-    }
     var key = e.currentTarget.dataset.key;
     var dou = {};
     dou[key] = e.detail.value;
     obj.setData(dou);
   },
 
-
-/**
- * 扫码
- */
-  scanCode: () => {
-    var isScan = false;
-    wx.scanCode({
-      onlyFromCamera: true,
-      scanType: ['barCode'],
-      success: (res) => {
-        isScan = true;
-        if (res.result == obj.data.workDetail.number) {
-          var scanTime = util.formatTime(new Date());
-          obj.setData({
-            isScan: isScan,
-            scanTime: scanTime,
-          });
-          // 修改为进行中
-          // obj.ongoing();
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '您当前所扫条码，不属于当前任务中的设备！',
-            showCancel: false
-          })
-          return;
-        }
-        console.log(res);
-      }
-    })
-
-  },
-
   /**
    * 拍照
    */
   photo: () => {
-    if (!obj.checkValid()) {
-       return;
-    }
     var isPhoto = false;
     var isUpload = obj.data.isUpload;
     var photo = {};
@@ -360,9 +320,6 @@ Page({
    * 调用上传方法
    */
   uploadPictures: () => {
-    if (!obj.checkValid()) {
-        return;
-    }
     var photos = obj.data.photos;
     if (photos.length > 0) {
         obj.uploadPics();
@@ -419,51 +376,6 @@ Page({
       }
     })
 
-  },
-
-  /**
-   * 校验是否已经设备条码
-   */
-  checkValid () {
-    var isScan = obj.data.isScan;
-    if (!isScan) {
-      wx.showModal({
-        title: '提示',
-        content: '请先验证设备条码',
-      })
-      return false;
-    } else {
-      return true;
-    }
-
-  },
-
-  /**
-   * 确定是否需要填写执行情况
-   */
-  sure() {
-    obj.setData({
-      hidden: false
-    });
-  },
-
-  /**
-   * 点击确定按钮
-   */
-  confirm() {
-    obj.scanCode();
-    obj.setData({
-      hidden: true
-    });
-  },
-
-  /**
-   * 点击取消按钮
-   */
-  cancel() {
-    obj.setData({
-      hidden: true
-    });
   },
 
 })
