@@ -27,6 +27,17 @@ Page({
         overhaul: overhaul
       });
     }
+
+    var title = '';
+    if (overhaul == 0) {
+        title = '自行维修缺陷单';
+    } else {
+        title = '委外维修申请单';
+    }
+
+    wx.setNavigationBarTitle({
+      title: title,
+    })
     
     
 

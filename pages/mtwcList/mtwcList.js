@@ -18,15 +18,22 @@ Page({
     obj = this;
 
     // 维修方式
-    if (options.type) {
-      obj.setData({
-        type: options.type
-      });
+    var type = options.type;
+    var title = '';
+    if (type == 0) {
+       title = '自行工作单列表';
+    } else {
+       title = '委外工作单列表';
     }
+    
+    wx.setNavigationBarTitle({
+      title: title,
+    })
 
-    // 用户权限
+
     obj.setData({
-      userPriv: app.user.userPriv 
+      type: type,
+      userPriv: app.user.userPriv
     });
   },
 

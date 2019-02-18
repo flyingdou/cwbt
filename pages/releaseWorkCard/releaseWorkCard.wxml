@@ -61,7 +61,7 @@
             <view class='buttons'>
                   <view wx:if = '{{!isPhoto}}' class='button photoButton' bindtap='photo'>拍照</view>
                   <view wx:if = '{{isPhoto && !isUpload}}' class='button uploadButton' bindtap='uploadPictures'>上传图片</view>
-                  <view wx:if = '{{isPhoto && isUpload}}' class='button finshButton' bindtap='finish'>保存</view>
+                  <view wx:if = '{{isPhoto && isUpload}}' class='button finshButton' bindtap='finish'>确定</view>
             </view>
       
       </view>

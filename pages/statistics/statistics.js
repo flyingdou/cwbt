@@ -33,6 +33,16 @@ Page({
       deptList: deptList,
       type: type
     });
+
+    var title = '';
+    if (type == 'handle') {
+       title = '执行进度';
+    } else {
+       title = '验收进度';
+    }
+    wx.setNavigationBarTitle({
+      title: title,
+    })
     obj.init();
     
   },

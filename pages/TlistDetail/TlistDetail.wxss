@@ -5,7 +5,6 @@ Page{
 
 .content{
   background: white;
-  padding: 0 4%;
 }
 
 .block1{
@@ -16,12 +15,12 @@ Page{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20rpx 0;
+  padding: 20rpx 4%;
   border-bottom: 1rpx solid rgba(245,245,245,1);
 }
 
 .remark{
-  padding: 20rpx 0;
+  padding: 20rpx 4%;
 }
 
 .textareaClass{
@@ -44,6 +43,7 @@ Page{
 .preview{
   overflow: hidden;
   margin-top: 40rpx;
+  padding: 0 4%;
 }
 
 .pic{
@@ -112,4 +112,12 @@ Page{
   margin-left: 16%;
   background: #F5F5F5;
   padding: 20rpx 4%;
+}
+
+.tagName{
+  font-size:32rpx;
+  color:black;
+  background:#ccc;
+  text-align:center;
+  padding:20rpx 0;
 }
