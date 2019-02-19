@@ -315,18 +315,18 @@ Page({
    * 取消领取
    */
   unchoose: (e) => {
-    var id = e.currentTarget.dataset.id;
     var index = e.currentTarget.dataset.index;
+    var work = e.currentTarget.dataset.item;
     var param = {
-      id: [id],
-      status: 1,
-      collectorpersonid: app.user.id
+      id: work.id,
+      collectorpersonid: app.user.id,
+      subffix: work.subffix
     };
 
     var taskList = obj.data.taskList;
 
     wx.request({
-      url: util.getRequestURL('updateMuiltWorkCard.we'),
+      url: util.getRequestURL('unchooseWork.we'),
       dataType: 'json',
       data: {
         json: encodeURI(JSON.stringify(param))
@@ -334,7 +334,7 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-             taskList[index].status = param.status;
+             taskList[index].status = res.status;
              obj.setData({
                taskList: taskList
              });

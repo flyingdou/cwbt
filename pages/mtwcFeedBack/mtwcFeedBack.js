@@ -20,12 +20,28 @@ Page({
     if (options.id) {
       obj.data.id = options.id;
     }
-
-    if (options.type) {
+    
+    var type = options.type;
+    if (type) {
       obj.setData({
-        type: options.type
+        type: type
       });
     }
+    var title = '';
+    // 自行
+    if (type == 0) {
+       title = '自行维修完成情况';
+    }
+
+    // 委外
+    if (type == 1) {
+       title = '委外维修完成情况';
+    }
+
+    wx.setNavigationBarTitle({
+      title: title,
+    })
+
   },
 
   /**
@@ -74,6 +90,10 @@ Page({
    */
   getTempFeedback: function () {
     var url = util.getRequestURL('getTempWorkcardFeedback.we');
+    // loading
+    wx.showLoading({
+      title: '加载中...',
+    })
     wx.request({
       url: url,
       data: {
@@ -90,6 +110,9 @@ Page({
       fail: function (e) {
         util.tipsMessage('网络异常！');
         console.log(e);
+      },
+      complete: function (com) {
+        wx.hideLoading();
       }
     });
   },

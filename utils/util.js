@@ -134,11 +134,8 @@ function preview (e) {
  * 格式化计划时间
  */
 function formatPlanTime (workList) {
-  var value = '';
   var around = 0;
   var expectedTime = '';
-  var prefix = '';
-  var subffix = '';
   var dou = new Date();
   var exTimeStamp = 0;
   workList.forEach((work,i) => {
@@ -147,18 +144,17 @@ function formatPlanTime (workList) {
     exTimeStamp = expectedTime.getTime();
     if (around == 0) {
        dou = expectedTime;
-       value = formatDate(dou,1);
+       work.prefix = formatDate(dou);
     } else if (around > 0 ) {
        dou.setTime(exTimeStamp - 1000*60*60*24*around);
-       prefix = formatDate(dou,1);
+       work.prefix = formatDate(dou);
        dou.setTime(exTimeStamp + 1000*60*60*24*around);
-       subffix = formatDate(dou,1);
-       value = prefix + ' 至 ' + subffix; 
+       work.subffix = formatDate(dou);
     } else {
       dou = expectedTime;
-      value = formatDate(dou, 1);
+      work.prefix = formatDate(dou);
     }
-    work.planTimeStr = value;
+      
   });
 
   return workList;

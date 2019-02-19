@@ -35,7 +35,7 @@
                           <view class='line2 div'>
                               <view class='fb'>
                                     <view class='title'>计划时间</view>
-                                    <view class='value'>{{item.planTimeStr}}</view>
+                                    <view class='value'>{{item.prefix}}<text wx:if = '{{item.subffix}}' decode='{{true}}'>&nbsp;至&nbsp;{{item.subffix}}</text></view>
                               </view>
                          </view>
 
@@ -57,7 +57,7 @@
                           <!-- 图标 -->
                           <view class='tag' wx:if = '{{item.status == 9 && !isUpdate}}'>
                                 <!-- 撤销领取 -->
-                                <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-id='{{item.id}}' data-index = '{{index}}'>撤销领取</view>
+                                <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-item = '{{item}}' data-index = '{{index}}'>撤销领取</view>
 					  
 					                  <!-- 他人领取 -->
                             <view wx:else class='tagDiv'>
