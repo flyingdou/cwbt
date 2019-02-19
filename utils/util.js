@@ -130,6 +130,42 @@ function preview (e) {
 }
 
 
+/**
+ * 格式化计划时间
+ */
+function formatPlanTime (workList) {
+  var value = '';
+  var around = 0;
+  var expectedTime = '';
+  var prefix = '';
+  var subffix = '';
+  var dou = new Date();
+  var exTimeStamp = 0;
+  workList.forEach((work,i) => {
+    around = work.around ? parseInt(work.around) : around;
+    expectedTime = new Date(work.expectedtime);
+    exTimeStamp = expectedTime.getTime();
+    if (around == 0) {
+       dou = expectedTime;
+       value = formatDate(dou,1);
+    } else if (around > 0 ) {
+       dou.setTime(exTimeStamp - 1000*60*60*24*around);
+       prefix = formatDate(dou,1);
+       dou.setTime(exTimeStamp + 1000*60*60*24*around);
+       subffix = formatDate(dou,1);
+       value = prefix + ' 至 ' + subffix; 
+    } else {
+      dou = expectedTime;
+      value = formatDate(dou, 1);
+    }
+    work.planTimeStr = value;
+  });
+
+  return workList;
+  
+}
+
+
 
 
 
@@ -143,5 +179,6 @@ module.exports = {
   getRequestURL: getRequestURL,
   formatDate: formatDate,
   getOverhaul: getOverhaul,
-  preview: preview
+  preview: preview,
+  formatPlanTime: formatPlanTime
 }

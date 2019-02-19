@@ -33,17 +33,26 @@
                           
                           <!-- 第三行 -->
                           <view class='line2 div'>
-                                <view class='line'>
-                                      <view class='title'>所属船舶</view>
-                                      <view class='value'>{{item.boatName}}</view>
-                                </view>
+                              <view class='fb'>
+                                    <view class='title'>计划时间</view>
+                                    <view class='value'>{{item.planTimeStr}}</view>
+                              </view>
+                         </view>
 
-                                <view class='line'>
-                                      <view class='title'>计划时间</view>
-                                      <view class='value'>{{item.plannedtime}}</view>
-                                </view>
+                          <!-- 第四行 -->
+                          <view class='line2 div'>
+                                  <view class='line'>
+                                        <view class='title'>所属船舶</view>
+                                        <view class='value'>{{item.boatName}}</view>
+                                  </view>
 
-                          </view>
+                                  <view class='line'>
+                                        <view class='title'>截止时间</view>
+                                        <view class='value'>{{item.lasttime}}</view>
+                                  </view>
+
+                            </view>
+                           
 
                           <!-- 图标 -->
                           <view class='tag' wx:if = '{{item.status == 9 && !isUpdate}}'>
@@ -60,7 +69,8 @@
 
                           <!-- 多选择 -->
                           <view class='choose'>
-                                <checkbox value='{{item.id}}'  color = 'rgba(54, 123, 240, 1)' catchtap='ni' wx:if = '{{item.status == 1}}'></checkbox>
+                                <view class = 'overtime' wx:if = '{{item.status == 3}}'>逾期</view>
+                                <checkbox class='checkBoxDou' value='{{item.id}}'  color = 'rgba(54, 123, 240, 1)' catchtap='ni' wx:if = '{{item.status != 9}}'></checkbox>
                           </view>
 
                     </view>

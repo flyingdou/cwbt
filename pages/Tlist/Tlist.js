@@ -138,7 +138,7 @@ Page({
       param = {
         type: '1',
         dept_id: app.user.deptId,
-        status: '1,9', // 未完成、进行中
+        status: '1,3,9', // 未完成、进行中
         boatdepartment: boatdepartment, //船舶部门
         boatId: obj.data.boatId, // 船舶Id
       };
@@ -180,7 +180,8 @@ Page({
         res = res.data;
         if (res.success) {
           var taskList = obj.data.taskList;
-          taskList = taskList.concat(res.workCardList);
+          var workcardList = util.formatPlanTime(res.workCardList);
+          taskList = taskList.concat(workcardList);
           obj.setData({
             taskList: taskList,
             isGet: false
