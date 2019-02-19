@@ -1,3 +1,4 @@
+import regeneratorRuntime from '../../utils/runtime.js';
 var app = getApp();
 var util = require('../../utils/util.js');
 var obj = null;
@@ -21,6 +22,12 @@ Page({
     obj = this;
     var code = options.code; // 扫码识别的code
     var overhaul = options.overhaul; // 维修方式
+
+    // 测试数据
+    // code = '121600110100300';
+    // overhaul = 1;
+
+    
     if (code) {
       obj.setData({
         code: code,
@@ -147,7 +154,7 @@ Page({
   checkFormData: function () {
     var data = obj.data;
     var remark = data.remark;
-    var overhaulFunction = obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul;
+    // var overhaulFunction = obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul;
     var photos = obj.data.photos;
     if (!remark) {
       wx.showModal({
@@ -157,18 +164,18 @@ Page({
       });
       return false;
     }
-    if (overhaulFunction < 0) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择维修方式！',
-        showCancel: false
-      });
-      return false;
-    }
+    // if (overhaulFunction < 0) {
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '请选择维修方式！',
+    //     showCancel: false
+    //   });
+    //   return false;
+    // }
     if (photos.length < 1) {
       wx.showModal({
         title: '提示',
-        content: '请上传异常图片！',
+        content: '请将异常部位拍照！',
         showCancel: false,
       })
       return false;
@@ -177,20 +184,43 @@ Page({
     return true;
   },
 
+  async execute () {
+    var overhaul = obj.data.overhaul;
+    if (overhaul == 0) {
+        // 自行维修，数据校验、上传照片、提交流程
+        if (!obj.checkFormData()) {
+          return;
+        }
+        await obj.uploadDou('photos');
+        await obj.uploadDou('exPhotos');
+        obj.finish();
+    }
+    if (overhaul == 1) {
+       // 委外维修，走正常的校验数据，上传照片，提交流程
+      if (!obj.checkFormData()) {
+        return;
+      }
+      await obj.uploadDou('photos');
+      obj.finish();
+
+    }
+  },
 
   /**
    * 保存临时工作卡数据
    */
   finish: function () {
-    if (!obj.checkFormData()) {
-      return;
-    }
     var data = obj.data;
-    var photos = obj.data.photos;
+    var photos = data.photos;
     for(var x in photos) {
       delete photos[x]['tempFilePath']; // 删除tempFilePath
     }
-    var overhaulFunction = obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul;
+
+    var exPhotos = data.exPhotos;
+    for (var x in exPhotos) {
+      delete exPhotos[x]['tempFilePath']; // 删除tempFilePath
+    }
+    var overhaulFunction = data.overhaul == undefined ? data.pickerData[data.index].code : data.overhaul;
     var name = data.equipment.name + '-' + util.getOverhaul(overhaulFunction);
     var param = {
       equipmentId: data.equipment.id,
@@ -201,6 +231,17 @@ Page({
       creator: app.user.id
     }
 
+    var url = util.getRequestURL('addTemporaryWorkCard.we');
+    // 自行维修
+    if (data.overhaul == 0) {
+      url = util.getRequestURL('addOwnTemporaryWorkCard.we');
+      var feedParam = {};
+      feedParam.image = JSON.stringify(exPhotos);
+      feedParam.exRemark = data.exRemark;
+      feedParam.executorId = app.user.id;
+      param.feedParam = feedParam;
+    }
+
     // 测试数据
     // console.log(param);
     // return;
@@ -209,7 +250,7 @@ Page({
       title: '正在保存中',
       mask: true
     });
-    var url = util.getRequestURL('addTemporaryWorkCard.we');
+
     wx.request({
       url: url,
       data: {
@@ -220,7 +261,7 @@ Page({
         if (res.data.success) {
           wx.showModal({
             title: '提示',
-            content: '保存成功',
+            content: '保存成功! ',
             showCancel: false,
             complete: function () {
               wx.navigateBack({
@@ -243,32 +284,28 @@ Page({
   /**
   * 拍照
   */
-  photo: () => {
-    var isPhoto = false;
+  photo: (e) => {
+    var key = e.currentTarget.dataset.key;
     var photo = {};
-    var photos = obj.data.photos;
+    var photos = obj.data[key] || [];
+    var dou = {};
+
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
       sourceType: ['camera'],
       success: (res) => {
-        isPhoto = true;
         var timex = util.formatTime(new Date());
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
         console.log(res);
 
         photos.push(photo);
-        obj.setData({
-          isPhoto: isPhoto,
-          photos: photos
-        });
+        dou[key] = photos;
+        obj.setData(dou);
       },
     })
-
-    obj.setData({
-      isPhoto: isPhoto
-    });
+   
   },
 
 
@@ -276,24 +313,7 @@ Page({
    * 图片预览
    */
   preview: (e) => {
-    var imgs = [];
-    var photos = obj.data.photos;
-    for (var i = 0; i < photos.length; i++) {
-      var url = '';
-      if (photos[i].name) {
-        url = app.constant.base_img_url + '/' + photos[i].name;
-      }
-      if (photos[i].tempFilePath) {
-        url = photos[i].tempFilePath;
-      }
-      imgs.push(url);
-    }
-    var index = e.currentTarget.dataset.index;
-    // 预览开始
-    wx.previewImage({
-      current: imgs[index],
-      urls: imgs
-    })
+    util.preview(e);
   },
 
 
@@ -302,81 +322,58 @@ Page({
    */
   deletePic: (e) => {
     var index = e.currentTarget.dataset.index;
-    var photos = obj.data.photos;
+    var key = e.currentTarget.dataset.photoskey;
+    var photos = obj.data[key] || [];
     photos.splice(index, 1);
     var isPhoto = true;
     if (photos.length == 0) {
       isPhoto = false;
     }
-    obj.setData({
-      photos: photos,
-      isPhoto: isPhoto
-    });
+    var dou = {};
+    dou[key] = photos;
+    obj.setData(dou);
 
   },
 
   /**
-   * 上传图片
+   * 上传图片（同步）
    */
-  uploadPics: (i) => {
-    var photos = obj.data.photos;
-    var count = photos.length;
-    var reqUrl = app.constant.upload_url;
-    if (!i) {
-      i = 0;
-    }
-    // 已有照片，不上传
-    if (!photos[i].tempFilePath) {
-      i++;
-      obj.uploadPics(i);
-      return;
-    }
+  uploadPictureDou (tempFilePath) {
+  return new Promise(function (resolve, reject) {
     // 开始上传图片
+    var reqUrl = app.constant.upload_url;
     wx.uploadFile({
       url: reqUrl,
-      filePath: photos[i].tempFilePath,
+      filePath: tempFilePath,
       name: 'myfile',
       success: (res) => {
         var res = res.data;
         if (res) {
           res = JSON.parse(res);
         }
-        if (res.success) {
-          photos[i].name = res.picture;
-        } else {
-          var x = i + 1;
-          console.log('第' + x + '张图片上传失败！');
-        }
+        resolve(res)
       },
-      fail: (e) => {
-        var y = i + 1;
-        console.log('第' + y + '张图片上传失败！可能是网络异常导致');
-      },
-      complete: () => {
-        console.log(i);
-        i++;
-        if (i >= count) {
-          var isUpload = true;
-          obj.setData({
-            isUpload: isUpload
-          });
-          console.log('图片上传完成！');
-          return;
-        } else {
-          // 图片还未传完，需要继续上传
-          obj.uploadPics(i);
-        }
-      }
 
     })
-  },
+  });
+},
 
-  /**
-  * 调用上传方法
-  */
-  uploadPictures: () => {
-    obj.uploadPics();
-  },
+/**
+ * 批量上传照片(同步)
+ */
+async uploadDou (key) {
+  var photoList = obj.data[key] || [];
+  for (var p = 0; p < photoList.length; p++) {
+    var res = await obj.uploadPictureDou(photoList[p].tempFilePath);
+    if (res.success) {
+       photoList[p].name = res.picture;
+    }
+  }
+
+  var dou = {};
+  dou[key] = photoList;
+  obj.setData(dou);
+},
 
 
 })

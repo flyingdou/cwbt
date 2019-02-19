@@ -185,11 +185,6 @@
                               <view wx:if = '{{(!status || status > 1) && user_priv == 2 && workDetail.overhaul_function == 1}}'>
                                     <view class='button gotButton' bindtap='Got' >审批</view>
                               </view>
-
-                              <!-- 船舶端 -->
-                              <!--<view wx:if = '{{user_priv == 3 && workDetail.overhaul_function == 0}}'>
-                                    <view class='button gotButton' bindtap='Got' >领取</view>
-                              </view>--> 
                         </view>
                   </view>
                   

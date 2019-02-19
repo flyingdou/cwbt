@@ -211,21 +211,7 @@ Page({
     // 未领取时禁用
     var hasGot = obj.data.hasGot;
     var key = e.currentTarget.dataset.key;
-    // var timestamp = obj.data.timestamp ? obj.data.timestamp : undefined;
-    // if (!hasGot) {
-    //   if (timestamp && ((e.timeStamp - timestamp) < 1000)) { // 1一秒以内禁止再次弹窗
-    //     return;
-    //   }
-    //   wx.showModal({
-    //     title: '提示',
-    //     content: '请先领取工作！',
-    //     showCancel: false
-    //   })
-    //   obj.setData({
-    //     timestamp: e.timeStamp
-    //   });
-    //   return;
-    // }
+    
     var dou = {};
     dou[key] = e.detail.value;
     obj.setData(dou);
@@ -350,16 +336,6 @@ Page({
    * 拍照
    */
   photo: () => {
-    // 未领取时禁用
-    // var hasGot = obj.data.hasGot;
-    // if (!hasGot) {
-    //    wx.showModal({
-    //      title: '提示',
-    //      content: '请先领取工作！',
-    //      showCancel: false
-    //    })
-    //    return;
-    // }
     var isPhoto = false;
     var photo = {};
     var photos = obj.data.photos;
@@ -441,11 +417,6 @@ Page({
    * 删除图片
    */
   deletePic: (e) => {
-    // var isRollback = obj.data.isRollback;
-    // var alreadyRoll = obj.data.alreadyRoll;
-    // if (isRollback && !alreadyRoll) {
-    //   return;
-    // }
     wx.showModal({
       title: '提示',
       content: '是否确认删除图片?',
@@ -547,14 +518,6 @@ Page({
     var handle = obj.data.handle;
     var workcardName = undefined;
     if (status == 1) {
-      // if (handle == 0) {
-      //   wx.showModal({
-      //     title: '提示',
-      //     content: '请选择维修方式！',
-      //     showCancel: false
-      //   })
-      //   return;
-      // }
       var handleName = undefined;
       if (handle == 1) {
         handle = 0; // 自行维修

@@ -107,9 +107,6 @@ Page({
    * 跳转页面
    */
   goto: function (e) {
-    // var index = e.currentTarget.dataset.index;
-    // var tabindex = e.currentTarget.dataset.tabindex;
-    // var workCard = obj.data.titles[tabindex].workCardList[index];
     var link = e.currentTarget.dataset.link;
     wx.navigateTo({
       url: link
@@ -132,6 +129,11 @@ Page({
       currentPage: obj.data.currentPage,
       pageSize: obj.data.pageSize
     };
+
+    // loading
+    wx.showLoading({
+      title: '加载中...',
+    })
     wx.request({
       url: url,
       data: {
@@ -147,6 +149,9 @@ Page({
       fail: function (e) {
         util.tipsMessage('网络异常！');
         console.log(e);
+      },
+      complete: function (com) {
+        wx.hideLoading();
       }
     });
   },

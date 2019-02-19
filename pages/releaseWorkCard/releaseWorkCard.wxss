@@ -1,6 +1,6 @@
 .content{
   background: white;
-  padding: 0 4%;
+  height: auto;
 }
 
 .line{
@@ -132,4 +132,24 @@
 
 .del-content{
   background: black;
+}
+.block1{
+  padding: 0 4%;
+}
+
+.block2{
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+}
+
+.tagName{
+  font-size: 32rpx;
+  color: black;
+  background: #ccc;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.p4{
+  padding: 20rpx 4%;
 }

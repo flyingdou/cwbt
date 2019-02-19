@@ -1,6 +1,7 @@
 <!-- 页面开始 -->
 <view class='content'>
-  <tab titles='{{titles[overhaul]}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx && titles}}'>
+  <!-- 委外的 -->
+  <tab titles='{{titles[overhaul]}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx && titles && overhaul == 1}}'>
       <view class='list' wx:for='{{titles[overhaul]}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
                 <noData wx:if='{{!tabItem.workCardList || tabItem.workCardList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{tabItem.workCardList}}' wx:key=''>
@@ -59,6 +60,57 @@
       </view>
 
   </tab>
+
+
+  <!-- 自行的 -->
+  <view class='list' wx:if = '{{overhaul == 0}}'>
+        <noData wx:if='{{!titles[0][1].workCardList || titles[0][1].workCardList.length <= 0}}'></noData>
+        <view class='pre' wx:for = '{{titles[0][1].workCardList}}' wx:key=''>
+              <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}' data-index = '{{index}}' >
+                    <!-- 填充高度 -->
+                    <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
+                    <view class='line1'>
+                          <view class='tv left'>
+                                <view class='title'>设备名称</view>
+                                <view class='value'>{{item.equipmentName}}</view>
+                          </view>
+
+                          <view class='tv'>
+                                <view class='title'>发起人</view>
+                                <view class='value'>{{item.userName}}</view>
+                          </view>
+                    </view>
+
+                    <view class='lineFill'></view>
+
+                    <view class='line1'>
+                          <view class='tv left'>
+                                <view class='title'>所属部门</view>
+                                <view class='value'>{{item.deptName}}</view>
+                          </view>
+
+                          <view class='tv'>
+                                <view class='title'>所属船舶</view>
+                                <view class='value'>{{item.boat}}</view>
+                          </view>
+                    </view>
+
+                    <view class='lineFill'></view>
+
+                    <view class='line2'>
+                          <view class='tv right'>
+                                <view class='title'>异常发现时间</view>
+                                <view class='value'>{{item.createtime}}</view>
+                          </view>
+                    </view>
+
+                   
+              </view>
+
+        </view>
+
+  </view>
+
 
       <!-- 填充 -->
       <!-- <view class='fill'></view> -->
