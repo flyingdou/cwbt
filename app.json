@@ -5,6 +5,7 @@
     "pages/releaseSupervision/releaseSupervision",
     "pages/chooseUser/chooseUser",
     "pages/history/history",
+    "pages/analysis/analysis",
     "pages/spareChoosed/spareChoosed",
     "pages/spareCost/spareCost",
     "pages/sparePick/sparePick",

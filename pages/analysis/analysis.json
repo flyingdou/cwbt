@@ -1,0 +1,6 @@
+{
+	"navigationBarTitleText": "决策分析",
+  "usingComponents": {
+  	"ec-canvas": "../../ec-canvas/ec-canvas"
+  }
+}

@@ -1,0 +1,4 @@
+<view class="container">
+	<view class='title'>荆州测绘处工作卡任务完成情况</view>
+  <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" bind:init="init"></ec-canvas>
+</view>
