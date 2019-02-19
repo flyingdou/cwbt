@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "委外维修申请",
+  "navigationBarTitleText": "",
   "usingComponents": {
   	"mark": "../../component/mark/mark"
   }

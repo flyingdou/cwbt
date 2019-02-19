@@ -36,6 +36,19 @@ Page({
       workCardId = 48;
     }
 
+    var title = '';
+    var overhaul = options.overhaul;
+    if (overhaul == 0) {
+        title = '自行维修记录';
+    } 
+    if (overhaul == 1) {
+        title = '委外维修申请';
+    }
+
+    wx.setNavigationBarTitle({
+      title: title,
+    })
+
     obj.setData({
       workCardId: workCardId
     })

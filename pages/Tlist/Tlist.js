@@ -169,6 +169,10 @@ Page({
     
     // console.log(param);
     // return;
+    // loading
+    wx.showLoading({
+      title: '加载中...',
+    })
     wx.request({
       url: reqUrl,
       dataType:'json',
@@ -187,6 +191,9 @@ Page({
             isGet: false
           });
         }
+      },
+      complete: (com) => {
+        wx.hideLoading();
       }
     })
 
