@@ -149,6 +149,9 @@ Page({
     };
     var reqUrl = util.getRequestURL('getTempWork.we');
     
+
+    var expectedtime = '';
+    var disablex = true;
     // 请求数据
     wx.request({
       url: reqUrl,
@@ -159,11 +162,21 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
+
+          if (res.status == 9) {
+            disablex = true;
+          } else {
+            disablex = false;
+          }
           if (res.workDetail.image) {
             res.workDetail.image = JSON.parse(res.workDetail.image);
           }
+          if (res.workDetail.expectedtime) {
+            expectedtime = res.workDetail.expectedtime;
+          }
+
           if (res.workDetail.feedbackimage) {
-            res.workDetail.feedbackimage = JSON.parse(res.workDetail.feedbackimage);
+             res.workDetail.feedbackimage = JSON.parse(res.workDetail.feedbackimage);
           }
           if (res.workFeedback) {
             var workFeedback = res.workFeedback;
@@ -184,7 +197,9 @@ Page({
           obj.setData({
             workDetail: res.workDetail,
             hasGot: hasGot,
-            user_priv: user_priv
+            user_priv: user_priv,
+            expectedtime: expectedtime,
+            disablex: disablex
           });
 
           // 判断是否需要领取
@@ -241,11 +256,13 @@ Page({
  * 弹起日历
  */
   showMark: function (e) {
+    if (obj.data.disablex) {
+       return;
+    }
     var key = e.currentTarget.dataset.key;
     obj.setData({
       dateKey: key,
-      showMark: true,
-      isHidden: true
+      showMark: true
     });
   },
 
@@ -255,8 +272,7 @@ Page({
   dateChange: (e) => {
     var key = obj.data.dateKey;
     var dou = {
-      showMark: false,
-      isHidden: false
+      showMark: false
     };
     if (e.detail.value) {
       dou[key] = e.detail.value;
@@ -275,10 +291,6 @@ Page({
     obj.setData(dou);
 
   },
-
-
-  
-
 
   /**
    * 阻止点击穿透
@@ -754,30 +766,6 @@ Page({
       }
     })
 
-  },
-  
-  /**
-   * 弹出领取框
-   */
-  Got: () => {
-     obj.setData({
-       isHidden: false
-     });
-  },
-
-  //取消按钮  
-  cancel: function () {
-    // 清除领取数据
-    this.setData({
-      isHidden: true
-    });
-  },
-  //确认  
-  confirm: function () {
-    obj.getTemp();
-    this.setData({
-      isHidden: true
-    })
   },
 
   /**

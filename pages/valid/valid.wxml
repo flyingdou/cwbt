@@ -43,7 +43,7 @@
             </view>
 
             <!-- 作业照片 -->
-            <view class='picsList'>
+            <view class='picsList' wx:if = '{{valid.status != 5}}'>
                   <view class='taskTitle'>作业照片</view>
                   <view class='pics'>
                         <view class='pre' wx:for = '{{valid.image}}' wx:key = ''>
@@ -56,8 +56,43 @@
             </view>
 
 
-
       </view>
+
+      <!-- 异常反馈信息 -->
+      <view class='exception' wx:if = '{{valid.status == 5}}'>
+            <!-- tagName -->
+            <view class='tagName' wx:if = '{{valid.status == 5}}'>异常情况</view>
+            <view class='exceptionInfo'>
+                    <!-- 异常照片 -->
+                    <view class='picsList'>
+                            <view class='taskTitle'>异常照片</view>
+                            <view class='pics'>
+                                  <view class='pre' wx:for = '{{valid.eimage}}' wx:key = ''>
+                                        <view class='pic' bindtap='preview' data-index = '{{index}}'>
+                                              <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                                        </view>
+                                        <view class='picTime'>{{item.pic_time}}</view>
+                                  </view>
+                            </view>
+                    </view>
+
+                    <!-- 异常描述 -->
+                    <view class='taskList'>
+                            <view class='taskTitle'>异常描述</view>
+                            
+                            <!-- 工作内容 -->
+                            <view class='task'>
+                                  <view class='ta'>{{valid.exceptional_describe}}</view>
+                            </view>
+                    </view>
+                    
+            </view>
+
+        </view>
+
+
+
+      <view class='douFill'></view>
 
       <!-- 底部功能按钮 -->
       <view class='footer'>

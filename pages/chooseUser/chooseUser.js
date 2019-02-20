@@ -525,6 +525,9 @@ Page({
    */
   choose () {
     var obj = this;
+    var navList = obj.data.navList;
+    var backIndex = navList ? navList.length : 0;
+
     var userList = obj.data.userList || [];
     var key = obj.data.key;
     var hv = obj.data[key] || {};
@@ -565,17 +568,45 @@ Page({
     key = key + 'Dou';
     dou[key] = douValue;
     
-    // 将值存储到上个页面
+    // 将值存储到来时的页面上
     var pages = getCurrentPages();
     // 获取上一页面对象
-    var prePage = pages[pages.length -2];
+    var prePage = pages[pages.length - 1 - backIndex];
     prePage.setData(dou);
 
     wx.navigateBack({
-      delta: 1,
+      delta: backIndex,
     })
 
 
+  },
+
+  /**
+   * 获取当前情况下选中的用户
+   */
+  getChooseUser() {
+    var obj = this;
+    var key = obj.data.key;
+    var hv = obj.data[key] || {};
+
+    // 勾选的用户
+    var _chooseUsers = hv.chooseUsers || [];
+    var chooseUsers = [];
+    if (_chooseUsers.length > 0) {
+      _chooseUsers.forEach(function (item, i) {
+        if (!item.isDel) {
+          chooseUsers.push(item);
+        }
+      });
+    }
+
+
+    // 勾选的部门中的用户
+    var deptUser = obj.data.deptUser || [];
+    deptUser.forEach((user, index) => {
+      chooseUsers.push(user);
+    });
+    return chooseUsers;
   },
 
   /**

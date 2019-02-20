@@ -59,9 +59,21 @@
   text-align: center;
 }
 
+.preSpare{
+  position: relative;
+}
+
 .background-bolck{
   height: 20rpx;
   background-color: rgba(245,245,245,1);
+}
+
+.delIcon{
+  position: absolute;
+  right: 0;
+  top: 20;
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .add-btn{

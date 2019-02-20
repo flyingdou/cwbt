@@ -16,8 +16,11 @@
                   <view class='value'>{{inputCount}}</view>
             </view>
 
-            <view wx:for='{{spareoutList}}' wx:key='' catchlongpress='removeSpareout' data-index='{{index}}'>
+            <view wx:for='{{spareoutList}}' wx:key='' class='preSpare' data-index='{{index}}'>
                   <view class='background-bolck'></view>
+                  <view class='delIcon' wx:if = '{{index > 0}}' catchtap='removeSpareout'>
+                        <image src='../../icon/close.png' mode='aspectFill'></image>
+                  </view>
                   <view class='tv'>
                         <view class='title'>使用数量:</view>
                         <view class='value'>

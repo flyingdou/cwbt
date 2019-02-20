@@ -191,6 +191,23 @@ var filters = {
       return flag;
     },
 
+    /**
+     * 截取给定的字符串长度
+     */
+    subLen: function (value, len) {
+      if (value == undefined) {
+        return "";
+      }
+      value = value + '';
+      len = parseInt(len);
+      if (value.length <= len) {
+         return value;
+      } else {
+         value = value.substring(0, len);
+         return value;
+      } 
+    }
+
 
 }
 
@@ -216,5 +233,6 @@ module.exports = {
   jobProperties: filters.jobProperties,
   overhaul: filters.overhaul,
   cut_name: filters.cut_name,
-  notEmpty: filters.notEmpty
+  notEmpty: filters.notEmpty,
+  subLen: filters.subLen
 }

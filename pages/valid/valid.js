@@ -92,7 +92,10 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.image) {
-          res.image = JSON.parse(res.image);
+           res.image = JSON.parse(res.image);
+        }
+        if (res.eimage) {
+           res.eimage = JSON.parse(res.eimage);
         }
         valid = res;
         obj.setData({

@@ -115,6 +115,27 @@ textarea{
   height: 500rpx;
 }
 
+.exception{
+  background: white;
+  margin: 20rpx;
+}
+
+.exceptionInfo{
+  padding: 20rpx;
+}
+
+.tagName{
+  font-size:32rpx;
+  color:black;
+  background:#ccc;
+  text-align:center;
+  padding:20rpx 0;
+}
+
+.douFill{
+  width: 100%;
+  height: 200rpx;
+}
 
 
 
