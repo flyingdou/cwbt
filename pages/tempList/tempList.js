@@ -8,7 +8,8 @@ Page({
    */
   data: {
     currentPage: app.pageInfo.currentPage,
-    pageSize: app.pageInfo.pageSize
+    pageSize: app.pageInfo.pageSize,
+    hidden: true
   },
 
   /**
@@ -255,6 +256,37 @@ Page({
      wx.navigateTo({
        url: url,
      })
-  }
+  },
+
+
+
+  /**
+ * 确定是否需要填写执行情况
+ */
+  sure() {
+    obj.setData({
+      hidden: false
+    });
+  },
+
+  /**
+   * 点击确定按钮
+   */
+  confirm() {
+    obj.releaseWorkcard();
+    obj.setData({
+      hidden: true
+    });
+  },
+
+  /**
+   * 点击取消按钮
+   */
+  cancelx() {
+    obj.setData({
+      hidden: true
+    });
+  },
+  
 
 })

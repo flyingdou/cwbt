@@ -175,3 +175,11 @@ textarea{
   padding-bottom: 20rpx;
 }
 
+.tagName{
+  font-size:32rpx;
+  color:black;
+  background:#ccc;
+  text-align:center;
+  padding:20rpx 0;
+}
+

@@ -40,7 +40,7 @@
                   <view class='value'>{{filter.overhaul(workDetail.overhaul_function)}}</view>
             </view>
 
-
+            <view class = 'tagName'>异常情况</view>
             <view class='line'>
                   <view class='title'>异常时间</view>
                   <view class='value'>{{workDetail.createtime}}</view>
@@ -78,10 +78,10 @@
             <!-- 船舶端可看 -->
             <!-- 维修后图片 -->
             <view class='remark' wx:if='{{user_priv == 3 && showFeedbackPic}}'>
-                  
-
+            
+            <view class='tagName'>维修后情况</view>
             <view class='line' wx:if = '{{user_priv == 3 && showFeedbackInput}}'> 
-                  <view class='title'>维修后设备状况</view>
+                  <view class='title'>维修后状况</view>
                   <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
                           <view class='item'>
                                 <view class='value'>{{status == 0 ? "正常" : "异常"}}</view>
@@ -115,7 +115,7 @@
 
             <view class='remark' wx:if = '{{user_priv == 3 && showFeedbackInput && hidden}}'>
                   <view class='title'>维修反馈情况</view>
-                  <textarea placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.remark}}' wx:if = '{{isHidden}}'></textarea>
+                  <textarea placeholder='请输入维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.remark}}' wx:if = '{{isHidden}}'></textarea>
                   
             </view>
             
@@ -136,6 +136,8 @@
                   </view>
             </view>
 
+            <!-- 审批情况 -->
+            <view class='tagName'>审批情况</view>
             <view class='line' wx:if = '{{user_priv == 2}}' bindtap='showMark' data-key = 'expectedtime' >
                   <view class='title'>预计完成时间</view>
                   <view class='value'>{{filter.subLen(expectedtime, 10)}}</view>

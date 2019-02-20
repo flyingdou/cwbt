@@ -111,14 +111,16 @@
 
   </view>
 
-
-      <!-- 填充 -->
-      <!-- <view class='fill'></view> -->
-      
       <!-- 功能按钮 -->
       <view class='footer'>
             <!-- 发起临时工作卡 -->
-            <view class='button releaseWorkcard' bindtap='releaseWorkcard'>新建缺陷记录</view>
+            <view class='button releaseWorkcard' bindtap='sure'>新建缺陷记录</view>
       </view>
       
 </view>
+
+
+<!-- 弹出层 -->
+<modal catchtouchmove = 'true' hidden = '{{hidden}}' title = '提示' confirm-text = '确定' cancel-text = '取消' bindconfirm = 'confirm' bindcancel = 'cancelx'>
+        <view class='block'>将要扫描设备条码，用以验证设备，确定吗？</view>
+</modal>

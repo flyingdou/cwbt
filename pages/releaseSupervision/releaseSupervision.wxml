@@ -45,9 +45,7 @@
                                   </block>
                             </view>
                       </view> 
-                      <!--<view class = 'moreIcon'> 
-                            <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
-                      </view>--> 
+                     
         </view> 
                  
                 <!-- 抄送 --> 
@@ -68,9 +66,7 @@
                                   </block>
                             </view>
                       </view> 
-                      <!--<view class = 'moreIcon'> 
-                            <image src = '../../icon/more@2x.png' mode = 'aspectFill'></image> 
-                      </view>-->
+                      
                    </view> 
         </view> 
         

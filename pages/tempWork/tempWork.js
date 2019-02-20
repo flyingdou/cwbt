@@ -145,7 +145,8 @@ Page({
   */
   getWorkDetail: (e) => {
     var param = {
-      id: obj.data.workCardId
+      id: obj.data.workCardId,
+      dept_id: app.user.deptId
     };
     var reqUrl = util.getRequestURL('getTempWork.we');
     
@@ -162,8 +163,7 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-
-          if (res.status == 9) {
+          if (res.workDetail.status == 9 || res.workDetail.isLast) {
             disablex = true;
           } else {
             disablex = false;
