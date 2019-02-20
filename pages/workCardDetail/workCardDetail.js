@@ -123,7 +123,9 @@ Page({
         if (res.success) {
           if (res.workFeedback) {
             var workFeedback = res.workFeedback;
-            workFeedback.image = JSON.parse(workFeedback.image);
+            if (workFeedback.image) {
+              workFeedback.image = JSON.parse(workFeedback.image);
+            }
             obj.setData({
               photos: workFeedback.image,
               workFeedback: workFeedback

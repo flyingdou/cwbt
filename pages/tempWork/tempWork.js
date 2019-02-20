@@ -159,13 +159,17 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-          res.workDetail.image = JSON.parse(res.workDetail.image);
+          if (res.workDetail.image) {
+            res.workDetail.image = JSON.parse(res.workDetail.image);
+          }
           if (res.workDetail.feedbackimage) {
             res.workDetail.feedbackimage = JSON.parse(res.workDetail.feedbackimage);
           }
           if (res.workFeedback) {
             var workFeedback = res.workFeedback;
-            workFeedback.image = JSON.parse(workFeedback.image);
+            if (workFeedback.image) {
+              workFeedback.image = JSON.parse(workFeedback.image);
+            }
             obj.setData({
               photos: workFeedback.image,
               workFeedback: workFeedback

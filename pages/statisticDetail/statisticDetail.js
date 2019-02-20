@@ -92,7 +92,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    
   },  
 
   /**
@@ -164,16 +164,12 @@ Page({
         obj.setData({
           titles: titles,
           list: res.data.list
-        });
-        wx.hideLoading();
+        }, wx.hideLoading());
       },
       fail: function (e) {
         wx.hideLoading();
         util.tipsMessage('网络异常！');
         console.log(e);
-      },
-      complete: (xe) =>{
-        wx.hideLoading();
       }
     });
   },

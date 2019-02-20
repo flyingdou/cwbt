@@ -471,11 +471,11 @@ Page({
    
     var link = '../../pages/statisticDetail/statisticDetail?boatId=' + boatId + '&type=' + obj.data.type;
     var startDate = obj.data.startDate;
-    if (startDate) {
+    if (startDate && startDate != "请选择") {
       link = link + '&startDate=' + startDate;
     }
     var endDate = obj.data.endDate;
-    if (endDate) {
+    if (endDate && endDate != "请选择") {
       link = link + '&endDate=' + endDate;
     }
     wx.navigateTo({

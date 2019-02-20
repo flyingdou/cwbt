@@ -136,7 +136,9 @@ Page({
       },
       success: function (res) {
         res.data.forEach(function (item) {
-          item.image = JSON.parse(item.image);
+          if (item.image) {
+            item.image = JSON.parse(item.image);
+          }
         }); 
         obj.setData({
           superviseFeedback: res.data

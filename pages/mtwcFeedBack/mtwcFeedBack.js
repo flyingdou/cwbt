@@ -101,8 +101,12 @@ Page({
       },
       
       success: function (res) {
-        res.data.image1 = JSON.parse(res.data.image1);
-        res.data.image2 = JSON.parse(res.data.image2);
+        if (res.data.image1) {
+          res.data.image1 = JSON.parse(res.data.image1);
+        }
+        if (res.data.image2) {
+          res.data.image2 = JSON.parse(res.data.image2);
+        }
         obj.setData({
           feedback: res.data
         });

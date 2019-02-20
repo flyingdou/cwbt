@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+
   },
 
   /**
@@ -89,10 +89,10 @@ Page({
           sum += item.number5;
         });
         var data = [];
-        data.push({data: Math.round((notComplete/sum) * 100), name: "未完成"});
-        data.push({data: Math.round((complete/sum) * 100), name: "正常完成"});
-        data.push({data: Math.round((advance/sum) * 100), name: "提前完成"});
-        data.push({data: Math.round((overdue/sum) * 100), name: "逾期完成"});
+        data.push({data: ((notComplete/sum) * 100), name: "未完成"});
+        data.push({data: ((complete/sum) * 100), name: "正常完成"});
+        data.push({data: ((advance/sum) * 100), name: "提前完成"});
+        data.push({data: ((overdue/sum) * 100), name: "逾期完成"});
         obj.wxcharts = new wxcharts({
           canvasId: "pieCanvas",
           width: 300,
