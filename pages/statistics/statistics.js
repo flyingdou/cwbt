@@ -106,6 +106,10 @@ Page({
  * 初始化页面
  */
   init: () => {
+    wx.showLoading({
+      title: "加载中",
+      mask: true
+    });
     var dept_id = app.user.deptId;
     if (!dept_id) {
       dept_id = 2;
@@ -123,12 +127,20 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-          obj.setData({
+          var data = { 
             lt: res.department.lt,
-            count: res.department.count
-          });
+            count: res.department.count 
+          };
+          if (data.count == 2) {
+            data.deptObj = data.lt[data.count];
+          }
+          obj.setData(data);
           obj.getData();
+          wx.hideLoading();
         }
+      },
+      fail(e) {
+        wx.hideLoading();
       }
     })
 
@@ -410,13 +422,13 @@ Page({
 
     // 开始时间
     var startDate = obj.data.startDate;
-    if (startDate) {
+    if (startDate && startDate != "请选择") {
       param.begintime = startDate;
     }
 
     // 结束时间
     var endDate = obj.data.endDate;
-    if (endDate) {
+    if (endDate && endDate != "请选择") {
       param.endtime = endDate;
     }
     obj.data.param = param;

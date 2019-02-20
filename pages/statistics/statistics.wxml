@@ -170,7 +170,7 @@
 
       <!-- footer -->
       <view class='footer'>
-            <view class='sure' bindtap='getBoatList'>确定</view>
+            <view class='sure' bindtap='getBoatList'>查询</view>
       </view>
       
 
