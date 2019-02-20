@@ -1,18 +1,17 @@
-page{
+.pie-wraper{
+	margin: 0 20rpx;
+	padding: 20rpx 0;
 	background-color: #FFFFFF;
+	border-radius: 20rpx;
 }
 
 .title{
-	position: absolute;
-	top: 40rpx;
-	left: 0;
 	padding: 20rpx 0;
 	width: 100%;
 	font-size: 32rpx;
 	text-align: center;
 }
 
-ec-canvas {
-  width: 100%;
-  height: 100%;
+.canvas{
+	margin: 0 auto;
 }
