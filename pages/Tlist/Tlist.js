@@ -320,7 +320,7 @@ Page({
     var param = {
       id: work.id,
       collectorpersonid: app.user.id,
-      subffix: work.subffix
+      subffix: work.subffix || work.prefix
     };
 
     var taskList = obj.data.taskList;

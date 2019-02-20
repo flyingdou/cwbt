@@ -48,7 +48,7 @@
             
             <!-- 异常图片 -->
             <view class='remark'>
-                  <view class='title'>异常图片:</view>
+                  <view class='title'>异常图片</view>
                   
                   <!-- 拍摄的照片 -->
                   <view class='shot'>
@@ -68,7 +68,7 @@
 
             <!-- 异常描述 -->
             <view class='remark'>
-                  <view class='title'>异常描述:</view>
+                  <view class='title'>异常描述</view>
                   <view class='task'>
                         <view class='value task-value' wx:if='{{!showExceptionalInput}}'>{{workDetail.exceptional_describe}}</view>
                         <textarea wx:if='{{isHidden && showExceptionalInput}}' placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptional_describe' value='{{workDetail.exceptional_describe}}'></textarea>
@@ -78,23 +78,7 @@
             <!-- 船舶端可看 -->
             <!-- 维修后图片 -->
             <view class='remark' wx:if='{{user_priv == 3 && showFeedbackPic}}'>
-                  <view class='title'>维修后图片:</view>
                   
-                  <!-- 拍摄的照片 -->
-                  <view class='shot'>
-                        <view class='prePic' wx:for = '{{workDetail.feedbackimage}}' wx:key='' bindtap='previewShot'  data-index = '{{index}}'>
-                              <!-- 照片 -->
-                              <view class='shotPic'>
-                                    <image src='{{base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
-                              </view>
-                              
-                              <!-- 拍照时间 -->
-                              <view class='pic_time'>{{item.pic_time}}</view>
-
-                              
-                        </view>
-                  </view>
-            </view>
 
             <view class='line' wx:if = '{{user_priv == 3 && showFeedbackInput}}'> 
                   <view class='title'>维修后设备状况</view>
@@ -123,16 +107,33 @@
                   </view>
 
                   <view class='remark'>
-                        <view class='title'>异常描述:</view>
+                        <view class='title'>异常描述</view>
                         <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe' disabled='{{user_priv == 2 ? true : false}}'></textarea>
                   </view>
 
             </view>
 
             <view class='remark' wx:if = '{{user_priv == 3 && showFeedbackInput && hidden}}'>
-                  <view class='title'>维修反馈情况:</view>
+                  <view class='title'>维修反馈情况</view>
                   <textarea placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.remark}}' wx:if = '{{isHidden}}'></textarea>
                   
+            </view>
+            
+            <view class='title'>维修后图片</view>
+                  <!-- 拍摄的照片 -->
+                  <view class='shot'>
+                        <view class='prePic' wx:for = '{{workDetail.feedbackimage}}' wx:key='' bindtap='previewShot'  data-index = '{{index}}'>
+                              <!-- 照片 -->
+                              <view class='shotPic'>
+                                    <image src='{{base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
+                              </view>
+                              
+                              <!-- 拍照时间 -->
+                              <view class='pic_time'>{{item.pic_time}}</view>
+
+                              
+                        </view>
+                  </view>
             </view>
 
             <view class='line' wx:if = '{{user_priv == 2}}'>
@@ -141,7 +142,7 @@
             </view>
 
             <view class='remark' wx:if = '{{user_priv == 2}}'>
-                  <view class='title'>审批意见:</view>
+                  <view class='title'>审批意见</view>
                   <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.collect_note}}' disabled></textarea>
                   
             </view>
@@ -167,23 +168,22 @@
             <view class='buttons'>
                   <!-- 修改时 -->
                   <view class='update-buttons' wx:if = '{{isRollback && user_priv == 3}}'>
-                        <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='uploadPictures' data-fun='updateWorkCard'>修改</view>
+                        <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='uploadPictures' data-fun='updateWorkCard'>修改并提交</view>
                         <view wx:if = '{{isRollback}}' class='button finshButton' bindtap='deleteWorkCard'>删除</view>
                   </view>
 
                   <!-- 非修改时 -->
-                  <view wx:if = '{{!isRollback}}'>
+                  <view>
                         <!-- 船舶端，已领取 -->
-                        <view wx:if = '{{hasGot && user_priv == 3}}'> 
+                        <view wx:if = '{{!isRollback && user_priv == 3}}'> 
                               <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
                               <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures' data-fun='finish'>完成</view>
                         </view>
 
-                        <!-- 领取button -->
-                        <view wx:if = '{{!hasGot}}'>
+                        <view>
                               <!-- 管理端、委外维修 -->
-                              <view wx:if = '{{(!status || status > 1) && user_priv == 2 && workDetail.overhaul_function == 1}}'>
-                                    <view class='button gotButton' bindtap='Got' >审批</view>
+                              <view wx:if = '{{user_priv == 2 && workDetail.overhaul_function == 1}}'>
+                                    <view class='button gotButton' bindtap='Got' >提交</view>
                               </view>
                         </view>
                   </view>
@@ -202,13 +202,13 @@
       <!-- 预计完成时间 -->
       <view class='pickerDiv'>
                 <view value="{{expectedtime}}" start="{{startDate}}" end="{{endDate}}" bindchange="inputChange" data-key='expectedtime' bindtap='showMark'>
-                        <view class="picker">计划完成时间: {{expectedtime}}</view>
+                        <view class="picker">计划完成时间{{expectedtime}}</view>
                 </view>
       </view> 
 
       <!-- 领取备注 -->
       <view class='inputDiv'>
-           <view class='xd'>意见：</view>
+           <view class='xd'>意见</view>
            <input type='text' class="xdInput" placeholder='请输入审批意见！' maxlength='-1' bindinput='inputChange' data-key = 'collectNote'></input>
       </view>
       

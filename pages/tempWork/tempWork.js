@@ -160,7 +160,9 @@ Page({
         res = res.data;
         if (res.success) {
           res.workDetail.image = JSON.parse(res.workDetail.image);
-          res.workDetail.feedbackimage = JSON.parse(res.workDetail.feedbackimage);
+          if (res.workDetail.feedbackimage) {
+            res.workDetail.feedbackimage = JSON.parse(res.workDetail.feedbackimage);
+          }
           if (res.workFeedback) {
             var workFeedback = res.workFeedback;
             workFeedback.image = JSON.parse(workFeedback.image);

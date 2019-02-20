@@ -91,7 +91,9 @@ Page({
       },
       success: (res) => {
         res = res.data;
-        res.image = JSON.parse(res.image);
+        if (res.image) {
+          res.image = JSON.parse(res.image);
+        }
         valid = res;
         obj.setData({
           valid: valid

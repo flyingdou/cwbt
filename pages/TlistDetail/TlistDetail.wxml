@@ -117,7 +117,7 @@
         <!-- 底部按钮 -->
         <view class='buttons' wx:if = '{{workCardStatus == 9}}'>
               <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
-              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures'>完成</view>
+              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures'>提交</view>
         </view>
       
       </view>

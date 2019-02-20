@@ -57,10 +57,10 @@
 
       <!-- 执行反馈 -->
       <view class = 'block2' wx:if = '{{overhaul == 0}}'>
-            <view class='tagName'>执行反馈</view>
+            <view class='tagName'>处理反馈</view>
             <view class='remark p4'>
-                  <view class='title'>现场情况描述</view>
-                  <textarea placeholder='请输入现场情况描述' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='saveFormData' data-key = 'exRemark'></textarea>
+                  <view class='title'>处理情况描述</view>
+                  <textarea placeholder='请输入处理情况描述' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='saveFormData' data-key = 'exRemark'></textarea>
             </view>
 
             <!-- preview -->
