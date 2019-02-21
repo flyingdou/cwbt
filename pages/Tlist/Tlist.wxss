@@ -57,7 +57,9 @@ Page{
 }
 
 .tagDiv{
-  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .statusFont{
@@ -65,6 +67,10 @@ Page{
   color: #ff4401;
   text-align: center;
   line-height: 42rpx;
+}
+
+.overtimeDou{
+  padding-right: 20rpx;
 }
 
 .cancelButton{

@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_img_url: app.constant.base_img_url,
+    base_img_url: app.constant.base_img_url + "/",
     statusList: [],
     handleList: [],
     photos: [],
@@ -106,6 +106,7 @@ Page({
   * 查询数据
   */
   getWorkDetail: (e) => {
+    var dou = {};
     var param = {
       id: obj.data.workCardId
     };
@@ -124,16 +125,14 @@ Page({
           if (res.workFeedback) {
             var workFeedback = res.workFeedback;
             if (workFeedback.image) {
-              workFeedback.image = JSON.parse(workFeedback.image);
+                workFeedback.image = JSON.parse(workFeedback.image);
+                dou.photos = workFeedback.image;
             }
-            obj.setData({
-              photos: workFeedback.image,
-              workFeedback: workFeedback
-            });
+            dou.workFeedback = workFeedback;
           }
 
           var level = res.workDetail.level;
-          var dou = {};
+
           if (level == 'A' || level == 'B') {
              dou.isPhoto = true;
              dou.isUpload = true;
@@ -169,8 +168,6 @@ Page({
    * 拍照
    */
   photo: () => {
-    var isPhoto = false;
-    var isUpload = obj.data.isUpload;
     var photo = {};
     var photos = obj.data.photos;
     wx.chooseImage({
@@ -178,8 +175,6 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['camera'],
       success: (res) => {
-        isPhoto = true;
-        isUpload = false;
         var timex = util.formatTime(new Date());
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
@@ -187,17 +182,10 @@ Page({
 
         photos.push(photo);
         obj.setData({
-          isPhoto: isPhoto,
-          isUpload: isUpload,
           photos: photos
         });
       },
     })
-
-    obj.setData({
-      isPhoto: isPhoto,
-      isUpload: isUpload
-    });
   },
 
 
@@ -210,7 +198,7 @@ Page({
     for (var i = 0; i < photos.length; i++) {
       var url = '';
       if (photos[i].name) {
-        url = app.constant.base_img_url + '/' + photos[i].name;
+        url = app.constant.base_img_url + "/" + photos[i].name;
       }
       if (photos[i].tempFilePath) {
         url = photos[i].tempFilePath;
@@ -223,6 +211,7 @@ Page({
       current: imgs[index],
       urls: imgs
     })
+
   },
 
   

@@ -198,6 +198,7 @@ Page({
     if (obj.data.chooseDeptList && obj.data.chooseDeptList.length > 0) {
       link += '&chooseDeptList=' + JSON.stringify(obj.data.chooseDeptList);
     }
+
     wx.navigateTo({
       url: link,
     })
@@ -712,34 +713,6 @@ Page({
       }
       wx.setStorageSync("data", data);
     }
-  },
-
-  /**
-   * 获取当前情况下选中的用户
-   */
-  getChooseUser() {
-    var obj = this;
-    var key = obj.data.key;
-    var hv = obj.data[key] || {};
-
-    // 勾选的用户
-    var _chooseUsers = hv.chooseUsers || [];
-    var chooseUsers = [];
-    if (_chooseUsers.length > 0) {
-      _chooseUsers.forEach(function (item, i) {
-        if (!item.isDel) {
-          chooseUsers.push(item);
-        }
-      });
-    }
-
-
-    // 勾选的部门中的用户
-    var deptUser = obj.data.deptUser || [];
-    deptUser.forEach((user, index) => {
-      chooseUsers.push(user);
-    });
-    return chooseUsers;
   },
 
   /**
