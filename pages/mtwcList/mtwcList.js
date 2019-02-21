@@ -87,7 +87,8 @@ Page({
     var link = e.currentTarget.dataset.link;
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.workCardList[index];
-    if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
+    var type = obj.data.type;
+    if (workCard.status == 9 && workCard.collectorpersonid != app.user.id && type == 0) {
       wx.showModal({
         title: '提示',
         content: '该任务已被他人领取，请选择其他任务！',
@@ -112,7 +113,7 @@ Page({
             status: [1, 2, 4, 9, 14], 
             overhaul_function: obj.data.type,
             currentPage: obj.data.currentPage,
-            pageSize: obj.data.pageSize 
+            pageSize: obj.data.pageSize
       };
     wx.request({
       url: url,

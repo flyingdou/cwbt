@@ -66,8 +66,8 @@
                   <view class='taskTitle'>现场照片</view>
                   <view class='pics'>
                         <view class='pre' wx:for = '{{feedback.image2}}' wx:key=''>
-                              <view class='pic' bindtap='preview2' data-index = '{{index}}'>
-                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                              <view class='pic' bindtap='preview' data-itemlist = '{{feedback.image2}}' data-index = '{{index}}' data-key = 'name' data-prefix = '{{base_img_url}}'>
+                                    <image src='{{base_img_url + item.name}}' mode='aspectFill'></image>
                               </view>
                               <view class='picTime'>{{item.pic_time}}</view>
                         </view>
@@ -136,8 +136,8 @@
                   <view class='taskTitle'>现场照片</view>
                   <view class='pics'>
                         <view class='pre' wx:for = '{{feedback.image1}}' wx:key=''>
-                              <view class='pic' bindtap='preview1' data-index = '{{index}}'>
-                                    <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
+                              <view class='pic' bindtap='preview' data-itemlist = '{{feedback.image1}}' data-index = '{{index}}' data-key = 'name' data-prefix = '{{base_img_url}}'>
+                                    <image src='{{base_img_url + item.name}}' mode='aspectFill'></image>
                               </view>
                               <view class='picTime'>{{item.pic_time}}</view>
                         </view>

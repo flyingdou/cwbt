@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_img_url: app.constant.base_img_url,
+    base_img_url: app.constant.base_img_url + "/",
     overhaul_function: ["自行维修", "委外维修"]
   },
 
@@ -124,37 +124,8 @@ Page({
   /**
    * 图片预览
    */
-  preview1: (e) => {
-    var imgs = [];
-    var photos = obj.data.feedback.image1;
-    for (var i = 0; i < photos.length; i++) {
-      imgs.push(app.constant.base_img_url + '/' + photos[i].name);
-    }
-    console.log(imgs);
-    var index = e.currentTarget.dataset.index;
-    // 预览开始
-    wx.previewImage({
-      current: imgs[index],
-      urls: imgs
-    })
-  },
-
-  /**
-   * 图片预览
-   */
-  preview2: (e) => {
-    var imgs = [];
-    var photos = obj.data.feedback.image2;
-    for (var i = 0; i < photos.length; i++) {
-      imgs.push(app.constant.base_img_url + '/' + photos[i].name);
-    }
-    console.log(imgs);
-    var index = e.currentTarget.dataset.index;
-    // 预览开始
-    wx.previewImage({
-      current: imgs[index],
-      urls: imgs
-    })
+  preview: (e) => {
+    util.preview(e);
   },
 
   /**

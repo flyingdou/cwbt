@@ -79,8 +79,8 @@
             <!-- preview -->
             <view class='preview'>
                   <!-- 拍摄的照片 -->
-                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
-                        <image src='{{item.tempFilePath ?  item.tempFilePath : base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
+                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}' >
+                        <image src='{{item.tempFilePath ?  item.tempFilePath : base_img_url + item.name}}' mode='aspectFill' ></image>
                   </view>
 
                   <view class='pic' wx:if = '{{workCardStatus == 1}}'>

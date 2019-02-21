@@ -80,7 +80,7 @@
                   <view class='taskTitle'>作业照片</view>
                   <view class='pics'>
                         <view class='pre' wx:for = '{{workFeedback.image}}' wx:key = ''>
-                              <view class='pic' bindtap='preview' data-index = '{{index}}'>
+                              <view class='pic' bindtap='preview' data-itemlist = '{{workFeedback.image}}' data-key = 'name' data-index = '{{index}}' data-prefix = '{{base_img_url}}'>
                                     <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
                               </view>
                               <view class='picTime'>{{item.pic_time}}</view>

@@ -55,22 +55,23 @@
                            
 
                           <!-- 图标 -->
-                          <view class='tag' wx:if = '{{item.status == 9 && !isUpdate}}'>
+                          <view class='tag' wx:if = '{{item.collectorpersonid && !isUpdate}}'>
                                 <!-- 撤销领取 -->
                                 <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-item = '{{item}}' data-index = '{{index}}'>撤销领取</view>
-					  
-					                  <!-- 他人领取 -->
-                            <view wx:else class='tagDiv'>
-                                  <view class='statusFont'>【{{item.collector}}已领取】</view>
-                            </view>
+                
+                                <!-- 他人领取 -->
+                                <view wx:else class='tagDiv'>
+                                      <view class = 'overtime overtimeDou' wx:if = '{{item.status == 3}}'>逾期</view>
+                                      <view class='statusFont'>【{{item.collector}}已领取】</view>
+                                </view>
 					  
                           </view>
                           
 
                           <!-- 多选择 -->
-                          <view class='choose'>
+                          <view class='choose'  wx:if = '{{!item.collectorpersonid}}' >
                                 <view class = 'overtime' wx:if = '{{item.status == 3}}'>逾期</view>
-                                <checkbox class='checkBoxDou' value='{{item.id}}'  color = 'rgba(54, 123, 240, 1)' catchtap='ni' wx:if = '{{item.status != 9}}'></checkbox>
+                                <checkbox class='checkBoxDou' value='{{item.id}}'  color = 'rgba(54, 123, 240, 1)' catchtap='ni'></checkbox>
                           </view>
 
                     </view>

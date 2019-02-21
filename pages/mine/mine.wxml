@@ -86,7 +86,7 @@
           <view class='line'>
                 <view class='line-left'>
                       <image class='line-left-icon' src='../../icon/version.png' mode='widthFix'></image>
-                      <view class='line-left-text'>版本号</view>
+                      <view class='line-left-text'>版本</view>
                 </view>
                 <view class='line-right line-right-text'>
                       V{{update.version}}
@@ -95,7 +95,7 @@
   </view>
 
   <!-- 弹出层 -->
-  <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = 'V{{update.version}}更新内容' confirm-text = ' ' cancel-text = ' ' bindconfirm = 'confirm' bindcancel = 'cancel'>
+  <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = 'V{{update.version}} 更新内容' confirm-text = ' ' cancel-text = ' ' bindconfirm = 'confirm' bindcancel = 'cancel'>
                <view class='block'>
                     <!-- detailList -->
                     <view class='detailList'>

@@ -205,7 +205,7 @@ Page({
   goto: (e) => {
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.taskList[index];
-    if (workCard.status == 9 && workCard.collectorpersonid != app.user.id) {
+    if (workCard.collectorpersonid && workCard.collectorpersonid != app.user.id) {
       wx.showModal({
         title: '提示',
         content: '该工作已在进行中，请选择其他工作！',
