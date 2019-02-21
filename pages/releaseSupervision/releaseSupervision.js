@@ -146,6 +146,10 @@ Page({
     var douKey = key + 'Dou';
     var douValue = obj.data[douKey] || '';
     var jumpUrl = '../../pages/chooseUser/chooseUser?' + key + '=' + JSON.stringify(douValue) + '&key=' + key;
+    if (obj.data.recUsersDou) {
+      var chooseDeptList = obj.data.recUsersDou.chooseDeptList || [];
+      jumpUrl += '&chooseDeptList=' + JSON.stringify(chooseDeptList);
+    }
     var contents = obj.data.contents || [];
     var upUsers = [];
     if (contents.length > 0) {

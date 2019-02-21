@@ -76,9 +76,13 @@ Page({
         mask: true
       });
       deptList.forEach(function (item, i) {
+        var count = 0;
         chooseDeptList.forEach(function (subItem, subIndex) {
-          item.checked = item.seq_id == subItem.dept_id;
+          if (item.seq_id == subItem.dept_id && !subItem.isDel) {
+            count++;
+          }
         });
+        item.checked = count > 0;
         if (chooseDeptList.length <= 0) {
           item.checked = false;
         }
@@ -297,17 +301,38 @@ Page({
      var obj = this;
      var chooseDeptList = obj.data.chooseDeptList || [];
      var chooseUsers = obj.data.recUsers.chooseUsers || [];
+     var deptList = obj.data.deptList || [];
      // 已有选中的部门用户
      var deptUser = obj.data.deptUser || [];
      userList.forEach((user,index) => {
        deptUser.push(user);
      });
 
-     var douDept = {
-      userList: userList,
-      dept_id: dept_id
-     };
-     chooseDeptList.push(douDept);
+     // var douDept = {
+     //  userList: userList,
+     //  dept_id: dept_id
+     // };
+     // chooseDeptList.push(douDept);
+
+     deptList.forEach(function (item, i) {
+       var count = 0;
+       chooseDeptList.forEach(function (subItem, subIndex) {
+         if (item.seq_id == subItem.dept_id) {
+           if (subItem.dept_id == dept_id) {
+              subItem.isDel = false;
+           }
+           count++;
+         }
+       });
+
+       if (count <= 0) {
+          if (item.seq_id == dept_id) {
+            chooseDeptList.push({dept_id: item.seq_id, isDel: false});
+          } else {
+            chooseDeptList.push({dept_id: item.seq_id, isDel: true});
+          }
+       }
+     });
 
      userList.forEach(function (item, i) {
        var count = 0;
@@ -345,24 +370,32 @@ Page({
     var deptUser = obj.data.deptUser || [];
     var forDeptUser = deptUser;
 
-    forChooseDeptList.forEach((dept,index) => {
-      if (dept.dept_id == dept_id) {
-          // 已选中的用户
-          dept.userList.forEach((user,ui) => {
-            forDeptUser.forEach((du, di) => {
-              if (user.user_id == du.user_id) {
-                  // 删除当前用户
-                  deptUser.splice(di,1);
-              }
-            });
-          });
+    // forChooseDeptList.forEach((dept,index) => {
+    //   if (dept.dept_id == dept_id) {
+    //       // 已选中的用户
+    //       dept.userList.forEach((user,ui) => {
+    //         forDeptUser.forEach((du, di) => {
+    //           if (user.user_id == du.user_id) {
+    //               // 删除当前用户
+    //               deptUser.splice(di,1);
+    //           }
+    //         });
+    //       });
 
-          // 在chooseDeptList中移除当前大项
-          chooseDeptList.splice(index,1);
+    //       // 在chooseDeptList中移除当前大项
+    //       chooseDeptList.splice(index,1);
+    //   }
+    // });
+
+    // 移除选中部门下的所有用户
+    chooseUsers.forEach(function (item, i) {
+      if (item.dept_id == dept_id) {
+        item.isDel = true;
       }
     });
 
-    chooseUsers.forEach(function (item, i) {
+    // 移除选中的部门
+    chooseDeptList.forEach(function (item, i) {
       if (item.dept_id == dept_id) {
         item.isDel = true;
       }
@@ -467,17 +500,30 @@ Page({
              }
            }
 
-
           // 标记当前已被选中的部门
            var chooseDeptList = obj.data.chooseDeptList || [];
            chooseDeptList.forEach((chooseDept,index) => {
               res.deptList.forEach((dept) => {
-                if (chooseDept.dept_id == dept.seq_id) {
+                if (chooseDept.dept_id == dept.seq_id && !chooseDept.isDel) {
                    dept.checked = true;
                   //  obj.getDeptUsers(dept.seq_id);
                 }
               });
            });
+
+           res.deptList.forEach(function (item, i) {
+             var count = 0;
+             chooseDeptList.forEach(function (subItem, subIndex) {
+               if (item.seq_id == subItem.dept_id) {
+                 count++;
+               }
+             });
+             if (count <= 0) {
+               chooseDeptList.push({dept_id: item.seq_id, isDel: true});
+             }
+           });
+
+           dou.chooseDeptList = chooseDeptList;
            dou.deptList = res.deptList;
            dou.userList = res.userList;
            dou.indexs = indexs;
@@ -549,10 +595,9 @@ Page({
         var chooseDeptIndex = 0;
         chooseDeptList.forEach(function (item, i) {
           if (item.dept_id == dept_id) {
-            chooseDeptIndex = i; 
+            item.isDel = true;
           }
         });
-        chooseDeptList.splice(chooseDeptIndex, 1);
       }
 
      var dou = { indexs: indexs, userList: userList, chooseDeptList: chooseDeptList };
@@ -562,11 +607,30 @@ Page({
        var checkCount = obj.statisticsCheckCount(hasUsers);
        dou.checkCount = checkCount;
      }
+
+     // 判断全选状态
+      var isChooseAll = obj.isChooseAll();
+
+      // 如果是全选就添加部门
+      if (isChooseAll) {
+        var dept_id = userList[0].dept_id;
+        chooseDeptList.forEach(function (item, i) {
+          if (item.dept_id == dept_id) {
+            item.isDel = false;
+          }
+        });
+        dou.chooseDeptList = chooseDeptList;
+      } else {
+        var dept_id = userList[0].dept_id;
+        chooseDeptList.forEach(function (item, i) {
+          if (item.dept_id == dept_id) {
+            item.isDel = true;
+          }
+        });
+        dou.chooseDeptList = chooseDeptList;
+      }
       
       obj.setData(dou);
-      // 判断全选状态
-      obj.isChooseAll();
-
 
   },
 
@@ -579,6 +643,7 @@ Page({
     var chooseAll = obj.data.chooseAll || false;
     var indexs = obj.data.indexs || [];
     var userList = obj.data.userList || [];
+    var chooseDeptList = obj.data.chooseDeptList || [];
 		// 判断当前是否有数据
 		var key = obj.data.key;
 		var hv = obj.data[key] || {};
@@ -627,6 +692,15 @@ Page({
       var checkCount = obj.statisticsCheckCount(hasUsers);
       dou.checkCount = checkCount;
 		}
+
+    // 如果是全选就添加部门
+    var dept_id = userList[0].dept_id;
+    chooseDeptList.forEach(function (item, i) {
+      if (item.dept_id == dept_id) {
+        item.isDel = false;
+      }
+    });
+    dou.chooseDeptList = chooseDeptList;
 		 
 		 obj.setData(dou);
 
@@ -655,10 +729,10 @@ Page({
     }
 
     // 勾选的部门中的用户
-    var deptUser = obj.data.deptUser || [];
-    deptUser.forEach((user,index) => {
-      chooseUsers.push(user);
-    });
+    // var deptUser = obj.data.deptUser || [];
+    // deptUser.forEach((user,index) => {
+    //   chooseUsers.push(user);
+    // });
 
     // 勾选中的部门
     var chooseDeptList = obj.data.chooseDeptList || [];
@@ -765,6 +839,8 @@ Page({
     obj.setData({
       chooseAll: chooseAll
     });
+
+    return chooseAll;
     
   },
 
