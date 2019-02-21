@@ -37,6 +37,14 @@ Page({
       dou.deptUser = JSON.parse(options.deptUser);
     }
 
+    if (options.checkCount) {
+      dou.checkCount = options.checkCount;
+    }
+
+    if (options.chooseDeptList) {
+      dou.chooseDeptList = JSON.parse(options.chooseDeptList);
+    }
+
     obj.setData(dou);
 
     // 初始化页面数据
@@ -59,11 +67,27 @@ Page({
     var dou = {};
     var isLoad = obj.data.isLoad;
     var navList = obj.data.navList;
+    var deptList = obj.data.deptList || [];
     if (wx.getStorageSync("data")) {
-      obj.setData(wx.getStorageSync("data"));
+      var data = wx.getStorageSync("data");
+      var chooseDeptList = data.chooseDeptList || [];
+      wx.showLoading({
+        title: "加载中",
+        mask: true
+      });
+      deptList.forEach(function (item, i) {
+        chooseDeptList.forEach(function (subItem, subIndex) {
+          item.checked = item.seq_id == subItem.dept_id;
+        });
+        if (chooseDeptList.length <= 0) {
+          item.checked = false;
+        }
+      });
+
+      data.deptList = deptList;
+      obj.setData(data, wx.hideLoading());
       wx.removeStorageSync("data");
     }
-    obj.isChooseAll();
   },
 
   /**
@@ -77,6 +101,12 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    // 是否返回发起督导页面
+    if (this.data.isToSupervision) {
+      this.data.isToSupervision = false;
+      return;
+    }
+    // 返回上一个页面时传递本页面最新数据
     this.choose();
   },
 
@@ -112,27 +142,25 @@ Page({
     var key = obj.data.key;
     var dou = obj.data[key]; 
     var deptUser = [];
-    var chooseDeptList = dou.chooseDeptList || [];
-    chooseDeptList.forEach((dept,index) => {
-      dept.userList.forEach((user,ui) => {
-        deptUser.push(user);
-      });
-    });
+    // var chooseDeptList = dou.chooseDeptList || [];
+    // chooseDeptList.forEach((dept,index) => {
+    //   dept.userList.forEach((user,ui) => {
+    //     deptUser.push(user);
+    //   });
+    // });
 
-    var indexs = [];
-    if (dou.chooseUsers) {
-      dou.chooseUsers.forEach(function (item, i) {
-        if (!item.isDel) {
-          indexs.push(item.user_id);
-        }
-       });
-    }
+    // var indexs = [];
+    // if (dou.chooseUsers) {
+    //   dou.chooseUsers.forEach(function (item, i) {
+    //     if (!item.isDel) {
+    //       indexs.push(item.user_id);
+    //     }
+    //    });
+    // }
 
     // 存储值
     obj.setData({
-      choosedUser: dou.choosedUser  || [],
-      chooseDeptList: chooseDeptList,
-      indexs: indexs
+      choosedUser: dou.choosedUser  || []
     });
     
     var dept_id = null;
@@ -164,6 +192,12 @@ Page({
     if (obj.data.deptUser && obj.data.deptUser.length > 0) {
       link += '&deptUser=' + JSON.stringify(obj.data.deptUser);
     }
+    if (obj.data.checkCount && obj.data.checkCount > 0) {
+      link += '&checkCount=' + obj.data.checkCount;
+    }
+    if (obj.data.chooseDeptList && obj.data.chooseDeptList.length > 0) {
+      link += '&chooseDeptList=' + JSON.stringify(obj.data.chooseDeptList);
+    }
     wx.navigateTo({
       url: link,
     })
@@ -193,7 +227,7 @@ Page({
       }
 
 		});
-   
+
 		obj.setData({
 			deptList: deptList
 		});
@@ -262,6 +296,7 @@ Page({
   addDeptUser (dept_id, userList) {
      var obj = this;
      var chooseDeptList = obj.data.chooseDeptList || [];
+     var chooseUsers = obj.data.recUsers.chooseUsers || [];
      // 已有选中的部门用户
      var deptUser = obj.data.deptUser || [];
      userList.forEach((user,index) => {
@@ -273,18 +308,37 @@ Page({
       dept_id: dept_id
      };
      chooseDeptList.push(douDept);
+
+     userList.forEach(function (item, i) {
+       var count = 0;
+       chooseUsers.forEach(function (subItem, subIndex) {
+        if (item.user_id == subItem.user_id) {
+          subItem.isDel = false;
+          count++;
+        }
+       });
+       if (count <= 0) {
+          chooseUsers.push(item);
+       }
+     });  
+     var checkCount = obj.statisticsCheckCount(chooseUsers);
      obj.setData({
        deptUser: deptUser,
-       chooseDeptList: chooseDeptList
+       chooseDeptList: chooseDeptList,
+       recUsers: {
+        chooseUsers: chooseUsers
+       },
+       checkCount: checkCount
      });
   },
 
   /**
    * 移除某一部门下的用户
    */
-  removeDeptUser: (dept_id) => {
+  removeDeptUser: function (dept_id) {
     var obj = this;
     var chooseDeptList = obj.data.chooseDeptList || [];
+    var chooseUsers = obj.data.recUsers.chooseUsers || [];
     var forChooseDeptList = chooseDeptList;
 
     // 命中的部门
@@ -307,11 +361,22 @@ Page({
           chooseDeptList.splice(index,1);
       }
     });
+
+    chooseUsers.forEach(function (item, i) {
+      if (item.dept_id == dept_id) {
+        item.isDel = true;
+      }
+    });
     
+    var checkCount = obj.statisticsCheckCount(chooseUsers);
     // 存储数据
     obj.setData({
       chooseDeptList: chooseDeptList,
-      deptUser: deptUser
+      deptUser: deptUser,
+      recUsers: {
+        chooseUsers: chooseUsers
+      },
+      checkCount: checkCount
     });
   },
 
@@ -395,12 +460,13 @@ Page({
            // 标记当前已被选中的用户
            for (var c in chooseList) {
              for (var u in res.userList) {
-               if (chooseList[c].user_id == res.userList[u].user_id) {
+               if (chooseList[c].user_id == res.userList[u].user_id && !chooseList[c].isDel) {
                  res.userList[u].checked = true;
                  indexs.push(u);
                }
              }
            }
+
 
           // 标记当前已被选中的部门
            var chooseDeptList = obj.data.chooseDeptList || [];
@@ -420,6 +486,9 @@ Page({
              dou.navList = navList;
            }
            obj.setData(dou);
+
+           // 判断是否已经全选
+           obj.isChooseAll();
         }
       },
       complete: (rx) => {
@@ -440,6 +509,7 @@ Page({
 		 var key = obj.data.key;
 		 var hv = obj.data[key] || {};
 		 var hasUsers = hv.chooseUsers || [];
+     var chooseDeptList = obj.data.chooseDeptList || [];
      
 		 // 在页面勾选第一个用户
      if (hasUsers.length == 0) {
@@ -466,10 +536,31 @@ Page({
         }
        });
 
-     var dou = { indexs: indexs, userList: userList };
+      var userCount = 0;
+      userList.forEach(function (item, i) {
+        hasUsers.forEach(function (subItem, subIndex) {
+          if (item.user_id == subItem.user_id && !subItem.isDel) {
+            userCount++;
+          }
+        });
+      });
+      if (userCount < userList.length) {
+        var dept_id = userList[0].dept_id;
+        var chooseDeptIndex = 0;
+        chooseDeptList.forEach(function (item, i) {
+          if (item.dept_id == dept_id) {
+            chooseDeptIndex = i; 
+          }
+        });
+        chooseDeptList.splice(chooseDeptIndex, 1);
+      }
+
+     var dou = { indexs: indexs, userList: userList, chooseDeptList: chooseDeptList };
      if (hv) {
        hv.chooseUsers = hasUsers;
        dou[key] = hv;
+       var checkCount = obj.statisticsCheckCount(hasUsers);
+       dou.checkCount = checkCount;
      }
       
       obj.setData(dou);
@@ -518,7 +609,7 @@ Page({
 							count++;
 					} 
 				});
-				if (count == 0) {
+				if (count <= 0) {
 					addIndexs.push(u);
 				}
 				user.isDel = false;
@@ -533,6 +624,8 @@ Page({
 		if (hv) {
 		  hv.chooseUsers = hasUsers;
 		  dou[key] = hv;
+      var checkCount = obj.statisticsCheckCount(hasUsers);
+      dou.checkCount = checkCount;
 		}
 		 
 		 obj.setData(dou);
@@ -548,7 +641,6 @@ Page({
     var obj = this;
     var navList = obj.data.navList;
     var backIndex = navList ? navList.length : 0;
-
     var userList = obj.data.userList || [];
     var key = obj.data.key;
     var hv = obj.data[key] || {};
@@ -590,7 +682,9 @@ Page({
     key = key + 'Dou';
     dou[key] = douValue;
     
+    // 向督导发起页面传递数据
     if (e) {
+      obj.data.isToSupervision = true;
       var pages = getCurrentPages();
       // 将值存储到来时的页面上
       // 获取上一页面对象
@@ -598,9 +692,14 @@ Page({
       prePage.setData(dou);
       wx.navigateBack({
         delta: backIndex,
-      })
-    } else {
+      });
+      return;
+    } 
+
+    // 向上个页面传递数据
+    if (backIndex > 1) {
       var data = {};
+      data.chooseDeptList = obj.data.chooseDeptList || [];
       if (obj.data.deptUser && obj.data.deptUser.length > 0) {
         data.deptUser = deptUser;
       }
@@ -608,10 +707,11 @@ Page({
         data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
         data.indexs = obj.data.indexs;
       } 
+      if (obj.data.checkCount && obj.data.checkCount > 0) {
+        data.checkCount = obj.data.checkCount;
+      }
       wx.setStorageSync("data", data);
     }
-
-
   },
 
   /**
@@ -648,8 +748,10 @@ Page({
   isChooseAll() {
     var obj = this;
     var userList = obj.data.userList || [];
+    var chooseUsers = obj.data.recUsers.chooseUsers || [];
     var hasLen = 0;
     var chooseAll = false;
+
     userList.forEach((user,u) => {
       if (user.checked) {
          hasLen++;
@@ -757,5 +859,17 @@ Page({
 
   },
   
-
+  /**
+   * 统计选中数量
+   */
+  statisticsCheckCount: function (chooseUsers) {
+    var obj = this;
+    var checkCount = 0;
+    chooseUsers.forEach(function (item, i) {
+      if (!item.isDel) {
+        checkCount++;
+      }
+    }); 
+    return checkCount;
+  }
 })
