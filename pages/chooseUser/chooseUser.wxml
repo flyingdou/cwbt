@@ -90,7 +90,7 @@
             </view>
 
             <view class='sureLine'>
-                  <view class='title'>已选择:<text wx:if = '{{(indexs && indexs.length > 0) || (deptUser && deptUser.length)}}'>{{(indexs.length || 0) + (deptUser.length || 0)}}人</text></view>
+                  <view class='title'>已选择:<text wx:if = '{{(recUsers.chooseUsers && recUsers.chooseUsers.length > 0) || (deptUser && deptUser.length)}}'>{{(recUsers.chooseUsers.length || 0) + (deptUser.length || 0)}}人</text></view>
                   <view class='sure' bindtap='choose'>确定</view>
             </view>
       </view>

@@ -32,6 +32,11 @@ Page({
       navList.push(nav);
       dou.navList = navList;
     }
+
+    if (options.deptUser) {
+      dou.deptUser = JSON.parse(options.deptUser);
+    }
+
     obj.setData(dou);
 
     // 初始化页面数据
@@ -54,10 +59,11 @@ Page({
     var dou = {};
     var isLoad = obj.data.isLoad;
     var navList = obj.data.navList;
-
-    obj.setData(dou);
+    if (wx.getStorageSync("data")) {
+      obj.setData(wx.getStorageSync("data"));
+      wx.removeStorageSync("data");
+    }
     obj.isChooseAll();
-
   },
 
   /**
@@ -71,8 +77,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-   
-
+    this.choose();
   },
 
   /**
@@ -105,8 +110,8 @@ Page({
     var obj = this;
     var navList = obj.data.navList;
     var key = obj.data.key;
+    var dou = obj.data[key]; 
     var deptUser = [];
-    var dou = obj.data[key];
     var chooseDeptList = dou.chooseDeptList || [];
     chooseDeptList.forEach((dept,index) => {
       dept.userList.forEach((user,ui) => {
@@ -114,11 +119,20 @@ Page({
       });
     });
 
+    var indexs = [];
+    if (dou.chooseUsers) {
+      dou.chooseUsers.forEach(function (item, i) {
+        if (!item.isDel) {
+          indexs.push(item.user_id);
+        }
+       });
+    }
+
     // 存储值
     obj.setData({
       choosedUser: dou.choosedUser  || [],
-      deptUser: deptUser,
-      chooseDeptList: chooseDeptList
+      chooseDeptList: chooseDeptList,
+      indexs: indexs
     });
     
     var dept_id = null;
@@ -147,6 +161,9 @@ Page({
     var value = obj.data[key] || '';
     // 重载当前页面
     var link = '../../pages/chooseUser/chooseUser?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav) + '&' + key + '=' + JSON.stringify(value) + '&key=' + key;
+    if (obj.data.deptUser && obj.data.deptUser.length > 0) {
+      link += '&deptUser=' + JSON.stringify(obj.data.deptUser);
+    }
     wx.navigateTo({
       url: link,
     })
@@ -180,6 +197,7 @@ Page({
 		obj.setData({
 			deptList: deptList
 		});
+
 		
 	},
 	
@@ -265,6 +283,7 @@ Page({
    * 移除某一部门下的用户
    */
   removeDeptUser: (dept_id) => {
+    var obj = this;
     var chooseDeptList = obj.data.chooseDeptList || [];
     var forChooseDeptList = chooseDeptList;
 
@@ -439,13 +458,13 @@ Page({
         }
      }
 
-     hasUsers.forEach(function (item, i) {
-      if (!item.isDel) {
-        indexs.push(item.user_id);
-      }
-     });
-
      userList[index].checked = !userList[index].checked
+
+      hasUsers.forEach(function (item, i) {
+        if (!item.isDel) {
+          indexs.push(item.user_id);
+        }
+       });
 
      var dou = { indexs: indexs, userList: userList };
      if (hv) {
@@ -456,6 +475,7 @@ Page({
       obj.setData(dou);
       // 判断全选状态
       obj.isChooseAll();
+
 
   },
 
@@ -516,6 +536,7 @@ Page({
 		}
 		 
 		 obj.setData(dou);
+
     
   },
 
@@ -523,7 +544,7 @@ Page({
   /**
    * 点击确定时
    */
-  choose () {
+  choose (e) {
     var obj = this;
     var navList = obj.data.navList;
     var backIndex = navList ? navList.length : 0;
@@ -541,7 +562,6 @@ Page({
       });
     }
 
-
     // 勾选的部门中的用户
     var deptUser = obj.data.deptUser || [];
     deptUser.forEach((user,index) => {
@@ -552,13 +572,15 @@ Page({
     var chooseDeptList = obj.data.chooseDeptList || [];
     var dou = {};
 
-    if (chooseUsers.length < 1) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择人员',
-        showCancel: false,
-      })
-      return;
+    if (e) {
+      if (chooseUsers.length < 1) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择人员',
+          showCancel: false,
+        })
+        return;
+      }
     }
    
     var douValue = {};
@@ -568,15 +590,26 @@ Page({
     key = key + 'Dou';
     dou[key] = douValue;
     
-    // 将值存储到来时的页面上
-    var pages = getCurrentPages();
-    // 获取上一页面对象
-    var prePage = pages[pages.length - 1 - backIndex];
-    prePage.setData(dou);
-
-    wx.navigateBack({
-      delta: backIndex,
-    })
+    if (e) {
+      var pages = getCurrentPages();
+      // 将值存储到来时的页面上
+      // 获取上一页面对象
+      var prePage = pages[pages.length - 1 - backIndex];
+      prePage.setData(dou);
+      wx.navigateBack({
+        delta: backIndex,
+      })
+    } else {
+      var data = {};
+      if (obj.data.deptUser && obj.data.deptUser.length > 0) {
+        data.deptUser = deptUser;
+      }
+      if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
+        data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
+        data.indexs = obj.data.indexs;
+      } 
+      wx.setStorageSync("data", data);
+    }
 
 
   },

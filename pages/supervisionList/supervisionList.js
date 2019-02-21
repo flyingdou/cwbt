@@ -113,19 +113,21 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
-        wx.hideLoading();
-        
        var queryType = obj.data.queryType;
        if (queryType == 1 || queryType == 2) {
-            var titles = obj.data.titles;
-            titles[queryType][status].supervisionList = res.data;
-            obj.setData({
-              titles: titles
-            });
+          var titles = obj.data.titles;
+          titles[queryType][status].supervisionList = res.data;
+          obj.setData({
+            titles: titles
+          }, setTimeout(function() {
+            wx.hideLoading();
+          }, 800));
        } else {
          obj.setData({
            supervisionList: res.data
-         });
+         }, setTimeout(function() {
+            wx.hideLoading();
+         }, 800));
        }
       },
       fail: function (e) {
