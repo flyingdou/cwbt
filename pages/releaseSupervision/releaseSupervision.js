@@ -148,7 +148,9 @@ Page({
     var jumpUrl = '../../pages/chooseUser/chooseUser?' + key + '=' + JSON.stringify(douValue) + '&key=' + key;
     if (obj.data.recUsersDou) {
       var chooseDeptList = obj.data.recUsersDou.chooseDeptList || [];
-      jumpUrl += '&chooseDeptList=' + JSON.stringify(chooseDeptList);
+      var chooseUsers = obj.data.recUsersDou.chooseUsers || [];
+      var checkCount = chooseUsers.length;
+      jumpUrl += '&chooseDeptList=' + JSON.stringify(chooseDeptList) + '&checkCount=' + checkCount;
     }
     var contents = obj.data.contents || [];
     var upUsers = [];
