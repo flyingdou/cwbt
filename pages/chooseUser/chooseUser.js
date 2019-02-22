@@ -68,30 +68,41 @@ Page({
     var isLoad = obj.data.isLoad;
     var navList = obj.data.navList;
     var deptList = obj.data.deptList || [];
-    if (wx.getStorageSync("data")) {
-      var data = wx.getStorageSync("data");
-      var chooseDeptList = data.chooseDeptList || [];
-      wx.showLoading({
-        title: "加载中",
-        mask: true
-      });
-      deptList.forEach(function (item, i) {
-        var count = 0;
-        chooseDeptList.forEach(function (subItem, subIndex) {
-          if (item.seq_id == subItem.dept_id && !subItem.isDel) {
-            count++;
-          }
-        });
-        item.checked = count > 0;
-        if (chooseDeptList.length <= 0) {
-          item.checked = false;
-        }
-      });
 
-      data.deptList = deptList;
-      obj.setData(data, wx.hideLoading());
+    // 取出上个页面的数据
+    var data = {};
+    if (wx.getStorageSync("data2")) {
+      data = wx.getStorageSync("data2");
+      wx.removeStorageSync("data2");
+      if (wx.getStorageSync("data")) {
+        wx.removeStorageSync("data");
+      }
+    } else if (wx.getStorageSync("data")) {
+      data = wx.getStorageSync("data");
       wx.removeStorageSync("data");
     }
+
+    // 渲染最新数据
+    var chooseDeptList = data.chooseDeptList || [];
+    wx.showLoading({
+      title: "加载中",
+      mask: true
+    });
+    deptList.forEach(function (item, i) {
+      var count = 0;
+      chooseDeptList.forEach(function (subItem, subIndex) {
+        if (item.seq_id == subItem.dept_id && !subItem.isDel) {
+          count++;
+        }
+      });
+      item.checked = count > 0;
+      if (chooseDeptList.length <= 0) {
+        item.checked = false;
+      }
+    });
+
+    data.deptList = deptList;
+    obj.setData(data, wx.hideLoading());
   },
 
   /**
