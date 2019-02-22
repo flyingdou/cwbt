@@ -775,9 +775,6 @@ Page({
     if (backIndex > 1) {
       var data = {};
       data.chooseDeptList = obj.data.chooseDeptList || [];
-      if (obj.data.deptUser && obj.data.deptUser.length > 0) {
-        data.deptUser = deptUser;
-      }
       if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
         data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
         data.indexs = obj.data.indexs;
