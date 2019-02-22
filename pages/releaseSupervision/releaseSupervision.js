@@ -174,6 +174,7 @@ Page({
        
     }
     wx.setStorageSync('upUsers', upUsers);
+    wx.removeStorageSync("isToSupervision");
 
     wx.navigateTo({
       url: jumpUrl,

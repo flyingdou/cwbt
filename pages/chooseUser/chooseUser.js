@@ -106,8 +106,7 @@ Page({
    */
   onUnload: function () {
     // 是否返回发起督导页面
-    if (this.data.isToSupervision) {
-      this.data.isToSupervision = false;
+    if (wx.getStorageSync("isToSupervision")) {
       return;
     }
     // 返回上一个页面时传递本页面最新数据
@@ -738,17 +737,6 @@ Page({
     // 勾选中的部门
     var chooseDeptList = obj.data.chooseDeptList || [];
     var dou = {};
-
-    if (e) {
-      if (chooseUsers.length < 1) {
-        wx.showModal({
-          title: '提示',
-          content: '请选择人员',
-          showCancel: false,
-        })
-        return;
-      }
-    }
    
     var douValue = {};
     douValue.chooseUsers = chooseUsers;
@@ -759,7 +747,15 @@ Page({
     
     // 向督导发起页面传递数据
     if (e) {
-      obj.data.isToSupervision = true;
+      if (chooseUsers.length < 1) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择人员',
+          showCancel: false,
+        });
+        return;
+      }
+      wx.setStorageSync("isToSupervision", true);
       var pages = getCurrentPages();
       // 将值存储到来时的页面上
       // 获取上一页面对象
@@ -773,6 +769,7 @@ Page({
 
     // 向上个页面传递数据
     if (backIndex > 1) {
+      console.log(3);
       var data = {};
       data.chooseDeptList = obj.data.chooseDeptList || [];
       if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
