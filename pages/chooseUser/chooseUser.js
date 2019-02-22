@@ -73,7 +73,6 @@ Page({
     var data = {};
     if (wx.getStorageSync("data2")) {
       data = wx.getStorageSync("data2");
-      console.log('data2: ' + JSON.stringify(data));
       wx.removeStorageSync("data2");
       if (wx.getStorageSync("data")) {
         wx.removeStorageSync("data");
@@ -643,9 +642,9 @@ Page({
    */
   chooseAll () {
     var obj = this;
+    var userList = obj.data.userList || [];
     var chooseAll = obj.data.chooseAll || false;
     var indexs = obj.data.indexs || [];
-    var userList = obj.data.userList || [];
     var chooseDeptList = obj.data.chooseDeptList || [];
     var _chooseDeptList = [];
 		// 判断当前是否有数据
@@ -665,7 +664,7 @@ Page({
 			});
         
       indexs = [];
-
+       var dept_id = 0;
       // 如果是全选就添加部门
       var dept_id = userList[0].dept_id;
       chooseDeptList.forEach(function (item, i) {

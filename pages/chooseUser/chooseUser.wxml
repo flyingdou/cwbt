@@ -82,7 +82,7 @@
 
       <!-- footer -->
       <view class='footer'>
-            <view class='chooseAllLine' bindtap='chooseAll'>
+            <view class='chooseAllLine' bindtap='chooseAll' wx:if = '{{userList.length > 0}}'>
                   <view class='chooseAll' >全选</view>
                   <view class='checkBox'>
                         <checkbox checked='{{chooseAll}}'  color='rgba(54, 123, 240, 1'></checkbox>
