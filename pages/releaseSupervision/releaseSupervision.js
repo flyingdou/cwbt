@@ -145,6 +145,7 @@ Page({
     var key = e.currentTarget.dataset.key;
     var douKey = key + 'Dou';
     var douValue = obj.data[douKey] || '';
+
     var jumpUrl = '../../pages/chooseUser/chooseUser?' + key + '=' + JSON.stringify(douValue) + '&key=' + key;
     if (obj.data.recUsersDou) {
       var chooseDeptList = obj.data.recUsersDou.chooseDeptList || [];

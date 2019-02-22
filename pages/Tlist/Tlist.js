@@ -214,8 +214,12 @@ Page({
       return;
     }
 
+    
     // 跳转传参
-    var redUrl = '../../pages/TlistDetail/TlistDetail?workCardId=' + workCard.id + '&workCardStatus=' + workCard.status;
+    var redUrl = '../../pages/TlistDetail/TlistDetail?workCardId=' + workCard.id;
+    if (workCard.collectorpersonid) {
+       redUrl = redUrl + '&collectorpersonid=' + workCard.collectorpersonid;
+    }
     wx.navigateTo({
       url: redUrl,
     })
@@ -335,6 +339,7 @@ Page({
         res = res.data;
         if (res.success) {
              taskList[index].status = res.status;
+             taskList[index].collectorpersonid = undefined;
              obj.setData({
                taskList: taskList
              });

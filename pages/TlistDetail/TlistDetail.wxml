@@ -50,7 +50,7 @@
             </view>
 
       <!-- 已领取的才显示 -->
-      <view class='isShow' wx:if = '{{workCardStatus == 9 && isScan}}'>
+      <view class='isShow' wx:if = '{{ collectorpersonid && isScan}}'>
             <!-- 提示文字 -->
             <view class='tagName'>填写执行情况</view>
             
@@ -115,7 +115,7 @@
         </view>
 
         <!-- 底部按钮 -->
-        <view class='buttons' wx:if = '{{workCardStatus == 9}}'>
+        <view class='buttons' wx:if = '{{collectorpersonid}}'>
               <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
               <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures'>提交</view>
         </view>

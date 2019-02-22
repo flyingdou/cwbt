@@ -30,8 +30,8 @@
 
                   <!-- left -->
                   <view class='left' bindtap = 'chooseDept' data-deptindex = '{{index}}'>
-                        <view class='deptImage'>
-                              <image src='{{base_img_url}}/shipLogo1.jpg'></image>
+                        <view class='deptImage' catchtap='preview' data-itemlist = '{{deptList}}' data-key = 'fileurl' data-index = '{{index}}' data-prefix = '{{base_domain}}'>
+                              <image src='{{base_domain + dept.fileurl}}'></image>
                         </view>
 
                         <view class='checkDiv'>
