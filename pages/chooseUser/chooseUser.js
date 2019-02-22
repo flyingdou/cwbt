@@ -671,7 +671,7 @@ Page({
         }
       });
       _chooseDeptList = chooseDeptList;
-      
+
     } else {
 			var addIndexs = [];
       chooseAll = true;
@@ -780,16 +780,13 @@ Page({
 
     // 向上个页面传递数据
     if (backIndex > 1) {
-      console.log(3);
       var data = {};
       data.chooseDeptList = obj.data.chooseDeptList || [];
+      data.checkCount = obj.data.checkCount || 0;
       if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
         data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
         data.indexs = obj.data.indexs;
       } 
-      if (obj.data.checkCount && obj.data.checkCount > 0) {
-        data.checkCount = obj.data.checkCount;
-      }
       wx.setStorageSync("data", data);
     }
   },
