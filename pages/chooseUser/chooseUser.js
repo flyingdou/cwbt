@@ -783,10 +783,7 @@ Page({
       var data = {};
       data.chooseDeptList = obj.data.chooseDeptList || [];
       data.checkCount = obj.data.checkCount || 0;
-      if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
-        data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
-        data.indexs = obj.data.indexs;
-      } 
+      data.chooseUsers = obj.data.recUsers.chooseUsers || [];
       wx.setStorageSync("data", data);
     }
   },
