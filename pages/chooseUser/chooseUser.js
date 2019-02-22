@@ -644,6 +644,7 @@ Page({
     var indexs = obj.data.indexs || [];
     var userList = obj.data.userList || [];
     var chooseDeptList = obj.data.chooseDeptList || [];
+    var _chooseDeptList = [];
 		// 判断当前是否有数据
 		var key = obj.data.key;
 		var hv = obj.data[key] || {};
@@ -661,6 +662,16 @@ Page({
 			});
         
       indexs = [];
+
+      // 如果是全选就添加部门
+      var dept_id = userList[0].dept_id;
+      chooseDeptList.forEach(function (item, i) {
+        if (item.dept_id == dept_id) {
+          item.isDel = true;
+        }
+      });
+      _chooseDeptList = chooseDeptList;
+      
     } else {
 			var addIndexs = [];
       chooseAll = true;
@@ -684,25 +695,25 @@ Page({
 				hasUsers.push(userList[ai]);
 			});
       
+      // 如果是取消全选就移除部门
+      var dept_id = userList[0].dept_id;
+      chooseDeptList.forEach(function (item, i) {
+        if (item.dept_id == dept_id) {
+          item.isDel = false;
+        }
+      });
+      _chooseDeptList = chooseDeptList; 
     }
-		var dou = { chooseAll: chooseAll, indexs: indexs, userList: userList };
+		var dou = { chooseAll: chooseAll, indexs: indexs, userList: userList, chooseDeptList: _chooseDeptList };
 		if (hv) {
 		  hv.chooseUsers = hasUsers;
 		  dou[key] = hv;
       var checkCount = obj.statisticsCheckCount(hasUsers);
       dou.checkCount = checkCount;
 		}
-
-    // 如果是全选就添加部门
-    var dept_id = userList[0].dept_id;
-    chooseDeptList.forEach(function (item, i) {
-      if (item.dept_id == dept_id) {
-        item.isDel = false;
-      }
-    });
-    dou.chooseDeptList = chooseDeptList;
+    
 		 
-		 obj.setData(dou);
+	 obj.setData(dou);
 
     
   },
