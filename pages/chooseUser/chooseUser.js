@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_img_url: app.constant.base_img_url
+    base_domain: app.constant.base_domain
   },
 
   /**
@@ -730,7 +730,7 @@ Page({
 
 
   /**
-   * 点击确定时
+   * 选择人员
    */
   choose (e) {
     var obj = this;
@@ -738,6 +738,7 @@ Page({
     var backIndex = navList ? navList.length : 0;
     var userList = obj.data.userList || [];
     var key = obj.data.key;
+    var keyD = key;
     var hv = obj.data[key] || {};
     var _chooseUsers = hv.chooseUsers || [];
     var chooseUsers = [];
@@ -748,12 +749,6 @@ Page({
         }
       });
     }
-
-    // 勾选的部门中的用户
-    // var deptUser = obj.data.deptUser || [];
-    // deptUser.forEach((user,index) => {
-    //   chooseUsers.push(user);
-    // });
 
     // 勾选中的部门
     var chooseDeptList = obj.data.chooseDeptList || [];
@@ -791,13 +786,10 @@ Page({
     // 向上个页面传递数据
     if (backIndex > 1) {
       var data = {};
+      data[keyD] = {};
       data.chooseDeptList = obj.data.chooseDeptList || [];
       data.checkCount = obj.data.checkCount || 0;
-      data.chooseUsers = obj.data.recUsers.chooseUsers || [];
-      if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
-        data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
-        data.indexs = obj.data.indexs;
-      } 
+      data[keyD].chooseUsers = obj.data[keyD].chooseUsers || [];
       wx.setStorageSync("data", data);
     }
   },

@@ -24,11 +24,11 @@ Page({
     // 工作卡id
     var workCardId = options.workCardId; 
     // 工作卡状态
-    var workCardStatus = options.workCardStatus;
+    var collectorpersonid = options.collectorpersonid;
 
     obj.setData({
       workCardId: workCardId,
-      workCardStatus: workCardStatus
+      collectorpersonid: collectorpersonid || 0
     })
     obj.init();
   },
