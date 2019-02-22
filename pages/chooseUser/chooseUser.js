@@ -428,6 +428,16 @@ Page({
       return;
     }
 
+    // 向上个页面传递数据
+    var data = {};
+    data.chooseDeptList = obj.data.chooseDeptList || [];
+    data.checkCount = obj.data.checkCount || 0;
+    data.chooseUsers = obj.data.recUsers.chooseUsers || [];
+    if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
+      data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
+      data.indexs = obj.data.indexs;
+    } 
+    wx.setStorageSync("data", data);
     // 非当前部门，返回选中的部门层级
     var backIndex = navList.length - 1 - index;
     wx.navigateBack({
@@ -784,6 +794,10 @@ Page({
       data.chooseDeptList = obj.data.chooseDeptList || [];
       data.checkCount = obj.data.checkCount || 0;
       data.chooseUsers = obj.data.recUsers.chooseUsers || [];
+      if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
+        data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
+        data.indexs = obj.data.indexs;
+      } 
       wx.setStorageSync("data", data);
     }
   },
