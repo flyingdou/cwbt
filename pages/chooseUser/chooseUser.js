@@ -73,6 +73,7 @@ Page({
     var data = {};
     if (wx.getStorageSync("data2")) {
       data = wx.getStorageSync("data2");
+      console.log('data2: ' + JSON.stringify(data));
       wx.removeStorageSync("data2");
       if (wx.getStorageSync("data")) {
         wx.removeStorageSync("data");
@@ -310,20 +311,15 @@ Page({
    */
   addDeptUser (dept_id, userList) {
      var obj = this;
+     var key = obj.data.key;
      var chooseDeptList = obj.data.chooseDeptList || [];
-     var chooseUsers = obj.data.recUsers.chooseUsers || [];
+     var chooseUsers = obj.data[key].chooseUsers || [];
      var deptList = obj.data.deptList || [];
      // 已有选中的部门用户
      var deptUser = obj.data.deptUser || [];
      userList.forEach((user,index) => {
        deptUser.push(user);
      });
-
-     // var douDept = {
-     //  userList: userList,
-     //  dept_id: dept_id
-     // };
-     // chooseDeptList.push(douDept);
 
      deptList.forEach(function (item, i) {
        var count = 0;
@@ -358,14 +354,14 @@ Page({
        }
      });  
      var checkCount = obj.statisticsCheckCount(chooseUsers);
-     obj.setData({
+     var dou = {
        deptUser: deptUser,
        chooseDeptList: chooseDeptList,
-       recUsers: {
-        chooseUsers: chooseUsers
-       },
        checkCount: checkCount
-     });
+     };
+     dou[key] = {};
+     dou[key].chooseUsers = chooseUsers;
+     obj.setData(dou);
   },
 
   /**
@@ -373,30 +369,14 @@ Page({
    */
   removeDeptUser: function (dept_id) {
     var obj = this;
+    var key = obj.data.key;
     var chooseDeptList = obj.data.chooseDeptList || [];
-    var chooseUsers = obj.data.recUsers.chooseUsers || [];
+    var chooseUsers = obj.data[key].chooseUsers || [];
     var forChooseDeptList = chooseDeptList;
 
     // 命中的部门
     var deptUser = obj.data.deptUser || [];
     var forDeptUser = deptUser;
-
-    // forChooseDeptList.forEach((dept,index) => {
-    //   if (dept.dept_id == dept_id) {
-    //       // 已选中的用户
-    //       dept.userList.forEach((user,ui) => {
-    //         forDeptUser.forEach((du, di) => {
-    //           if (user.user_id == du.user_id) {
-    //               // 删除当前用户
-    //               deptUser.splice(di,1);
-    //           }
-    //         });
-    //       });
-
-    //       // 在chooseDeptList中移除当前大项
-    //       chooseDeptList.splice(index,1);
-    //   }
-    // });
 
     // 移除选中部门下的所有用户
     chooseUsers.forEach(function (item, i) {
@@ -413,15 +393,16 @@ Page({
     });
     
     var checkCount = obj.statisticsCheckCount(chooseUsers);
-    // 存储数据
-    obj.setData({
+    var dou = {
       chooseDeptList: chooseDeptList,
       deptUser: deptUser,
-      recUsers: {
-        chooseUsers: chooseUsers
-      },
       checkCount: checkCount
-    });
+    };
+    dou[key] = {};
+    dou[key].chooseUsers = chooseUsers;
+
+    // 存储数据
+    obj.setData(dou);
   },
 
   /**
@@ -429,6 +410,7 @@ Page({
    */
   up (e) {
     var obj = this;
+    var key = obj.data.key;
     // 清空storage中的值
     wx.removeStorageSync('chooseUsers');
     var index = e.currentTarget.dataset.index;
@@ -443,12 +425,12 @@ Page({
     var data = {};
     data.chooseDeptList = obj.data.chooseDeptList || [];
     data.checkCount = obj.data.checkCount || 0;
-    data.chooseUsers = obj.data.recUsers.chooseUsers || [];
-    if (obj.data.recUsers.chooseUsers && obj.data.recUsers.chooseUsers.length > 0) {
-      data.recUsers = {chooseUsers: obj.data.recUsers.chooseUsers};
+    data.chooseUsers = obj.data[key].chooseUsers || [];
+    if (obj.data[key].chooseUsers && obj.data[key].chooseUsers.length > 0) {
+      data[key] = {chooseUsers: obj.data[key].chooseUsers};
       data.indexs = obj.data.indexs;
     } 
-    wx.setStorageSync("data", data);
+    wx.setStorageSync("data2", data);
     // 非当前部门，返回选中的部门层级
     var backIndex = navList.length - 1 - index;
     wx.navigateBack({
@@ -810,8 +792,9 @@ Page({
    */
   isChooseAll() {
     var obj = this;
+    var key = obj.data.key;
     var userList = obj.data.userList || [];
-    var chooseUsers = obj.data.recUsers.chooseUsers || [];
+    var chooseUsers = obj.data[key].chooseUsers || [];
     var hasLen = 0;
     var chooseAll = false;
 
