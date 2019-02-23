@@ -121,3 +121,11 @@ Page{
   text-align:center;
   padding:20rpx 0;
 }
+
+.titleX{
+  padding: 20rpx 0;
+}
+
+.errExecute{
+   padding: 20rpx 0;
+}

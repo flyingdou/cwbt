@@ -24,11 +24,11 @@ Page({
     // 工作卡id
     var workCardId = options.workCardId; 
     // 工作卡状态
-    var collectorpersonid = options.collectorpersonid;
+    var collectorpersonid = options.collectorpersonid || '';
 
     obj.setData({
       workCardId: workCardId,
-      collectorpersonid: collectorpersonid || 0
+      collectorpersonid: collectorpersonid 
     })
     obj.init();
   },
@@ -200,20 +200,25 @@ Page({
         console.log(res);
       }
     })
+    // obj.setData({
+    //   isScan:true,
+    //   scanTime: util.formatTime(new Date())
+    // });
 
   },
 
   /**
    * 拍照
    */
-  photo: () => {
+  photo: (e) => {
     if (!obj.checkValid()) {
        return;
     }
+    var key = e.currentTarget.dataset.key;
     var isPhoto = false;
     var isUpload = obj.data.isUpload;
     var photo = {};
-    var photos = obj.data.photos;
+    var photos = obj.data[key] || [];
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
@@ -227,11 +232,13 @@ Page({
         console.log(res);
 
         photos.push(photo);
-        obj.setData({
+        var dou = {
           isPhoto: isPhoto,
-          isUpload: isUpload,
-          photos: photos
-        });
+          isUpload: isUpload
+        };
+        dou[key] = photos;
+        obj.setData(dou);
+
       },
     })
 
@@ -247,7 +254,8 @@ Page({
    */
   preview: (e) => {
     var imgs = [];
-    var photos = obj.data.photos;
+    var key = e.currentTarget.dataset.key;
+    var photos = obj.data[key];
     for (var i = 0; i < photos.length; i++) {
       var url = '';
       if (photos[i].name) {
@@ -277,7 +285,8 @@ Page({
       return;
     }
     var index = e.currentTarget.dataset.index;
-    var photos = obj.data.photos;
+    var key = e.currentTarget.dataset.key;
+    var photos = obj.data[key];
     photos.splice(index, 1);
     var isPhoto = true;
     var isUpload = obj.data.isUpload;
@@ -285,19 +294,20 @@ Page({
       isPhoto = false;
       isUpload = false;
     }
-    obj.setData({
-      photos: photos,
+    var dou = {
       isPhoto: isPhoto,
       isUpload: isUpload
-    });
+    };
+    dou[key] = photos;
+    obj.setData(dou);
 
   },
 
   /**
    * 上传图片
    */
-  uploadPics: (i) => {
-    var photos = obj.data.photos;
+  uploadPics: (i, key) => {
+    var photos = obj.data[key];
     var count = photos.length;
     var reqUrl = app.constant.upload_url;
     if (!i) {
@@ -306,7 +316,7 @@ Page({
     // 已有照片，不上传
     if (!photos[i].tempFilePath) {
       i++;
-      obj.uploadPics(i);
+      obj.uploadPics(i,key);
       return;
     }
     // 开始上传图片
@@ -335,17 +345,21 @@ Page({
         i++;
         if (i >= count) {
           var isUpload = true;
-          obj.setData({
-            isUpload: isUpload,
-            showPhoto: false,
-            photos: photos
-          });
+          var dou = {};
+          dou.isUpload = isUpload;
+          dou.showPhoto = false;
+          dou[key] = photos;
+          obj.setData(dou);
           console.log('图片上传完成！');
-          obj.finish();
+          if (key == 'photos') {
+            obj.finish();
+          } else {
+            obj.handleErr();
+          }
           return;
         } else {
           // 图片还未传完，需要继续上传
-          obj.uploadPics(i);
+          obj.uploadPics(i, key);
         }
       }
 
@@ -355,13 +369,14 @@ Page({
   /**
    * 调用上传方法
    */
-  uploadPictures: () => {
+  uploadPictures: (e) => {
     if (!obj.checkValid()) {
         return;
     }
+    var key = e.currentTarget.dataset.key;
     var photos = obj.data.photos;
     if (photos.length > 0) {
-        obj.uploadPics();
+        obj.uploadPics(0, key);
     } else {
         obj.finish();
     }
@@ -375,6 +390,7 @@ Page({
     // 校验数据
     var status = obj.data.status;
     var handle = obj.data.handle;
+    var handleDou = handle;
     var workcardName = undefined;
     if (status == 1) {
       if (handle == 0) {
@@ -390,6 +406,16 @@ Page({
       if (handle == 1) {
         handle = 0; // 自行维修
         handleName = '自行维修';
+        var executePhotos = obj.data.executePhotos || [];
+        if (executePhotos.length == 0) {
+          wx.showModal({
+            title: '提示',
+            content: '工作卡异常且处于自行维修情况下，请拍摄设备维修后照片！',
+            showCancel: false
+          })
+          return;
+        }
+
       }
 
       if (handle == 2) {
@@ -472,23 +498,27 @@ Page({
         wx.hideLoading();
         res = res.data;
         if (res.success) {
-          wx.showModal({
-            title: '提示',
-            content: '工作完成，有待上级人员确认！',
-            showCancel: false,
-            success: (resx) => {
-              if (resx.confirm) {
-                wx.reLaunch({
-                  url: '../../pages/index/index',
-                })
-              }
-            },
-            
+          if (status = 1 && handleDou == 1) {
+             obj.setData({
+               tempWorkId: res.tempWorkId
+             });
+             obj.uploadPics(0,'executePhotos');
+          } else {
+              wx.showModal({
+                title: '提示',
+                content: '工作完成，有待上级人员确认！',
+                showCancel: false,
+                success: (resx) => {
+                  if (resx.confirm) {
+                    wx.reLaunch({
+                      url: '../../pages/index/index',
+                    })
+                  }
+                },
+              })
+          }
 
-          })
-          wx.reLaunch({
-            url: '../../pages/index/index',
-          })
+
         } else {
           console.log('程序异常！');
         }
@@ -504,6 +534,62 @@ Page({
     })
 
   },
+
+  /**
+   * 自行维修的
+   */
+  handleErr () {
+    // 必填参数
+    var param = {
+      workcardId: obj.data.tempWorkId,
+      executorId: app.user.id,
+      confirmId: app.user.id,
+      image: obj.data.executePhotos,
+      status: 2
+    };
+
+    // 选填参数
+    var mark = obj.data.handleMark;
+    if (mark) {
+      param.mark = mark;
+    }
+
+    // 测试数据
+    console.log('param: ' + JSON.stringify(param));
+    // return;
+    
+    // loading
+    wx.showLoading({
+      title: '处理中',
+    })
+
+    var reqUrl = util.getRequestURL('selfWorkFeedback.we');
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success (res) {
+        res = res.data;
+        if (res.success) {
+                wx.showModal({
+                  title: '提示',
+                  content: '工作完成，有待上级人员确认！',
+                  showCancel: false,
+                  success: (resx) => {
+                    if (resx.confirm) {
+                      wx.reLaunch({
+                        url: '../../pages/index/index',
+                      })
+                    }
+                  },
+                })
+        }
+      } 
+    })
+  },
+  
   
   // 进行中
   ongoing: () => {

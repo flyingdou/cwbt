@@ -49,10 +49,8 @@
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                                         <view class='statusFont'>已审批</view>
                                   </view>
-
-                                  <!-- 取消 -->
-                                  <!-- <view class='cancle' wx:if = '{{item.collectorpersonid == user_id}}' catchtap='cancle' data-index = '{{index}}'>取消</view> -->
                             </view>
+
                       </view>
 
                 </view>
@@ -116,6 +114,9 @@
             <!-- 发起临时工作卡 -->
             <view class='button releaseWorkcard' bindtap='sure'>新建缺陷记录</view>
       </view>
+
+      <!-- 填充高度 -->
+      <view class='douFill'></view>
       
 </view>
 

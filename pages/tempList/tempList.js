@@ -120,6 +120,7 @@ Page({
   getWorkCardList: function (status, index) {
     var overhaul = obj.data.overhaul;
     var titles = obj.data.titles;
+    titles[index] = {};
     var workCardList = titles[index].workCardList || [];
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
     var param = { 
