@@ -110,6 +110,11 @@ Page({
     var param = {
       id: obj.data.workCardId
     };
+
+    // loading
+    wx.showLoading({
+      title: '加载中',
+    })
     var reqUrl = util.getRequestURL('getWorkDetailById.we');
     
     // 请求数据
@@ -143,6 +148,8 @@ Page({
           dou.showPhoto = true;
           dou.workDetail = res.workDetail;
           obj.setData(dou);
+
+          wx.hideLoading();
         } 
         if (!res.success) {
           console.log('程序异常！');
@@ -339,7 +346,7 @@ Page({
     param.mark = obj.data.remark; // 反馈数据
     param.workcardId = workDetail.id; // 工作卡id
 
-    console.log(param);
+    // console.log(param);
 
     // 发起微信请求
     wx.request({

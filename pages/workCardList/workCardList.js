@@ -75,6 +75,11 @@ Page({
    * 初始化页面数据
    */
   init: () => {
+
+    // loading
+    wx.showLoading({
+      title: '加载中',
+    })
     var reqUrl = util.getRequestURL('getFinishedWorkcardList.we');
     
     var param = {};
@@ -100,6 +105,8 @@ Page({
           obj.setData({
             taskList: taskList
           });
+          // 数据存储完再隐藏
+          wx.hideLoading();
         }
       }
     })

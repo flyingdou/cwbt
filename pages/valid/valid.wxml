@@ -55,6 +55,16 @@
                   </view>
             </view>
 
+            <!-- 备注 -->
+            <view class='taskList'>
+                  <view class='taskTitle'>备注</view>
+                  
+                  <!-- 工作内容 -->
+                  <view class='task'>
+                        <view class='ta'>{{valid.mark}}</view>
+                  </view>
+                  
+            </view>
 
       </view>
 

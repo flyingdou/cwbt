@@ -1,6 +1,6 @@
 <view style='height: 20rpx;'></view>
 
 <view class="pie-wraper">
-	<view class='title'>荆州测绘处工作卡任务完成情况</view>
+	<view class='title'>荆州测绘中心工作卡任务完成情况</view>
   <canvas canvas-id="pieCanvas" class="canvas" style="height:300px"></canvas>
 </view>

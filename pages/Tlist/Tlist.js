@@ -283,6 +283,11 @@ Page({
       collectorpersonid: app.user.id
     };
 
+    // loading
+    wx.showLoading({
+      title: '处理中',
+    })
+
     wx.request({
       url: util.getRequestURL('updateMuiltWorkCard.we'),
       dataType: 'json',
@@ -308,6 +313,8 @@ Page({
             taskList: taskList,
             isGet: false
           });
+          
+          wx.hideLoading();
         }
       }
     })

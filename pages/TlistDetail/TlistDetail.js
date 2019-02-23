@@ -429,9 +429,9 @@ Page({
 
     // 可选数据
     // 备注信息
-    var remark = obj.data.remark;
-    if (remark) {
-      param.remark = remark;
+    var mark = obj.data.mark;
+    if (mark) {
+      param.mark = mark;
     }
     
     // 异常描述

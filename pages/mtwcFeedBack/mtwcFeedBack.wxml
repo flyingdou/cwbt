@@ -78,11 +78,11 @@
 
       </view>
 
-      <!-- 临时工作卡反馈 -->
+      <!-- 维修反馈 -->
       <view style='height: 20rpx;'></view>
       <view class='up'>
             <view class='up-title'>
-              临时工作卡反馈
+              维修反馈
             </view>
 
             <view class='line'>
@@ -150,11 +150,6 @@
 
       <!-- 填充高度 -->
       <view style='height: 80rpx;' wx:if='{{type == 0}}'></view>
-
-      <!-- 底部功能按钮 -->
-      <!-- <view class='footer' wx:if='{{type == 0 && feedback.status != 2}}'>
-            <view class='checkButton' bindtap='valid'>验收</view>
-      </view>  -->
 
       <!-- 底部功能按钮 -->
       <view class='footer' wx:if='{{type == 1 && feedback.status != 2}}'>
