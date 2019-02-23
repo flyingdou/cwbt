@@ -20,6 +20,12 @@ textarea{
   border-bottom: 1rpx solid rgba(245,245,245,1);
 }
 
+.line-right{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .remark{
   padding: 20rpx 0;
 }
@@ -27,6 +33,11 @@ textarea{
 .task-value{
   margin-top: 20rpx;
   padding: 20rpx;
+}
+
+.moreIcon{
+  width: 26rpx;
+  height: 26rpx;
 }
 
 .textareaClass{

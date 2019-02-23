@@ -81,12 +81,17 @@
                   <view class='tagName'>审批情况</view>
                   <view class='line' wx:if = '{{user_priv == 2}}' bindtap='showMark' data-key = 'expectedtime' >
                         <view class='title'>预计完成时间</view>
-                        <view class='value'>{{filter.subLen(expectedtime, 10)}}</view>
+                        <view class='line-right'>
+                          <view class='value'>{{filter.subLen(expectedtime, 10) || "请选择预计完成时间"}}</view>
+                          <view class='moreIcon'>
+                                <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+                          </view>
+                        </view>
                   </view>
 
                   <view class='remark' wx:if = '{{user_priv == 2}}'>
                         <view class='title'>审批意见</view>
-                        <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}'></textarea>
+                        <textarea maxlength='-1' placeholder='请输入审批意见' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}'></textarea>
                         
                   </view>
             
