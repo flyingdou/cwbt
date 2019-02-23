@@ -337,7 +337,8 @@ Page({
           var isUpload = true;
           obj.setData({
             isUpload: isUpload,
-            showPhoto: false
+            showPhoto: false,
+            photos: photos
           });
           console.log('图片上传完成！');
           obj.finish();
@@ -385,22 +386,6 @@ Page({
         return;
       }
 
-      // 校验拍照信息
-      var photos = obj.data.photos;
-      var needPhoto = obj.data.needPhoto;
-      if (needPhoto && photos.length < 1) {
-        wx.showModal({
-          title: '提示',
-          content: '该任务需要拍照！',
-          showCancel: false
-        })
-        return;
-      }
-      for (var x = 0; x < photos.length; x++) {
-        delete photos[x]['tempFilePath'];
-      }
-
-
       var handleName = undefined;
       if (handle == 1) {
         handle = 0; // 自行维修
@@ -414,8 +399,20 @@ Page({
       workcardName = obj.data.workDetail.ename + '-' + handleName;
     }
 
-    
-
+    // 校验拍照信息
+    var photos = obj.data.photos;
+    var needPhoto = obj.data.needPhoto;
+    if (needPhoto && photos.length < 1) {
+      wx.showModal({
+        title: '提示',
+        content: '该任务需要拍照！',
+        showCancel: false
+      })
+      return;
+    }
+    for (var x = 0; x < photos.length; x++) {
+      delete photos[x]['tempFilePath'];
+    }
     
     var userId = app.user.id;
     var isError = status;
@@ -454,6 +451,9 @@ Page({
       param.workcardName = workcardName;
     }
 
+    // 测试数据
+    // console.log('param: ' + JSON.stringify(param));
+    // return;
     // showLoding
     wx.showLoading({
       title: '处理中',

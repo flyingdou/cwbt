@@ -181,7 +181,7 @@
                         <!-- 船舶端，已领取 -->
                         <view wx:if = '{{!isRollback && user_priv == 3}}'> 
                               <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
-                              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures' data-fun='finish'>完成</view>
+                              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures' data-fun='finish'>提交</view>
                         </view>
 
                         <view>
