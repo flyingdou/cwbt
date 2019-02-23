@@ -70,7 +70,7 @@ Page({
     var deptList = obj.data.deptList || [];
 
     // 取出上个页面的数据
-    var data = {};
+    var data = null;
     if (wx.getStorageSync("data2")) {
       data = wx.getStorageSync("data2");
       wx.removeStorageSync("data2");
@@ -83,26 +83,28 @@ Page({
     }
 
     // 渲染最新数据
-    var chooseDeptList = data.chooseDeptList || [];
-    wx.showLoading({
-      title: "加载中",
-      mask: true
-    });
-    deptList.forEach(function (item, i) {
-      var count = 0;
-      chooseDeptList.forEach(function (subItem, subIndex) {
-        if (item.seq_id == subItem.dept_id && !subItem.isDel) {
-          count++;
+    if (data) {
+      var chooseDeptList = data.chooseDeptList || [];
+      wx.showLoading({
+        title: "加载中",
+        mask: true
+      });
+      deptList.forEach(function (item, i) {
+        var count = 0;
+        chooseDeptList.forEach(function (subItem, subIndex) {
+          if (item.seq_id == subItem.dept_id && !subItem.isDel) {
+            count++;
+          }
+        });
+        item.checked = count > 0;
+        if (chooseDeptList.length <= 0) {
+          item.checked = false;
         }
       });
-      item.checked = count > 0;
-      if (chooseDeptList.length <= 0) {
-        item.checked = false;
-      }
-    });
 
-    data.deptList = deptList;
-    obj.setData(data, wx.hideLoading());
+      data.deptList = deptList;
+      obj.setData(data, wx.hideLoading());
+    }
   },
 
   /**
@@ -533,14 +535,15 @@ Page({
              navList.push(res.dept);
              dou.navList = navList;
            }
-           obj.setData(dou);
+           obj.setData(dou, wx.hideLoading());
 
            // 判断是否已经全选
            obj.isChooseAll();
         }
       },
-      complete: (rx) => {
+      fail(e) {
         wx.hideLoading();
+        util.tipsMessage("网络异常");
       }
     })
   },
