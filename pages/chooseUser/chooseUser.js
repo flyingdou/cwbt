@@ -918,5 +918,12 @@ Page({
       }
     }); 
     return checkCount;
+  },
+
+  /**
+   * 图片预览
+   */
+  preview: function (e) {
+    util.preview(e);
   }
 })

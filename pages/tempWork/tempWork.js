@@ -804,10 +804,24 @@ Page({
         if (res.success) {
            var workDetail = obj.data.workDetail;
            workDetail.status = param.status;
+           workDetail.collect_note = param.collectNote;
            obj.setData({
              hasGot: true, // 隐藏领取按钮
              workDetail: workDetail // 修改工作卡数据
            });
+
+           // 提示用户
+           wx.showModal({
+             title: '提示',
+             content: '审批完成！',
+             success: (su) => {
+               if (su.confirm) {
+                 wx.navigateBack({
+                   delta: 1
+                 })
+               } 
+             }
+           })
         }
       }
     })
