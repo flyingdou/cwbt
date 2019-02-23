@@ -75,6 +75,23 @@
                   </view>
             </view>
              
+            
+            <!-- 审批情况 -->
+            <view wx:if = '{{user_priv == 2 && !workDetail.isLast}}'>
+                  <view class='tagName'>审批情况</view>
+                  <view class='line' wx:if = '{{user_priv == 2}}' bindtap='showMark' data-key = 'expectedtime' >
+                        <view class='title'>预计完成时间</view>
+                        <view class='value'>{{filter.subLen(expectedtime, 10)}}</view>
+                  </view>
+
+                  <view class='remark' wx:if = '{{user_priv == 2}}'>
+                        <view class='title'>审批意见</view>
+                        <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}'></textarea>
+                        
+                  </view>
+            
+            </view>
+
             <!-- 船舶端可看 -->
             <!-- 维修后图片 -->
             <view class='remark' wx:if='{{user_priv == 3 && showFeedbackPic}}'>
@@ -135,18 +152,7 @@
                                         </view>
                                   </view>
 
-                            <!-- 审批情况 -->
-                            <view class='tagName'>审批情况</view>
-                            <view class='line' wx:if = '{{user_priv == 2}}' bindtap='showMark' data-key = 'expectedtime' >
-                                  <view class='title'>预计完成时间</view>
-                                  <view class='value'>{{filter.subLen(expectedtime, 10)}}</view>
-                            </view>
-
-                            <view class='remark' wx:if = '{{user_priv == 2}}'>
-                                  <view class='title'>审批意见</view>
-                                  <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}'></textarea>
-                                  
-                            </view>
+                           
 
                             <!-- preview -->
                             <view class='preview'>
