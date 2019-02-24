@@ -22,11 +22,6 @@ Page({
     obj = this;
     var code = options.code; // 扫码识别的code
     var overhaul = options.overhaul; // 维修方式
-
-    // 测试数据
-    // code = '121600110100300';
-    // overhaul = 1;
-
     
     if (code) {
       obj.setData({
@@ -154,7 +149,7 @@ Page({
   checkFormData: function () {
     var data = obj.data;
     var remark = data.remark;
-    // var overhaulFunction = obj.data.overhaul == undefined ? data.pickerData[data.index].code : obj.data.overhaul;
+
     var photos = obj.data.photos;
     if (!remark) {
       wx.showModal({
@@ -164,14 +159,7 @@ Page({
       });
       return false;
     }
-    // if (overhaulFunction < 0) {
-    //   wx.showModal({
-    //     title: '提示',
-    //     content: '请选择维修方式！',
-    //     showCancel: false
-    //   });
-    //   return false;
-    // }
+
     if (photos.length < 1) {
       wx.showModal({
         title: '提示',
@@ -213,12 +201,14 @@ Page({
     var data = obj.data;
     var photos = data.photos;
     for(var x in photos) {
-      delete photos[x]['tempFilePath']; // 删除tempFilePath
+      // 删除tempFilePath
+      delete photos[x]['tempFilePath']; 
     }
 
     var exPhotos = data.exPhotos;
     for (var x in exPhotos) {
-      delete exPhotos[x]['tempFilePath']; // 删除tempFilePath
+      // 删除tempFilePath
+      delete exPhotos[x]['tempFilePath']; 
     }
     var overhaulFunction = data.overhaul == undefined ? data.pickerData[data.index].code : data.overhaul;
     var name = data.equipment.name + '-' + util.getOverhaul(overhaulFunction);
@@ -228,7 +218,8 @@ Page({
       exceptionalDescribe: data.remark,
       overhaulFunction: overhaulFunction,
       image: JSON.stringify(photos),
-      creator: app.user.id
+      creator: app.user.id,
+      dept_id: app.user.deptId
     }
 
     var url = util.getRequestURL('addTemporaryWorkCard.we');
@@ -243,8 +234,6 @@ Page({
     }
 
     // 测试数据
-    // console.log(param);
-    // return;
 
     wx.showLoading({
       title: '正在保存中',

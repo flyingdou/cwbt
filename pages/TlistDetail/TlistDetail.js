@@ -450,7 +450,8 @@ Page({
       image: photos, // 照片信息
       isError: isError, // 设备状态，是否异常
       scanTime: obj.data.scanTime,
-      equipmentId: obj.data.workDetail.eid
+      equipmentId: obj.data.workDetail.eid,
+      dept_id: app.user.deptId
     };
 
     // 可选数据
