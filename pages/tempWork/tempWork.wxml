@@ -91,7 +91,7 @@
                         </view>
                   </view>
 
-                  <view class='remark' wx:if = '{{user_priv == 2}}'>
+                  <view class='remark' wx:if = '{{user_priv == 2 && !showMark}}'>
                         <view class='title'>审批意见</view>
                         <textarea maxlength='-1' placeholder='请输入审批意见' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}'></textarea>
                         
