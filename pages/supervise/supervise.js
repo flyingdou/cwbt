@@ -143,29 +143,6 @@ Page({
   },
 
   /**
-   * 扫码
-   */
-  scan: function () {
-    wx.scanCode({
-      scanType: ['barCode', 'qrCode'],
-      success: (res) => {
-        if (res.result == obj.data.deviceNumber) {
-          obj.setData({
-            isScan: false
-          });
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: '扫码的条码不正确',
-            showCancel: false
-          })
-        }
-      }
-    });
-  },
-
-
-  /**
   * 拍照
   */
   photo: () => {
@@ -269,6 +246,7 @@ Page({
               showUpload: false
           });
           console.log('图片上传完成！');
+          obj.finishSupervise();
           return;
         } else {
           // 图片还未传完，需要继续上传
@@ -283,23 +261,18 @@ Page({
    * 调用上传方法
    */
   uploadPictures: () => {
-    obj.uploadPics();
+    var photos = obj.data.photos || [];
+    if (photos.length > 0) {
+       obj.uploadPics(0);
+    } else {
+       obj.finishSupervise();
+    }
   },
 
   /**
    * 完成督导任务，生成督导反馈
    */
   finishSupervise: () => {
-    // 判断是否需要扫码
-    if (obj.data.deviceNumber && obj.data.isScan) {
-      wx.showModal({
-        title: '提示',
-        content: '请先扫码',
-        showCancel: false
-      })
-      return;
-    }
-
     var photos = obj.data.photos;
     for (var x = 0; x < photos.length; x++) {
       delete photos[x]['tempFilePath'];
