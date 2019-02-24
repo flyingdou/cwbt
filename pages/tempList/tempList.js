@@ -67,7 +67,6 @@ Page({
       }
     });
     if (obj.data.overhaul == 0) {
-      this.getWorkCardList([1,9], 0);
       this.getWorkCardList([2], 1);
     } else {
       this.getWorkCardList([1], 0);
@@ -100,8 +99,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-      obj.data.currentPage++;
-      obj.getWorkCardList();
   },
 
   /**
@@ -120,16 +117,13 @@ Page({
   getWorkCardList: function (status, index) {
     var overhaul = obj.data.overhaul;
     var titles = obj.data.titles;
-    titles[index] = {};
-    var workCardList = titles[index].workCardList || [];
+    var workCardList = titles[overhaul][index].workCardList || [];
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
     var param = { 
       userPriv: app.user.userPriv, 
       deptId: app.user.deptId, 
       status: status, // 未完成、被领取的
       overhaul_function: obj.data.overhaul,
-      currentPage: obj.data.currentPage,
-      pageSize: obj.data.pageSize
     };
 
     // loading
@@ -143,6 +137,7 @@ Page({
       },
       success: function (res) {
         workCardList = workCardList.concat(res.data);
+
         titles[overhaul][index].workCardList = workCardList;
         obj.setData({
           titles: titles

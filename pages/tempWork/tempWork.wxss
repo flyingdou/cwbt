@@ -87,8 +87,8 @@ textarea{
 
 .addPic{
   float: left;
-  width: 160rpx;
-  height: 160rpx;
+  width: 100rpx;
+  height: 100rpx;
   margin-right: 20rpx;
 }
 

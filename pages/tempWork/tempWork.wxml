@@ -64,6 +64,8 @@
                               
                         </view>
                   </view>
+
+
             </view>
 
             <!-- 异常描述 -->
@@ -101,9 +103,9 @@
             <!-- 维修后图片 -->
             <view class='remark' wx:if='{{user_priv == 3 && showFeedbackPic}}'>
             
-                  <block wx:if = '{{isScan}}'>
+                  <view wx:if = '{{(workDetail.overhaul_function == 1 && isScan) || (workDetail.overhaul_function == 1 && workDetail.status == 1) || workDetail.overhaul_function == 0}}'>
                             <view class='tagName'>维修后情况</view>
-                            <view class='line' wx:if = '{{user_priv == 3 && showFeedbackInput}}'> 
+                            <view class='line' wx:if = '{{showFeedbackInput}}'> 
                                   <view class='title'>维修后状况</view>
                                   <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
                                           <view class='item'>
@@ -116,7 +118,7 @@
                             </view>
                             
                             <!-- error -->
-                            <view class='error' wx:if = '{{user_priv == 3 && showFeedbackInput && status != 0}}'>
+                            <view class='error' wx:if = '{{showFeedbackInput && status != 0}}'>
                                   <view class='line'>
                                         <view class='title'>维修方式</view>
                                         <picker range='{{handleList}}' range-key='name' bindchange='pickerChange' data-key = 'handle'>
@@ -136,7 +138,7 @@
 
                             </view>
 
-                            <view class='remark' wx:if = '{{user_priv == 3 && showFeedbackInput && hidden}}'>
+                            <view class='remark' wx:if = '{{showFeedbackInput && hidden}}'>
                                   <view class='title'>维修反馈情况</view>
                                   <textarea placeholder='请输入维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workDetail.remark}}' wx:if = '{{isHidden}}'></textarea>
                                   
@@ -170,8 +172,11 @@
                                         <image wx:if = '{{!isUpload && user_priv == 3}}' src='../../icon/add.png' mode='aspectFill'  bindtap='photo' ></image>
                                   </view>
                             </view>
+
                   
-                  </block>
+                  </view><!-- block -->
+
+
             </view>
 
             

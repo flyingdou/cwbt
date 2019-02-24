@@ -214,7 +214,7 @@ Page({
               showFeedbackInput: true
             });
           }
-
+          // 自信维修且完成的，委外维修且审批后的
           if ((res.workDetail.overhaul_function == 0 && res.workDetail.status == 2) || (res.workDetail.overhaul_function == 1 && res.workDetail.status == 9)) {
             obj.setData({
               showFeedbackPic: true
