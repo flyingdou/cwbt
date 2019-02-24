@@ -259,7 +259,7 @@ Page({
       i = 0;
     }
     // 已有照片，不上传
-    console.log('photos: ' + JSON.stringify(photos) + '& i: ' + i);
+    // console.log('photos: ' + JSON.stringify(photos) + '& i: ' + i);
     if (photos[i]) {
         if (!photos[i].tempFilePath) {
           i++;

@@ -107,7 +107,7 @@
                             <view class='tagName'>维修后情况</view>
                             <view class='line' wx:if = '{{showFeedbackInput}}'> 
                                   <view class='title'>维修后状况</view>
-                                  <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' >
+                                  <picker range='{{statusList}}' range-key='name' bindchange='pickerChange' data-key = 'status' disabled='disabled' >
                                           <view class='item'>
                                                 <view class='value'>{{status == 0 ? "正常" : "异常"}}</view>
                                                 <view class='moreIcon'>

@@ -87,6 +87,7 @@ Page({
     var link = e.currentTarget.dataset.link;
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.workCardList[index];
+    // console.log('index: ' + index + ', workCardList: ' + JSON.stringify(obj.data.workCardList));
     var type = obj.data.type;
     if (workCard.status == 9 && workCard.collectorpersonid != app.user.id && type == 0) {
       wx.showModal({
@@ -105,6 +106,11 @@ Page({
    * 查询管理端临时工作卡列表数据
    */
   getWorkCardList: function () {
+    // loading
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var workCardList = obj.data.workCardList || [];
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
     var param = { 
@@ -124,11 +130,12 @@ Page({
         workCardList = workCardList.concat(res.data);
         obj.setData({
           workCardList: workCardList
-        });
+        }, wx.hideLoading());
       },
       fail: function (e) {
         util.tipsMessage('网络异常！');
         console.log(e);
+        wx.hideLoading();
       }
     });
   }

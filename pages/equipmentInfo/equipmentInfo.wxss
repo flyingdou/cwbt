@@ -123,14 +123,14 @@
 
 .add-content{
   margin-left: 20rpx;
-  padding: 0 10rpx;
-  height: 1.4rem;
+  padding: 20rpx 10rpx;
   text-align: center;
-  line-height: 1.4rem;
   font-size: 22rpx;
   color: black;
   background-color: #ccc;
   border-radius: 4rpx;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .footer{

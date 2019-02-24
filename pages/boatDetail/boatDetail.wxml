@@ -10,7 +10,7 @@
                   <view class='cardTitle'>船舶图片</view>
                   <!-- boatImage -->
                   <view class='boatImage' catchtap='preview' data-key = 'image' data-type = 'single' data-itemlist = '{{boat}}' data-prefix = '{{base_domain}}'>
-                        <image src = '{{base_domain}}/upload/pcfiles/image/boat1_1.jpg' mode='aspectFill'></image>
+                        <image wx:if = '{{boat.image}}' src = '{{base_domain + boat.image}}' mode='aspectFill'></image>
                   </view>
             </view>
 
