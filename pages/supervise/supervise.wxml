@@ -7,18 +7,6 @@
             <view class='value'>{{creator}}</view>
       </view>
 
-      <!-- 船 -->
-      <!-- <view class='line'>
-            <view class='title'>船舶：</view>
-            <view class='value'>{{boat}}</view>
-      </view> -->
-
-      <!-- 设备 -->
-      <!-- <view class='line'>
-            <view class='title'>设备：</view>
-            <view class='value'>{{device}}</view>
-      </view> -->
-
       <!-- 内容 -->
       <view class='remarkDiv' wx:if = '{{contents.length > 0}}'>
             <view class='title'>内容：</view>
@@ -64,10 +52,7 @@
 
       <!-- footer -->
       <view class='footer'>
-            <view class='button scanButton' wx:if = '{{deviceNumber && isScan}}' bindtap='scan'>扫描条码</view>
-            <view class='button photo' wx:if = '{{showCamera}}' bindtap='photo'>拍照</view>
-            <view class='button uploadPic' wx:if = '{{showUpload}}' bindtap='uploadPictures'>上传照片</view>
-            <view class='button finish' wx:if = '{{showFinish}}' bindtap='finishSupervise'>完成</view>
+            <view class='button finish' bindtap='uploadPictures'>提交</view>
       </view>
 
 

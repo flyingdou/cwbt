@@ -51,19 +51,19 @@
                                   </view>
                             </view>
                             <!-- 图标 -->
-                            <view class='tag' wx:if='{{(item.status == 2 || item.status == 4) && item.feedback != 2}}'>
+                            <!-- <view class='tag' wx:if='{{(item.status == 2 || item.status == 4) && item.feedback != 2}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                                         <view class='statusFont'>已反馈</view>
                                   </view>
-                            </view>
+                            </view> -->
                             <!-- 图标 -->
-                            <view class='tag' wx:if='{{item.feedback == 2}}'>
+                            <!-- <view class='tag' wx:if='{{item.feedback == 2}}'>
                                   <view class='tagDiv'>
                                         <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
                                         <view class='statusFont'>已验收</view>
                                   </view>
-                            </view>
+                            </view> -->
                       </view>
 
                 </view>
