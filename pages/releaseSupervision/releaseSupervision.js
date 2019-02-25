@@ -240,6 +240,7 @@ Page({
 		 		}
 		 	},
 		 	fail: (e) => {
+        wx.hideLoading();
 		 		wx.showModal({
 		 			title: '提示',
 		 			content: '网络异常！',

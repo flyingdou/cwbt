@@ -24,7 +24,7 @@
 
                             <view class='line1'>
                                   <view class='tv left'>
-                                        <view class='title'>备件数量</view>
+                                        <view class='title'>剩余数量</view>
                                         <view class='value'>{{item.number || 0}}</view>
                                   </view>
 
