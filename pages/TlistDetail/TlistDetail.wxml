@@ -65,6 +65,13 @@
                           </view>
                   </picker>
             </view>
+
+             <!-- 正常的执行过程描述 -->
+             <view class='remark'  wx:if = '{{status == 0 && hidden}}'>
+                  <view class='title'>执行过程描述</view>
+                  <textarea placeholder='请输入执行过程描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'mark' value='{{workFeedback.mark}}'></textarea>
+                  
+            </view>
             
             <!-- error -->
             <view class='error' wx:if = '{{status != 0}}'>
@@ -87,11 +94,7 @@
 
             </view>
 
-            <view class='remark'  wx:if = '{{hidden}}'>
-                  <view class='title'>备注</view>
-                  <textarea placeholder='请输入备注信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'mark' value='{{workFeedback.mark}}'></textarea>
-                  
-            </view>
+           
 
             <!-- 正常执行时的照片 -->
             <view class='preview'>

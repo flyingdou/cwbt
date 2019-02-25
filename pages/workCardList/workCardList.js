@@ -7,9 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentPage: app.pageInfo.currentPage,
-    pageSize: app.pageInfo.pageSize,
-    taskList: []
+    taskList: [],
+    titles: {
+      valid: [
+        { title: '未验收', checkStatusKey: 'typeStatus', checkStatus: 1 },
+        { title: '已验收', checkStatusKey: 'typeStatus', checkStatus: 2 },
+        { title: '驳回', checkStatusKey: 'typeStatus', checkStatus: 3 }
+      ]
+    }
   },
 
   /**
@@ -18,6 +23,10 @@ Page({
   onLoad: function (options) {
      obj = this;
      obj.init();
+
+     obj.setData({
+      windowHeightRpx: util.getSystemInfo().windowHeightRpx
+     });
   },
 
   /**
@@ -87,9 +96,6 @@ Page({
     
     
     // 分页
-    param.currentPage = obj.data.currentPage;
-    param.pageSize = obj.data.pageSize;
-    
     // console.log(param);
     // return;
     wx.request({
@@ -102,7 +108,8 @@ Page({
         res = res.data;
         if (res.success) {
           var taskList = obj.data.taskList;
-          taskList = taskList.concat(res.workcardList);
+          var workcardList = util.formatPlanTime(res.workcardList);
+          taskList = taskList.concat(workcardList);
           obj.setData({
             taskList: taskList
           });

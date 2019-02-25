@@ -177,7 +177,6 @@ Page({
       url: reqUrl,
       dataType:'json',
       data:{
-        requestType:'wechat',
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
@@ -190,9 +189,10 @@ Page({
             taskList: taskList,
             isGet: false
           });
+          wx.hideLoading();
         }
       },
-      complete: (com) => {
+      fail: (f) => {
         wx.hideLoading();
       }
     })

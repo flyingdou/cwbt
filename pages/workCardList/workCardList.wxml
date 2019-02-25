@@ -1,10 +1,11 @@
 <!-- 页面开始 -->
 <view class='content'>
+      <tab titles='{{titles.valid}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}'>
       <!-- 列表 -->
-      <view class='List'>
+      <view class='List' wx:for='{{titles.valid}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
                     <noData wx:if='{{!taskList || taskList.length <= 0}}'></noData>
                     <!-- 每一个 -->
-                    <view class='pre' wx:for = '{{taskList}}' wx:key = '' bindtap='goto' data-index = '{{index}}' style='background:{{item.color}}'>
+                    <view class='pre' wx:for = '{{taskList}}' wx:key = '' bindtap='goto' data-index = '{{index}}' style='background:{{item.color}}' wx:if = '{{item.status == tabItem.checkStatus}}'>
                           
                           <!-- 第一行 -->
                           <view class='line div'>
@@ -32,26 +33,39 @@
                           
                           <!-- 第三行 -->
                           <view class='line2 div'>
+                                <view class='fb'>
+                                      <view class='title'>计划时间</view>
+                                      <view class='value'>{{item.prefix}} <text wx:if = '{{item.subffix}}' decode='{{true}}'>&nbsp;至&nbsp;{{item.subffix}}</text></view>
+                                </view>
+
+                          </view>
+
+                           <!-- 第四行 -->
+                          <view class='line2 div'>
                                 <view class='line'>
                                       <view class='title'>所属船舶</view>
                                       <view class='value'>{{item.boatName}}</view>
                                 </view>
 
-                                <view class='line'>
-                                      <view class='title'>计划时间</view>
-                                      <view class='value'>{{item.plannedtime}}</view>
+                                <view class='line' wx:if = '{{item.status == 1}}'>
+                                      <view class='title'>完成时间</view>
+                                      <view class='value'>{{item.finishtime}}</view>
                                 </view>
 
+                                <view class='line' wx:if = '{{item.status == 2 || item.status == 3}}'>
+                                      <view class='title'>验收时间</view>
+                                      <view class='value'>{{item.orderTime}}</view>
+                                </view>
                           </view>
 
                           <!-- 图标 -->
-                          <view class='tag'>
+                          <!-- <view class='tag'> -->
 					                      <!-- 已验收 -->
-                                <view wx:if = '{{item.status == 2}}' class='tagDiv'>
+                                <!-- <view wx:if = '{{item.status == 2}}' class='tagDiv'>
                                       <view class='statusFont'>已验收</view>
-                                </view>
+                                </view> -->
 					  
-                          </view>
+                          <!-- </view> -->
                           
                     </view>
                     
@@ -59,5 +73,6 @@
 
       <!-- 底部填充 -->
       <view class='douFill'></view>
+  </tab>
 
 </view>
