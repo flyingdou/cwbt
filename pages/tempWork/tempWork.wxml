@@ -78,10 +78,10 @@
             </view>
              
             
-            <!-- 审批情况 -->
-            <view wx:if = '{{user_priv == 2 && !workDetail.isLast}}'>
+            <!-- 审批情况(审批情况显示(首先必须是委外维修,第一种情况：管理端大处未审批,已审批,已完成都可看，第二种情况管理端小处未审批不可看,已审批和已完成可看，第三种情况船舶端未审批不可看,已审批和已完成可看)) -->
+            <view wx:if='{{workDetail && workDetail.overhaul_function == 1 && ((user_priv == 2 && !workDetail.isLast) || (user_priv == 2 && workDetail.isLast && workDetail.expectedtime) || (user_priv == 3 && workDetail.expectedtime))}}'>
                   <view class='tagName'>审批情况</view>
-                  <view class='line' wx:if = '{{user_priv == 2}}' bindtap='showMark' data-key = 'expectedtime' >
+                  <view class='line' bindtap='showMark' data-key = 'expectedtime' >
                         <view class='title'>预计完成时间</view>
                         <view class='line-right'>
                           <view class='value'>{{filter.subLen(expectedtime, 10) || "请选择预计完成时间"}}</view>
@@ -91,9 +91,9 @@
                         </view>
                   </view>
 
-                  <view class='remark' wx:if = '{{user_priv == 2 && !showMark}}'>
+                  <view class='remark' wx:if = '{{!showMark}}'>
                         <view class='title'>审批意见</view>
-                        <textarea maxlength='-1' placeholder='请输入审批意见' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}'></textarea>
+                        <textarea maxlength='-1' placeholder='{{disablex ? "无" : "请输入审批意见"}}' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}'></textarea>
                         
                   </view>
             

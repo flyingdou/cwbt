@@ -147,15 +147,4 @@
 
 
       </view>
-
-      <!-- 填充高度 -->
-      <view style='height: 80rpx;' wx:if='{{type == 0}}'></view>
-
-      <!-- 底部功能按钮 -->
-      <view class='footer' wx:if='{{type == 1 && feedback.status != 2}}'>
-            <view class='checkButton' bindtap='valid'>确认</view>
-      </view> 
-
-
-
 </view>

@@ -1,11 +1,11 @@
 <!-- 页面开始 -->
-<view class='content'>
+<view class='content' wx:if='{{type == 0}}'>
       <checkbox-group bindchange = 'checkboxChange'> 
 
       <view class='list'>
                 <noData wx:if='{{!workCardList || workCardList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type + "&status=" + item.status : "../tempWork/tempWork?id=" + item.id + "&status=" + item.status + "&overhaul=" + type}}' data-index='{{index}}'>
+                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type + "&status=" + item.status : "../tempWork/tempWork?id=" + item.id + "&status=" + item.status + "&overhaul=" + type}}' data-workcard='{{item}}'>
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 4 || item.status == 9 || item.feedback == 2}}'></view>
                             <view class='line1'>
@@ -70,13 +70,86 @@
 
       </view>
       
-      
-
-
       </checkbox-group>
       
+</view>
 
 
 
+<!-- 委外维修 -->
+<view class='content' wx:if='{{type == 1}}'>
+  <tab titles='{{titles}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}'>
+      <view class='list' wx:for='{{titles}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
+                <noData wx:if='{{!tabItem.workCardList || tabItem.workCardList.length <= 0}}'></noData>
+                <view class='pre' wx:for='{{tabItem.workCardList}}' wx:key=''>
+                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type + "&status=" + item.status : "../tempWork/tempWork?id=" + item.id + "&status=" + item.status + "&overhaul=" + type}}' data-workcard='{{item}}'>
+                            <!-- 填充高度 -->
+                            <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 4 || item.status == 9 || item.feedback == 2}}'></view>
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>设备名称</view>
+                                        <view class='value'>{{item.equipmentName}}</view>
+                                  </view>
 
+                                  <view class='tv'>
+                                        <view class='title'>发起人</view>
+                                        <view class='value'>{{item.userName}}</view>
+                                  </view>
+                            </view>
+
+                            <view class='lineFill'></view>
+
+                            <view class='line1'>
+                                  <view class='tv left'>
+                                        <view class='title'>所属部门</view>
+                                        <view class='value'>{{item.deptName}}</view>
+                                  </view>
+
+                                  <view class='tv'>
+                                        <view class='title'>所属船舶</view>
+                                        <view class='value'>{{item.boat}}</view>
+                                  </view>
+                            </view>
+
+                            <view class='lineFill'></view>
+
+                            <view class='line2'>
+                                  <view class='tv right' wx:if='{{item.status == 1 || item.status == 9}}'>
+                                        <view class='title'>异常时间</view>
+                                        <view class='value'>{{item.createtime}}</view>
+                                  </view>
+                                  <view class='tv right' wx:else>
+                                        <view class='title'>完成时间</view>
+                                        <view class='value'>{{item.feedbacktime}}</view>
+                                  </view>
+                            </view>
+
+                            <!-- 图标 -->
+                            <!--<view class='tag' wx:if='{{item.status == 9}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已审批</view>
+                                  </view>
+                            </view>-->
+                            <!-- 图标 -->
+                            <!-- <view class='tag' wx:if='{{(item.status == 2 || item.status == 4) && item.feedback != 2}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已反馈</view>
+                                  </view>
+                            </view> -->
+                            <!-- 图标 -->
+                            <!-- <view class='tag' wx:if='{{item.feedback == 2}}'>
+                                  <view class='tagDiv'>
+                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
+                                        <view class='statusFont'>已验收</view>
+                                  </view>
+                            </view> -->
+                      </view>
+
+                </view>
+
+      </view>
+      
+  </tab>
 </view>

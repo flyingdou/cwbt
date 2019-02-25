@@ -7,6 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    titles: [
+      {title: "待审批"},
+      {title: "已审批"},
+      {title: "已完成"}
+    ],
     currentPage: app.pageInfo.currentPage,
     pageSize: app.pageInfo.pageSize
   },
@@ -33,7 +38,8 @@ Page({
 
     obj.setData({
       type: type,
-      userPriv: app.user.userPriv
+      userPriv: app.user.userPriv,
+      windowHeightRpx: util.getSystemInfo().windowHeightRpx
     });
   },
 
@@ -50,7 +56,14 @@ Page({
   onShow: function () {
     obj.data.currentPage = app.pageInfo.currentPage;
     obj.data.workCardList = [];
-    this.getWorkCardList();
+    // 自行维修不分tab，委外维修分三个tab
+    if (obj.data.type == 0) {
+      this.getWorkCardList();
+    } else {
+      this.getWorkCardList(0);
+      this.getWorkCardList(1);
+      this.getWorkCardList(2);
+    }
   },
 
   /**
@@ -79,14 +92,13 @@ Page({
    */
   onReachBottom: function () {
      // 上拉加载，分页查询
-     obj.data.currentPage++;
-     obj.getWorkCardList();
+     // obj.data.currentPage++;
+     // obj.getWorkCardList();
   },
 
   goto: function (e) {
     var link = e.currentTarget.dataset.link;
-    var index = e.currentTarget.dataset.index;
-    var workCard = obj.data.workCardList[index];
+    var workCard = e.currentTarget.dataset.workcard;
     // console.log('index: ' + index + ', workCardList: ' + JSON.stringify(obj.data.workCardList));
     var type = obj.data.type;
     if (workCard.status == 9 && workCard.collectorpersonid != app.user.id && type == 0) {
@@ -105,7 +117,7 @@ Page({
   /**
    * 查询管理端临时工作卡列表数据
    */
-  getWorkCardList: function () {
+  getWorkCardList: function (queryType) {
     // loading
     wx.showLoading({
       title: '加载中',
@@ -114,23 +126,37 @@ Page({
     var workCardList = obj.data.workCardList || [];
     var url = util.getRequestURL('getTemporaryWorkCardList.we');
     var param = { 
-            userPriv: app.user.userPriv,
-            deptId: app.user.deptId, 
-            status: [1, 2, 4, 9, 14], 
-            overhaul_function: obj.data.type,
-            currentPage: obj.data.currentPage,
-            pageSize: obj.data.pageSize
-      };
+      userPriv: app.user.userPriv,
+      deptId: app.user.deptId, 
+      overhaul_function: obj.data.type,
+      status: [1, 2, 9],
+      queryType: queryType
+    };
+    if (queryType == 0) {
+      param.status = [1];
+    } else if (queryType == 1) {
+      param.status = [9];
+    } else if (queryType == 2) {
+      param.status = [2];
+    }
     wx.request({
       url: url,
       data: {
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
-        workCardList = workCardList.concat(res.data);
-        obj.setData({
-          workCardList: workCardList
-        }, wx.hideLoading());
+        // workCardList = workCardList.concat(res.data);
+        if (queryType || queryType == 0) {
+          var titles = obj.data.titles;
+          titles[queryType].workCardList = res.data; 
+          obj.setData({
+            titles: titles
+          }, wx.hideLoading());
+        } else {
+          obj.setData({
+            workCardList: res.data
+          }, wx.hideLoading());
+        }
       },
       fail: function (e) {
         util.tipsMessage('网络异常！');

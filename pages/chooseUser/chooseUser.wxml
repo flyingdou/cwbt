@@ -59,7 +59,14 @@
 
 
       <!-- userListTitle -->
-      <view class='userListTitle' wx:if = '{{userList && userList.length > 0}}'>{{navList[navList.length-1].dept_name}}直属人员</view>
+      <view class='userListTitle' wx:if = '{{userList && userList.length > 0}}'>
+        <block wx:if='{{navList[navList.length-1].seq_id != userList[0].dept_id}}'>
+          搜索结果
+        </block>
+        <block wx:else>
+          {{navList[navList.length-1].dept_name}}直属人员
+        </block>
+      </view>
       <!-- 当前机构的人员 -->
       <view class='userList' wx:if = '{{userList && userList.length > 0}}'>
             <!-- checkboxGroup -->

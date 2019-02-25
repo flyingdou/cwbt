@@ -55,9 +55,9 @@
                   </view>
             </view>
 
-            <!-- 备注 -->
-            <view class='taskList'>
-                  <view class='taskTitle'>备注</view>
+            <!-- 执行过程描述 -->
+            <view class='taskList' wx:if='{{!valid.exceptional_describe}}'>
+                  <view class='taskTitle'>执行过程描述</view>
                   
                   <!-- 工作内容 -->
                   <view class='task'>
