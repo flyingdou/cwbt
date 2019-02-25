@@ -1,9 +1,10 @@
 .weui-cell-third{  
+  padding-top: 10rpx;
   background: #fff;
 }
 .weui-cell-list{  
-  background: #fff;  
-  margin: 5px 50px 5px 50px;
+  padding: 0 100rpx;
+  background: #fff; 
 }
 .weui-cell-line{
   /* width: 100px; */
