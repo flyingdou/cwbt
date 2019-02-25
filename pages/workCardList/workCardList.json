@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "已办工作卡(待验收)",
+  "navigationBarTitleText": "已办工作卡",
   "usingComponents": {
     "noData": "../../component/noData/noData"
   }

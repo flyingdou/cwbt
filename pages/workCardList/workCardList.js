@@ -85,6 +85,7 @@ Page({
     var param = {};
     param.user_id = app.user.id;
     
+    
     // 分页
     param.currentPage = obj.data.currentPage;
     param.pageSize = obj.data.pageSize;

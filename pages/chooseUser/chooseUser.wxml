@@ -91,7 +91,7 @@
 
             <view class='sureLine'>
                   <view class='title'>已选择:<text wx:if = '{{checkCount && checkCount > 0}}'>{{checkCount}}人</text></view>
-                  <view class='sure' bindtap='choose'>确定</view>
+                  <view class='sure' bindtap='choose'>我选好了</view>
             </view>
       </view>
 

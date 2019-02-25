@@ -223,6 +223,8 @@ Page({
 		 		if (res.data.success) {
           // 移除页面缓存数据
           obj.clear();
+          // 取消loading
+          wx.hideLoading();
           wx.showModal({
             title: '提示',
             content: '发送成功！',
@@ -246,10 +248,8 @@ Page({
 		 			content: '网络异常！',
            showCancel: false
 		 		})
-		 	},
-       complete: (rx) => {
-         wx.hideLoading();
-       }
+		 	}
+      
 		 })
   },
 

@@ -171,6 +171,7 @@
       <!-- footer -->
       <view class='footer'>
             <view class='sure' bindtap='getBoatList'>查询</view>
+            
       </view>
       
 
