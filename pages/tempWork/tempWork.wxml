@@ -10,7 +10,7 @@
                   <view class='value'>{{workDetail.ename}}</view>
             </view>
 
-            <view class='line'>
+            <view class='line' wx:if='{{user_priv == 2}}'>
                   <view class='title'>设备编码</view>
                   <view class='value'>{{workDetail.number}}</view>
             </view>

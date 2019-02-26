@@ -1,6 +1,31 @@
+<!-- 填充高度 -->
 <view style='height: 20rpx;'></view>
 
-<view class="pie-wraper">
-	<view class='title'>荆州测绘中心工作卡任务完成情况</view>
+<!-- 选择部门 -->
+<view class='choose' bindtap='toSelectDeptPage'>
+      <view class='left'>
+            选择统计部门：
+      </view>
+
+      <view class='right'>
+            <view class='value'>{{deptObj.dept_name ? deptObj.dept_name : "请选择"}}</view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 统计图 -->
+<view class="wraper" wx:if='{{deptObj}}'>
+	<view class='title'>{{deptObj.dept_name}}工作卡任务完成情况</view>
   <canvas canvas-id="pieCanvas" class="canvas" style="height:300px"></canvas>
+  <view class='works-content'>
+    <view class='works-item' wx:for='{{statistics}}' wx:key=''>
+      {{item.name}}: {{item.sum}}
+    </view>
+  </view>
 </view>

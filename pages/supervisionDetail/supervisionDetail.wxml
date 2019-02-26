@@ -195,7 +195,7 @@
                   <view class='line'>
                         <view class='tv'>
                               <view class='title'>执行人</view>
-                              <view class='value'>{{item.opeartor}}</view>
+                              <view class='value'>{{item.opeartor}}-{{item.dept_name}}</view>
                         </view>
                   </view>
 

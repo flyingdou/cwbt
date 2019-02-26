@@ -32,7 +32,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 获取选择部门页面的数据
+    if (wx.getStorageSync("deptObj")) {
+      var deptObj = wx.getStorageSync("deptObj");
+      obj.setData({
+        deptObj: wx.getStorageSync("deptObj")
+      });
+      wx.removeStorageSync("deptObj");
 
+      // 根据部门查询统计数据
+      wx.showLoading({
+        title: '数据加载中',
+        mask: true
+      });
+
+      // 统计部门工作卡任务完成情况
+      obj.statistics(deptObj.seq_id);
+    }
   },
 
   /**
@@ -67,12 +83,29 @@ Page({
    * 页面初始化
    */
   init (e) {
-    wx.showLoading({
-      title: "数据加载中",
-      mask: true
+    // wx.showLoading({
+    //   title: "数据加载中",
+    //   mask: true
+    // });
+    // 根据当前登录用户所在部门自动展现
+
+  },
+
+  /**
+   * 去选择部门页面
+   */
+  toSelectDeptPage: function () {
+    wx.navigateTo({
+      url: '../chooseDept/chooseDept'
     });
+  },
+
+  /**
+   * 统计查询
+   */
+  statistics: function (departmentid) {
     var url = util.getRequestURL('statisticsWcWorkcard.we');
-    var param = {departmentid: 216};
+    var param = { departmentid: departmentid };
     wx.request({
       url: url,
       data: {
@@ -89,10 +122,10 @@ Page({
           sum += item.number5;
         });
         var data = [];
-        data.push({data: ((notComplete/sum) * 100), name: "未完成"});
-        data.push({data: ((complete/sum) * 100), name: "正常完成"});
-        data.push({data: ((advance/sum) * 100), name: "提前完成"});
-        data.push({data: ((overdue/sum) * 100), name: "逾期完成"});
+        data.push({ data: ((notComplete / sum) * 100), name: "未完成", sum: notComplete });
+        data.push({ data: ((complete / sum) * 100), name: "正常完成", sum: complete });
+        data.push({ data: ((advance / sum) * 100), name: "提前完成", sum: advance });
+        data.push({ data: ((overdue / sum) * 100), name: "逾期完成", sum: overdue });
         obj.wxcharts = new wxcharts({
           canvasId: "pieCanvas",
           width: 300,
@@ -102,7 +135,9 @@ Page({
           series: data,
           dataLabel: true
         });
-        wx.hideLoading();
+        obj.setData({
+          statistics: data.concat([{name: "总数", sum: sum}])
+        }, wx.hideLoading());
       },
       fail(e) {
         wx.hideLoading();

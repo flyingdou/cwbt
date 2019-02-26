@@ -28,7 +28,8 @@ Page({
 
     obj.setData({
       workCardId: workCardId,
-      collectorpersonid: collectorpersonid 
+      collectorpersonid: collectorpersonid,
+      userPriv: app.user.userPriv 
     })
     obj.init();
   },

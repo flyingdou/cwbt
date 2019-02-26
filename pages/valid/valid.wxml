@@ -56,7 +56,7 @@
             </view>
 
             <!-- 执行过程描述 -->
-            <view class='taskList' wx:if='{{!valid.exceptional_describe}}'>
+            <view class='taskList' wx:if='{{valid.status != 5}}'>
                   <view class='taskTitle'>执行过程描述</view>
                   
                   <!-- 工作内容 -->
@@ -106,7 +106,7 @@
 
       <!-- 底部功能按钮 -->
       <view class='footer'>
-            <view class='button validNo' bindtap='valid' data-status = '3' >驳回</view>
+            <view class='button validNo' bindtap='valid' data-status = '3' wx:if='{{valid.status != 5}}'>驳回</view>
             <view class='button validYes' bindtap='valid' data-status = '2'>验收</view>
       </view>
 

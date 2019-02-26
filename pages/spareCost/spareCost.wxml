@@ -24,7 +24,7 @@
                   <view class='tv'>
                         <view class='title'>使用数量:</view>
                         <view class='value'>
-                              <input type='number' value = '{{costCount}}' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount' data-name='number' data-index='{{index}}'>5</input>
+                              <input style='width:200rpx;' type='number' value = '{{costCount}}' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount' data-name='number' data-index='{{index}}'>5</input>
                         </view>
                   </view>
 

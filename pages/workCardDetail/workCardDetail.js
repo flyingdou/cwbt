@@ -27,7 +27,8 @@ Page({
 
     obj.setData({
       workCardId: workCardId,
-      workCardStatus: workCardStatus
+      workCardStatus: workCardStatus,
+      userPriv: app.user.userPriv
     })
     obj.init();
   },

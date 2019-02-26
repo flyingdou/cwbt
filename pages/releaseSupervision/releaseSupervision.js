@@ -147,11 +147,14 @@ Page({
     var douValue = obj.data[douKey] || '';
 
     var jumpUrl = '../../pages/chooseUser/chooseUser?' + key + '=' + JSON.stringify(douValue) + '&key=' + key;
-    if (obj.data.recUsersDou) {
-      var chooseDeptList = obj.data.recUsersDou.chooseDeptList || [];
-      var chooseUsers = obj.data.recUsersDou.chooseUsers || [];
+    if (douValue) {
+      var chooseDeptList = douValue.chooseDeptList || [];
+      var chooseUsers = douValue.chooseUsers || [];
       var checkCount = chooseUsers.length;
-      jumpUrl += '&chooseDeptList=' + JSON.stringify(chooseDeptList) + '&checkCount=' + checkCount;
+      jumpUrl += '&chooseDeptList=' + JSON.stringify(chooseDeptList);
+      if (checkCount && checkCount > 0) {
+        jumpUrl += '&checkCount=' + checkCount;
+      }
     }
     var contents = obj.data.contents || [];
     var upUsers = [];
