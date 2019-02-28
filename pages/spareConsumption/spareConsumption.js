@@ -7,7 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    qualitys: [
+      { name: '优', value: 1 },
+      { name: '中', value: 2 },
+      { name: '差', value: 3 }
+    ]
   },
 
   /**
@@ -147,7 +151,10 @@ Page({
               count++;
             }
           });
+          // 页面备件列表中没有重复，就执行添加操作，否则不添加并提示
           if (count == 0) {
+            // 备件质量默认给优
+            data[0].quality = 1;
             spareList.push(data[0]);
           } else {
             util.tipsMessage("该备件已经添加过，无法重复添加");

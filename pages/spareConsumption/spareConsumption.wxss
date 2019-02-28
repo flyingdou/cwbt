@@ -51,6 +51,8 @@
 }
 
 .title{
+  display: flex;
+  align-items: center;
   padding-right: 20rpx;
 }
 
@@ -70,6 +72,13 @@
   width: 26rpx;
   height: 26rpx;
   padding-left: 20rpx;
+}
+
+.radio-wraper{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 .preSpare{

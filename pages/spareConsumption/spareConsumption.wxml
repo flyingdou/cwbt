@@ -48,6 +48,14 @@
             <view class='title'>单位:</view>
             <view class='value'>{{item.unit}}</view>
       </view>
+
+      <view class='tv'>
+            <radio-group class='radio-wraper' bindchange='inputChange' data-index='{{index}}' data-key='quality'>
+              <view class='title' wx:for='{{qualitys}}' wx:key='' wx:for-item='quality' wx:for-index='qualityIndex'>
+                <radio value='{{quality.value}}' checked='{{item.quality == quality.value}}'></radio> {{quality.name}}
+              </view>
+            </radio-group>
+      </view>
 </view>
 
 <!-- 添加备件按钮 -->
