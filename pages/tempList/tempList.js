@@ -58,24 +58,20 @@ Page({
       titles: {
         0: [
           { title: '待审批'},
-          { title: '审批同意'},
           { title: '审批拒绝' }
         ],
         1: [
           { title: '待审批' },
-          { title: '审批同意' },
           { title: '审批拒绝' }
         ]
       }
     });
     if (obj.data.overhaul == 0) {
       this.getWorkCardList([6], 0);
-      this.getWorkCardList([14], 1);
-      this.getWorkCardList([7], 2);
+      this.getWorkCardList([7], 1);
     } else {
       this.getWorkCardList([6], 0);
-      this.getWorkCardList([14], 1);
-      this.getWorkCardList([7], 2);
+      this.getWorkCardList([7], 1);
     }
   },
 

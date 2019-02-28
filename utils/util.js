@@ -1,5 +1,4 @@
 var app = getApp();
-
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -130,7 +129,6 @@ function preview (e) {
    })
 }
 
-
 /**
  * 格式化计划时间
  */
@@ -161,11 +159,6 @@ function formatPlanTime (workList) {
   return workList;
   
 }
-
-
-
-
-
 
 
 
