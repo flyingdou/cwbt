@@ -1,0 +1,59 @@
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择设备 -->
+<view class='choose' bindtap='goto' data-link='../chooseEquipment3/chooseEquipment3'>
+      <view class='left'>
+            选择设备：
+      </view>
+
+      <view class='right'>
+            <view class='value'>{{equipment.name ? equipment.name : "请选择"}}</view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 备件列表 -->
+<view class='spare' wx:for='{{spareList}}' wx:key=''>
+      <view class='delIcon' catchtap='removeSpare'>
+            <image src='../../icon/close.png' mode='aspectFill'></image>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>备件名称:</view>
+            <view class='value'>{{item.name}}</view>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>剩余数量:</view>
+            <view class='value'>{{item.number}}</view>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>规格型号:</view>
+            <view class='value'>{{item.model}}</view>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>使用数量:</view>
+            <view class='value'>
+                  <input style='width:200rpx;' type='number' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount' data-index='{{index}}' value='{{item.costCount}}'></input>
+            </view>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>单位:</view>
+            <view class='value'>{{item.unit}}</view>
+      </view>
+</view>
+
+<!-- 添加备件按钮 -->
+<view class='add-btn' bindtap='addSpare'><view class='btn-block'>+添加备件</view></view>
+
+<!-- 底部悬浮按钮 -->
+<view class='footer'>
+      <view class='cost' bindtap='submit'>提交</view>
+</view>

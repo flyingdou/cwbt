@@ -20,7 +20,7 @@
 <view style='height: 20rpx;'></view>
 
 <!-- 统计图 -->
-<view class="wraper" wx:if='{{deptObj}}'>
+<view class="wraper" wx:if='{{deptObj && !deptObj.isHide}}'>
 	<view class='title'>{{deptObj.dept_name}}工作卡任务完成情况</view>
   <canvas canvas-id="pieCanvas" class="canvas" style="height:300px"></canvas>
   <view class='works-content'>

@@ -113,31 +113,40 @@ Page({
       },
       dataType: 'json',
       success(res) {
-        var complete = 0, notComplete = 0, advance = 0, overdue = 0, sum = 0;
-        res.data.list.forEach(function (item, i) {
-          notComplete += item.number1;
-          complete += item.number2;
-          overdue += item.number3;
-          advance += item.number4;
-          sum += item.number5;
-        });
-        var data = [];
-        data.push({ data: ((notComplete / sum) * 100), name: "未完成", sum: notComplete });
-        data.push({ data: ((complete / sum) * 100), name: "正常完成", sum: complete });
-        data.push({ data: ((advance / sum) * 100), name: "提前完成", sum: advance });
-        data.push({ data: ((overdue / sum) * 100), name: "逾期完成", sum: overdue });
-        obj.wxcharts = new wxcharts({
-          canvasId: "pieCanvas",
-          width: 300,
-          height: 300,
-          type: "pie",
-          animation: true,
-          series: data,
-          dataLabel: true
-        });
-        obj.setData({
-          statistics: data.concat([{name: "总数", sum: sum}])
-        }, wx.hideLoading());
+        if (res.data.list && res.data.list.length > 0) {
+          var complete = 0, notComplete = 0, advance = 0, overdue = 0, sum = 0;
+          res.data.list.forEach(function (item, i) {
+            notComplete += item.number1;
+            complete += item.number2;
+            overdue += item.number3;
+            advance += item.number4;
+            sum += item.number5;
+          });
+          var data = [];
+          data.push({ data: ((notComplete / sum) * 100), name: "未完成", sum: notComplete });
+          data.push({ data: ((complete / sum) * 100), name: "正常完成", sum: complete });
+          data.push({ data: ((advance / sum) * 100), name: "提前完成", sum: advance });
+          data.push({ data: ((overdue / sum) * 100), name: "逾期完成", sum: overdue });
+          obj.wxcharts = new wxcharts({
+            canvasId: "pieCanvas",
+            width: 300,
+            height: 300,
+            type: "pie",
+            animation: true,
+            series: data,
+            dataLabel: true
+          });
+          obj.setData({
+            statistics: data.concat([{ name: "总数", sum: sum }])
+          }, wx.hideLoading());
+        } else {
+          var deptObj = obj.data.deptObj;
+          deptObj.isHide = true;
+          obj.setData({
+            deptObj: deptObj
+          }, wx.hideLoading());
+          util.tipsMessage("该部门无统计数据");
+        }
       },
       fail(e) {
         wx.hideLoading();

@@ -1,0 +1,182 @@
+.content{
+  position: relative;
+}
+
+.navBar{
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20rpx;
+  background: white;
+  border-radius: 5rpx;
+}
+
+.preNav{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav{
+   font-size: 28rpx;
+   padding-right: 10rpx;
+   color: blue; 
+}
+
+.current{
+  color: rgba(153,153,153,1);
+}
+
+.deptList{
+  background:white;
+  padding:20rpx;
+}
+
+.preDept{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  border-bottom:0.5px solid rgba(245,245,245,1);
+}
+
+.preDept:last-child{
+  border-bottom: none;
+}
+
+.left{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+}
+
+.right{
+  width: 50%;
+}
+
+.deptImage{
+   width: 80rpx;
+   height: 80rpx;
+}
+
+.deptName{
+  padding-left: 20rpx;
+}
+
+.next{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nextImg{
+  width: 32rpx;
+  height: 27rpx;
+}
+
+.nextFont{
+  padding-left: 15rpx;
+  font-size: 28rpx;
+  color: rgba(54, 123, 240, 1);
+}
+
+.userList{
+  background:white;
+  padding:20rpx;
+}
+
+.preUser{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20rpx 0;
+  border-bottom:1rpx solid rgba(245,245,245,1);
+}
+
+.preUser:last-child{
+  border-bottom: none;
+}
+
+.userName{
+  font-size: 28rpx;
+  padding-left:20rpx;
+
+}
+
+.douFill{
+  width: 100%;
+  height: 180rpx;
+}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 20rpx;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.scan{
+   float: right;
+   font-size: 28rpx;
+   text-align: center;
+   color: white;
+   margin: 0 20rpx;
+   padding: 20rpx 20rpx;
+   background:rgba(38,130,255,1);
+   box-shadow:0px 5px 10px rgba(255,114,114,0.1);
+   border-radius: 8rpx;
+}
+
+.back{
+  float: left;
+  padding: 20rpx 30rpx;
+  margin: 0 20rpx;
+  border-radius: 8rpx;
+}
+
+.TagTitle{
+  font-size: 28rpx;
+  text-align: center;
+  background: #ccd;
+  color: black;
+  padding: 20rpx;
+}
+
+.left{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.info{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.iconDiv{
+  width: 100rpx;
+  height: 100rpx;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.boatImage{
+   width: 120rpx;
+   height: 120rpx;
+   border-radius:10rpx;
+   overflow:hidden;
+}
+
+.boatListTitle{
+  font-size: 32rpx;
+  color: black;
+  background: #ccc;
+  text-align: center;
+  padding: 20rpx 0;
+}

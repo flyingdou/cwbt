@@ -31,22 +31,24 @@
       </view>
 
       <!-- 结果 -->
-      <view class='weui-cell-third'>
-            <view class='tagTitle'>维保记录</view>
-            <noData wx:if='{{!list || list.length <= 0}}'></noData>
-            <block wx:for="{{list}}" wx:key="">
-                  <view class='weui-cell-list'>
-                        <view class='weui-cell-circle'></view>  
-                        <view class='weui-cell-line'>
-                              <view class='weui-cell-time'><text class="text">{{item.finishtime}}</text></view>
-                              <view class='weui-cell-name'></view>
-                              <view class='weui-cell-event'>名称: <text class="text">{{item.name}}</text></view>
-                              <view class='weui-cell-event'>执行人: <text class="text">{{item.executor}}</text></view>
-                              <view class='weui-cell-event'>状态: <text class="text">{{item.statusName}}</text></view>
-                        </view>
-                  </view>
-            </block>
-      </view>
+      <view class='tagTitle'>维保记录</view>
+      <tab titles='{{titles}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}'>
+        <view class='weui-cell-third' wx:for='{{titles}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
+              <noData wx:if='{{!tabItem.list || tabItem.list.length <= 0}}'></noData>
+              <block wx:for="{{tabItem.list}}" wx:key="">
+                    <view class='weui-cell-list'>
+                          <view class='weui-cell-circle'></view>  
+                          <view class='weui-cell-line'>
+                                <view class='weui-cell-time'><text class="text">{{item[tabItem.attribute1.key]}}</text></view>
+                                <view class='weui-cell-name'></view>
+                                <view class='weui-cell-event'>{{tabItem.attribute2.name}}: <text class="text">{{item[tabItem.attribute2.key]}}</text></view>
+                                <view class='weui-cell-event'>{{tabItem.attribute3.name}}: <text class="text">{{item[tabItem.attribute3.key]}}</text></view>
+                                <view class='weui-cell-event'>{{tabItem.attribute4.name}}: <text class="text">{{item[tabItem.attribute4.key]}}</text></view>
+                          </view>
+                    </view>
+              </block>
+        </view>
+      </tab>
 </view>
 
 <!-- 日历组件 -->

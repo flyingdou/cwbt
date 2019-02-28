@@ -7,6 +7,53 @@ Page({
    * 页面的初始数据
    */
   data: {
+     titles: [
+      { 
+         title: "维修记录",  
+         attribute1: {
+           name: "", key: "finishtime"
+         },
+         attribute2: {
+           name: "名称", key: "name"
+         },
+         attribute3: {
+           name: "执行人", key: "executor"
+         },
+         attribute4: {
+           name: "状态", key: "statusName"
+         }
+      },
+       { 
+         title: "保养记录", 
+         attribute1: {
+           name: "", key: "finishtime"
+         },
+         attribute2: {
+           name: "名称", key: "name"
+         },
+         attribute3: {
+           name: "执行人", key: "executor"
+         },
+         attribute4: {
+           name: "状态", key: "statusName"
+         } 
+       },
+       { 
+         title: "备件消耗", 
+         attribute1: {
+           name: "", key: "createtime"
+         },
+         attribute2: {
+           name: "名称", key: "name"
+         },
+         attribute3: {
+           name: "执行人", key: "updateperson"
+         },
+         attribute4: {
+           name: "数量", key: "number"
+         }
+       }
+     ],
      startTime: '请选择',
      endTime: '请选择',
      showModalStatus: false
@@ -18,8 +65,11 @@ Page({
   onLoad: function (options) {
     obj = this;
     var equipmentid = options.equipmentid;
+    var windowHeightRpx = util.getSystemInfo().windowHeightRpx;
+    windowHeightRpx -= 240;
     obj.setData({
-      equipmentid: equipmentid
+      equipmentid: equipmentid,
+      windowHeightRpx: windowHeightRpx
     });
     obj.getData();
   },
@@ -109,14 +159,56 @@ Page({
         json: encodeURI(JSON.stringify(param))
       },
       success: (res) => {
+        // list1是维修记录(临时工作卡), list2是保养记录(周期工作卡)
+        var list1 = [], list2 = [];
+        if (res.data && res.data instanceof Array) {
+          res.data.forEach(function (item, i) {
+            if (item.workcardtype == 2) {
+              list1.push(item);
+            } else {
+              list2.push(item);
+            }
+          });
+        }
+        // 更新数据
+        var titles = obj.data.titles;
+        titles[0].list = list1;
+        titles[1].list = list2;
         obj.setData({
-          list: res.data
+          titles: titles
+        }, wx.hideLoading());
+      },
+      fail (e) {
+        wx.hideLoading();
+        util.tipsMessage("网络异常");
+        console.log(e);
+      }
+    });
+
+    // 查询该设备的备件消耗记录
+    var reqUrl = util.getRequestURL('getSpareRecordByEquipment.we');
+    var param = {
+      equipmentId: obj.data.equipmentid
+    };
+    // 发起微信请求
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        // 更新数据
+        var titles = obj.data.titles;
+        titles[2].list = res.data;
+        obj.setData({
+          titles: titles
         });
       },
-      complete: (com) => {
-        wx.hideLoading();
+      fail(e) {
+        console.log(e);
       }
-    })
+    });
   },
 
   /**

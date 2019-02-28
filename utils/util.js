@@ -44,11 +44,12 @@ function getSystemInfo() {
 /**
  * 提示
  */
-function tipsMessage (message) {
+function tipsMessage (message, callback) {
   wx.showModal({
     title: '提示',
     content: message,
-    showCancel: false
+    showCancel: false,
+    success: callback
   });
 }
 

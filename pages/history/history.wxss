@@ -1,5 +1,6 @@
 .content{
   padding: 20rpx 0;
+  height: auto;
 }
 
 .weui-cell-third{  
