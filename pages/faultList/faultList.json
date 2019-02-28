@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "noData": "../../component/noData/noData",
+    "tab": "../../component/tab/tab"
+  }
+}

@@ -318,8 +318,8 @@ Page({
   init: () => {
     // 维修类型 
     var tempList = [
-      { "name": "自行维修", "link":"../tempList/tempList?overhaul=0"},
-      { "name": "委外维修", "link": "../tempList/tempList?overhaul=1" },
+      { "name": "自行维修", "link":"../faultList/faultList?overhaul=0"},
+      { "name": "委外维修", "link": "../faultList/faultList?overhaul=1" },
     ];
     var chooseTemp = {
       name:'维修类别',
