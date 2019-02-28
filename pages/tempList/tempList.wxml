@@ -1,11 +1,11 @@
 <!-- 页面开始 -->
 <view class='content'>
-  <!-- 委外的 -->
-  <tab titles='{{titles[overhaul]}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx && titles && overhaul == 1}}'>
+  <!-- 页面tab -->
+  <tab titles='{{titles[overhaul]}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx && titles}}'>
       <view class='list' wx:for='{{titles[overhaul]}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
                 <noData wx:if='{{!tabItem.workCardList || tabItem.workCardList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{tabItem.workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}&overhaul={{overhaul}}'  data-index = '{{index}}' data-tabindex='{{tabIndex}}'>
+                      <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}&overhaul={{overhaul}}&tabIndex={{tabIndex}}' >
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
                             <view class='line1'>
@@ -38,16 +38,8 @@
 
                             <view class='line2'>
                                   <view class='tv right'>
-                                        <view class='title'>异常发现时间</view>
+                                        <view class='title'>异常时间</view>
                                         <view class='value'>{{item.createtime}}</view>
-                                  </view>
-                            </view>
-
-                            <!-- 图标 -->
-                            <view class='tag' wx:if='{{item.status == 9}}'>
-                                  <view class='tagDiv'>
-                                        <image src='../../icon/tag@2x.png' mode='aspectFill'></image>
-                                        <view class='statusFont'>已审批</view>
                                   </view>
                             </view>
 
@@ -60,63 +52,15 @@
   </tab>
 
 
-  <!-- 自行的 -->
-  <view class='list' wx:if = '{{overhaul == 0}}'>
-        <noData wx:if='{{!titles[0][1].workCardList || titles[0][1].workCardList.length <= 0}}'></noData>
-        <view class='pre' wx:for = '{{titles[0][1].workCardList}}' wx:key=''>
-              <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}&overhaul={{overhaul}}' data-index = '{{index}}' >
-                    <!-- 填充高度 -->
-                    <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
-                    <view class='line1'>
-                          <view class='tv left'>
-                                <view class='title'>设备名称</view>
-                                <view class='value'>{{item.equipmentName}}</view>
-                          </view>
+    <!-- 功能按钮 -->
+    <view class='footer'>
+          <!-- 发起临时工作卡 -->
+          <view class='button releaseWorkcard' bindtap='sure'>报审缺陷记录</view>
+    </view>
 
-                          <view class='tv'>
-                                <view class='title'>发起人</view>
-                                <view class='value'>{{item.userName}}</view>
-                          </view>
-                    </view>
+    <!-- 填充高度 -->
+    <view class='douFill'></view>
 
-                    <view class='lineFill'></view>
-
-                    <view class='line1'>
-                          <view class='tv left'>
-                                <view class='title'>所属部门</view>
-                                <view class='value'>{{item.deptName}}</view>
-                          </view>
-
-                          <view class='tv'>
-                                <view class='title'>所属船舶</view>
-                                <view class='value'>{{item.boat}}</view>
-                          </view>
-                    </view>
-
-                    <view class='lineFill'></view>
-
-                    <view class='line2'>
-                          <view class='tv right'>
-                                <view class='title'>异常发现时间</view>
-                                <view class='value'>{{item.createtime}}</view>
-                          </view>
-                    </view>
-
-                   
-              </view>
-
-        </view>
-
-  </view>
-
-      <!-- 功能按钮 -->
-      <view class='footer'>
-            <!-- 发起临时工作卡 -->
-            <view class='button releaseWorkcard' bindtap='sure'>新建缺陷记录</view>
-      </view>
-
-      <!-- 填充高度 -->
-      <view class='douFill'></view>
       
 </view>
 

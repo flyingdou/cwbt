@@ -8,14 +8,15 @@ Page({
    */
   data: {
     base_img_url: app.constant.base_img_url,
-    statusList:[],
+    statusList: [],
     handleList: [],
-    photos:[],
-    status:0,
-    handle:0,
+    photos: [],
+    status: 0,
+    handle: 0,
     isHidden: true,
     hidden: true,
-    showMark: false
+    showMark: false,
+    user_id: app.user.id
   },
 
   /**
@@ -23,42 +24,31 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var isRollback = options.isRollback; // 是否撤回 
-    if (isRollback) { 
-       obj.setData({ 
-         isRollback: isRollback 
-       });
+    var dou = {};
+    // 工作卡id
+    dou.workCardId = options.id;
+    // tabIndex
+    dou.tabIndex = options.tabIndex;
+
+    // status
+    if (options.status) {
+      dou.status = options.status;
     }
+    obj.setData(dou);
 
-
-    var workCardId = options.id; // 工作卡id
-    if (!workCardId) {
-      workCardId = 48;
-    }
-
+    // title
     var title = '';
     var overhaul = options.overhaul;
     if (overhaul == 0) {
-        title = '自行维修记录';
-    } 
+      title = '自行报审记录';
+    }
     if (overhaul == 1) {
-        title = '委外维修申请';
+      title = '委外报审申请';
     }
 
     wx.setNavigationBarTitle({
       title: title,
     })
-
-    obj.setData({
-      workCardId: workCardId
-    })
-
-
-    if (options.status) {
-      obj.setData({
-        status: options.status
-      });
-    }
 
     obj.init();
   },
@@ -331,9 +321,9 @@ Page({
   },
 
 
-/**
- * 扫码
- */
+  /**
+   * 扫码
+   */
   scanCode: () => {
     var isScan = false;
     wx.scanCode({

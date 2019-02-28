@@ -76,6 +76,15 @@
                         <textarea wx:if='{{isHidden && showExceptionalInput}}' placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptional_describe' value='{{workDetail.exceptional_describe}}'></textarea>
                   </view>
             </view>
+
+            <!-- 报审事项 -->
+            <view class='remark' wx:if = '{{!showMark}}'>
+                  <view class='title'>报审事项</view>
+                  <view class='task'>
+                        <view class='value task-value' wx:if='{{!showExceptionalInput}}'>{{workDetail.apply_note}}</view>
+                        <textarea wx:if='{{isHidden && showExceptionalInput}}' placeholder='请输入设备维修反馈情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'applyNote' value='{{workDetail.apply_note}}'></textarea>
+                  </view>
+            </view>
              
             
             <!-- 审批情况(审批情况显示(首先必须是委外维修,第一种情况：管理端大处未审批,已审批,已完成都可看，第二种情况管理端小处未审批不可看,已审批和已完成可看，第三种情况船舶端未审批不可看,已审批和已完成可看)) -->
@@ -174,7 +183,7 @@
                             </view>
 
                   
-                  </view><!-- block -->
+                  </view>
 
 
             </view>
@@ -186,29 +195,12 @@
 
             <!-- 底部按钮 -->
             <view class='buttons'>
-                  <!-- 修改时 -->
-                  <view class='update-buttons' wx:if = '{{isRollback && user_priv == 3}}'>
-                        <view wx:if = '{{isRollback}}' class='button rollbackButton' bindtap='uploadPictures' data-fun='updateWorkCard'>修改并提交</view>
-                        <view wx:if = '{{isRollback}}' class='button finshButton' bindtap='deleteWorkCard'>删除</view>
+                  <view class='update-buttons' wx:if = '{{workDetail.creator == user_id && tabIndex == 0}}' >
+                        <view  class='button rollbackButton' bindtap='uploadPictures' data-fun='updateWorkCard'>修改并提交</view>
+                        <view  class='button finshButton' bindtap='deleteWorkCard'>删除</view>
                   </view>
-
-                  <!-- 非修改时 -->
-                  <view>
-                        <!-- 船舶端，已领取 -->
-                        <view wx:if = '{{!isRollback && user_priv == 3}}'> 
-                              <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
-                              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures' data-fun='finish'>提交</view>
-                        </view>
-
-                        <view>
-                              <!-- 管理端、委外维修 -->
-                              <view wx:if = '{{user_priv == 2 && workDetail.overhaul_function == 1 && !disablex}}'>
-                                    <view class='button gotButton' bindtap='getTemp' >提交</view>
-                              </view>
-                        </view>
-                  </view>
-                  
             </view>
+            
       
       </view>
 
