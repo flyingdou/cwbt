@@ -40,7 +40,7 @@
       <view class='tv'>
             <view class='title'>使用数量:</view>
             <view class='value'>
-                  <input style='width:200rpx;' type='number' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount' data-index='{{index}}' value='{{item.costCount}}'></input>
+                  <input style='width:200rpx;' type='digit' placeholder='请输入使用数量' bindinput='inputChange' data-key = 'costCount' data-index='{{index}}' value='{{item.costCount}}'></input>
             </view>
       </view>
 

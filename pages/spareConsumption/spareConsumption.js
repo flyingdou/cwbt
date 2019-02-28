@@ -175,14 +175,9 @@ Page({
   inputChange: function (e) {
     var index = e.currentTarget.dataset.index;
     var key = e.currentTarget.dataset.key;
-    var value = parseFloat(e.detail.value);
+    var value = e.detail.value;
     var spareList = obj.data.spareList;
-    if (spareList[index].number >= value) {
-      spareList[index][key] = value;
-    } else {
-      util.tipsMessage("输入的数量超过当前备件的剩余数量");
-      spareList[index][key] = "";
-    }
+    spareList[index][key] = value;
     obj.setData({
       spareList: spareList
     });
@@ -192,7 +187,7 @@ Page({
    * 校验表单
    */
   checkForm: function () {
-    var checkCount = 0;
+    var checkCount = 0, sumCount = 0;
     var spareList = obj.data.spareList || [];
 
     // 校验是否选择了设备
@@ -208,13 +203,21 @@ Page({
     }
 
     // 校验是否填写了备件消耗数量
-    for (var i = 0; i < spareList.length; i++) {
-      if (!spareList[i].costCount) {
+    spareList.forEach(function (item, i) {
+      if (!item.costCount || isNaN(item.costCount)) {
         checkCount++;
+      } else {
+        if (item.number <= parseFloat(item.costCount)) {
+          sumCount++;
+        }
       }
-    }
+    });
     if (checkCount > 0) {
-      util.tipsMessage("请填写完所有备件消耗数量");
+      util.tipsMessage("请正确填写所有备件消耗数量");
+      return false;
+    }
+    if (sumCount > 0) {
+      util.tipsMessage("备件使用数量超过剩余数量");
       return false;
     }
 
