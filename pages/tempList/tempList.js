@@ -32,9 +32,9 @@ Page({
     
     var title = '';
     if (overhaul == 0) {
-       title = '缺陷工作记录表(自行)';
+       title = '缺陷报审记录表(自行)';
     } else {
-       title = '缺陷工作记录表(委外)';
+       title = '缺陷报审记录表(委外)';
     }
 
     wx.setNavigationBarTitle({
@@ -57,20 +57,25 @@ Page({
     obj.setData({
       titles: {
         0: [
-          { title: '未处理'},
-          { title: '已处理'}
+          { title: '待审批'},
+          { title: '审批同意'},
+          { title: '审批拒绝' }
         ],
         1: [
-          { title: '未审批'},
-          { title: '已审批'}
+          { title: '待审批' },
+          { title: '审批同意' },
+          { title: '审批拒绝' }
         ]
       }
     });
     if (obj.data.overhaul == 0) {
-      this.getWorkCardList([2], 1);
+      this.getWorkCardList([6], 0);
+      this.getWorkCardList([14], 1);
+      this.getWorkCardList([7], 2);
     } else {
-      this.getWorkCardList([1], 0);
-      this.getWorkCardList([9], 1);
+      this.getWorkCardList([6], 0);
+      this.getWorkCardList([14], 1);
+      this.getWorkCardList([7], 2);
     }
   },
 
@@ -122,13 +127,13 @@ Page({
     var param = { 
       userPriv: app.user.userPriv, 
       deptId: app.user.deptId, 
-      status: status, // 未完成、被领取的
+      status: status,
       overhaul_function: obj.data.overhaul,
     };
 
     // loading
     wx.showLoading({
-      title: '加载中...',
+      title: '加载中',
     })
     wx.request({
       url: url,
@@ -142,76 +147,21 @@ Page({
         obj.setData({
           titles: titles
         });
+        wx.hideLoading();
       },
       fail: function (e) {
         util.tipsMessage('网络异常！');
         console.log(e);
-      },
-      complete: function (com) {
-        wx.hideLoading();
       }
     });
   },
-
-  /**
-   * 取消领取
-   */
-  cancle: (e) => {
-    wx.showModal({
-      title: '提示',
-      content: '确定取消领该任务吗？',
-      success: (rex) => {
-        if (rex.cancel) {
-          return;
-        }
-        
-        // 执行释放任务操作
-        if (rex.confirm) {
-          obj.release(e);
-        }
-      }
-    })
-   
-
-  },
- 
-  /**
-   * 释放任务
-   */
-  release: (e) => {
-    var reqUrl = util.getRequestURL('updateWorkCard.we');
-    var index = e.currentTarget.dataset.index;
-    var workCardList = obj.data.workCardList;
-    var param = {
-      id: workCardList[index].id,
-      status: 1 // 未处理状态
-    };
-
-    // 发起微信请求
-    wx.request({
-      url: reqUrl,
-      dataType: 'json',
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      success: (res) => {
-        res = res.data;
-        if (res.success) {
-          workCardList[index].status = param.status;
-          obj.setData({
-            workCardList: workCardList
-          });
-        }
-      }
-    })
-  },
-
 
   /**
    * releaseWorkcard
    */
   releaseWorkcard: () => {
     var code = '';
+    // obj.gotoWork();
     // 扫码识别设备编号
     wx.scanCode({
       onlyFromCamera: true, // 仅能通过相机扫码
@@ -237,6 +187,8 @@ Page({
    */
   gotoWork: () => {
      var code = obj.data.code;
+     // 测试数据
+    //  code = '121600110200400';
      if (!code || code == '') {
         wx.showModal({
           title: '提示',
@@ -248,7 +200,7 @@ Page({
 
     // 跳转
     var overhaul = obj.data.overhaul;
-    var url = '../../pages/releaseWorkCard/releaseWorkCard?code=' + code + '&overhaul=' + overhaul;
+    var url = '../../pages/releaseTempWork/releaseTempWork?code=' + code + '&overhaul=' + overhaul;
      wx.navigateTo({
        url: url,
      })

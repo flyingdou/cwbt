@@ -344,7 +344,7 @@ Page({
     * 发布临时工作卡
     */
     releaseWorkCard: (e) => {
-        var link = '../releaseWorkCard/releaseWorkCard';
+      var link = '../releaseTempWork/releaseTempWork';
         wx.navigateTo({
           url: link + '?code=' + obj.data.deviceNumber, // 跳转到发布临时工作卡页面
         });
