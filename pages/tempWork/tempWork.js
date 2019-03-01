@@ -21,12 +21,12 @@ Page({
     var dou = {};
     // 工作卡id
     dou.workCardId = options.id;
-    // tabIndex
-    dou.tabIndex = options.tabIndex;
+    // source
+    dou.source = options.source;
 
     // status
-    if (options.status) {
-      dou.status = options.status;
+    if (options.audit_status) {
+       dou.audit_status = options.audit_status;
     }
 
     obj.setData(dou);
@@ -149,10 +149,20 @@ Page({
             });
           }
           
-          // 页面数据是否可修改
+          // 判断是否可修改
           var isUpdate = false;
-          if (res.workDetail.creator == app.user.id && obj.data.tabIndex == 0) {
+          if (res.workDetail.creator == app.user.id && obj.data.audit_status == 0 && obj.data.source == 'tempList') {
               isUpdate = true;
+          }
+
+          // 判断是否审批
+          var isAudit = false;
+          var audit = false;
+          if (res.workDetail.creator != app.user.id && obj.data.source == 'mtwcList') {
+             audit = true;
+             if (obj.data.audit_status == 0) {
+                isAudit = true;
+             }
           }
 
 
@@ -162,7 +172,9 @@ Page({
               workDetail: res.workDetail,
               user_priv: user_priv,
               expectedtime: expectedtime,
-              isUpdate: isUpdate
+              isUpdate: isUpdate,
+              isAudit: isAudit,
+              audit: audit
             });
           
         } 
@@ -528,6 +540,102 @@ Page({
       }
     });
     
+  },
+
+  /**
+   * 审批
+   */
+  audit (e) {
+    var key = e.currentTarget.dataset.key;
+    var param = {
+      id: obj.data.workDetail.id,
+      auditPerson: app.user.id
+    };
+
+    var expectedtime = obj.data.expectedtime;
+    var auditNote = obj.data.auditNote;
+    var isdel = '';
+
+    // 校验数据
+    var auditStatus = '';
+    if (key == 'agree') {
+        if (!expectedtime) {
+          util.tipsMessage('请选择预计完成时间！');
+          return;
+        }
+        auditStatus = 1;
+        isdel = 0;
+    }
+    if (key == 'refuse') {
+        if (!auditNote) {
+          util.tipsMessage('请输入审批意见！');
+          return;
+        }
+        auditStatus = 2;
+        isdel = 1;
+    }
+
+    param.expectedtime = expectedtime;
+    param.auditNote = auditNote;
+    param.auditStatus = auditStatus;
+
+    var reqUrl = util.getRequestURL('audit.we');
+
+    // loading
+    wx.showLoading({
+      title: '处理中',
+    })
+
+    wx.request({
+      url: reqUrl,
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success (res) {
+        res = res.data;
+        if (res.success) {
+           wx.hideLoading();
+           wx.showModal({
+             title: '提示',
+             content: '审批完成！',
+             showCancel: false,
+             success (con) {
+                if (con.confirm) {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
+             }
+
+           })
+        }
+      }
+    })
+
+   
+   
+  },
+
+  /**
+   * 选择日历
+   */
+  showMark () {
+    if (!obj.data.isAudit) {
+       return;
+    }
+    obj.setData({
+      showMark: true
+    });
+  },
+
+  /**
+   * 保存日历选出的时间
+   */
+  saveDate (e) {
+    obj.setData({
+      showMark: false,
+      expectedtime: e.detail.value
+    });
   }
 
 

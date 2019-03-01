@@ -3,7 +3,7 @@
       <view class='list' wx:for='{{titles}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
                 <noData wx:if='{{!tabItem.workCardList || tabItem.workCardList.length <= 0}}'></noData>
                 <view class='pre' wx:for='{{tabItem.workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type + "&status=" + item.status : "../tempWork/tempWork?id=" + item.id + "&status=" + item.status + "&overhaul=" + type}}' data-workcard='{{item}}'>
+                      <view class='line' bindtap='goto' data-link = '{{item.status == 2 ? "../mtwcFeedBack/mtwcFeedBack?id=" + item.id + "&type=" + type + "&status=" + item.status : "../tempWork/tempWork?id=" + item.id + "&audit_status=" + item.audit_status + "&overhaul=" + type + "&source=mtwcList"}}' data-workcard='{{item}}'>
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;'></view>
                             <view class='line1'>

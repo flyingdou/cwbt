@@ -99,6 +99,34 @@
                   </view>
             </view>
 
+            <!-- 审批功能块 -->
+            <view wx:if = '{{audit}}'>
+                  <view class='tagName'>审批情况</view>
+                  <!-- 预计完成时间 -->
+                  <view class='line'>
+                        <view class='title'>预计完成时间</view>
+                        <view class='fl' bindtap='showMark'>
+                                <view class='value'>{{expectedtime ? filter.subLen(expectedtime, 10) : "请选择"}}</view>
+                                <view class='moreIcon'>
+                                      <image src='../../icon/more@2x.png' mode='aspectFill'></image>
+                                </view>
+                        </view>
+                        
+                  </view>
+
+
+                  <!-- 审批意见 -->
+                  <view class='remark'>
+                        <view class='title'>审批意见</view>
+                        <view class='task'>
+                              <view class='value task-value' wx:if = '{{!isAudit}}' >{{workDetail.audit_note}}</view>
+                              <textarea wx:if = '{{isAudit && !showMark}}' placeholder='请输入审批意见' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'auditNote' value='{{workDetail.audit_note}}'></textarea>
+                        </view>
+                  </view>
+
+            
+            </view>
+            
             
             <!-- 填充高度 -->
             <view class='fill'></view>
@@ -106,9 +134,17 @@
 
             <!-- 底部按钮 -->
             <view class='buttons'>
+
+                  <!-- 修改 -->
                   <view class='update-buttons' wx:if = '{{isUpdate}}' >
-                        <view  class='button rollbackButton' bindtap='uploadPictures' data-key = 'photos'>修改并提交</view>
                         <view  class='button finshButton' bindtap='deleteWorkCard'>删除</view>
+                        <view  class='button rollbackButton' bindtap='uploadPictures' data-key = 'photos'>修改并提交</view>
+                  </view>
+
+                  <!-- 审批 -->
+                  <view class='update-buttons' wx:if = '{{isAudit}}' >
+                        <view  class='button finshButton' bindtap='audit' data-key = 'refuse'>审批拒绝</view>
+                        <view  class='button rollbackButton' bindtap='audit' data-key = 'agree'>审批通过</view>
                   </view>
             </view>
             
@@ -123,3 +159,7 @@
 <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = '提示' confirm-text = '确定' cancel-text = '取消' bindconfirm = 'confirm2' bindcancel = 'cancel2'>
        <view class='block'>将要扫描设备条码，用以验证设备，确定吗？</view>
 </modal>
+
+
+<!-- 弹出日历，选择时间 -->
+<mark showModalStatus = '{{showMark}}' multiple = '{{false}}' bindMark = 'saveDate'></mark>

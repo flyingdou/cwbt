@@ -194,3 +194,12 @@ textarea{
   padding:20rpx 0;
 }
 
+.fl{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; 
+}
+
+.ft{
+  padding-right: 20rpx;
+}
