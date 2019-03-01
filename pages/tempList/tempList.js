@@ -66,13 +66,9 @@ Page({
         ]
       }
     });
-    if (obj.data.overhaul == 0) {
-      this.getWorkCardList([6], 0);
-      this.getWorkCardList([7], 1);
-    } else {
-      this.getWorkCardList([6], 0);
-      this.getWorkCardList([7], 1);
-    }
+    
+      this.getWorkCardList(0, 0, 1);
+      this.getWorkCardList(2, 1, 1);
   },
 
   /**
@@ -115,7 +111,7 @@ Page({
   /**
    * 查询临时工作卡列表数据
    */
-  getWorkCardList: function (status, index) {
+  getWorkCardList: function (audit_status, index, isdel) {
     var overhaul = obj.data.overhaul;
     var titles = obj.data.titles;
     var workCardList = titles[overhaul][index].workCardList || [];
@@ -123,8 +119,9 @@ Page({
     var param = { 
       userPriv: app.user.userPriv, 
       deptId: app.user.deptId, 
-      status: status,
+      audit_status: audit_status,
       overhaul_function: obj.data.overhaul,
+      isdel: isdel
     };
 
     // loading
@@ -204,7 +201,7 @@ Page({
 
 
 
-  /**
+/**
  * 确定是否需要填写执行情况
  */
   sure() {

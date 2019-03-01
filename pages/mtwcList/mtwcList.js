@@ -9,8 +9,8 @@ Page({
   data: {
     titles: [
       {title: "待审批"},
-      {title: "已审批"},
-      {title: "已完成"}
+      {title: "审批通过"},
+      {title: "审批不通过"}
     ],
     currentPage: app.pageInfo.currentPage,
     pageSize: app.pageInfo.pageSize
@@ -26,9 +26,9 @@ Page({
     var type = options.type;
     var title = '';
     if (type == 0) {
-       title = '自行工作单列表';
+       title = '自行维修报审表';
     } else {
-       title = '委外工作单列表';
+       title = '委外维修报审表';
     }
     
     wx.setNavigationBarTitle({
@@ -56,14 +56,15 @@ Page({
   onShow: function () {
     obj.data.currentPage = app.pageInfo.currentPage;
     obj.data.workCardList = [];
-    // 自行维修不分tab，委外维修分三个tab
-    if (obj.data.type == 0) {
-      this.getWorkCardList();
-    } else {
-      this.getWorkCardList(0);
-      this.getWorkCardList(1);
-      this.getWorkCardList(2);
-    }
+
+    // 待审批
+    this.getWorkCardList(0, 0, 1);
+
+    // 审批通过
+    this.getWorkCardList(1, 1, 0);
+
+    // 审批拒绝
+    this.getWorkCardList(2, 2, 1);
   },
 
   /**
@@ -91,33 +92,21 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-     // 上拉加载，分页查询
-     // obj.data.currentPage++;
-     // obj.getWorkCardList();
   },
 
   goto: function (e) {
     var link = e.currentTarget.dataset.link;
     var workCard = e.currentTarget.dataset.workcard;
-    // console.log('index: ' + index + ', workCardList: ' + JSON.stringify(obj.data.workCardList));
     var type = obj.data.type;
-    if (workCard.status == 9 && workCard.collectorpersonid != app.user.id && type == 0) {
-      wx.showModal({
-        title: '提示',
-        content: '该任务已被他人领取，请选择其他任务！',
-        showCancel: false
-      })
-      return;
-    }
     wx.navigateTo({
       url: link
     });
   },
 
   /**
-   * 查询管理端临时工作卡列表数据
+   * 查询管理端审批列表数据
    */
-  getWorkCardList: function (queryType) {
+  getWorkCardList: function (queryType, audit_status, isdel) {
     // loading
     wx.showLoading({
       title: '加载中',
@@ -129,23 +118,17 @@ Page({
       userPriv: app.user.userPriv,
       deptId: app.user.deptId, 
       overhaul_function: obj.data.type,
-      status: [1, 2, 9],
-      queryType: queryType
+      queryType: queryType,
+      audit_status: audit_status,
+      isdel: isdel
     };
-    if (queryType == 0) {
-      param.status = [1];
-    } else if (queryType == 1) {
-      param.status = [9];
-    } else if (queryType == 2) {
-      param.status = [2];
-    }
+    
     wx.request({
       url: url,
       data: {
         json: encodeURI(JSON.stringify(param))
       },
       success: function (res) {
-        // workCardList = workCardList.concat(res.data);
         if (queryType || queryType == 0) {
           var titles = obj.data.titles;
           titles[queryType].workCardList = res.data; 
