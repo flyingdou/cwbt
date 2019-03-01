@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js');
 
 Component({
   /**
@@ -164,6 +165,7 @@ Component({
     if (!this.data.multiple) {
      var today = e.currentTarget.dataset.date;
      if (today) {
+      today = util.formatDate(new Date(today));
       this.setData({
         activeDay: today
       });
@@ -182,7 +184,9 @@ Component({
 
         // 传递数据到父组件
         var values = activeDays.sort();
-        var myEventDetail = { values: values } // detail对象，提供给事件监听函数
+        var _values = [];
+        values.forEach(item => { _values.push(util.formatDate(new Date(item))); });
+        var myEventDetail = { values: _values } // detail对象，提供给事件监听函数
         var myEventOption = {} // 触发事件的选项
         this.triggerEvent('Calendar', myEventDetail, myEventOption);
       } else {
