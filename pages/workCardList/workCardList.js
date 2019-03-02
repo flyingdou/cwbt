@@ -22,7 +22,7 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
-     obj.init();
+     obj.init(options.queryType);
 
      obj.setData({
       windowHeightRpx: util.getSystemInfo().windowHeightRpx
@@ -83,7 +83,7 @@ Page({
   /**
    * 初始化页面数据
    */
-  init: () => {
+  init: (queryType) => {
 
     // loading
     wx.showLoading({
@@ -93,6 +93,23 @@ Page({
     
     var param = {};
     param.user_id = app.user.id;
+
+    // 周期工作卡
+    if (queryType == 1) {
+       param.type = 1;
+    }
+
+    // 临时工作卡（自行维修）
+    if (queryType == 2) {
+      param.type = 2;
+      param.overhaul_function = 0;
+    }
+
+    // 临时工作卡（委外维修）
+    if (queryType == 3) {
+      param.type = 2;
+      param.overhaul_function = 1;
+    }
     
     
     // 分页
@@ -111,7 +128,8 @@ Page({
           var workcardList = util.formatPlanTime(res.workcardList);
           taskList = taskList.concat(workcardList);
           obj.setData({
-            taskList: taskList
+            taskList: taskList,
+            queryType: queryType
           });
           // 数据存储完再隐藏
           wx.hideLoading();

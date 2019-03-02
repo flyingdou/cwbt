@@ -113,3 +113,12 @@ Page{
   background: #F5F5F5;
   padding: 20rpx 4%;
 }
+
+.tagName{
+  margin: 20rpx 0;
+  padding: 20rpx 0;
+  font-size: 32rpx;
+  color: black;
+  background: #ccc;
+  text-align: center;
+}

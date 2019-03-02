@@ -41,6 +41,7 @@
     "pages/superviseFeedback/superviseFeedback",
     "pages/superviseSwitch/superviseSwitch",
     "pages/logs/logs",
+    "pages/finishSwitch/finishSwitch",
     "pages/workCardList/workCardList",
     "pages/workCardDetail/workCardDetail",
     "pages/Tlist/Tlist",

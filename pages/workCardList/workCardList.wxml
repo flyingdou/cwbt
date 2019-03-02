@@ -20,7 +20,7 @@
                                       <view class='value'>{{item.name}}</view>
                                 </view>
 
-                                <view class='line'>
+                                <view class='line' wx:if = '{{queryType == 1}}'>
                                       <view class='title'>维修等级</view>
                                       <view class='value'>{{item.level}}</view>
                                 </view>

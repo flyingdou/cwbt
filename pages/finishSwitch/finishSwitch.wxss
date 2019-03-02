@@ -1,0 +1,72 @@
+.blocks{
+  margin: 0 auto;
+  padding: 20rpx 0;
+  width: 90%;
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+}
+
+.blocks-title{
+  padding: 0 40rpx;
+  font-size: 32rpx;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  color: rgba(21,21,21,1);
+}
+
+.hr{
+  margin: 20rpx 20rpx 0;
+  height: 2rpx;
+  background-color: #F0F0F2;
+}
+
+.blocks-content{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 30rpx;
+}
+
+.blocks-item{
+  width: 33.33%;
+}
+
+.blocks-icon{
+  position: relative;
+  margin: 0 auto;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  background: rgba(232,232,232,1);
+}
+
+.radius{
+  border-radius:20rpx;
+}
+
+.blocks-memo{
+  margin: 0 auto;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: rgba(21,21,21,1);
+  text-align: center;
+}
+
+.blocks-count{
+  position: absolute;
+  top: -14rpx;
+  right: -14rpx;
+  padding: 4rpx;
+  min-width: 24rpx;
+  font-size: 20rpx;
+  color: #FFF;
+  font-family: PingFang SC;
+  font-weight: 500;
+  text-align: center;
+  line-height: 28rpx;
+  border-radius: 50%;
+  background: rgba(255,114,114,1);
+}
