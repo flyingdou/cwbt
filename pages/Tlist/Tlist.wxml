@@ -1,91 +1,112 @@
 <!-- 页面开始 -->
 <view class='content'>
-      <!-- 列表 -->
-      <view class='List'>
-           <checkbox-group bindchange = 'chooseChange'>
-                    <noData wx:if='{{!taskList || taskList.length <= 0}}'></noData>
-                    <!-- 每一个 -->
-                    <view class='pre' wx:for = '{{taskList}}' wx:key = '' bindtap='goto' data-index = '{{index}}' style='background:{{item.color}}'>
-                          
-                          <!-- 第一行 -->
-                          <view class='line div'>
-                                <view class='title'>设备名称</view>
-                                <view class='value'>{{item.ename}}</view>
-                          </view>
+      <tab titles='{{titles}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}' bindChange='getTabIndex'>
+        <!-- 列表 -->
+        <view class='List' wx:for='{{titles}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
+            <checkbox-group bindchange = 'chooseChange'>
+                      <noData wx:if='{{!tabItem.list || tabItem.list.length <= 0}}'></noData>
+                      <!-- 每一个 -->
+                      <view class='pre' wx:for = '{{tabItem.list}}' wx:key = '' bindtap='goto' data-index = '{{index}}' data-tabindex='{{tabIndex}}' style='{{item.color ? "background:" + item.color : "background: #FFF"}}'>
+                            
+                            <!-- 第一行 -->
+                            <view class='line div'>
+                                  <view class='title'>设备名称</view>
+                                  <view class='value'>{{item.ename || item.equipmentName}}</view>
+                            </view>
 
-                          <!-- 第二行 -->
-                          <view class='line2 div'>
-                                <view class='line'>
-                                      <view class='title'>作业名称</view>
-                                      <view class='value'>{{item.name}}</view>
-                                </view>
-
-                                <view class='line'>
-                                      <view class='title'>维修等级</view>
-                                      <view class='value'>{{item.level}}</view>
-                                </view>
-
-                          </view>
-
-                          <view class='line div'>
-                                <view class='fill'></view>
-                          </view>
-                          
-                          <!-- 第三行 -->
-                          <view class='line2 div'>
-                              <view class='fb'>
-                                    <view class='title'>计划时间</view>
-                                    <view class='value'>{{item.prefix}}<text wx:if = '{{item.subffix}}' decode='{{true}}'>&nbsp;至&nbsp;{{item.subffix}}</text></view>
-                              </view>
-                         </view>
-
-                          <!-- 第四行 -->
-                          <view class='line2 div'>
+                            <!-- 第二行 -->
+                            <view class='line2 div'>
                                   <view class='line'>
-                                        <view class='title'>所属船舶</view>
-                                        <view class='value'>{{item.boatName}}</view>
+                                        <view class='title'>作业名称</view>
+                                        <view class='value'>{{item.name}}</view>
                                   </view>
 
-                                  <view class='line'>
-                                        <view class='title'>截止时间</view>
-                                        <view class='value'>{{item.lasttime}}</view>
+                                  <!-- 周期工作卡显示，临时工作卡不显示 -->
+                                  <view class='line' wx:if = '{{!item.type}}'>
+                                        <view class='title'>维修等级</view>
+                                        <view class='value'>{{item.level}}</view>
                                   </view>
 
                             </view>
-                           
 
-                          <!-- 图标 -->
-                          <view class='tag' wx:if = '{{item.collectorpersonid && !isUpdate}}'>
-                                <!-- 撤销领取 -->
-                                <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-item = '{{item}}' data-index = '{{index}}'>撤销领取</view>
-                
-                                <!-- 他人领取 -->
-                                <view wx:else class='tagDiv'>
-                                      <view class = 'overtime overtimeDou' wx:if = '{{item.status == 3}}'>逾期</view>
-                                      <view class='statusFont'>【{{item.collector}}已领取】</view>
+                            <view class='line div'>
+                                  <view class='fill'></view>
+                            </view>
+                            
+                            <!-- 周期工作卡显示计划时间和截至时间 -->
+                            <!-- 第三行 -->
+                            <view class='line2 div' wx:if='{{!item.type}}'>
+                                <view class='fb'>
+                                      <view class='title'>计划时间</view>
+                                      <view class='value'>{{item.prefix}}<text wx:if = '{{item.subffix}}' decode='{{true}}'>&nbsp;至&nbsp;{{item.subffix}}</text></view>
                                 </view>
-					  
-                          </view>
-                          
-
-                          <!-- 多选择 -->
-                          <view class='choose'  wx:if = '{{!item.collectorpersonid}}' >
-                                <view class = 'overtime' wx:if = '{{item.status == 3}}'>逾期</view>
-                                <checkbox class='checkBoxDou' value='{{item.id}}'  color = 'rgba(54, 123, 240, 1)' catchtap='ni'></checkbox>
                           </view>
 
-                    </view>
+                            <!-- 第四行 -->
+                            <view class='line2 div' wx:if='{{!item.type}}'>
+                                    <view class='line'>
+                                          <view class='title'>所属船舶</view>
+                                          <view class='value'>{{item.boatName}}</view>
+                                    </view>
 
-           </checkbox-group>
+                                    <view class='line'>
+                                          <view class='title'>截止时间</view>
+                                          <view class='value'>{{item.lasttime}}</view>
+                                    </view>
 
-      </view>
+                              </view>
+
+                              <!-- 临时工作卡显示异常时间和计划完成时间 -->
+                              <view class='line2 div' wx:if='{{item.type == 2}}'>
+                                <view class='fb'>
+                                      <view class='title'>异常时间</view>
+                                      <view class='value'>{{item.createtime}}</view>
+                                </view>
+                          </view>
+
+                          <view class='line2 div' wx:if='{{item.type == 2}}'>
+                                <view class='fb'>
+                                      <view class='title'>计划完成时间</view>
+                                      <view class='value'>{{item.expectedtime}}</view>
+                                </view>
+                          </view>
+                            
+
+                            <!-- 图标 -->
+                            <view class='tag' wx:if = '{{item.collectorpersonid && !isUpdate}}'>
+                                  <!-- 撤销领取 -->
+                                  <view class='cancelButton' wx:if = '{{user_id == item.collectorpersonid}}' catchtap='unchoose' data-item = '{{item}}' data-index = '{{index}}' data-tabindex='{{tabIndex}}'>撤销领取</view>
+                  
+                                  <!-- 他人领取 -->
+                                  <view wx:else class='tagDiv'>
+                                        <view class = 'overtime overtimeDou' wx:if = '{{item.status == 3}}'>逾期</view>
+                                        <view class='statusFont'>【{{item.collector}}已领取】</view>
+                                  </view>
+              
+                            </view>
+                            
+
+                            <!-- 多选择 -->
+                            <view class='choose'  wx:if = '{{!item.collectorpersonid}}' >
+                                  <view class = 'overtime' wx:if = '{{item.status == 3}}'>逾期</view>
+                                  <checkbox class='checkBoxDou' value='{{item.id}}'  color = 'rgba(54, 123, 240, 1)' catchtap='ni'></checkbox>
+                            </view>
+
+                      </view>
+
+                      <!-- 底部填充 -->
+                      <view class='douFill'></view>
+
+            </checkbox-group>
+
+        </view>
+      </tab>
 
       <!-- 底部按钮 -->
       <view class='footer' wx:if = '{{!isUpdate}}'>
-		        <view class='button chooseTask' bindtap='getTask' data-status = '9'>领取任务</view>
+		        <view class='button chooseTask' bindtap='getTask'>领取任务</view>
       </view>
 
-      <!-- 底部填充 -->
-      <view class='douFill'></view>
+      
 
 </view>

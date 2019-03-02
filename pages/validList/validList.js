@@ -7,6 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    titles: [
+      { title: '周期工作' },
+      { title: '自行维修' },
+      { title: '委外维修' }
+    ],
+    tabIndex: 0,
     currentPage: app.pageInfo.currentPage,
     pageSize: app.pageInfo.pageSize
   },
@@ -16,6 +22,11 @@ Page({
    */
   onLoad: function (options) {
      obj = this;
+
+    obj.setData({
+      windowHeightRpx: util.getSystemInfo().windowHeightRpx
+    });
+
   },
 
   /**
@@ -30,9 +41,11 @@ Page({
    */
   onShow: function () {
     // 设置默认分页参数
-    obj.data.currentPage = app.pageInfo.currentPage;
-    obj.data.validList = [];
+    // obj.data.currentPage = app.pageInfo.currentPage;
+    // obj.data.validList = [];
     obj.init();
+    obj.getTempList(0);
+    obj.getTempList(1);
   },
 
   /**
@@ -60,8 +73,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-     obj.data.currentPage++;
-     obj.init();
+    //  obj.data.currentPage++;
+    //  obj.init();
   },
 
   /**
@@ -75,8 +88,10 @@ Page({
    * 多选框
    */
   checkboxChange: (e) => {
+    var tabIndex = obj.data.tabIndex;
     var chooseList = e.detail.value;
-    var validList = obj.data.validList;
+    var titles = obj.data.titles;
+    var validList = titles[tabIndex].list;
 
     // 清除选中
     for (var x in validList) {
@@ -110,7 +125,10 @@ Page({
    * 选择
    */
   chooseAll: (e) => {
-    var validList = obj.data.validList;
+    var tabIndex = e.currentTarget.dataset.tabindex;
+    var index = e.currentTarget.dataset.index;
+    var titles = obj.data.titles;
+    var validList = titles[tabIndex].list;
     var id = e.detail.value;
     var isAll = obj.data.isAll;
     var chooseList = obj.data.chooseList;
@@ -133,7 +151,7 @@ Page({
     }
 
     obj.setData({
-      validList: validList,
+      titles: titles,
       chooseList: chooseList,
       isAll: isAll
     });
@@ -144,14 +162,17 @@ Page({
    * 初始化页面数据
    */
   init: () => {
+    wx.showLoading({
+      title: '数据加载中',
+      mask: true
+    });
+    var titles = obj.data.titles;
     var validList = obj.data.validList || [];
     // 发起请求
     var reqUrl = util.getRequestURL('getWorkfeedbackList.we');
     var param = {
       dept_id: app.user.deptId,
-      userId: app.user.id,
-      currentPage: obj.data.currentPage,
-      pageSize: obj.data.pageSize
+      userId: app.user.id
     };
     wx.request({
       url: reqUrl,
@@ -163,16 +184,23 @@ Page({
         res = res.data;
         if (res.success) {
             // 两个数组结果拼接
-            validList = validList.concat(res.workfeedbackList);
+            // validList = validList.concat(res.workfeedbackList);
+            titles[0].list = res.workfeedbackList;
             var isAll = {
               id: "0",
               checked: false
             };
             obj.setData({
-              validList: validList,
+              titles: titles,
               isAll: isAll
-            });
+            }, wx.hideLoading());
         }
+      },
+
+      fail(e) {
+        wx.hideLoading();
+        util.tipsMessage("网络异常");
+        console.log(e);
       }
     })
     
@@ -269,11 +297,60 @@ Page({
    */
   goto: (e) => {
     var id = e.currentTarget.dataset.id;
+    var url = '../../pages/valid/valid?id=' + id;
+    if (obj.data.tabIndex == 1) {
+      url = '../../pages/tempValid/tempValid?id=' + id + '&overhaul=0';
+    } else if (obj.data.tabIndex == 2) {
+      url = '../../pages/tempValid/tempValid?id=' + id + '&overhaul=1';
+    }
     wx.navigateTo({
-      url: '../../pages/valid/valid?id=' + id,
+      url: url
     })
-    
-  }
+  },
 
+  /**
+  * 查询临时工作卡
+  */
+  getTempList: function (overhaul) {
+    var url = util.getRequestURL("getTemporaryWorkCardList.we");
+    var param = {
+      overhaul_function: overhaul,
+      deptId: app.user.deptId,
+      userPriv: app.user.userPriv,
+      isdel: 0,
+      status: 2,
+      boatId: obj.data.boatId,
+      boatdepartment: obj.data.boatdepartment,
+      audit_status: 1,
+      valid_status: 1
+    };
+    wx.request({
+      url: url,
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success(res) {
+        var titles = obj.data.titles;
+        var index = overhaul + 1;
+        titles[index].list = res.data;
+        obj.setData({
+          titles: titles
+        });
+      },
+      fail(e) {
+        console.log(e);
+      }
+    });
+  },
+
+  /**
+   * 获取选中标签的索引
+   */
+  getTabIndex: function (e) {
+    var index = e.detail.index;
+    obj.setData({
+      tabIndex: index
+    });
+  }
 
 })

@@ -1,3 +1,8 @@
+/* 填充高度 */
+.fill{
+  height: 120rpx;
+}
+
 /* 选择设备样式 */
 .choose{
   display: flex;

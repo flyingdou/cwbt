@@ -7,6 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    titles: [
+      { title: '周期工作' },
+      { title: '自行维修' },
+      { title: '委外维修' }
+    ],
+    tabIndex: 0,
     currentPage: app.pageInfo.currentPage,
     pageSize: app.pageInfo.pageSize,
     taskList: []
@@ -66,10 +72,14 @@ Page({
        obj.data.boatId = boatId;
     }
 
+    obj.setData({
+      windowHeightRpx: util.getSystemInfo().windowHeightRpx
+    });
+
     obj.init();
 
-
-    
+    obj.getTempList(0);
+    obj.getTempList(1);
   },
 
   /**
@@ -112,8 +122,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    obj.data.currentPage++;
-    obj.init();
+    // obj.data.currentPage++;
+    // obj.init();
   },
 
   /**
@@ -164,8 +174,8 @@ Page({
     } 
 
     // 分页
-    param.currentPage = obj.data.currentPage;
-    param.pageSize = obj.data.pageSize;
+    // param.currentPage = obj.data.currentPage;
+    // param.pageSize = obj.data.pageSize;
     
     // console.log(param);
     // return;
@@ -184,9 +194,12 @@ Page({
         if (res.success) {
           var taskList = obj.data.taskList;
           var workcardList = util.formatPlanTime(res.workCardList);
-          taskList = taskList.concat(workcardList);
+          // taskList = taskList.concat(workcardList);
+
+          var titles = obj.data.titles;
+          titles[0].list = workcardList;
           obj.setData({
-            taskList: taskList,
+            titles: titles,
             isGet: false
           });
           wx.hideLoading();
@@ -200,11 +213,57 @@ Page({
   },
 
   /**
+   * 查询临时工作卡
+   */
+  getTempList: function (overhaul) {
+    var url = util.getRequestURL("getTemporaryWorkCardList.we");
+    var param = { 
+      overhaul_function: overhaul,
+      deptId: app.user.deptId,
+      userPriv: app.user.userPriv, 
+      isdel: 0, 
+      status: 1, 
+      boatId: obj.data.boatId, 
+      boatdepartment: obj.data.boatdepartment, 
+      audit_status: 1
+    };
+    wx.request({
+      url: url,
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success(res) {
+        var titles = obj.data.titles;
+        var index = overhaul + 1;
+        titles[index].list = res.data;
+        obj.setData({
+          titles: titles
+        });
+      },
+      fail(e) {
+        console.log(e);
+      }
+    });
+  },
+
+  /**
+   * 获取选中标签的索引
+   */
+  getTabIndex: function (e) {
+    var index = e.detail.index;
+    obj.setData({
+      tabIndex: index
+    });
+  },
+
+  /**
    * 跳转到任务详情页面
    */
   goto: (e) => {
+    var tabIndex = e.currentTarget.dataset.tabindex;
     var index = e.currentTarget.dataset.index;
-    var workCard = obj.data.taskList[index];
+    var titles = obj.data.titles;
+    var workCard = titles[tabIndex].list[index];
     if (workCard.collectorpersonid && workCard.collectorpersonid != app.user.id) {
       wx.showModal({
         title: '提示',
@@ -216,7 +275,17 @@ Page({
 
     
     // 跳转传参
-    var redUrl = '../../pages/TlistDetail/TlistDetail?workCardId=' + workCard.id;
+    var redUrl = '';
+    if (!workCard.type) {
+      redUrl = '../../pages/TlistDetail/TlistDetail?workCardId=' + workCard.id;
+    } else if (workCard.type == 2) {
+      redUrl = '../../pages/tempWork2/tempWork2?id=' + workCard.id;
+      if (obj.data.tabIndex == 1) {
+        redUrl += '&overhaul=0';
+      } else {  
+        redUrl += '&overhaul=1';
+      }
+    }
     if (workCard.collectorpersonid) {
        redUrl = redUrl + '&collectorpersonid=' + workCard.collectorpersonid;
     }
@@ -274,12 +343,10 @@ Page({
        return;
     }
     chooseList.join(',');
-    var status = e.currentTarget.dataset.status;
     
     // 参数
     var param = {
       id: chooseList,
-      status: status,
       collectorpersonid: app.user.id
     };
 
@@ -298,19 +365,21 @@ Page({
         res = res.data;
         if (res.success) {
           chooseList = obj.data.chooseList;
-          var taskList = obj.data.taskList;
+          var titles = obj.data.titles;
+          var tabIndex = obj.data.tabIndex;
+          var list = titles[tabIndex].list;
           for (var c in chooseList) {
-            for (var t in taskList) {
-              if (chooseList[c] == taskList[t].id) {
-                taskList[t].status = param.status;
-                taskList[t].collectorpersonid = param.collectorpersonid;
+            for (var t in list) {
+              if (chooseList[c] == list[t].id) {
+                list[t].status = param.status;
+                list[t].collectorpersonid = param.collectorpersonid;
               }
             }
           }
 
           // 设置到页面数据中
           obj.setData({
-            taskList: taskList,
+            titles: titles,
             isGet: false
           });
           
@@ -326,6 +395,7 @@ Page({
    * 取消领取
    */
   unchoose: (e) => {
+    var tabIndex = e.currentTarget.dataset.tabindex;
     var index = e.currentTarget.dataset.index;
     var work = e.currentTarget.dataset.item;
     var param = {
@@ -334,7 +404,7 @@ Page({
       subffix: work.subffix || work.prefix
     };
 
-    var taskList = obj.data.taskList;
+    var titles = obj.data.titles;
 
     wx.request({
       url: util.getRequestURL('unchooseWork.we'),
@@ -345,10 +415,10 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-             taskList[index].status = res.status;
-             taskList[index].collectorpersonid = undefined;
+            titles[tabIndex].list[index].status = res.status;
+            titles[tabIndex].list[index].collectorpersonid = undefined;
              obj.setData({
-               taskList: taskList
+               titles: titles
              });
         }
       }

@@ -28,6 +28,8 @@
     "pages/switch/switch",
     "pages/tempList/tempList",
     "pages/tempWork/tempWork",
+    "pages/tempWork2/tempWork2",
+    "pages/tempValid/tempValid",
     "pages/mtwcList/mtwcList",
     "pages/releaseTempWork/releaseTempWork",
     "pages/mtwcFeedBack/mtwcFeedBack",

@@ -1,20 +1,23 @@
-<!-- 页面开始 -->
-<view class='content'>
+<!-- 引入过滤器 -->
+<wxs src='../../utils/filters.wxs' module='filter' />
+<tab titles='{{titles}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}' bindChange='getTabIndex'>
+  <!-- 页面开始 -->
+  <view class='content' wx:for='{{titles}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
       <checkbox-group bindchange = 'checkboxChange'> 
 
       <view class='list'>
-                <noData wx:if='{{!validList || validList.length <= 0}}'></noData>
-                <view class='pre' wx:for = '{{validList}}' wx:key = ''>
+                <noData wx:if='{{!tabItem.list || tabItem.list.length <= 0}}'></noData>
+                <view class='pre' wx:for = '{{tabItem.list}}' wx:key = ''>
                       <view class='line' bindtap='goto' data-id = '{{item.id}}'>
                             <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>设备名称</view>
-                                        <view class='value'>{{item.ename}}</view>
+                                        <view class='value'>{{item.ename || item.equipmentName}}</view>
                                   </view>
 
                                   <view class='tv right'>
                                         <view class='title'>作业人员</view>
-                                        <view class='value'>{{item.opeartor}}</view>
+                                        <view class='value'>{{item.opeartor || item.userName}}</view>
                                   </view>
                             </view>
 
@@ -23,7 +26,7 @@
                             <view class='line2'>
                                   <view class='tv right'>
                                         <view class='title'>完成时间</view>
-                                        <view class='value'>{{item.finishtime}}</view>
+                                        <view class='value'>{{item.finishtime || filter.subLen(item.feedbacktime, 10)}}</view>
                                   </view>
                             </view>
                       </view>
@@ -35,8 +38,8 @@
       </view>
       
       <!-- 功能按钮 -->
-      <view class='footer' wx:if='{{validList && validList.length > 0}}'>
-            <checkbox-group bindchange = 'chooseAll'>
+      <view class='footer' wx:if='{{tabItem.list && tabItem.list.length > 0}}'>
+            <checkbox-group bindchange = 'chooseAll' data-index='{{index}}' data-tabindex='{{tabIndex}}'>
                   <!-- 全选按钮 -->
                   <view class='isAll'>
                         <checkbox value = '{{isAll.id}}' checked='{{isAll.checked}}'>全选</checkbox>
@@ -56,9 +59,6 @@
       </checkbox-group>
 
       <view class='douFill'></view>
-      
 
-
-
-
-</view>
+  </view>
+</tab>

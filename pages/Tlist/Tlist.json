@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "工作卡任务",
   "usingComponents": {
+    "tab": "../../component/tab/tab",
     "noData": "../../component/noData/noData"
   }
 }
