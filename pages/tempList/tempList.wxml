@@ -5,7 +5,7 @@
       <view class='list' wx:for='{{titles[overhaul]}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
                 <noData wx:if='{{!tabItem.workCardList || tabItem.workCardList.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{tabItem.workCardList}}' wx:key=''>
-                      <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}&overhaul={{overhaul}}&tabIndex={{tabIndex}}' >
+                      <view class='line' bindtap='goto' data-link = '../tempWork/tempWork?id={{item.id}}&overhaul={{overhaul}}&source=tempList&audit_status={{item.audit_status}}' >
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status == 1}}'></view>
                             <view class='line1'>
