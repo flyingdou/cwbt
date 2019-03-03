@@ -55,7 +55,7 @@
                         <view class='prePic' wx:for = '{{workDetail.image}}' wx:key='' bindtap='previewShot'  data-index = '{{index}}'>
                               <!-- 已有照片 -->
                               <view class='shotPic'>
-                                    <image src='{{base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
+                                    <image src='{{base_img_url + item.name}}' mode='aspectFill' ></image>
                               </view>
                               
                               <!-- 拍照时间 -->
@@ -125,6 +125,39 @@
                   </view>
 
             
+            </view>
+
+
+            <!-- 执行情况 -->
+            <view wx:if = '{{workDetail.status == 2}}'>
+                        <view class='tagName'>执行情况</view>
+
+                        <view class='something'>
+                              <!-- 作业照片 -->
+                              <view class='picsList'>
+                                    <view class='taskTitle'>作业照片</view>
+                                    <view class='pics'>
+                                          <view class='pre' wx:for = '{{workDetail.feedbackimage}}' wx:key = ''>
+                                                <view class='pic' bindtap='preview' data-itemlist = '{{workDetail.feedbackimage}}' data-key = 'name' data-prefix = '{{base_img_url}}' data-index = '{{index}}'>
+                                                      <image src='{{base_img_url + item.name}}' mode='aspectFill'></image>
+                                                </view>
+                                                <view class='picTime'>{{item.pic_time}}</view>
+                                          </view>
+                                    </view>
+                              </view>
+
+
+                              <!-- 异常描述 -->
+                              <view class='remark'>
+                                    <view class='title'>执行描述</view>
+                                    <view class='task'>
+                                          <view class='value' >{{workDetail.remark}}</view>
+                                    </view>
+                              </view>
+                        
+                        
+                        </view>
+                        
             </view>
             
             

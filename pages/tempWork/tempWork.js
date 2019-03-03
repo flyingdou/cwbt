@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_img_url: app.constant.base_img_url,
+    base_img_url: app.constant.base_img_url + "/",
     hidden: true,
     showMark: false
   },
@@ -334,7 +334,7 @@ Page({
     for (var i = 0; i < photos.length; i++) {
       var url = '';
       if (photos[i].name) {
-        url = app.constant.base_img_url + '/' + photos[i].name;
+        url = app.constant.base_img_url + photos[i].name;
       }
       if (photos[i].tempFilePath) {
         url = photos[i].tempFilePath;
@@ -358,7 +358,7 @@ Page({
     for (var i = 0; i < photos.length; i++) {
       var url = '';
       if (photos[i].name) {
-        url = app.constant.base_img_url + '/' + photos[i].name;
+        url = app.constant.base_img_url + photos[i].name;
       }
       if (photos[i].tempFilePath) {
         url = photos[i].tempFilePath;
@@ -432,7 +432,6 @@ Page({
           var res = await obj.uploadPicture(picList[p].tempFilePath);
           if (res.success) {
             picList[p].name = res.picture;
-            // console.log('第' + p + '上传完成');
             // 删除tempFilePath
             delete picList[p]['tempFilePath'];
           }
