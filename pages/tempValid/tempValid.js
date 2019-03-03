@@ -34,6 +34,12 @@ Page({
     if (options.status) {
       dou.status = options.status;
     }
+
+    // 是否可以验收
+    if (options.jurisdiction) {
+      dou.jurisdiction = options.jurisdiction;
+    }
+
     obj.setData(dou);
 
     // title

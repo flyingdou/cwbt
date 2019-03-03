@@ -297,11 +297,12 @@ Page({
    */
   goto: (e) => {
     var id = e.currentTarget.dataset.id;
+    var jurisdiction = e.currentTarget.dataset.jurisdiction;
     var url = '../../pages/valid/valid?id=' + id;
     if (obj.data.tabIndex == 1) {
-      url = '../../pages/tempValid/tempValid?id=' + id + '&overhaul=0';
+      url = '../../pages/tempValid/tempValid?id=' + id + '&overhaul=0&jurisdiction=' + (jurisdiction || 0);
     } else if (obj.data.tabIndex == 2) {
-      url = '../../pages/tempValid/tempValid?id=' + id + '&overhaul=1';
+      url = '../../pages/tempValid/tempValid?id=' + id + '&overhaul=1&jurisdiction=' + (jurisdiction || 0);
     }
     wx.navigateTo({
       url: url

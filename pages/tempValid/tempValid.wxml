@@ -134,7 +134,7 @@
 <view class='fill'></view>
             
 <!-- 底部按钮 -->
-<view class='buttons'>
+<view class='buttons' wx:if='{{jurisdiction == 1}}'>
       <view class='button validNo' bindtap='valid' data-status = '3'>驳回</view>
       <view class='button validYes' bindtap='valid' data-status = '2'>验收</view>
 </view>

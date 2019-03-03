@@ -8,7 +8,7 @@
       <view class='list'>
                 <noData wx:if='{{!tabItem.list || tabItem.list.length <= 0}}'></noData>
                 <view class='pre' wx:for = '{{tabItem.list}}' wx:key = ''>
-                      <view class='line' bindtap='goto' data-id = '{{item.id}}'>
+                      <view class='line' bindtap='goto' data-id = '{{item.id}}' data-jurisdiction='{{item.jurisdiction}}'>
                             <view class='line1'>
                                   <view class='tv left'>
                                         <view class='title'>设备名称</view>
