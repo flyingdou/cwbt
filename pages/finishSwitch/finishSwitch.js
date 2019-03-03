@@ -8,9 +8,9 @@ Page({
    */
   data: {
     blocksDiv1: [[
-      { name: '周期工作卡', count: '', fun: 'goto', iconPath: '../../icon/send.png', link: '../workCardList/workCardList?queryType=1' },
-      { name: '自行维修', count: '', fun: 'goto', iconPath: '../../icon/execute.png', link: '../workCardList/workCardList?queryType=2' },
-      { name: '委外维修', count: '', fun: 'goto', iconPath: '../../icon/copy.png', link: '../workCardList/workCardList?queryType=3' }
+      { name: '周期工作卡', count: 'finishedcycle', fun: 'goto', iconPath: '../../icon/send.png', link: '../workCardList/workCardList?queryType=1' },
+      { name: '自行维修', count: 'finishedvoluntarily', fun: 'goto', iconPath: '../../icon/execute.png', link: '../workCardList/workCardList?queryType=2' },
+      { name: '委外维修', count: 'finishedoutsourcing', fun: 'goto', iconPath: '../../icon/copy.png', link: '../workCardList/workCardList?queryType=3' }
     ]]
   },
 
@@ -32,7 +32,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // obj.getSupervisionCategoryCount();
+    obj.queryData();
   },
 
   /**
@@ -64,24 +64,25 @@ Page({
   },
 
   /**
-   * 查询督导类别数量
+   * 查询数量
    */
-  getSupervisionCategoryCount() {
-    var url = util.getRequestURL('getSupervisionCategoryCount.we');
-    var param = { userId: app.user.id };
+  queryData: function () {
+    var reqUrl = util.getRequestURL('getFinishedWorkSubCount.we');
+    var param = {userId: app.user.id};
+    // 请求数据
     wx.request({
-      url: url,
+      url: reqUrl,
+      dataType: 'json',
       data: {
         json: encodeURI(JSON.stringify(param))
       },
-      success(res) {
+      success: (res) => {
         obj.setData({
           categoryCount: res.data
         });
       },
-      fail(e) {
-        util.tipsMessage('网络异常！');
-        console.log(e);
+      fail: (e) => {
+        console.log('网络异常！');
       }
     });
   },
