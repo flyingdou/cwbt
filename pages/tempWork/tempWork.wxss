@@ -30,11 +30,6 @@ textarea{
   padding: 20rpx 0;
 }
 
-.value{
-  color:rgba(128,128,128,1);
-  background:#f5f5f5;
-}
-
 .moreIcon{
   width: 26rpx;
   height: 26rpx;
@@ -73,6 +68,7 @@ textarea{
 }
 
 .shotPic{
+  float: left;
   width: 160rpx;
   height: 160rpx;
   padding-right: 20rpx;

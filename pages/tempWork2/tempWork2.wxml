@@ -92,7 +92,7 @@
 
                   <view class='remark' wx:if = '{{!showMark}}'>
                         <view class='title'>审批意见</view>
-                        <textarea maxlength='-1' placeholder='{{disablex ? "无" : "请输入审批意见"}}' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'collectNote' value='{{workDetail.collect_note}}' disabled='{{disablex}}' wx:if='{{hidden}}'></textarea>
+                        <textarea maxlength='-1' placeholder='{{disablex ? "无" : "请输入审批意见"}}' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'auditNote' value='{{workDetail.audit_note}}' disabled='{{disablex}}' wx:if='{{hidden}}'></textarea>
                   </view>
             </view>
 

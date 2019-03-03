@@ -105,7 +105,7 @@
                   <view class='remark'>
                           <view class='title'>{{workDetail.valid_status == 2 ? "验收意见" : "驳回意见"}}</view>
                           <view class='task'>
-                                <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{workDetail.valid_remark}}</view>
+                                <view class='value'>{{workDetail.validRemark}}</view>
                           </view>
                   </view>
 

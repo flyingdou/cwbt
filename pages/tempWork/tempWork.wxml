@@ -72,7 +72,7 @@
                         </view>
 
                         <!-- 拍图按钮 -->
-                        <view class='pic' wx:if = '{{isUpdate}}'>
+                        <view class='shotPic' wx:if = '{{isUpdate}}'>
                               <image src='../../icon/redAdd.png' mode='aspectFill'  bindtap='photo' data-key = 'photos'></image>
                         </view>
 

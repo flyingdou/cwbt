@@ -160,7 +160,7 @@ Page({
           var audit = false;
           if (res.workDetail.creator != app.user.id && obj.data.source == 'mtwcList') {
              audit = true;
-             if (obj.data.audit_status == 0) {
+             if (obj.data.audit_status == 0 && !res.workDetail.isLast) {
                 isAudit = true;
              }
           }
@@ -503,7 +503,7 @@ Page({
     var photos = obj.data[key] || [];
     var url = util.getRequestURL('updateExceptionalFeedBack.we');
     var param = {id: workDetail.exceptionid};
-    if ((!photos || photos.length <= 0) && !obj.data.exceptional_describe) {
+    if ((!photos || photos.length <= 0) && !obj.data.exceptional_describe && !obj.data.applyNote) {
         wx.hideLoading();
         util.tipsMessage('修改成功');
         wx.navigateBack({
@@ -573,10 +573,11 @@ Page({
         auditStatus = 2;
         isdel = 1;
     }
-
+    param.isdel = isdel;
     param.expectedtime = expectedtime;
     param.auditNote = auditNote;
     param.auditStatus = auditStatus;
+
 
     var reqUrl = util.getRequestURL('audit.we');
 

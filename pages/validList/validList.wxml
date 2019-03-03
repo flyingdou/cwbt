@@ -30,7 +30,7 @@
                                   </view>
                             </view>
                       </view>
-                      <view class='radioDiv'>
+                      <view class='radioDiv' wx:if = '{{!item.type || item.jurisdiction == 1}}'>
                             <checkbox value='{{item.id}}' checked= '{{item.checked}}'></checkbox>
                       </view>
                 </view>
@@ -38,7 +38,7 @@
       </view>
       
       <!-- 功能按钮 -->
-      <view class='footer' wx:if='{{tabItem.list && tabItem.list.length > 0}}'>
+      <view class='footer' wx:if='{{tabItem.list && tabItem.list.length > 0 && (tabItem.list[0].jurisdiction == 1 || !tabItem.list[0].type)}}'>
             <checkbox-group bindchange = 'chooseAll' data-index='{{index}}' data-tabindex='{{tabIndex}}'>
                   <!-- 全选按钮 -->
                   <view class='isAll'>
