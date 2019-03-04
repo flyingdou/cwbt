@@ -371,7 +371,6 @@ Page({
           for (var c in chooseList) {
             for (var t in list) {
               if (chooseList[c] == list[t].id) {
-                list[t].status = param.status;
                 list[t].collectorpersonid = param.collectorpersonid;
               }
             }
@@ -415,7 +414,6 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
-            titles[tabIndex].list[index].status = res.status;
             titles[tabIndex].list[index].collectorpersonid = undefined;
              obj.setData({
                titles: titles
