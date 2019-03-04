@@ -182,6 +182,11 @@ Page({
       scanType: ['barCode'],
       success: (res) => {
         isScan = true;
+        // 添加功能，开发模式扫码模拟（扫什么码都当成正确的）
+        if (app.constant.isDev) {
+          res.result = obj.data.workDetail.number;
+        }
+        // 正常业务流程
         if (res.result == obj.data.workDetail.number) {
           var scanTime = util.formatTime(new Date());
           obj.setData({
