@@ -569,6 +569,7 @@ Page({
         }
         auditStatus = 1;
         isdel = 0;
+        param.eid = obj.data.workDetail.eid;
     }
     if (key == 'refuse') {
         if (!auditNote) {
