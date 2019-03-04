@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isDev: app.constant.isDev,
     // 隐藏弹出框
     hidden: true,
     phoneNumber: '15527930302'

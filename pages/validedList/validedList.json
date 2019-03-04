@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "已验收工作卡列表",
+  "usingComponents": {
+    "tab": "../../component/tab/tab",
+    "noData": "../../component/noData/noData"
+  }
+}

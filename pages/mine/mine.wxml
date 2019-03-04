@@ -94,6 +94,16 @@
           </view>
   </view>
 
+  <!-- 测试(开发模式显示) -->
+  <!-- <view class='tool-line' catchtap='goto' data-link='../validedSwitch/validedSwitch' wx:if='{{isDev}}'>
+          <view class='line'>
+                <view class='line-left'>
+                      <image class='line-left-icon' src='../../icon/version.png' mode='widthFix'></image>
+                      <view class='line-left-text'>测试</view>
+                </view>
+          </view>
+  </view> -->
+
   <!-- 弹出层 -->
   <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = 'V{{update.version}} 更新内容' confirm-text = ' ' cancel-text = ' ' bindconfirm = 'confirm' bindcancel = 'cancel'>
                <view class='block'>

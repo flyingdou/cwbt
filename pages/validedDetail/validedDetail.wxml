@@ -1,0 +1,128 @@
+<!-- 页面开始 -->
+<view class='content'>
+      <!-- block1 -->
+      <view class='block1'>
+
+            <view class='line'>
+                  <view class='title'>设备名称</view>
+                  <view class='value'>{{workDetail.ename}}</view>
+            </view>
+
+            <view class='line' wx:if='{{userPriv == 2}}'>
+                  <view class='title'>设备编码</view>
+                  <view class='value'>{{workDetail.number}}</view>
+            </view>
+            
+            <view class='line'>
+                  <view class='title'>作业名称</view>
+                  <view class='value'>{{workDetail.name}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>所属船舶</view>
+                  <view class='value'>{{workDetail.boatName}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>计划时间</view>
+                  <view class='value'>{{workDetail.plannedtime}}</view>
+            </view>
+            
+            <!-- 作业内容 -->
+            <view class='remark'>
+                  <view class='title'>作业内容</view>
+                  <view class='task'>
+                        <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{item.name}}</view>
+                  </view>
+            </view>
+
+            <!-- 验收标准 -->
+            <view class='remark'>
+                  <view class='title'>验收标准</view>
+                  <view class='task'>
+                        <view class='value' wx:for = '{{workDetail.taskList}}' wx:key=''>{{item.mark}}</view>
+                  </view>
+            </view>
+            
+            <!-- error -->
+            <view class='error' wx:if = '{{status != 0}}'>
+                  <view class='line'>
+                        <view class='title'>维修方式</view>
+                        <picker range='{{handleList}}' range-key='name' bindchange='pickerChange' data-key = 'handle' disabled='{{workCardStatus == 2}}'>
+                              <view class='item'>
+                                    <view class='value'>{{handleList[handle].name}}</view>
+                                    <view class='moreIcon'>
+                                          <image src='../../icon/more@2x.png'></image>
+                                    </view>
+                              </view>
+                        </picker>
+                  </view>
+
+                  <view class='remark'>
+                        <view class='title'>异常描述</view>
+                        <textarea placeholder='请输入异常描述信息' disabled='{{workCardStatus == 1 ? "" : "disabled" }}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe'></textarea>
+                  </view>
+
+            </view>
+
+            <view class='remark'>
+                  <view class='title'>备注</view>
+                  <textarea placeholder='请输入备注信息' disabled='{{workCardStatus == 1 ? "" : "disabled" }}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark}}'></textarea>
+                  
+            </view>
+
+            <!-- preview -->
+            <view class='preview'>
+                  <!-- 拍摄的照片 -->
+                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}' >
+                        <image src='{{item.name ? base_img_url + item.name : item.tempFilePath}}' mode='aspectFill' ></image>
+                  </view>
+
+                  <view class='pic' wx:if = '{{workCardStatus == 1}}'>
+                        <image wx:if = '{{showPhoto}}' src='{{needPhoto ? "../../icon/redAdd.png" : "../../icon/add.png"}}' mode='aspectFill'  bindtap='photo' ></image>
+                  </view>
+            </view>
+
+            <!-- 验收或者驳回 -->
+            <view wx:if = '{{workDetail.valid_status != 1}}'>
+                  <view class='tagName'>验收情况</view>
+                  
+                  <view class='line'>
+                        <view class='title'>验收结果</view>
+                        <view class='value'>{{workDetail.validStatus}}</view>
+                  </view>
+
+                  <view class='line'>
+                        <view class='title'>{{workDetail.valid_status == 2 ? "验收时间" : "驳回时间"}}</view>
+                        <view class='value'>{{workDetail.validDate}}</view>
+                  </view>
+
+                  <view class='line'>
+                        <view class='title'>{{workDetail.valid_status == 2 ? "验收人" : "驳回人"}}</view>
+                        <view class='value'>{{workDetail.confirmor}}</view>
+                  </view>
+
+                  <view class='remark'>
+                          <view class='title'>{{workDetail.valid_status == 2 ? "验收意见" : "驳回意见"}}</view>
+                          <view class='task'>
+                                <view class='value'>{{workDetail.validRemark}}</view>
+                          </view>
+                  </view>
+
+
+            </view>
+
+            
+            <!-- 填充高度 -->
+            <view class='fill'></view>
+
+
+            <!-- 底部按钮 -->
+            <!-- 未验收的才能修改 -->
+            <view class='buttons' wx:if = '{{workCardStatus == 1}}'>
+                  <view class='button finshButton' bindtap='uploadPictures'>修改并提交</view>
+            </view>
+      
+      </view>
+
+</view>
