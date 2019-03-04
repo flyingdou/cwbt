@@ -10,7 +10,7 @@ Page({
     titles: [
       {title: "待审批"},
       {title: "审批通过"},
-      {title: "审批不通过"}
+      {title: "审批拒绝"}
     ],
     currentPage: app.pageInfo.currentPage,
     pageSize: app.pageInfo.pageSize
@@ -118,7 +118,7 @@ Page({
       userPriv: app.user.userPriv,
       deptId: app.user.deptId, 
       overhaul_function: obj.data.type,
-      queryType: queryType,
+      // queryType: queryType,
       audit_status: audit_status,
       isdel: isdel
     };

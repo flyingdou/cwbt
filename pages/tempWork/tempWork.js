@@ -164,6 +164,11 @@ Page({
                 isAudit = true;
              }
           }
+          
+          // 审批拒绝的，让查看审批情况
+          if (obj.data.source == 'tempList' && obj.data.audit_status == 2) {
+             audit = true;
+          }
 
 
           // 领导领取委外维修的临时工作卡
@@ -471,8 +476,8 @@ Page({
             title: '处理中',
             mask: true
           });
-          var url = util.getRequestURL('updateWorkCard.we');
-          var param = {id: obj.data.workDetail.id, isdel: 1};
+          var url = util.getRequestURL('deleteWorkcard.we');
+          var param = {id: obj.data.workDetail.id};
           wx.request({
             url: url,
             data: {

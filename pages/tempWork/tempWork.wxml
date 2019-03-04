@@ -119,8 +119,16 @@
                   <view class='remark'>
                         <view class='title'>审批意见</view>
                         <view class='task'>
-                              <view class='value task-value' wx:if = '{{!isAudit}}' >{{workDetail.audit_note}}</view>
-                              <textarea wx:if = '{{isAudit && !showMark}}' placeholder='请输入审批意见' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'auditNote' value='{{workDetail.audit_note}}'></textarea>
+                              
+
+                              <textarea wx:if = '{{!isAudit && !showMark}}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' disabled='disabled' value='{{workDetail.audit_note}}'>
+                                        <rich-text nodes = '<br/><br/>审批人: {{workDetail.auditPerson}}  <br/>时   间:  {{workDetail.audit_time}}'></rich-text>
+                              </textarea>
+
+                              <textarea wx:if = '{{isAudit && !showMark}}' placeholder='请输入审批意见' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'auditNote' value='{{auditNote}}'></textarea>
+
+                              
+
                         </view>
                   </view>
 
