@@ -194,7 +194,7 @@ Page({
             scanTime: scanTime,
           });
           // 修改为进行中
-          obj.ongoing();
+          // obj.ongoing();
         } else {
           wx.showModal({
             title: '提示',
@@ -357,11 +357,8 @@ Page({
           dou[key] = photos;
           obj.setData(dou);
           console.log('图片上传完成！');
-          if (key == 'photos') {
-            obj.finish();
-          } else {
-            obj.handleErr();
-          }
+          obj.finish();
+         
           return;
         } else {
           // 图片还未传完，需要继续上传
@@ -412,15 +409,7 @@ Page({
       if (handle == 1) {
         handle = 0; // 自行维修
         handleName = '自行维修';
-        var executePhotos = obj.data.executePhotos || [];
-        if (executePhotos.length == 0) {
-          wx.showModal({
-            title: '提示',
-            content: '工作卡异常且处于自行维修情况下，请拍摄设备维修后照片！',
-            showCancel: false
-          })
-          return;
-        }
+        
 
       }
 
@@ -444,6 +433,21 @@ Page({
     }
     for (var x = 0; x < photos.length; x++) {
       delete photos[x]['tempFilePath'];
+    }
+
+    // 报审事项
+    var applyNote = obj.data.applyNote;
+    // 工作卡异常时，必填报审事项
+    if (status == 1) {
+       if (!auditNote || auditNote == '') {
+           wx.showModal({
+             title: '提示',
+             content: '请填写报审事项！',
+             showCancel: false
+           })
+           return;
+       }
+       param.apply_note = applyNote;
     }
     
     var userId = app.user.id;
@@ -487,7 +491,7 @@ Page({
     // 测试数据
     // console.log('param: ' + JSON.stringify(param));
     // return;
-    // showLoding
+    // showLoading
     wx.showLoading({
       title: '处理中',
       mask: true,
@@ -506,24 +510,24 @@ Page({
         res = res.data;
         if (res.success) {
           if (status = 1 && handleDou == 1) {
-             obj.setData({
-               tempWorkId: res.tempWorkId
-             });
-             obj.uploadPics(0,'executePhotos');
-          } else {
-              wx.showModal({
-                title: '提示',
-                content: '工作完成，有待上级人员确认！',
-                showCancel: false,
-                success: (resx) => {
-                  if (resx.confirm) {
-                    wx.reLaunch({
-                      url: '../../pages/index/index',
-                    })
-                  }
-                },
-              })
+              obj.setData({
+                tempWorkId: res.tempWorkId
+              });
           }
+        
+          wx.showModal({
+            title: '提示',
+            content: '工作完成，有待上级人员确认！',
+            showCancel: false,
+            success: (resx) => {
+              if (resx.confirm) {
+                wx.reLaunch({
+                  url: '../../pages/index/index',
+                })
+              }
+            },
+          })
+        
 
 
         } else {
@@ -540,124 +544,6 @@ Page({
 
     })
 
-  },
-
-  /**
-   * 自行维修的
-   */
-  handleErr () {
-    // 必填参数
-    var param = {
-      workcardId: obj.data.tempWorkId,
-      executorId: app.user.id,
-      confirmId: app.user.id,
-      image: obj.data.executePhotos,
-      status: 2
-    };
-
-    // 选填参数
-    var mark = obj.data.handleMark;
-    if (mark) {
-      param.mark = mark;
-    }
-
-    // 测试数据
-    console.log('param: ' + JSON.stringify(param));
-    // return;
-    
-    // loading
-    wx.showLoading({
-      title: '处理中',
-    })
-
-    var reqUrl = util.getRequestURL('selfWorkFeedback.we');
-    wx.request({
-      url: reqUrl,
-      dataType: 'json',
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      success (res) {
-        res = res.data;
-        if (res.success) {
-                wx.showModal({
-                  title: '提示',
-                  content: '工作完成，有待上级人员确认！',
-                  showCancel: false,
-                  success: (resx) => {
-                    if (resx.confirm) {
-                      wx.reLaunch({
-                        url: '../../pages/index/index',
-                      })
-                    }
-                  },
-                })
-        }
-      } 
-    })
-  },
-  
-  
-  // 进行中
-  ongoing: () => {
-    var id = obj.data.workDetail.id;
-    var status = obj.data.workDetail.status;
-    if (status == 1) {
-      status = 9;
-    } else if (status == 9) {
-      status = 1;
-    }
-    
-    // 参数
-    var param = {
-      id: id,
-      status: status,
-      collectorpersonid: app.user.id
-    };
-
-    wx.request({
-      url: util.getRequestURL('updateWorkCard.we'),
-      dataType: 'json',
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      success: (res) => {
-        res = res.data;
-        if (res.success) {
-          obj.data.workDetail.status = param.status;
-        }
-      }
-    })
-
-
-  },
-
-
-  /**
-   * 撤回数据
-   */
-  rollback: () => {
-    var param = {
-      workcardId: obj.data.workCardId
-    };
-
-    var reqUrl = util.getRequestURL('rollback.we');
-    wx.request({
-      url: reqUrl,
-      dataType:'json',
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      success: (res) => {
-        res = res.data;
-        if (res.success) {
-          // 撤回成功
-          obj.setData({
-            alreadyRoll:true
-          });
-        }
-      }
-    })
   },
 
 
@@ -680,7 +566,7 @@ Page({
     param.mark = obj.data.remark; // 反馈数据
     param.workcardId = workDetail.id; // 工作卡id
 
-    console.log(param);
+    // console.log(param);
 
     // 发起微信请求
     wx.request({

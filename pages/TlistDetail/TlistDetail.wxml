@@ -92,6 +92,13 @@
                         <textarea placeholder='请输入异常描述信息' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'exceptionalDescribe'></textarea>
                   </view>
 
+                  <!-- 报审事项 -->
+                  <view class='remark'>
+                        <view class='title'>报审事项</view>
+                        <textarea placeholder='请输入报审事项' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'applyNote'></textarea>
+                        
+                  </view>
+
             </view>
 
            
@@ -107,32 +114,7 @@
                         <image wx:if = '{{showPhoto}}' src='{{needPhoto ? "../../icon/redAdd.png" : "../../icon/add.png"}}' mode='aspectFill'  bindtap='photo' data-key = 'photos' ></image>
                   </view>
             </view>
-
-
-            <!-- 异常执行情况(自行维修) -->
-            <view class='errExecute' wx:if = '{{status != 0 && handle == 1 }}'>
-                  <!-- 提示文字 -->
-                  <view class='tagName'>设备维修情况</view>
-                  <view class='remark'  wx:if = '{{hidden}}'>
-                        <view class='title'>维修后设备情况</view>
-                        <textarea placeholder='请输入维修后设备情况' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'handleMark' value = '{{handleMark}}'></textarea>
-                        
-                  </view>
-
-                  <!-- 异常执行的照片 -->
-                  <view class='preview'>
-                        <!-- 异常执行的照片 -->
-                        <view class='title titleX'>维修后图片</view>
-                        <view class='pic' wx:for = '{{executePhotos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
-                              <image src='{{item.tempFilePath ?  item.tempFilePath : base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
-                        </view>
-
-                        <view class='pic'>
-                              <image src='../../icon/redAdd.png' mode='aspectFill'  bindtap='photo' data-key = 'executePhotos'></image>
-                        </view>
-                  </view>
-                  
-            </view>
+            
 
             <!-- 填充高度 -->
             <view class='fill'></view>
