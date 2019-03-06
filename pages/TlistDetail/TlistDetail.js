@@ -434,21 +434,6 @@ Page({
     for (var x = 0; x < photos.length; x++) {
       delete photos[x]['tempFilePath'];
     }
-
-    // 报审事项
-    var applyNote = obj.data.applyNote;
-    // 工作卡异常时，必填报审事项
-    if (status == 1) {
-       if (!auditNote || auditNote == '') {
-           wx.showModal({
-             title: '提示',
-             content: '请填写报审事项！',
-             showCancel: false
-           })
-           return;
-       }
-       param.apply_note = applyNote;
-    }
     
     var userId = app.user.id;
     var isError = status;
@@ -463,6 +448,22 @@ Page({
       equipmentId: obj.data.workDetail.eid,
       dept_id: app.user.deptId
     };
+
+
+    // 报审事项
+    var applyNote = obj.data.applyNote;
+    // 工作卡异常时，必填报审事项
+    if (status == 1) {
+      if (!applyNote || applyNote == '') {
+        wx.showModal({
+          title: '提示',
+          content: '请填写报审事项！',
+          showCancel: false
+        })
+        return;
+      }
+      param.apply_note = applyNote;
+    }
 
     // 可选数据
     // 备注信息
