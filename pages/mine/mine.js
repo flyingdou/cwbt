@@ -10,7 +10,7 @@ Page({
     isDev: app.constant.isDev,
     // 隐藏弹出框
     hidden: true,
-    phoneNumber: '15527930302'
+    phoneNumber: '13657277062'
   },
 
   /**

@@ -6,23 +6,11 @@
         <view class = 'remark'> 
                 <view class = 'title'> 
                         <view class = 'title'>内容:</view> 
-                        <textarea placeholder='请输入督导内容' placeholder-class = 'placeHolder' maxlength='-1'  bindinput='inputChange' data-key = 'content' value = '{{contents[0].content}}'></textarea> 
+                        <textarea placeholder='请输入督导内容' placeholder-class = 'placeHolder' maxlength='-1'  bindinput='inputChange' data-key = 'content' value = '{{content}}'></textarea> 
                 </view> 
                 
                 
         </view>
-
-        <!-- 已有内容 -->
-        <!-- <view class='contents' wx:if = '{{contents.length > 0}}'>
-              <view class='title'>已有内容：</view>
-              <view class='remarkList'>
-                    <view class='remarkContent' wx:for = '{{contents}}' wx:key='' wx:for-item = 'content'>
-                          <view class='remarkTitle'>{{content.userName}}要求：</view>
-                          <view class='remarkValue'>{{content.content}}</view>
-                          <view class='remarkValue tright'>{{content.auto_date}}</view>
-                    </view>
-              </view>
-        </view>  -->
 
 
         <!-- 选择区 --> 

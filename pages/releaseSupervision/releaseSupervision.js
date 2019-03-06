@@ -22,6 +22,8 @@ Page({
 		if (contents) {
 				contents = JSON.parse(contents);
 				dou.contents = contents;
+        dou.content = contents[contents.length-1].content;
+        
 		}
 		
 		// 已有的督导id
