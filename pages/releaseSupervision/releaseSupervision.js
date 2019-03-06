@@ -56,7 +56,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    obj.init();
     // 获取附件数据
     obj.getAttachment();
 
@@ -104,15 +103,6 @@ Page({
   inputChange: (e) => {
      var key = e.currentTarget.dataset.key;
      wx.setStorageSync(key, e.detail.value);
-  },
-
-  /**
-   * 初始化页面数据
-   */
-  init: () => {
-    var dou = {};
-    dou.content = wx.getStorageSync('content') || '';
-    obj.setData(dou);
   },
 
   /**
