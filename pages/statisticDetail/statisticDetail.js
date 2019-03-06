@@ -9,8 +9,8 @@ Page({
   data: {
       titles: {
         handle: [
-          { title: '已完成', checkStatusKey: 'workstatus', checkStatus: 2 },
-          { title: '未完成', checkStatusKey: 'workstatus', checkStatus: 1 }
+          { title: '已完成', checkStatusKey: 'typeStatus', checkStatus: 2 },
+          { title: '未完成', checkStatusKey: 'typeStatus', checkStatus: 1 }
         ],
         valid: [
           { title: '已验收', checkStatusKey: 'typeStatus', checkStatus: 1 },
@@ -152,9 +152,11 @@ Page({
           });
         } else {
           res.data.list.forEach((item, i) => {
-            if ([2].includes(item.workstatus)) {
+            if ([2, 5].includes(item.workstatus)) {
+              item.typeStatus = 2;
               count1++;
-            } else if ([1].includes(item.workstatus)) {
+            } else if ([1, 3, 9, 10].includes(item.workstatus)) {
+              item.typeStatus = 1;
               count2++;
             }
             titles.handle[0].count = count1;
