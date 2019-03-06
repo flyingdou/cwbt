@@ -139,7 +139,6 @@ Page({
           if (level == 'A' || level == 'B') {
              // 非必须拍照
              dou.isPhoto = true;
-             dou.isUpload = true;
           } else {
              // 必须拍照
              dou.needPhoto = true;
@@ -194,7 +193,6 @@ Page({
             scanTime: scanTime,
           });
           // 修改为进行中
-          // obj.ongoing();
         } else {
           wx.showModal({
             title: '提示',
@@ -206,10 +204,6 @@ Page({
         console.log(res);
       }
     })
-    // obj.setData({
-    //   isScan:true,
-    //   scanTime: util.formatTime(new Date())
-    // });
 
   },
 
@@ -222,7 +216,6 @@ Page({
     }
     var key = e.currentTarget.dataset.key;
     var isPhoto = false;
-    var isUpload = obj.data.isUpload;
     var photo = {};
     var photos = obj.data[key] || [];
     wx.chooseImage({
@@ -230,8 +223,7 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['camera'],
       success: (res) => {
-        isPhoto = true;
-        isUpload = false;
+        isPhoto = true
         var timex = util.formatTime(new Date());
         photo.pic_time = timex;
         photo.tempFilePath = res.tempFilePaths[0];
@@ -240,7 +232,6 @@ Page({
         photos.push(photo);
         var dou = {
           isPhoto: isPhoto,
-          isUpload: isUpload
         };
         dou[key] = photos;
         obj.setData(dou);
@@ -250,7 +241,6 @@ Page({
 
     obj.setData({
       isPhoto: isPhoto,
-      isUpload: isUpload
     });
   },
 
@@ -295,14 +285,11 @@ Page({
     var photos = obj.data[key];
     photos.splice(index, 1);
     var isPhoto = true;
-    var isUpload = obj.data.isUpload;
     if (photos.length == 0) {
       isPhoto = false;
-      isUpload = false;
     }
     var dou = {
       isPhoto: isPhoto,
-      isUpload: isUpload
     };
     dou[key] = photos;
     obj.setData(dou);
@@ -350,9 +337,7 @@ Page({
         console.log(i);
         i++;
         if (i >= count) {
-          var isUpload = true;
           var dou = {};
-          dou.isUpload = isUpload;
           dou.showPhoto = false;
           dou[key] = photos;
           obj.setData(dou);
