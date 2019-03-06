@@ -203,7 +203,7 @@ Page({
 		 var param = obj.data.param;
 		 
 		 wx.showLoading({
-		 	title: '处理中...',
+		 	title: '处理中',
 		 	mask: true,
 		 })
 		 
@@ -261,7 +261,7 @@ Page({
     if (obj.data.copyUsersDou) {
       copyUsers = obj.data.copyUsersDou.chooseUsers;
     }
-    var content = wx.getStorageSync('content') || null;
+    var content = obj.data.content;
 		var id = obj.data.id || null;
     if (recUsers.length < 1) {
       wx.showModal({
