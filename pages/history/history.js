@@ -190,6 +190,16 @@ Page({
     var param = {
       equipmentId: obj.data.equipmentid
     };
+    // 开始时间
+    var startTime = obj.data.startTime;
+    if (startTime && startTime.indexOf('请') < 0) {
+      param.startTime = startTime;
+    }
+    // 结束时间
+    var endTime = obj.data.endTime;
+    if (endTime && endTime.indexOf('请') < 0) {
+      param.endTime = endTime + " 23:59:59";
+    }
     // 发起微信请求
     wx.request({
       url: reqUrl,

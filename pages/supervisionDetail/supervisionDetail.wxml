@@ -118,60 +118,13 @@
           </view>
     </view>
 
-    <!-- 反馈内容(hidden控制不显示, 反馈内容暂不显示) -->
-    <view class='content' wx:if='{{!loadingStatus && superviseFeedback && hidden}}'>
-
-          <!-- block1 -->
-          <view class='block1'>
-
-                <view class='up-title'>
-                      反馈
-                </view>
-
-                <view class='line'>
-                            <view class='title'>执行人</view>
-                            <view class='value'>{{superviseFeedback.opeartor}}</view>
-                </view>
-
-                <view class='line'>
-                            <view class='title'>执行时间</view>
-                            <view class='value'>{{superviseFeedback.auto_date}}</view>
-                </view>
-
-                <!-- 作业内容 -->
-                <view class='taskList'>
-                      <view class='taskTitle'>情况描述</view>
-                      
-                      <!-- 工作内容 -->
-                      <view class='task'>
-                            <view class='ta'>{{superviseFeedback.remark}}</view>
-                      </view>
-                      
-                </view>
-
-                <!-- 作业照片 -->
-                <view class='picsList'>
-                      <view class='taskTitle'>现场照片</view>
-                      <view class='pics'>
-                            <view class='pre' wx:for = '{{superviseFeedback.image}}' wx:key=''>
-                                  <view class='pic' bindtap='preview' data-index = '{{index}}'>
-                                        <image src='{{base_img_url}}/{{item.name}}' mode='aspectFill'></image>
-                                  </view>
-                                  <view class='picTime'>{{item.pic_time}}</view>
-                            </view>
-                      </view>
-                </view>
-
-          </view>
-    </view> 
-
     <!-- 填充高度 -->
     <view class='fill'></view>
 
     <!-- 底部按钮 -->
     <view class='buttons' wx:if='{{userId == supervise.creatorId}}'>
       <view class='button scanButton' bindtap='updateSuperviseStatus' data-status='2' wx:if='{{supervise.status == 0 && supervise.contents.length < 2 && superviseFeedback.length < 1}}'>撤回</view>
-      <view class='button scanButton' bindtap='updateSuperviseStatus' data-status='1' wx:if='{{supervise.status == 0 && supervise.contents.length > 1 && superviseFeedback.length > 0}}'>完结</view>
+      <view class='button scanButton' bindtap='updateSuperviseStatus' data-status='1' wx:if='{{supervise.status == 0 && (supervise.contents.length > 1 || superviseFeedback.length > 0)}}'>完结</view>
       <view class='button photoButton' bindtap='updateSuperviseStatus' data-status='3' wx:if='{{supervise.status == 0}}'>冻结</view>
     </view> 
 
@@ -183,6 +136,7 @@
   </view>
 
   <view slot='1'>
+    <noData wx:if='{{!superviseFeedback || superviseFeedback.length <= 0}}'></noData>
     <block wx:for='{{superviseFeedback}}' wx:key='' wx:if='{{superviseFeedback && superviseFeedback.length > 0}}'>
 
       <!-- 填充高度 -->
