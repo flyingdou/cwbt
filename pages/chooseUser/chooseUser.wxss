@@ -56,14 +56,14 @@ input{
 
 .deptList{
   background:white;
-  padding:20rpx;
+  padding:20rpx 0;
 }
 
 .preDept{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding: 20rpx 0;
+  padding: 20rpx;
   font-size: 28rpx;
   border-bottom:0.5px solid rgba(245,245,245,1);
 }
@@ -102,7 +102,7 @@ input{
 
 .userList{
   background:white;
-  padding:20rpx;
+  padding:20rpx 0;
   margin:20rpx 0;
 }
 
@@ -110,8 +110,12 @@ input{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20rpx 0;
+  padding:20rpx;
   border-bottom:1rpx solid rgba(245,245,245,1);
+}
+
+.disabled{
+  background: #F7981F;
 }
 
 .preUser:last-child{

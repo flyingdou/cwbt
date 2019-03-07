@@ -19,9 +19,19 @@ Page({
     if (value) {
       value = JSON.parse(value);
     }
+
+    var key2 = options.key2;
+    var value2 = options[key2];
+    if (value2) {
+      value2 = JSON.parse(value2);
+    }
     var dou = {};
     dou[key] = value;
     dou.key = key;
+
+    dou[key2] = value2;
+    dou.key2 = key2;
+
 
     var navList = options.navList;
     var nav = options.nav;
@@ -158,22 +168,7 @@ Page({
     var key = obj.data.key;
     var dou = obj.data[key]; 
     var deptUser = [];
-    // var chooseDeptList = dou.chooseDeptList || [];
-    // chooseDeptList.forEach((dept,index) => {
-    //   dept.userList.forEach((user,ui) => {
-    //     deptUser.push(user);
-    //   });
-    // });
-
-    // var indexs = [];
-    // if (dou.chooseUsers) {
-    //   dou.chooseUsers.forEach(function (item, i) {
-    //     if (!item.isDel) {
-    //       indexs.push(item.user_id);
-    //     }
-    //    });
-    // }
-
+    
     // 存储值
     obj.setData({
       choosedUser: dou.choosedUser  || []
@@ -201,10 +196,15 @@ Page({
      var navList = obj.data.navList;
      var nav = e.currentTarget.dataset.dept;
 
+    // key
     var key = obj.data.key;
     var value = obj.data[key] || '';
+
+    // key2
+    var key2 = obj.data.key2;
+    var value2 = obj.data[key2] || '';
     // 重载当前页面
-    var link = '../../pages/chooseUser/chooseUser?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav) + '&' + key + '=' + JSON.stringify(value) + '&key=' + key;
+    var link = '../../pages/chooseUser/chooseUser?navList=' + JSON.stringify(navList) + '&nav=' + JSON.stringify(nav) + '&' + key + '=' + JSON.stringify(value) + '&key=' + key + '&' + key2 + '=' + JSON.stringify(value2) + '&key2=' + key2;
     if (obj.data.deptUser && obj.data.deptUser.length > 0) {
       link += '&deptUser=' + JSON.stringify(obj.data.deptUser);
     }
@@ -228,6 +228,11 @@ Page({
 		var deptList = obj.data.deptList;
 		var deptindex = e.currentTarget.dataset.deptindex;
     var dept_id = deptList[deptindex].seq_id;
+
+    // 在之前的选择中，被选中的部门，不做任何处理。
+    if (deptList[deptindex].hasChoosed) {
+       return;
+    }
 
 		 // 机构状态处理
 		deptList.forEach((dept,index) => {
@@ -457,21 +462,42 @@ Page({
     param.type = 'nextDept';
     param.user_id = app.user.id;
 
-    var choosedUser = obj.data.choosedUser || [];
-    var choosedUserIds = [];
-    for (var c in choosedUser) {
-      choosedUserIds.push(choosedUser[c].user_id);
-    }
+    // var choosedUser = obj.data.choosedUser || [];
+    // var choosedUserIds = [];
+    // for (var c in choosedUser) {
+    //   choosedUserIds.push(choosedUser[c].user_id);
+    // }
 
-    var upUsers = wx.getStorageSync('upUsers') || [];
-    if (upUsers.length > 0) {
-      for (var u in upUsers) {
-        choosedUserIds.push(upUsers[u]);
-      }
-    }
+    // var upUsers = wx.getStorageSync('upUsers') || [];
+    // if (upUsers.length > 0) {
+    //   for (var u in upUsers) {
+    //     choosedUserIds.push(upUsers[u]);
+    //   }
+    // }
 
-    choosedUserIds = choosedUserIds.join(',');
-    param.choosedUserIds = choosedUserIds;
+    // choosedUserIds = choosedUserIds.join(',');
+    // param.choosedUserIds = choosedUserIds;
+
+    var key2 = obj.data.key2;
+    var value2 = obj.data[key2];
+    var hasUserList = value2.chooseUsers || [];
+    var hasUsers = [];
+
+    hasUserList.forEach((item) => {
+       hasUsers.push(item.user_id);
+    });
+    hasUsers = hasUsers.join(',');
+    param.hasUsers = hasUsers;
+
+    var hasDept = value2.chooseDeptList || [];
+    var hasDepts = [];
+    hasDept.forEach((dept) => {
+       if (!dept.isDel) {
+         hasDepts.push(dept.dept_id);
+       }
+    });
+    hasDepts = hasDepts.join(',');
+    param.hasDepts = hasDepts;
 
     // 取出当前模式下，被选中的用户
     var key = obj.data.key;
@@ -562,6 +588,11 @@ Page({
 		 var hasUsers = hv.chooseUsers || [];
      var chooseDeptList = obj.data.chooseDeptList || [];
      
+     // 在之前的选择中被选中的用户，不做任何操作
+     if (userList[index].hasChoosed) {
+        return;
+     }
+
 		 // 在页面勾选第一个用户
      if (hasUsers.length == 0) {
         hasUsers.push(userList[index]);
@@ -641,7 +672,7 @@ Page({
 
 
   /**
-   * chooseAll
+   * 全选 chooseAll
    */
   chooseAll () {
     var obj = this;
@@ -654,7 +685,7 @@ Page({
 		var key = obj.data.key;
 		var hv = obj.data[key] || {};
 		var hasUsers = hv.chooseUsers || [];
-		// 给重叠部分标记
+		// 给重叠部分标记, 取消全选
     if (chooseAll) {
       chooseAll = false;
       userList.forEach((user,u) => {
@@ -667,40 +698,53 @@ Page({
 			});
         
       indexs = [];
-       var dept_id = 0;
-      // 如果是全选就添加部门
+      var dept_id = 0;
+      // 如果是取消全选就移除部门
       var dept_id = userList[0].dept_id;
       chooseDeptList.forEach(function (item, i) {
         if (item.dept_id == dept_id) {
-          item.isDel = true;
+           item.isDel = true;
         }
       });
       _chooseDeptList = chooseDeptList;
 
     } else {
+      // 全选操作
 			var addIndexs = [];
       chooseAll = true;
 			userList.forEach((user,u) => {
-				user.checked = true;
-				indexs.push(user);
+        if (user.hasChoosed) {
+           user.checked = false;
+        } else {
+          user.checked = true;
+          indexs.push(user);
+        }
 				var count = 0;
 				hasUsers.forEach((has,h) => {
 					if (has.user_id == user.user_id) {
-						  has.isDel = false;
+             if (!user.hasChoosed) {
+						    has.isDel = false;
+             }
 							count++;
 					} 
 				});
+        // 非选中的才做操作
 				if (count <= 0) {
-					addIndexs.push(u);
+					 if (!user.hasChoosed) {
+              addIndexs.push(u);
+           }
 				}
-				user.isDel = false;
+        // 非选中的
+				if (!user.hasChoosed) {
+           user.isDel = false;
+        }
 			});
 			
 			addIndexs.forEach((ai,i) => {
 				hasUsers.push(userList[ai]);
 			});
       
-      // 如果是取消全选就移除部门
+      // 如果是全选就添加部门
       var dept_id = userList[0].dept_id;
       chooseDeptList.forEach(function (item, i) {
         if (item.dept_id == dept_id) {
