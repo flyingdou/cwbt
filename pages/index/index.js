@@ -222,7 +222,7 @@ Page({
     wx.request({
       url: url,
       data: {
-        userName: obj.data.account,
+        account: obj.data.account,
         pwd: obj.data.password,
         json: encodeURI(JSON.stringify(param)),
         encryptedData: encryptedData
