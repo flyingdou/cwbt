@@ -138,7 +138,11 @@ Page({
     var douKey = key + 'Dou';
     var douValue = obj.data[douKey] || '';
 
-    var jumpUrl = '../../pages/chooseUser/chooseUser?' + key + '=' + JSON.stringify(douValue) + '&key=' + key;
+    var key2 = e.currentTarget.dataset.key2;
+    var douKey2 = key2 + 'Dou';
+    var douValue2 = obj.data[douKey2] || '';
+
+    var jumpUrl = '../../pages/chooseUser/chooseUser?' + key + '=' + JSON.stringify(douValue) + '&key=' + key + '&' + key2 + '=' + JSON.stringify(douValue2) + '&key2=' + key2;
     if (douValue) {
       var chooseDeptList = douValue.chooseDeptList || [];
       var chooseUsers = douValue.chooseUsers || [];

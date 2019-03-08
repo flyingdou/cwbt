@@ -27,7 +27,7 @@
                                          </view>
                                   </block> 
                                   <block>
-                                        <view class='user-name' bindtap='choose' data-key = 'recUsers'>
+                                        <view class='user-name' bindtap='choose' data-key = 'recUsers' data-key2 = 'copyUsers'>
                                            <view class='small_text add-block'><image src='../../icon/add2.png' mode='aspectFill'></image></view>
                                          </view>
                                   </block>
@@ -48,7 +48,7 @@
                                          </view>
                                   </block> 
                                   <block>
-                                        <view class='user-name' bindtap='choose' data-key = 'copyUsers'>
+                                        <view class='user-name' bindtap='choose' data-key = 'copyUsers' data-key2 = 'recUsers'>
                                            <view class='small_text add-block'><image src='../../icon/add2.png' mode='aspectFill'></image></view>
                                          </view>
                                   </block>
