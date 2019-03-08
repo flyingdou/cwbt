@@ -74,7 +74,7 @@ Page({
    * 取出账户
    */
   init:() => {
-    var account = wx.getStorageSync('account');
+    var account = app.user.account;
     obj.setData({
       account: account
     });
@@ -128,7 +128,7 @@ Page({
      console.log(param);
      var reqUrl = util.getRequestURL('updatePassword.we');
      wx.showLoading({
-       title: '处理中...',
+       title: '处理中',
        mask: true
      })
      wx.request({
@@ -226,7 +226,7 @@ Page({
       return false;
     }
 
-    param.userName = obj.data.account;
+    param.account = obj.data.account;
     param.pwd = password;
     param.newPassword = newPassword;
     obj.data.param = param;

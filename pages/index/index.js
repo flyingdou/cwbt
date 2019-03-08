@@ -245,6 +245,7 @@ Page({
           // util.tipsMessage('登录成功！');
 
           app.user = res.data.user;
+          app.user.account = obj.data.account;
           wx.setStorageSync('user', res.data.user);
           wx.setStorageSync('account', obj.data.account);
           var workCount = res.data.workCount;
