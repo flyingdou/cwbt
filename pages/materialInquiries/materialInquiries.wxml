@@ -1,0 +1,70 @@
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择部门 -->
+<view class='choose' bindtap='toSelectDeptPage'>
+      <view class='left'>
+            选择查询部门：
+      </view>
+
+      <view class='right'>
+            <view class='value'>{{deptObj.dept_name ? deptObj.dept_name : "请选择"}}</view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 数据列表 -->
+<view class='list'>
+        <noData wx:if='{{list.length <= 0}}'></noData>
+        <view class='pre' wx:for = '{{list}}' wx:key=''>
+              <view class='line' bindtap='goto' data-link = '../materialRecord/materialRecord?deptId={{deptObj.seq_id}}' data-index='{{index}}'>
+                    <view class='line1'>
+                          <view class='tv left'>
+                                <view class='title'>物资名称</view>
+                                <view class='value'>{{item.name}}</view>
+                          </view>
+
+                          <view class='tv'>
+                                <view class='title'>单位</view>
+                                <view class='value'>{{item.unitname}}</view>
+                          </view>
+                    </view>
+
+                    <view class='lineFill'></view>
+
+                    <!-- <view class='line1'>
+                          <view class='tv left'>
+                                <view class='title'>剩余数量</view>
+                                <view class='value'>{{item.number || 0}}</view>
+                          </view>
+
+                          <view class='tv'>
+                                <view class='title'>所属船舶</view>
+                                <view class='value'>{{item.boatName}}</view>
+                          </view>
+                    </view>
+
+                    <view class='lineFill'></view> -->
+
+                    <view class='line1'>
+                          <view class='tv left'>
+                                <view class='title'>备注</view>
+                                <view class='value'>{{item.remark || "无"}}</view>
+                          </view>
+
+                          <view class='tv'>
+                                <view class='title'>创建时间</view>
+                                <view class='value'>{{item.createtime}}</view>
+                          </view>
+                    </view>
+              </view>
+
+        </view>
+
+</view>

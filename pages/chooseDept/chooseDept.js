@@ -15,6 +15,8 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+
+    // 页面初始化
     var dou = {};
     // 设置navList的值
     var navList = options.navList;
@@ -309,7 +311,7 @@ Page({
       return;
     }
 
-    // 将值存储起来
+    // 将值存储起来并返回上一页
     var deptObj = obj.data.deptObj;
     wx.setStorageSync('deptObj', deptObj);
 

@@ -1,0 +1,16 @@
+<view class='weui-cell-third'>
+  <block wx:for="{{list}}" wx:key="">
+    <view class='weui-cell-list'>
+      <view class='weui-cell-circle'></view>  
+      <view class='weui-cell-line'>
+        <view class='weui-cell-time'><text class="value">{{item.outtime}}</text></view>
+        <view class='weui-cell-name'></view>
+        <view class='weui-cell-event'>操作人 <text class="value">{{item.createperson}}</text></view>
+        <view class='weui-cell-event'>状态 <text class="value">{{statusTypes[item.status]}}</text></view>
+        <view class='weui-cell-event'>数量 <text class="value">{{item.number}}</text></view>
+        <!-- <view class='weui-cell-event' wx:if='{{item.spareStatus == 7}}'>消耗至 <text class="value">{{item.equipmentName}}</text></view>
+        <view class='weui-cell-event' wx:else>{{item.recordType == "in" ? "来源" : "去向"}} <text class="value">{{item.spareStatus == 1 ? item.spareStatusName : item.boatName}} </text></view> -->
+      </view>
+    </view>
+  </block>
+</view>

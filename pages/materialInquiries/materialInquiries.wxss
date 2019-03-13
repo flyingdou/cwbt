@@ -1,0 +1,134 @@
+/* 选择部门样式 */
+.choose{
+  display: flex;
+  margin: 0 20rpx;
+  padding: 20rpx 0;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+}
+
+.left{
+	flex: 1;
+  padding-left: 20rpx;
+  width: auto;
+  font-size: 24rpx;
+}
+
+.right{
+	flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20rpx;
+}
+
+.moreIcon{
+  width: 26rpx;
+  height: 26rpx;
+}
+
+/* 数据列表样式 */
+.list{
+  padding: 20rpx;
+}
+
+.pre{
+  background: white;
+  padding:20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8rpx;
+  margin-bottom: 30rpx;
+}
+
+.line{
+  position: relative;
+  width: 100%;
+}
+
+
+.line1{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lineFill{
+  width: 100%;
+  height: 2rpx;
+  background: rgba(245,245,245,1);
+  margin: 20rpx 0;
+}
+
+.line2{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.left{
+ margin-right: 120rpx;
+}
+
+.tv{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.value{
+  padding-left: 20rpx;
+}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 40rpx;
+  width: 100%;
+  height: auto;
+}
+
+.tag{
+  position: absolute;
+  right: 10rpx;
+  top: -30rpx;
+}
+
+.tagDiv{
+  position: relative;
+  width: 71rpx;
+  height: 45rpx;
+}
+
+.statusFont{
+  position: absolute;
+  font-size: 18rpx;
+  color: white;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 42rpx;
+}
+
+.isAll {
+  font-size: 28rpx;
+  color: rgba(51,51,51,1);
+  padding: 20rpx;
+  text-align: right;
+}
+
+.valid{
+  font-size: 28rpx;
+  color: white;
+  padding: 15rpx;
+  margin: 0 20rpx;
+  text-align: center;
+  background:rgba(38,130,255,1);
+  box-shadow:0px 5px 10px rgba(255,114,114,0.1);
+  border-radius: 8rpx;
+}
