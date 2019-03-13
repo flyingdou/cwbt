@@ -1,1 +1,105 @@
-/* pages/consumeMaterial/consumeMaterial.wxss */
+/* 填充高度 */
+.fill{
+  height: 120rpx;
+}
+
+/* 物资列表样式 */
+.spare{
+  position: relative;
+  margin: 20rpx;
+  padding: 20rpx;
+  background: white;
+  border-radius: 20rpx;
+}
+
+.tv{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid rgba(245,245,245,1);
+}
+
+.tv:last-child{
+  border-bottom: none;
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  padding-right: 20rpx;
+}
+
+.line{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.radio-wraper{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.preSpare{
+  position: relative;
+}
+
+.background-bolck{
+  height: 20rpx;
+  background-color: rgba(245,245,245,1);
+}
+
+.delIcon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.add-btn{
+  display: flex;
+  justify-content: center;
+  margin-top: 20rpx;
+  padding: 20rpx 50rpx;
+  font-size: 28rpx;
+  color: white;
+  text-align: center;
+}
+
+.btn-block{
+  padding: 20rpx 60rpx;
+  background: #2682FF;
+  border-radius: 5rpx;
+}
+
+/* 底部按钮样式 */
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 20rpx;
+  padding-top: 50rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cost{
+  width: 80%;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: white;
+  background: #2682FF;
+  border-radius: 5rpx;
+  text-align: center;
+}

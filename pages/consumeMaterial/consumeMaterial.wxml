@@ -1,2 +1,45 @@
-<!--pages/consumeMaterial/consumeMaterial.wxml-->
-<text>pages/consumeMaterial/consumeMaterial.wxml</text>
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 物资列表 -->
+<view class='spare' wx:for='{{materialList}}' wx:key=''>
+      <view class='delIcon' catchtap='removeMaterial' data-index = '{{index}}'>
+            <image src='../../icon/close.png' mode='aspectFill'></image>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>物资名称:</view>
+            <view class='value'>{{item.name}}</view>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>使用数量:</view>
+            <view class='value'>
+                  <input style='width:200rpx;' type='digit' placeholder='请输入使用数量' placeholder-style='color: #88F25B;' bindinput='inputChange' data-key = 'costCount' data-index='{{index}}' value='{{item.costCount}}'></input>
+            </view>
+      </view>
+
+      <view class='tv'>
+            <view class='title'>单位:</view>
+            <view class='value'>{{item.unitname}}</view>
+      </view>
+
+      <view class='tv'>
+            <radio-group class='radio-wraper' bindchange='inputChange' data-index='{{index}}' data-key='quality'>
+              <view class='title' wx:for='{{qualitys}}' wx:key='' wx:for-item='quality' wx:for-index='qualityIndex'>
+                <radio value='{{quality.value}}' checked='{{item.quality == quality.value}}'></radio> {{quality.name}}
+              </view>
+            </radio-group>
+      </view>
+</view>
+
+<!-- 选择物资按钮 -->
+<view class='add-btn' bindtap='chooseMaterial'><view class='btn-block'>+选择物资</view></view>
+
+<!-- 填充高度 -->
+<view class='fill'></view>
+
+<!-- 底部悬浮按钮 -->
+<view class='footer'>
+      <view class='cost' bindtap='submit'>提交</view>
+</view>
