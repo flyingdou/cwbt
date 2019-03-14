@@ -1,6 +1,10 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/materialSwitch/materialSwitch",
+    "pages/ppmCharts/ppmCharts",//单部门单时间多物资
+    "pages/mppCharts/mppCharts",//多部门单时间单物资
+    "pages/pmpCharts/pmpCharts",//单部门多时间单物资
     "pages/releaseSupervision/releaseSupervision",
     "pages/boatDetail/boatDetail",
     "pages/chooseUser/chooseUser",
