@@ -1,1 +1,23 @@
-/* pages/materialSwitch/materialSwitch.wxss */
+.content{
+  background: #91edde;
+}
+
+.preLine{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.preFun{
+  width: 48%;
+  height: 560rpx;
+  border-radius: 10rpx;
+}
+
+.funTitle{
+  font-size: 32rpx;
+  color: black;
+  text-align: center;
+  line-height: 300rpx;
+}
