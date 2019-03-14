@@ -23,7 +23,7 @@
 <view class='list'>
         <noData wx:if='{{list.length <= 0}}'></noData>
         <view class='pre' wx:for = '{{list}}' wx:key=''>
-              <view class='line' bindtap='goto' data-link = '../materialRecord/materialRecord?deptId={{deptObj.seq_id}}' data-index='{{index}}'>
+              <view class='line' bindtap='goto' data-link = '../materialRecord/materialRecord?deptId={{deptObj.seq_id}}&materialId={{item.id}}' data-index='{{index}}'>
                     <view class='line1'>
                           <view class='tv left'>
                                 <view class='title'>物资名称</view>

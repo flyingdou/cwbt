@@ -20,6 +20,9 @@ Page({
     if (options.deptId) {
       obj.data.deptId = options.deptId;
     }
+    if (options.materialId) {
+      obj.data.materialId = options.materialId;
+    }
   },
 
   /**
@@ -74,7 +77,12 @@ Page({
    */
   queryData: function () {
     var url = util.getRequestURL('getMaterialRecord.we');
-    var param = { deptId: obj.data.deptId, currentPage: obj.data.currentPage, pageSize: obj.data.pageSize };
+    var param = { 
+      materialId: obj.data.materialId,
+      deptId: obj.data.deptId, 
+      currentPage: obj.data.currentPage, 
+      pageSize: obj.data.pageSize 
+    };
 
     // 测试数据
     // console.log(param);

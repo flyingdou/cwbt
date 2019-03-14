@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "物资消耗查询",
+  "navigationBarTitleText": "物资消耗记录",
   "usingComponents": {
     "noData": "../../component/noData/noData"
   }

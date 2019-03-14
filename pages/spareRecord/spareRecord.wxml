@@ -1,4 +1,5 @@
 <view class='weui-cell-third'>
+  <noData wx:if='{{list.length <= 0}}'></noData>
   <block wx:for="{{list}}" wx:key="">
     <view class='weui-cell-list'>
       <view class='weui-cell-circle'></view>  
