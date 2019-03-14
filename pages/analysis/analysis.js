@@ -83,12 +83,42 @@ Page({
    * 页面初始化
    */
   init (e) {
-    // wx.showLoading({
-    //   title: "数据加载中",
-    //   mask: true
-    // });
+    wx.showLoading({
+      title: "数据加载中",
+      mask: true
+    });
     // 根据当前登录用户所在部门自动展现
+    var reqUrl = util.getRequestURL('getDepartmentClass.we');
+    var param = { id: app.user.deptId };
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          var data = {
+            lt: res.department.lt,
+            count: res.department.count
+          };
+          if (data.count == 2) {
+            var deptObj = data.lt[data.count];
 
+            data.deptObj = deptObj;
+
+            // 统计部门工作卡任务完成情况
+            obj.statistics(deptObj.seq_id);
+          }
+          obj.setData(data);
+          wx.hideLoading();
+        }
+      },
+      fail(e) {
+        wx.hideLoading();
+      }
+    });
   },
 
   /**
