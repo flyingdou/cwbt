@@ -3,3 +3,5 @@
    <view class='upload' bindtap='photo'>选择图片上传</view>
  
 </view>
+
+<mark showModalStatus = 'true' multiple = 'true' bindMark = 'pickDates'></mark>

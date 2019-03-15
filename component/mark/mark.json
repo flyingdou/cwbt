@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-  	"calendar": "../../component/calendar/calendar"
+  	"calendar": "../../component/calendar/calendar",
+    "yearMonth": "../../component/yearMonth/yearMonth"
   }
 }

@@ -1,0 +1,65 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
+
+<view class='date-show'>
+   <view class='date-show-left' bindtap='preYear'>
+       <image src='../../icon/left.png' mode='aspectFit'></image>
+   </view>
+   <view class="date-show-middle">
+    {{year}}年
+   </view>
+   <view class='date-show-right' bindtap='nextYear'>
+       <image src='../../icon/right.png' mode='aspectFit'></image>
+   </view>
+</view>
+<swiper class='swiper' duration='{{duration}}' current-item-id='{{currentItem}}' bindanimationfinish='changeMonthCallback'>
+  <!-- 左节点 -->
+  <swiper-item item-id='preMonth'>
+    <view class='wrap'>
+       <view>
+          
+         </view>
+       
+         <view class='date-box'>
+             <view wx:for='{{dateArr}}' class='preMonth' wx:key='' data-month='{{item.isToday}}' bindtap='changeMonthDou' data-index = '{{index}}'>            
+                 <view class='date-head {{activeDay == item.isToday ? "activeDay" : ""}}'>
+                     <view class='{{activeDay && (activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : ""))}}'>{{item.dateNum}}</view>
+                 </view>
+                 
+             </view>
+         </view>
+    </view>
+  </swiper-item>
+  <!-- 中节点 -->
+  <swiper-item item-id='currentMonth'>
+    <view class='wrap'>
+       <view>
+         </view>
+         
+         <view class='date-box'>
+             <view wx:for='{{dateArr}}' class='preMonth' wx:key='' data-month='{{item.isToday}}' bindtap='changeMonthDou' data-index = '{{index}}'>            
+                 <view class='date-head {{activeDay == item.isToday ? "activeDay" : ""}}'>
+                     <view class='{{activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : "") }}'>{{item.dateNum}}</view>
+                 </view>
+                 
+             </view>
+         </view>
+    </view>
+  </swiper-item>
+  <!-- 右节点 -->
+  <swiper-item item-id='nextMonth'>
+    <view class='wrap'>
+       <view>
+         </view>
+        
+         <view class='date-box'>
+             <view wx:for='{{dateArr}}' class='preMonth' wx:key=''  data-month='{{item.isToday}}' bindtap='changeMonthDou' data-index = '{{index}}'>            
+                 <view class='date-head {{activeDay == item.isToday ? "activeDay" : ""}}'>
+                     <view class='{{activeDay == item.isToday ? "" : (nowDay == item.isToday ? "nowDay" : "") }}'>{{item.dateNum}}</view>
+                 </view>
+                
+             </view>
+         </view>
+    </view>
+  </swiper-item>
+</swiper>

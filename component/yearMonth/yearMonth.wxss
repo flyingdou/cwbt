@@ -1,0 +1,136 @@
+.switch-wrap{
+  width: 100%;
+  overflow: hidden;
+}
+
+.scroll-wrap{
+  display: flex;
+  width: 300%;
+}
+
+.swiper{
+  height: 800rpx;
+}
+
+.date-show{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20rpx 0;
+    font-family: PingFang-SC-Regular;
+    font-size: 40rpx;
+    color: #282828;
+    text-align: center;
+ }
+ .date-show-left,.date-show-middle,.date-show-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33.33%;
+    height: 80rpx;
+    line-height: 80rpx;
+ }
+ .date-show-left>image{
+    width: 40rpx;
+    height: 40rpx;
+ }
+ .date-show-right>image{
+    width: 40rpx;
+    height: 40rpx;
+ }
+ .lt-arrow,.rt-arrow{
+     position: absolute;
+     top: 1rpx;
+     width: 60rpx;
+     height: 60rpx;
+   padding-right: 0.6rem;
+ }
+ .lt-arrow image,.rt-arrow image{
+     width: 40rpx;
+     height: 40rpx;
+ }
+ .lt-arrow{
+     left: -110rpx;
+     /* transform: rotate(180deg); */
+ }
+ .rt-arrow{
+     right: -100rpx;
+ }
+ .header{
+     font-size: 0;
+     padding: 0 24rpx;
+ }
+ .header>view{
+     display: inline-block;
+     width: 14.285%;
+     color: #333;
+     font-size: 30rpx;
+     text-align: center;
+     border-bottom: 1px solid #D0D0D0;
+     padding: 39rpx 0;
+ }
+ .weekMark{
+     position: relative;
+ }
+ .weekMark view{
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     border-bottom: 1px solid #22A7F6;
+ }
+ .date-box{
+     font-size: 0;
+     padding: 10rpx 0;
+ }
+ .preMonth{
+     position: relative;
+     display: inline-block;
+     width: 22%;
+     color: #020202;
+     font-size: 40rpx;
+     text-align: center;
+     vertical-align: middle;
+     margin: 15rpx 0;
+ }
+ .date-head{
+     height: 100rpx;
+     line-height: 100rpx;
+     font-size: 32rpx;
+ }
+ .date-weight{
+     font-size: 22rpx;
+     padding: 15rpx 0;
+ }
+ .nowDay .date-weight{
+     color: #22A7F6;
+ }
+ .nowDay{
+    color: #A3C2CC;
+ }
+ .activeDay{
+  color: #fff;
+  border-radius: 50%;
+  background-color: #22A7F6;
+  width:100rpx;
+  text-align: center;
+  margin: 0 auto;
+ }
+ .one{
+     position: absolute;
+     bottom: 0;
+     right: 5rpx;
+     width: 20rpx;
+     height: 20rpx;
+     border-radius: 50%;
+     background-color: red;
+ }
+ .two{
+     position: absolute;
+     bottom: 30rpx;
+     right: 5rpx;
+     width: 20rpx;
+     height: 20rpx;
+     border-radius: 50%;
+     background-color: blue;
+ }

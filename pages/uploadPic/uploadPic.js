@@ -148,6 +148,9 @@ Page({
     obj.uploadPics();
   },
 
+  pickDates (e) {
+    console.log(e.detail.values);
+  },
 
 
 })

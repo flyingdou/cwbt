@@ -178,4 +178,4 @@
 </view>
 
 <!-- 日历选择组件 -->
-<mark showModalStatus='{{showMark}}' multiple='{{true}}' bindMark='dateChange'></mark>
+<mark showModalStatus='{{showMark}}' multiple='{{true}}' bindMark='dateChange' type = 'calendar'></mark>

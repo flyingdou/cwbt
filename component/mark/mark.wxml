@@ -10,6 +10,8 @@
   </view> -->
   <!-- <view class="drawer_title">弹窗标题</view> -->
   <view class="drawer_content">
-    <calendar multiple='{{multiple}}' bindCalendar='saveSelectValue' wx:if='{{showModalStatus}}'></calendar>
+    <calendar multiple='{{multiple}}' bindCalendar='saveSelectValue' wx:if='{{showModalStatus && (!type || type == "calendar")}}'></calendar>
+    <yearMonth multiple='{{multiple}}' bindCalendar='saveSelectValue' wx:if='{{showModalStatus && type == "yearMonth"}}'></yearMonth>
   </view>
+
 </view>

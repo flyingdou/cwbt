@@ -5,7 +5,8 @@ Component({
    */
   properties: {
     showModalStatus: Boolean, // 是否显示弹出框
-    multiple: Boolean
+    multiple: Boolean, // 是否多选
+    type: String // 引用组件类型
   },
 
   /**

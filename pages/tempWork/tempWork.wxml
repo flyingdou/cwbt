@@ -203,4 +203,4 @@
 
 
 <!-- 弹出日历，选择时间 -->
-<mark showModalStatus = '{{showMark}}' multiple = '{{false}}' bindMark = 'saveDate'></mark>
+<mark showModalStatus = '{{showMark}}' multiple = '{{false}}' bindMark = 'saveDate' type = 'calendar'></mark>
