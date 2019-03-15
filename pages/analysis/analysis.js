@@ -32,14 +32,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 获取选择部门页面的数据
-    if (wx.getStorageSync("deptObj")) {
-      var deptObj = wx.getStorageSync("deptObj");
-      obj.setData({
-        deptObj: wx.getStorageSync("deptObj")
-      });
-      wx.removeStorageSync("deptObj");
-
+    // 每次页面显示检查当前页面存在部门数据就查询工作卡统计
+    var { deptObj } = obj.data;
+    if (deptObj) {
       // 根据部门查询统计数据
       wx.showLoading({
         title: '数据加载中',

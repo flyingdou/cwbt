@@ -58,12 +58,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (wx.getStorageSync("deptObj")) {
-      obj.setData({
-        deptObj: wx.getStorageSync("deptObj")
-      });
-      wx.removeStorageSync("deptObj")
-    }
+    
   },
 
   /**

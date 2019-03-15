@@ -70,7 +70,7 @@
 </view>
 
 <!-- 统计图 -->
-<view class="charts-wrapper" wx:if='{{chartData}}'>
+<view class="charts-wrapper" wx:if='{{chartData}}' hidden='{{showMark}}'>
 	<view class="title">
 		{{chartData.title}}
 	</view>
