@@ -15,6 +15,8 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    // 初始化页面数据
+    obj.init();
   },
 
   /**
@@ -64,5 +66,69 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  /**
+   * init
+   */
+  init () {
+    var funList = [];
+    var funs = [];
+    var funDou = [
+      {
+        'name': '工作卡统计',
+        'icon': '../../icon/workCard.png',
+        'link': '../../pages/analysis/analysis'
+      },
+      {
+        'name': '统计图1',
+        'icon': '../../icon/ppm.png',
+        'link': '../../pages/ppmCharts/ppmCharts'
+      },
+      {
+        'name': '统计图2',
+        'icon': '../../icon/mpp.png',
+        'link': '../../pages/ppmCharts/ppmCharts'
+      },
+      {
+        'name': '统计图3',
+        'icon': '../../icon/pmp.png',
+        'link': '../../pages/ppmCharts/ppmCharts'
+      }
+    ];
+    
+
+    funDou.forEach((fun,i) => {
+      funs.push(fun);
+      if (funs.length == 2) {
+        funList.push(funs);
+        funs = [];
+      }
+      if (i == (funDou.length - 1)) {
+        if (funs.length > 0) {
+          funList.push(funs);
+        }
+      }
+    });
+
+    obj.setData({
+      funList: funList
+    });
+
+
+
+  },
+
+  /**
+   * 跳转
+   */
+  goto (e) {
+    var link = e.currentTarget.dataset.link;
+    wx.navigateTo({
+      url: link,
+    })
+  }, 
+
+
+
 })

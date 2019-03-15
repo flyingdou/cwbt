@@ -1,2 +1,13 @@
-<!--pages/materialSwitch/materialSwitch.wxml-->
-<text>pages/materialSwitch/materialSwitch.wxml</text>
+<!-- 统计分流页面 -->
+<view class='content'>
+      <view class='funList'>
+
+            <!-- 行循环 -->
+            <view class='preLine' wx:for = '{{funList}}' wx:for-item = 'funs' wx:key = ''>
+                  <!-- 每行内容循环 -->
+                  <view class='preFun' style='background:url({{fun.icon}}) no-repeat;background-size: 100% 100%;' wx:for = '{{funs}}' wx:for-item = 'fun' wx:key = '' bindtap='goto' data-link = '{{fun.link}}'>
+                        <view class='funTitle'>{{fun.name}}</view>
+                  </view>
+            </view>
+      </view>
+</view>
