@@ -1,1 +1,81 @@
 <!-- 单部门单时间多物资 -->
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择部门 -->
+<view class='choose' bindtap='goto' data-link='../chooseDept/chooseDept?type=radio'>
+      <view class='left'>
+            选择统计部门：
+      </view>
+
+      <view class='right'>
+            <view class='value'>{{deptObj.dept_name ? deptObj.dept_name : "请选择"}}</view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择时间 -->
+<view class='choose' bindtap='showMark'>
+      <view class='left'>
+            选择统计时间：
+      </view>
+
+      <view class='right'>
+            <view class='value'>
+              <block wx:if='{{startDate && endDate}}'>
+                <view>{{startDate}}</view>  
+                <view>{{endDate}}</view>
+              </block>
+              <block wx:else>
+                请选择
+              </block>
+            </view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择物资 -->
+<view class='choose' bindtap='goto' data-link='../chooseMaterial/chooseMaterial?type=checkbox'>
+      <view class='left'>
+            选择统计物资：
+      </view>
+
+      <view class='right'>
+            <view class='value'>
+              <block wx:for='{{materialList}}' wx:key='' wx:if='{{materialList}}'>
+                <text>{{item.name}}</text>、
+              </block>
+              <block wx:if='{{!materialList}}'>
+                请选择
+              </block>
+            </view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 统计图 -->
+<view class="charts-wrapper" wx:if='{{chartData}}'>
+	<view class="title">
+		{{chartData.title}}
+	</view>
+  <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
+
+<!-- 日历选择组件 -->
+<mark showModalStatus='{{showMark}}' multiple='{{true}}' bindMark='dateChange' type = 'calendar'></mark>
