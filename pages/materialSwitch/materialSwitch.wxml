@@ -5,7 +5,7 @@
             <!-- 行循环 -->
             <view class='preLine' wx:for = '{{funList}}' wx:for-item = 'funs' wx:key = ''>
                   <!-- 每行内容循环 -->
-                  <view class='preFun' style='background:url({{fun.icon}}) no-repeat;background-size: 100% 100%;' wx:for = '{{funs}}' wx:for-item = 'fun' wx:key = '' bindtap='goto' data-link = '{{fun.link}}'>
+                  <view class='preFun' style='background:url({{base_domain + fun.icon}}) no-repeat;background-size: 100% 100%;' wx:for = '{{funs}}' wx:for-item = 'fun' wx:key = '' bindtap='goto' data-link = '{{fun.link}}'>
                         <view class='funTitle'>{{fun.name}}</view>
                   </view>
             </view>

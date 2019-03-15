@@ -1,1 +1,80 @@
-<!-- 单部门多时间单物资 -->
+<!-- 单部门多月份单物资 -->
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择部门 -->
+<view class='choose' bindtap='goto' data-link='../chooseDept/chooseDept'>
+      <view class='left'>
+            选择统计部门：
+      </view>
+
+      <view class='right'>
+            <view class='value'>
+              <block  wx:key='' wx:if='{{deptObj}}'>
+                <text>{{deptObj.dept_name}}</text>
+              </block>
+              <block wx:if='{{!deptObj}}'>
+                请选择
+              </block>
+            </view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择时间 -->
+<view class='choose' bindtap='showMark'>
+      <view class='left'>
+            选择统计时间：
+      </view>
+
+      <view class='right'>
+            <view class='value'>
+              <block wx:if='{{startDate && endDate}}'>
+                <view>{{startDate}}</view>  
+                <view>{{endDate}}</view>
+              </block>
+              <block wx:else>
+                请选择
+              </block>
+            </view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择物资 -->
+<view class='choose' bindtap='goto' data-link='../chooseMaterial/chooseMaterial?type=radio'>
+      <view class='left'>
+            选择统计物资：
+      </view>
+
+      <view class='right'>
+            <view class='value'>{{material.name ? material.name : "请选择"}}</view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 画图插件 -->
+<view class='chart' wx:if = '{{unit && !showMark}}'>
+      <!-- title -->
+      <view class='chartTitle'>物资消耗量</view>
+      <canvas canvas-id="columnCanvas" class="canvas"></canvas>
+</view>
+
+<!-- 日历选择组件 -->
+<mark showModalStatus='{{showMark}}' multiple='{{true}}' bindMark='dateChange' type = 'yearMonth'></mark>
