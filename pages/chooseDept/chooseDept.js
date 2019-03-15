@@ -349,8 +349,6 @@ Page({
     // 单选逻辑
     if (!type || type === "radio") {
       prePage.setData({ deptObj });
-      // 兼容代码，部分页面使用缓存向上传值
-      wx.setStorageSync("deptObj", deptObj);
     } else if (type && type === "checkbox") {
       // 多选
       var deptObjList = [];
