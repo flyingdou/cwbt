@@ -1,1 +1,59 @@
-/* pages/ppmCharts/ppmCharts.wxss */
+/* 选择部门样式 */
+.choose{
+  display: flex;
+  margin: 0 20rpx;
+  padding: 20rpx 0;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+}
+
+.left{
+	flex: 1;
+  padding-left: 20rpx;
+  width: auto;
+  font-size: 24rpx;
+}
+
+.right{
+	flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20rpx;
+}
+
+.moreIcon{
+  width: 26rpx;
+  height: 26rpx;
+}
+
+/* 统计图样式 */
+.charts-wrapper{
+  margin: 0 20rpx;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+}
+
+.title{
+  padding: 20rpx 0;
+  text-align: center;
+}
+
+.canvas {
+  width: 100%;
+  height: 400px;
+}
+
+/* 数量样式 */
+.sumcount-content{
+  padding: 0 20rpx;
+  font-size: 24rpx;
+}
+
+.sumcount-item{
+  margin-bottom: 20rpx;
+}

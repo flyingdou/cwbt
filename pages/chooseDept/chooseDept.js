@@ -224,7 +224,8 @@ Page({
 
            if (!res.deptList || res.deptList.length == 0) {
               obj.setData({
-                deptObj: obj.data.navList[0]
+                deptObj: obj.data.navList[0],
+                selectCount: 1
               });
            }
         }
@@ -328,10 +329,7 @@ Page({
 
 
   choose: () => {   
-    var type = obj.data.type;
-    var deptList = obj.data.deptList || [];
-    var selectCount = obj.data.selectCount;
-    var deptObj = obj.data.deptObj;
+    var { type, selectCount, deptObj, deptList = [], navList = [] } = obj.data;
 
     // 校验是否选择部门
     if (!obj.data.deptObj && (!selectCount || selectCount <= 0)) {
@@ -356,6 +354,9 @@ Page({
     } else if (type && type === "checkbox") {
       // 多选
       var deptObjList = [];
+      if (deptList.length <= 0) {
+        deptObjList = [...deptObjList, navList[0]];
+      }
       deptList.forEach(item => item.checked && (deptObjList = [...deptObjList, item]));
       prePage.setData({ deptObjList });
     }

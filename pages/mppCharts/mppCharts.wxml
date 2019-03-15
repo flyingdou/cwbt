@@ -69,5 +69,13 @@
       </view>
 </view>
 
+<!-- 统计图 -->
+<view class="charts-wrapper" wx:if='{{chartData}}'>
+	<view class="title">
+		{{chartData.title}}
+	</view>
+  <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>
+
 <!-- 日历选择组件 -->
 <mark showModalStatus='{{showMark}}' multiple='{{true}}' bindMark='dateChange' type = 'calendar'></mark>
