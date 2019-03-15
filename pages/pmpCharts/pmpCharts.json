@@ -1,3 +1,6 @@
 {
-  
+  "navigationBarTitleText": "单部门多月份单物资",
+  "usingComponents": {
+    "mark": "../../component/mark/mark"
+  }
 }

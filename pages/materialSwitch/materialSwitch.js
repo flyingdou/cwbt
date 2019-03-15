@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+     base_domain: app.constant.base_domain + "upload/"
   },
 
   /**
@@ -77,22 +77,22 @@ Page({
     var funDou = [
       {
         'name': '工作卡统计',
-        'icon': '../../icon/workCard.png',
+        'icon': 'icon/workCard.png',
         'link': '../../pages/analysis/analysis'
       },
       {
         'name': '统计图1',
-        'icon': '../../icon/ppm.png',
+        'icon': 'icon/ppm.png',
         'link': '../../pages/mppCharts/mppCharts'
       },
       {
         'name': '统计图2',
-        'icon': '../../icon/mpp.png',
+        'icon': 'icon/mpp.png',
         'link': '../../pages/ppmCharts/ppmCharts'
       },
       {
         'name': '统计图3',
-        'icon': '../../icon/pmp.png',
+        'icon': 'icon/pmp.png',
         'link': '../../pages/pmpCharts/pmpCharts'
       }
     ];

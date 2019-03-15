@@ -70,7 +70,7 @@ App({
     base_req_url_backup_1: 'https://cwbt.castlc.cn/cwbt/test/login?url=http://47.92.101.196:8080/cwbt/api/cwbtMP/',
     upload_url_backup: 'https://fish.ecartoon.com.cn/uploadFile',
     download_url_backup: 'https://cwbt.castlc.cn/file/',
-    server_url: 'http://127.0.0.1:8080/'
+    server_url: 'http://192.168.0.107:8080/'
   },
 
   /**
