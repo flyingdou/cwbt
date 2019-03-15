@@ -29,13 +29,21 @@
 <view style='height: 20rpx;'></view>
 
 <!-- 选择时间 -->
-<view class='choose'>
+<view class='choose' bindtap='showMark'>
       <view class='left'>
             选择统计时间：
       </view>
 
       <view class='right'>
-            <view class='value'>{{deptObj.dept_name ? deptObj.dept_name : "请选择"}}</view>
+            <view class='value'>
+              <block wx:if='{{startDate && endDate}}'>
+                <view>{{startDate}}</view>  
+                <view>{{endDate}}</view>
+              </block>
+              <block wx:else>
+                请选择
+              </block>
+            </view>
             <!-- moreIcon -->
             <view class='moreIcon'>
                   <image mode='aspectFill' src='../../icon/more@2x.png'></image>
@@ -60,3 +68,6 @@
             </view>
       </view>
 </view>
+
+<!-- 日历选择组件 -->
+<mark showModalStatus='{{showMark}}' multiple='{{true}}' bindMark='dateChange' type = 'calendar'></mark>

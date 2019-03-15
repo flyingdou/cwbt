@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showMark: false
   },
 
   /**
@@ -28,7 +28,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var { deptObjList, startDate, endDate, material } = obj.data;
+    if (deptObjList && startDate && endDate && material) {
+      
+    }
   },
 
   /**
@@ -63,10 +66,33 @@ Page({
    * 跳转页面
    */
   goto: function (e) {
-    var link = e.currentTarget.dataset.link;
+    var { link } = e.currentTarget.dataset;
     if (link) {
       wx.navigateTo({
         url: link
+      });
+    }
+  },
+
+  /**
+   * 弹起日历
+   */
+  showMark: function (e) {
+    obj.setData({
+      showMark: true
+    });
+  },
+
+  /**
+   * 时间选择器改变
+   */
+  dateChange: function (e) {
+    if (e.detail.values) {
+      var [ startDate, endDate ] = e.detail.values;
+      obj.setData({
+        startDate,
+        endDate,
+        showMark: false
       });
     }
   }
