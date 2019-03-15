@@ -16,6 +16,8 @@ Page({
   onLoad: function (options) {
     obj = this;
 
+    // 页面初始化
+    obj.init();
   },
 
   /**
@@ -74,6 +76,48 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+
+  /**
+   * 页面初始化
+   */
+  init: function () {
+    wx.showLoading({
+      title: "数据加载中",
+      mask: true
+    });
+    // 根据当前登录用户所在部门自动展现
+    var reqUrl = util.getRequestURL('getDepartmentClass.we');
+    var param = { id: app.user.deptId };
+    wx.request({
+      url: reqUrl,
+      dataType: 'json',
+      data: {
+        json: encodeURI(JSON.stringify(param))
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.success) {
+          var data = {
+            lt: res.department.lt,
+            count: res.department.count
+          };
+          if (data.count == 2) {
+            var deptObj = data.lt[data.count];
+
+            data.deptObj = deptObj;
+
+            // 查询物资列表
+            obj.queryData();
+          }
+          obj.setData(data);
+          wx.hideLoading();
+        }
+      },
+      fail(e) {
+        wx.hideLoading();
+      }
+    });
   },
 
   /**
