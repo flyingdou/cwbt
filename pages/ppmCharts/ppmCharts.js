@@ -102,7 +102,7 @@ Page({
   queryData: function () {
     var { deptObj, startDate, endDate, materialList } = obj.data;
     var url = app.constant.server_url + "/WcMaterialout/selecttoeacharts2";
-    var param = { departmentid: deptObj.id, time: `${startDate}~${endDate}`, list2: '' }
+    var param = { departmentid: deptObj.seq_id, time: `${startDate}~${endDate}`, list2: '' }
     materialList.forEach((item, index) => (param.list2 += item.id + (index == materialList.length - 1 ? '' : ',')));
     wx.showLoading({
       title: "数据加载中",
@@ -139,43 +139,19 @@ Page({
     }
 
     // 设置统计图数据
-    var chartData = { title: '物资消耗量', data: [], categories: [], unitname: "" }
-    data.forEach((item, index) => {
-      chartData.data = [...chartData.data, parseFloat(item.sumnumber)];
-      chartData.categories = [...chartData.categories, item.departmentname];
-      chartData.unitname = item.unitname;
-    });
+    var { deptObj } = obj.data;
+    var chartData = { title: deptObj.dept_name + '物资消耗量', data: [], unitname: "", sumCount: 0 }
+    data.forEach(item => chartData.sumCount += parseFloat(item.sumnumber));
+    data.forEach(item => chartData.data = [...chartData.data, { data: parseFloat(item.sumnumber), name: item.materialname,unitname: item.unitname }]);
     obj.setData({ chartData });
-    obj.columnChart = new wxCharts({
-      canvasId: 'columnCanvas',
-      type: 'column',
+    obj.pieChart = new wxCharts({
       animation: true,
-      categories: chartData.categories,
-      series: [{
-        name: '消耗量',
-        data: chartData.data,
-        format: function (val, name) {
-          return val.toFixed(2) + chartData.unitname;
-        }
-      }],
-      yAxis: {
-        format: function (val) {
-          return val + chartData.unitname;
-        },
-        title: '',
-        min: 0
-      },
-      xAxis: {
-        disableGrid: false,
-        type: 'calibration'
-      },
-      extra: {
-        column: {
-          width: 15
-        }
-      },
+      canvasId: 'pieCanvas',
+      type: 'pie',
+      series: chartData.data,
       width: windowWidth,
-      height: 200,
+      height: 300,
+      dataLabel: true,
     });
   }
 })

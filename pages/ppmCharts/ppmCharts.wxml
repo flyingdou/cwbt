@@ -74,7 +74,15 @@
 	<view class="title">
 		{{chartData.title}}
 	</view>
-  <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+  <canvas canvas-id="pieCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+  <view class='sumcount-content'>
+    <!-- <view class='sumcount-item'>
+      总数: {{chartData.sumCount}}
+    </view> -->
+    <view class='sumcount-item' wx:for='{{chartData.data}}' wx:key=''>
+      {{item.name}}: {{item.data}}{{item.unitname}}
+    </view>
+  </view>
 </view>
 
 <!-- 日历选择组件 -->
