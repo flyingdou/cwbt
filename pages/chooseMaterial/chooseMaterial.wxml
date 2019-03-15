@@ -21,7 +21,8 @@
                     </view>
 
                     <view class='right'>
-                          <checkbox color = 'rgba(54, 123, 240, 1)' bindtap='choose' data-index = '{{index}}' checked='{{item.choose}}'></checkbox>
+                          <checkbox color = 'rgba(54, 123, 240, 1)' bindtap='choose' data-index = '{{index}}' checked='{{item.choose}}' wx:if='{{!type || type === "checkbox"}}'></checkbox>
+                          <radio color = 'rgba(54, 123, 240, 1)' bindtap='choose' data-index = '{{index}}' checked='{{item.choose}}' wx:if='{{type && type === "radio"}}'></radio>
                     </view>
                    
               </view>

@@ -27,6 +27,9 @@ Page({
        navList.push(nav);
        dou.navList = navList;
     }
+    if (options.type) {
+      dou.type = options.type;
+    }
     // 初始化页面数据
     dou.isLoad = true;
     obj.setData(dou);
@@ -234,10 +237,33 @@ Page({
 
   radioChange: (e) => {
     var index = e.currentTarget.dataset.index;
-    var deptObj = obj.data.deptList[index];
+    var deptList = obj.data.deptList || [];
+    var deptObj = deptList[index];
+    // 多选逻辑
+    if (obj.data.type && obj.data.type === "checkbox") {
+      deptObj.checked = !deptObj.checked;
+      obj.setData({ deptList });
+      // 统计选中数量
+      obj.sumSelectCount();
+      return;
+    }
+
+    // 单选逻辑
     obj.setData({
       deptObj: deptObj
     });
+  },
+
+  // 统计选中部门数量
+  sumSelectCount: function () {
+    var selectCount = 0;
+    var deptList = obj.data.deptList || [];
+    deptList.forEach(function (item, index) {
+      if (item.checked) {
+        selectCount++;
+      }
+    });
+    obj.setData({ selectCount });
   },
 
   /**
@@ -302,7 +328,13 @@ Page({
 
 
   choose: () => {   
-    if (!obj.data.deptObj) {
+    var type = obj.data.type;
+    var deptList = obj.data.deptList || [];
+    var selectCount = obj.data.selectCount;
+    var deptObj = obj.data.deptObj;
+
+    // 校验是否选择部门
+    if (!obj.data.deptObj && (!selectCount || selectCount <= 0)) {
       wx.showModal({
         title: '提示',
         content: '请选择部门',
@@ -311,15 +343,26 @@ Page({
       return;
     }
 
-    // 将值存储起来并返回上一页
-    var deptObj = obj.data.deptObj;
-    wx.setStorageSync('deptObj', deptObj);
+    // 将值存储到来时的页面上
+    var pages = getCurrentPages();
+    // 获取上一页面对象
+    var prePage = pages[pages.length - 1 - 1];
 
+    // 单选逻辑
+    if (!type || type === "radio") {
+      prePage.setData({ deptObj });
+      // 兼容代码，部分页面使用缓存向上传值
+      wx.setStorageSync("deptObj", deptObj);
+    } else if (type && type === "checkbox") {
+      // 多选
+      var deptObjList = [];
+      deptList.forEach(item => item.checked && (deptObjList = [...deptObjList, item]));
+      prePage.setData({ deptObjList });
+    }
+    // 返回上一页
     var backIndex = obj.data.navList.length;
     wx.navigateBack({
       delta: backIndex,
-    })
-
-
+    });
   }
 })

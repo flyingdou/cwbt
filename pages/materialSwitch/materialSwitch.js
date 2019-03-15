@@ -83,7 +83,7 @@ Page({
       {
         'name': '统计图1',
         'icon': '../../icon/ppm.png',
-        'link': '../../pages/ppmCharts/ppmCharts'
+        'link': '../../pages/mppCharts/mppCharts'
       },
       {
         'name': '统计图2',
@@ -93,7 +93,7 @@ Page({
       {
         'name': '统计图3',
         'icon': '../../icon/pmp.png',
-        'link': '../../pages/ppmCharts/ppmCharts'
+        'link': '../../pages/pmpCharts/pmpCharts'
       }
     ];
     

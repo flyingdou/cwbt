@@ -1,1 +1,62 @@
 <!-- 多部门单时间单物资 -->
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择部门 -->
+<view class='choose' bindtap='goto' data-link='../chooseDept/chooseDept?type=checkbox'>
+      <view class='left'>
+            选择统计部门：
+      </view>
+
+      <view class='right'>
+            <view class='value'>
+              <block wx:for='{{deptObjList}}' wx:key='' wx:if='{{deptObjList}}'>
+                <text>{{item.dept_name}}</text>、
+              </block>
+              <block wx:if='{{!deptObjList}}'>
+                请选择
+              </block>
+            </view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择时间 -->
+<view class='choose'>
+      <view class='left'>
+            选择统计时间：
+      </view>
+
+      <view class='right'>
+            <view class='value'>{{deptObj.dept_name ? deptObj.dept_name : "请选择"}}</view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>
+
+<!-- 填充高度 -->
+<view style='height: 20rpx;'></view>
+
+<!-- 选择物资 -->
+<view class='choose' bindtap='goto' data-link='../chooseMaterial/chooseMaterial?type=radio'>
+      <view class='left'>
+            选择统计物资：
+      </view>
+
+      <view class='right'>
+            <view class='value'>{{material.name ? material.name : "请选择"}}</view>
+            <!-- moreIcon -->
+            <view class='moreIcon'>
+                  <image mode='aspectFill' src='../../icon/more@2x.png'></image>
+            </view>
+      </view>
+</view>

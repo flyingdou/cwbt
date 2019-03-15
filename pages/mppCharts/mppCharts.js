@@ -28,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -60,9 +60,14 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 跳转页面
    */
-  onShareAppMessage: function () {
-
+  goto: function (e) {
+    var link = e.currentTarget.dataset.link;
+    if (link) {
+      wx.navigateTo({
+        url: link
+      });
+    }
   }
 })

@@ -15,11 +15,14 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
-    var chooseList = options.chooseList;
+    // 接收参数
+    var { chooseList, type } = options;
     if (chooseList) {
        obj.data.chooseList = JSON.parse(chooseList);
     }
-
+    if (type) {
+      obj.setData({ type });
+    }
     // 初始化页面数据
     obj.init();
   },
@@ -112,8 +115,17 @@ Page({
    * 选择物资
    */
   choose (e) {
-   var index = e.currentTarget.dataset.index;
-   var materialList = obj.data.materialList;
+   var { index } = e.currentTarget.dataset;
+   var { type , materialList = [] } = obj.data;
+
+   // 单选逻辑
+   if (type && type === "radio") {
+     materialList.forEach((item, _index) => item.choose = index === _index);
+     obj.setData({ materialList });
+     return;
+   }
+
+   // 多选逻辑
    materialList[index].choose = !materialList[index].choose;
    obj.setData({
      materialList: materialList
@@ -125,7 +137,7 @@ Page({
   */
  sure () {
    var chooseList = [];
-   var materialList = obj.data.materialList || [];
+   var { type, materialList = [] } = obj.data;
    materialList.forEach((material) => {
      if (material.choose) {
         chooseList.push(material);
@@ -147,9 +159,17 @@ Page({
    var pages = getCurrentPages();
    // 获取上一页面对象
    var prePage = pages[pages.length - 1 -1];
-   prePage.setData({
-     materialList: chooseList
-   });
+
+   // 单选逻辑
+   if (type && type === "radio") {
+     var material = chooseList[0];
+     prePage.setData({ material, materialList: chooseList });
+   } else if (!type || type === "checkbox") {
+     // 多选
+     prePage.setData({
+       materialList: chooseList
+     });
+   }
 
    wx.navigateBack({
      delta: 1
