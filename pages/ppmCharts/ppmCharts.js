@@ -101,7 +101,7 @@ Page({
    */
   queryData: function () {
     var { deptObj, startDate, endDate, materialList } = obj.data;
-    var url = app.constant.server_url + "/WcMaterialout/selecttoeacharts2";
+    var url = app.constant.server_url + "WcMaterialout/selecttoeacharts2";
     var param = { departmentid: deptObj.seq_id, time: `${startDate}~${endDate}`, list2: '' }
     materialList.forEach((item, index) => (param.list2 += item.id + (index == materialList.length - 1 ? '' : ',')));
     wx.showLoading({
