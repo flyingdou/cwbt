@@ -70,7 +70,7 @@
 </view>
 
 <!-- 画图插件 -->
-<view class='chart' wx:if = '{{unit && !showMark}}'>
+<view class='chart' wx:if = '{{unit}}' hidden='{{showMark}}'>
       <!-- title -->
       <view class='chartTitle'>物资消耗量</view>
       <canvas canvas-id="columnCanvas" class="canvas"></canvas>

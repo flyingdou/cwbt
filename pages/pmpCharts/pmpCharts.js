@@ -193,7 +193,6 @@ Page({
         } catch (e) {
           console.error('getSystemInfoSync failed!');
         }
-        // console.log(obj.data);
 
         columnChart = new wxCharts({
             canvasId: 'columnCanvas',
