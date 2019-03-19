@@ -92,6 +92,12 @@ Page({
     if (e.detail.values) {
       var [startDate, endDate] = e.detail.values;
       obj.setData({ startDate, endDate });
+
+      // 查询统计数据
+      var { deptObj, startDate, endDate, materialList } = obj.data;
+      if (deptObj && startDate && endDate && materialList) {
+        obj.queryData();
+      }
     }
     obj.setData({ showMark: false });
   },
