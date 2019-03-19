@@ -3,7 +3,7 @@
       <tab titles='{{titles.valid}}' height='{{windowHeightRpx}}' wx:if='{{windowHeightRpx}}'>
       <!-- 列表 -->
       <view class='List' wx:for='{{titles.valid}}' wx:key='' wx:for-item='tabItem' wx:for-index='tabIndex' slot='{{tabIndex}}'>
-                    <noData wx:if='{{!taskList || taskList.length <= 0}}'></noData>
+                    <noData wx:if='{{workCounts["count" + (tabIndex+1)] <= 0}}'></noData>
                     <!-- 每一个 -->
                     <view class='pre' wx:for = '{{taskList}}' wx:key = '' bindtap='goto' data-index = '{{index}}' style='background:{{item.color}}' wx:if = '{{item.status == tabItem.checkStatus}}'>
                           

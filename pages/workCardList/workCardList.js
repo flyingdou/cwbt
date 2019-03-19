@@ -125,11 +125,14 @@ Page({
         res = res.data;
         if (res.success) {
           var taskList = obj.data.taskList;
+          var workCounts = { count1: 0, count2: 0, count3: 0};
+          res.workcardList.forEach((item, index) => workCounts[`count${item.status}`]++);
           var workcardList = util.formatPlanTime(res.workcardList);
           taskList = taskList.concat(workcardList);
           obj.setData({
             taskList: taskList,
-            queryType: queryType
+            queryType: queryType,
+            workCounts
           });
           // 数据存储完再隐藏
           wx.hideLoading();
