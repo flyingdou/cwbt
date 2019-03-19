@@ -77,25 +77,21 @@ Page({
     var funDou = [
       {
         'name': '工作卡统计',
-        'icon1': 'icon/workCard.png',
         'icon': 'icon/workCardx.png',
         'link': '../../pages/analysis/analysis'
       },
       {
-        'name': '统计图1',
-        'icon1': 'icon/ppm.png',
+        'name': '物资部门统计',
         'icon': 'icon/ppmx.png',
         'link': '../../pages/mppCharts/mppCharts'
       },
       {
-        'name': '统计图2',
-        'icon1': 'icon/mpp.png',
+        'name': '部门物资统计',
         'icon': 'icon/mppx.png',
         'link': '../../pages/ppmCharts/ppmCharts'
       },
       {
-        'name': '统计图3',
-        'icon1': 'icon/pmp.png',
+        'name': '部门物资月统计',
         'icon': 'icon/pmpx.png',
         'link': '../../pages/pmpCharts/pmpCharts'
       }

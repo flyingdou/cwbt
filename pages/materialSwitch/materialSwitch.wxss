@@ -17,7 +17,7 @@
 }
 
 .funTitle{
-  font-size: 32rpx;
+  font-size: 28rpx;
   color: black;
   text-align: center;
   line-height: 300rpx;
