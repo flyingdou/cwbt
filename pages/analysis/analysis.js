@@ -16,6 +16,11 @@ Page({
    */
   onLoad: function (options) {
     obj = this;
+    
+    // 设置title
+    wx.setNavigationBarTitle({
+      title: options.title,
+    })
 
     // 页面初始化
     obj.init();
