@@ -31,14 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 获取选择部门页面的数据
-    if (wx.getStorageSync("deptObj")) {
-      var deptObj = wx.getStorageSync("deptObj");
-      obj.setData({
-        deptObj: wx.getStorageSync("deptObj")
-      });
-      wx.removeStorageSync("deptObj");
-
+    if (obj.data.deptObj) {
       // 根据部门查询物资列表
       wx.showLoading({
         title: '数据加载中',

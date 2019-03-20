@@ -214,7 +214,7 @@ Page({
       if (!item.costCount || isNaN(item.costCount)) {
         checkCount++;
       } else {
-        if (item.number <= parseFloat(item.costCount)) {
+        if (item.number < parseFloat(item.costCount)) {
           sumCount++;
         }
       }
