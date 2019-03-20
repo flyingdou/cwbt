@@ -45,6 +45,11 @@
                   <view class='title'>异常时间</view>
                   <view class='value'>{{workDetail.createtime}}</view>
             </view>
+
+            <view class='line'>
+                  <view class='title'>创建人</view>
+                  <view class='value'>{{workDetail.creator_name}}</view>
+            </view>
             
             <!-- 异常图片 -->
             <view class='remark'>
@@ -80,6 +85,17 @@
             <!-- 审批情况(审批情况显示(首先必须是委外维修,第一种情况：管理端大处未审批,已审批,已完成都可看，第二种情况管理端小处未审批不可看,已审批和已完成可看，第三种情况船舶端未审批不可看,已审批和已完成可看)) -->
             <view>
                   <view class='tagName'>审批情况</view>
+
+                  <view class='line'>
+                        <view class='title'>审批时间</view>
+                        <view class='value'>{{workDetail.audit_time}}</view>
+                  </view>
+
+                  <view class='line'>
+                        <view class='title'>审批人</view>
+                        <view class='value'>{{workDetail.auditPerson}}</view>
+                  </view>
+
                   <view class='line' bindtap='showMark' data-key = 'expectedtime' >
                         <view class='title'>预计完成时间</view>
                         <view class='line-right'>
@@ -91,7 +107,6 @@
                   <view class='remark' wx:if = '{{!showMark}}'>
                         <view class='title'>审批意见</view>
                         <textarea wx:if = '{{!isAudit && !showMark}}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' disabled='disabled' value='{{workDetail.audit_note}}'>
-                                        <rich-text nodes = '<br/><br/>审批人: {{workDetail.auditPerson}}  <br/>时   间:  {{workDetail.audit_time}}'></rich-text>
                         </textarea>
                        
                   </view>

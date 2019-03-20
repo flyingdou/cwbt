@@ -1,3 +1,6 @@
+<!-- 引入过滤器 -->
+<wxs module="filter" src="../../utils/filters.wxs"></wxs>
+
 <!-- 页面开始 -->
 <view class='content'>
       <!-- block1 -->
@@ -65,9 +68,21 @@
 
             </view>
 
+            <view class='tagName'>执行情况</view>
+
+            <view class='line'>
+                  <view class='title'>执行时间</view>
+                  <view class='value'>{{workDetail.scanTime}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>执行人</view>
+                  <view class='value'>{{workDetail.executor}}</view>
+            </view>
+
             <view class='remark'>
-                  <view class='title'>备注</view>
-                  <textarea placeholder='请输入备注信息' disabled='{{workCardStatus == 1 ? "" : "disabled" }}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark}}'></textarea>
+                  <view class='title'>情况描述</view>
+                  <textarea placeholder='请输入备注信息' disabled='{{workCardStatus == 1 ? "" : "disabled" }}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark || ""}}'></textarea>
                   
             </view>
 

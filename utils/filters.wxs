@@ -1,14 +1,26 @@
 // 过滤器
 var filters = {
+
+  /**
+   * 获取图片路径
+   */
   getImgURL: function (image) {
     return 'https://fish.ecartoon.com.cn/static/img/' + image;
   },
+
+  /**
+   * 获取图片路径（添加默认图片）
+   */
   errorImage: function (image) {
     if(!image || image == ''){
       return 'https://fish.ecartoon.com.cn/picture/201808219303.png';
     }
     return 'https://fish.ecartoon.com.cn/picture/' + image;
   },
+
+  /**
+   * 获取天气图片
+   */
   getWeatherImgURL: function (weather_code) {
     if (!weather_code) {
       weather_code = 100;
@@ -16,6 +28,10 @@ var filters = {
     var url = 'https://fish.ecartoon.com.cn/picture/weather/' + weather_code + '.png';
     return url;
   },
+
+  /**
+   * 数字小数点位数保留
+   */
   toFixed: function (num, length) {
     if (!isNaN(num)) {
       return parseFloat(num).toFixed(length);
@@ -23,6 +39,10 @@ var filters = {
       return 0;
     }
   },
+
+  /**
+   * 字符串长度超出隐藏
+   */
   overflow_hidden: function (text, length) {
     if(text){
       if (text.length > length) {
@@ -31,9 +51,17 @@ var filters = {
     }
     return text;
   },
+
+  /**
+   * 切割字符串最后一位
+   */
   showNameLast: function (name) {
     return name ? name.substring(name.length-1, name.length) : name;
   },
+
+  /**
+   * 距离m转换km
+   */
   distance: function (distance) {
     if(!distance){
       return '0m';
@@ -45,10 +73,16 @@ var filters = {
     return distance + 'm';
   },
 
+  /**
+   * 
+   */
   checkSupervisionParent: function (code) {
     return code.indexOf("_") < 0;
   },
 
+  /**
+   * 
+   */
   distanceUpperCase: function (distance) {
     if (!distance) {
       return '0M';
@@ -61,6 +95,9 @@ var filters = {
     return distance + 'M';
   },
 
+  /**
+   * 星期英文传中文
+   */
   week_cn: function (value, type) {
     var weekTextList = [
       ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
@@ -69,6 +106,9 @@ var filters = {
     return weekTextList[type || 0][value || 0];
   },
   
+  /**
+   * 获取天气图片
+   */
   getWeatherImg: function (value) {
     var matching = {
       "100": "100n",

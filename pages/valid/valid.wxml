@@ -42,6 +42,20 @@
                   
             </view>
 
+            <!-- 填充高度 -->
+            <view style='height: 20rpx;'></view>
+            <view class='tagName'>执行情况</view>
+
+            <view class='line'>
+                  <view class='title'>执行时间</view>
+                  <view class='value'>{{valid.finishtime}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>执行人</view>
+                  <view class='value'>{{valid.operator}}</view>
+            </view>
+
             <!-- 作业照片 -->
             <view class='picsList' wx:if = '{{valid.status != 5}}'>
                   <view class='taskTitle'>作业照片</view>
