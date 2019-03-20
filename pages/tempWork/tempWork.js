@@ -158,7 +158,8 @@ Page({
           // 判断是否审批
           var isAudit = false;
           var audit = false;
-          if (res.workDetail.creator != app.user.id && obj.data.source == 'mtwcList') {
+          // res.workDetail.creator != app.user.id && 
+          if (obj.data.source == 'mtwcList') {
              audit = true;
              if (obj.data.audit_status == 0 && !res.workDetail.isLast) {
                 isAudit = true;
@@ -173,14 +174,14 @@ Page({
 
           // 领导领取委外维修的临时工作卡
           var user_priv = app.user.userPriv; // 用户权限
-            obj.setData({
-              workDetail: res.workDetail,
-              user_priv: user_priv,
-              expectedtime: expectedtime,
-              isUpdate: isUpdate,
-              isAudit: isAudit,
-              audit: audit
-            });
+          obj.setData({
+            workDetail: res.workDetail,
+            user_priv: user_priv,
+            expectedtime: expectedtime,
+            isUpdate: isUpdate,
+            isAudit: isAudit,
+            audit: audit
+          });
           
         } 
         if (!res.success) {

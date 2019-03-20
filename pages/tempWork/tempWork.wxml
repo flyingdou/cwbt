@@ -40,11 +40,11 @@
                   <view class='value'>{{filter.overhaul(workDetail.overhaul_function)}}</view>
             </view>
 
+            <!-- tagName -->
             <view class = 'tagName'>异常情况</view>
-            <view class='line'>
-                  <view class='title'>异常时间</view>
-                  <view class='value'>{{workDetail.createtime}}</view>
-            </view>
+
+            
+
             
             <!-- 异常图片 -->
             <view class='remark'>
@@ -99,12 +99,31 @@
                   </view>
             </view>
 
+            <view class='line'>
+                  <view class='title'>报审人</view>
+                  <view class='value'>{{workDetail.creator_name}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>报审时间</view>
+                  <view class='value'>{{workDetail.createtime}}</view>
+            </view>
+
+            
+
             <!-- 审批功能块 -->
             <view wx:if = '{{audit}}'>
                   <view class='tagName'>审批情况</view>
+
+                  <!-- 审批结果 -->
+                  <view class='line'>
+                        <view class='title'>审批结果</view>
+                        <view class='value'>{{workDetail.audit_result}}</view>
+                  </view>
+
                   <!-- 预计完成时间 -->
                   <view class='line'>
-                        <view class='title'>预计完成时间</view>
+                        <view class='title'>要求完成时间</view>
                         <view class='fl' bindtap='showMark'>
                                 <view class='value'>{{expectedtime ? filter.subLen(expectedtime, 10) : "请选择"}}</view>
                                 <view class='moreIcon'>
@@ -116,20 +135,28 @@
 
 
                   <!-- 审批意见 -->
-                  <view class='remark'>
+                  <view class='remark' wx:if = '{{!showMark}}'>
                         <view class='title'>审批意见</view>
-                        <view class='task'>
+                              
+                              <block wx:if = '{{!isAudit}}'>
+                                     <textarea maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' disabled='disabled' value='{{workDetail.audit_note}}'></textarea>
+                                     <block wx:if = '{{audit_status != 0}}'>
+                                            <view class='line'>
+                                                  <view class='title'>审批人</view>
+                                                  <view class='value'>{{workDetail.auditPerson}}</view>
+                                            </view>
+
+                                            <view class='line'>
+                                                  <view class='title'>审批时间</view>
+                                                  <view class='value'>{{workDetail.audit_time}}</view>
+                                            </view>
+                                     </block>
+                              </block>
+
+                              <textarea wx:if = '{{isAudit}}' placeholder='请输入审批意见' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'auditNote' value='{{auditNote}}'></textarea>
+
                               
 
-                              <textarea wx:if = '{{!isAudit && !showMark}}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' disabled='disabled' value='{{workDetail.audit_note}}'>
-                                        <rich-text nodes = '<br/><br/>审批人: {{workDetail.auditPerson}}  <br/>时   间:  {{workDetail.audit_time}}'></rich-text>
-                              </textarea>
-
-                              <textarea wx:if = '{{isAudit && !showMark}}' placeholder='请输入审批意见' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'auditNote' value='{{auditNote}}'></textarea>
-
-                              
-
-                        </view>
                   </view>
 
             

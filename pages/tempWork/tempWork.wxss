@@ -36,8 +36,7 @@ textarea{
 }
 
 .textareaClass{
-  padding-left: 20rpx;
-  padding-top: 20rpx;
+  padding: 20rpx;
   font-size: 28rpx;
   color: rgba(51, 51, 51, 1);
   text-align: left;

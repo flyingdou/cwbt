@@ -41,15 +41,6 @@
             </view>
 
             <view class = 'tagName'>异常情况</view>
-            <view class='line'>
-                  <view class='title'>异常时间</view>
-                  <view class='value'>{{workDetail.createtime}}</view>
-            </view>
-
-            <view class='line'>
-                  <view class='title'>创建人</view>
-                  <view class='value'>{{workDetail.creator_name}}</view>
-            </view>
             
             <!-- 异常图片 -->
             <view class='remark'>
@@ -82,22 +73,30 @@
                   </view>
             </view>
              
+            <view class='line'>
+                  <view class='title'>创建人</view>
+                  <view class='value'>{{workDetail.creator_name}}</view>
+            </view>
+
+            <view class='line'>
+                  <view class='title'>异常时间</view>
+                  <view class='value'>{{workDetail.createtime}}</view>
+            </view>
+
+
             <!-- 审批情况(审批情况显示(首先必须是委外维修,第一种情况：管理端大处未审批,已审批,已完成都可看，第二种情况管理端小处未审批不可看,已审批和已完成可看，第三种情况船舶端未审批不可看,已审批和已完成可看)) -->
             <view>
                   <view class='tagName'>审批情况</view>
 
+                  <!-- 审批结果 -->
                   <view class='line'>
-                        <view class='title'>审批时间</view>
-                        <view class='value'>{{workDetail.audit_time}}</view>
+                        <view class='title'>审批结果</view>
+                        <view class='value'>{{workDetail.audit_result}}</view>
                   </view>
 
-                  <view class='line'>
-                        <view class='title'>审批人</view>
-                        <view class='value'>{{workDetail.auditPerson}}</view>
-                  </view>
 
                   <view class='line' bindtap='showMark' data-key = 'expectedtime' >
-                        <view class='title'>预计完成时间</view>
+                        <view class='title'>要求完成时间</view>
                         <view class='line-right'>
                           <view class='value'>{{filter.subLen(workDetail.expectedtime, 10)}}</view>
                           
@@ -110,6 +109,17 @@
                         </textarea>
                        
                   </view>
+
+                  <view class='line'>
+                        <view class='title'>审批人</view>
+                        <view class='value'>{{workDetail.auditPerson}}</view>
+                  </view>
+
+                  <view class='line'>
+                        <view class='title'>审批时间</view>
+                        <view class='value'>{{workDetail.audit_time}}</view>
+                  </view>
+
             </view>
 
             <!-- 正常的执行过程描述 -->

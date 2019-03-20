@@ -70,21 +70,15 @@
 
             <view class='tagName'>执行情况</view>
 
-            <view class='line'>
-                  <view class='title'>执行时间</view>
-                  <view class='value'>{{workDetail.scanTime}}</view>
-            </view>
-
-            <view class='line'>
-                  <view class='title'>执行人</view>
-                  <view class='value'>{{workDetail.executor}}</view>
-            </view>
 
             <view class='remark'>
                   <view class='title'>情况描述</view>
                   <textarea placeholder='请输入备注信息' disabled='{{workCardStatus == 1 ? "" : "disabled" }}' maxlength='-1' placeholder-class='placeholderClass' class='textareaClass' bindinput='pickerChange' data-key = 'remark' value='{{workFeedback.mark || ""}}'></textarea>
                   
             </view>
+
+           
+
 
             <!-- preview -->
             <view class='preview'>
@@ -98,6 +92,16 @@
                   </view>
             </view>
 
+            <view class='line'>
+                  <view class='title'>执行人</view>
+                  <view class='value'>{{workDetail.executor}}</view>
+            </view>
+            
+            <view class='line'>
+                  <view class='title'>执行时间</view>
+                  <view class='value'>{{workDetail.scanTime}}</view>
+            </view>
+
             <!-- 验收或者驳回 -->
             <view wx:if = '{{workDetail.valid_status != 1}}'>
                   <view class='tagName'>验收情况</view>
@@ -107,9 +111,12 @@
                         <view class='value'>{{workDetail.validStatus}}</view>
                   </view>
 
-                  <view class='line'>
-                        <view class='title'>{{workDetail.valid_status == 2 ? "验收时间" : "驳回时间"}}</view>
-                        <view class='value'>{{workDetail.validDate}}</view>
+
+                  <view class='remark'>
+                          <view class='title'>{{workDetail.valid_status == 2 ? "验收意见" : "驳回意见"}}</view>
+                          <view class='task'>
+                                <view class='value'>{{workDetail.validRemark}}</view>
+                          </view>
                   </view>
 
                   <view class='line'>
@@ -117,11 +124,9 @@
                         <view class='value'>{{workDetail.confirmor}}</view>
                   </view>
 
-                  <view class='remark'>
-                          <view class='title'>{{workDetail.valid_status == 2 ? "验收意见" : "驳回意见"}}</view>
-                          <view class='task'>
-                                <view class='value'>{{workDetail.validRemark}}</view>
-                          </view>
+                  <view class='line'>
+                        <view class='title'>{{workDetail.valid_status == 2 ? "验收时间" : "驳回时间"}}</view>
+                        <view class='value'>{{workDetail.validDate}}</view>
                   </view>
 
 
