@@ -43,7 +43,7 @@ App({
     if (this.constant.isDev) {
        this.user = { id: 1316, deptId: 216, userPriv: 4, name: 'hua', account: 13657277062 };
       //  this.user = { id: 1317, deptId: 216, userPriv: 4, name: 'dou', account: 15527930302 };
-      //  this.user = { id: 1318, deptId: 21, userPriv: 2, name: 'zuo', : 15201870052 };
+      //  this.user = { id: 1318, deptId: 21, userPriv: 2, name: 'zuo', account: 15201870052 };
       //  this.user = { id: 1324, deptId: 2, userPriv: 2, name: 'tang', account: 13517115190 };
       //  this.user = {};
 
@@ -65,12 +65,11 @@ App({
     upload_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/uploadFile',
     download_url: 'https://cwbt.castlc.cn/file/',
     logo: 'https://cwbt.castlc.cn/picture/shipLogo123.jpg',
-    base_img_url_backup: 'https://fish.ecartoon.com.cn/picture',
-    base_req_url_backup: 'http://192.168.0.107:8080/api/cwbtMP/',
-    base_req_url_backup_1: 'https://cwbt.castlc.cn/cwbt/test/login?url=http://47.92.101.196:8080/cwbt/api/cwbtMP/',
-    upload_url_backup: 'https://fish.ecartoon.com.cn/uploadFile',
+    base_req_url_backup_1: 'http://192.168.0.107:8080/api/cwbtMP/',
+    base_req_url_backup: 'https://cwbt.castlc.cn/cwbt/test/login?url=http://47.92.101.196:8080/api/cwbtMP/',
     download_url_backup: 'https://cwbt.castlc.cn/file/',
-    server_url: 'http://192.168.0.107:8080/'
+    server_url: 'https://cwbt.castlc.cn/cwbt/test/login?url=http://47.92.101.196:8080/',
+    server_url_1: 'http://192.168.0.107:8080/'
   },
 
   /**

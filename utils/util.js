@@ -1,5 +1,15 @@
 var app = getApp();
 const formatTime = (date, format) => {
+  if (!date) {
+      date = new Date();
+  }
+
+  if (date instanceof string) {
+    date = date.substring(0, 19);
+    date = date.replace(/-/g, '/');
+    date = new Date(date);
+  }
+
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -13,6 +23,7 @@ const formatTime = (date, format) => {
 
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
+
 
  function formatDate (date, type) {
   var year = date.getFullYear();
@@ -147,15 +158,15 @@ function formatPlanTime (workList) {
     exTimeStamp = expectedTime.getTime();
     if (around == 0) {
       dou = expectedTime;
-      work.prefix = formatTime(dou, "yyyy-MM-dd HH:mm");
+      work.prefix = formatDate(dou);
     } else if (around > 0 ) {
       dou.setTime(exTimeStamp - 1000*60*60*24*around);
-      work.prefix = formatTime(dou, "yyyy-MM-dd HH:mm");
+      work.prefix = formatDate(dou);
       dou.setTime(exTimeStamp + 1000*60*60*24*around);
-      work.subffix = formatTime(dou, "yyyy-MM-dd HH:mm");
+      work.subffix = formatDate(dou);
     } else {
       dou = expectedTime;
-      work.prefix = formatTime(dou, "yyyy-MM-dd HH:mm");
+      work.prefix = formatDate(dou);
     }
       
   });
