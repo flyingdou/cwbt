@@ -55,7 +55,7 @@
 
       <!-- 船舶统计列表 -->
       <view class='statisticsList'>
-            <radio-group bindchange = 'radioChange' >
+            <radio-group>
                   <view wx:if = '{{type == "handle"}}'>
                         <view class='pre preStatistics' wx:for = '{{statisticsList}}' wx:key='' bindtap='radioChange' data-index = '{{index}}'>
                               <view class='blocks'>

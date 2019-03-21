@@ -4,7 +4,7 @@ const formatTime = (date, format) => {
       date = new Date();
   }
 
-  if (date instanceof string) {
+  if (date instanceof String) {
     date = date.substring(0, 19);
     date = date.replace(/-/g, '/');
     date = new Date(date);

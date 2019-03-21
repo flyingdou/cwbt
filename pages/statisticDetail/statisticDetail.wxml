@@ -6,7 +6,7 @@
                <checkbox-group bindchange = 'chooseChange'>
                         <noData wx:if='{{tabItem.count <= 0}}'></noData>
                         <!-- 每一个 -->
-                        <view class='pre' wx:for = '{{list}}' wx:key='' bindtap='goto' data-index = '{{index}}' data-link='../statisticWorkDetail/statisticWorkDetail?workId={{item.workid}}' wx:if='{{item[tabItem.checkStatusKey] == tabItem.checkStatus}}'>
+                        <view class='pre' wx:for = '{{list}}' wx:key='workid' bindtap='goto' data-index = '{{index}}' data-link='../statisticWorkDetail/statisticWorkDetail?workId={{item.workid}}' wx:if='{{item[tabItem.checkStatusKey] == tabItem.checkStatus}}'>
                               
                               <!-- 第一行 -->
                               <view class='line div'>

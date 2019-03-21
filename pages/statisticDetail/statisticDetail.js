@@ -120,15 +120,7 @@ Page({
     }
 
     param.style = style;
-
-
-    // 测试数据
-    // console.log(param);
     
-    wx.showLoading({
-      title: '加载中',
-      mask: true
-    })
     wx.request({
       url: url,
       dataType:'json',
@@ -163,10 +155,22 @@ Page({
             titles.handle[1].count = count2;
           });
         }
+        
         obj.setData({
           titles: titles,
-          list: res.data.list
+          list: res.data.list.splice(0, 30)
         }, wx.hideLoading());
+
+        var interval = setInterval(() => {
+          if (res.data.list.length > 0) {
+            var _list = JSON.parse(JSON.stringify(obj.data.list));
+            var appendList = res.data.list.splice(0, 30);
+            _list = _list.concat(appendList);
+            obj.setData({ list: _list });
+          } else {
+            clearInterval(interval);
+          }
+        }, 2000);
       },
       fail: function (e) {
         wx.hideLoading();
