@@ -102,6 +102,9 @@ Page({
    */
   inputChange: (e) => {
      var key = e.currentTarget.dataset.key;
+     var dou = {};
+     dou[key] = e.detail.value;
+     obj.setData(dou);
      wx.setStorageSync(key, e.detail.value);
   },
 
