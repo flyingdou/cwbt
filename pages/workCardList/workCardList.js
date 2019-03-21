@@ -149,7 +149,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     var workCard = obj.data.taskList[index];
     // 跳转传参
-    var redUrl = '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id + '&workCardStatus=' + workCard.status;
+    var redUrl = '../../pages/workCardDetail/workCardDetail?workCardId=' + workCard.id + '&workCardStatus=' + workCard.status + '&plannedtime=' + workCard.prefix;
     wx.navigateTo({
       url: redUrl,
     })

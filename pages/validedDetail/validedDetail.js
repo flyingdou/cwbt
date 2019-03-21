@@ -128,6 +128,8 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.success) {
+          // 处理计划时间
+          res.workDetail.plannedtime = util.formatTime(res.workDetail.plannedtime, "yyyy-MM-dd");
           if (res.workFeedback) {
             var workFeedback = res.workFeedback;
             if (workFeedback.image) {

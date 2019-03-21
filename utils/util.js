@@ -4,8 +4,7 @@ const formatTime = (date, format) => {
       date = new Date();
   }
 
-  if (date instanceof String) {
-    date = date.substring(0, 19);
+  if (typeof date == 'string') {
     date = date.replace(/-/g, '/');
     date = new Date(date);
   }
@@ -19,6 +18,10 @@ const formatTime = (date, format) => {
 
   if (format === "yyyy-MM-dd HH:mm") {
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
+  }
+
+  if (format === "yyyy-MM-dd") {
+    return [year, month, day].map(formatNumber).join('-');
   }
 
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
@@ -168,6 +171,8 @@ function formatPlanTime (workList) {
       dou = expectedTime;
       work.prefix = formatDate(dou);
     }
+
+    work.expectedtime = formatTime(work.expectedtime,"yyyy-MM-dd");
       
   });
 

@@ -235,6 +235,9 @@ Page({
       success(res) {
         var titles = obj.data.titles;
         var index = overhaul + 1;
+        res.data.forEach((work, i) => {
+           work.expectedtime = util.formatTime(work.expectedtime, 'yyyy-MM-dd');
+        });
         titles[index].list = res.data;
         obj.setData({
           titles: titles

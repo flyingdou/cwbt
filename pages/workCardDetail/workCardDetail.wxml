@@ -25,7 +25,7 @@
 
             <view class='line'>
                   <view class='title'>计划时间</view>
-                  <view class='value'>{{workDetail.plannedtime}}</view>
+                  <view class='value'>{{plannedtime}}</view>
             </view>
             
             <!-- 作业内容 -->

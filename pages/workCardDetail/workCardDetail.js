@@ -25,10 +25,14 @@ Page({
     // 工作卡状态
     var workCardStatus = options.workCardStatus;
 
+    // 计划时间
+    var plannedtime = options.plannedtime;
+
     obj.setData({
       workCardId: workCardId,
       workCardStatus: workCardStatus,
-      userPriv: app.user.userPriv
+      userPriv: app.user.userPriv,
+      plannedtime: plannedtime
     })
     obj.init();
   },
