@@ -1,5 +1,5 @@
 var app = getApp();
-const formatTime = date => {
+const formatTime = (date, format) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -7,13 +7,17 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
+  if (format === "yyyy-MM-dd HH:mm") {
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
+  }
+
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
  function formatDate (date, type) {
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
-  var  day = date.getDate();
+  var day = date.getDate();
   if (type) {
      var yeax = parseInt(year);
      year = yeax + 1;
@@ -142,16 +146,16 @@ function formatPlanTime (workList) {
     expectedTime = new Date(work.expectedtime);
     exTimeStamp = expectedTime.getTime();
     if (around == 0) {
-       dou = expectedTime;
-       work.prefix = formatDate(dou);
+      dou = expectedTime;
+      work.prefix = formatTime(dou, "yyyy-MM-dd HH:mm");
     } else if (around > 0 ) {
-       dou.setTime(exTimeStamp - 1000*60*60*24*around);
-       work.prefix = formatDate(dou);
-       dou.setTime(exTimeStamp + 1000*60*60*24*around);
-       work.subffix = formatDate(dou);
+      dou.setTime(exTimeStamp - 1000*60*60*24*around);
+      work.prefix = formatTime(dou, "yyyy-MM-dd HH:mm");
+      dou.setTime(exTimeStamp + 1000*60*60*24*around);
+      work.subffix = formatTime(dou, "yyyy-MM-dd HH:mm");
     } else {
       dou = expectedTime;
-      work.prefix = formatDate(dou);
+      work.prefix = formatTime(dou, "yyyy-MM-dd HH:mm");
     }
       
   });

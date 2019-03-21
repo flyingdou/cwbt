@@ -148,9 +148,6 @@ Page({
           }
           dou.showPhoto = true;
           dou.workDetail = res.workDetail;
-          if (!dou.workDetail.scanTime) {
-            dou.workDetail.scanTime = util.formatDate(new Date(dou.photos[0].pic_time));
-          }
           obj.setData(dou);
 
           wx.hideLoading();
