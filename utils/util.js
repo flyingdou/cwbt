@@ -118,13 +118,12 @@ function preview (e) {
    // 图片前缀
    var prefix = e.currentTarget.dataset.prefix;
 
-
    var urls = [];
    // 预览数据类型,不传默认为多张图片预览，传参了即为单张图片预览
    var type = e.currentTarget.dataset.type;
    if (type) {
       // 单张预览
-      var image = prefix + itemList[key];
+      var image = prefix + '/' + itemList[key];
       // 解决图片链接有中文字符的情况下，部分机型预览图片失败的问题
       image = encodeURI(image);
       urls.push(image);
@@ -132,7 +131,7 @@ function preview (e) {
       // 多张预览
       itemList.forEach((item, i) => {
         // 图片URL
-        var image = prefix + item[key];
+        var image = prefix + '/' + item[key];
         // 解决图片链接有中文字符的情况下，部分机型预览图片失败的问题
         image = encodeURI(image);
         urls.push(image);
