@@ -261,6 +261,10 @@ Page({
    * 调用上传方法
    */
   uploadPictures: () => {
+    wx.showLoading({
+      title: '处理中',
+      mask: true
+    })
     var photos = obj.data.photos || [];
     if (photos.length > 0) {
        obj.uploadPics(0);
@@ -299,10 +303,7 @@ Page({
     // 编码
     param.code = obj.data.code;
 
-    wx.showLoading({
-      title: '处理中',
-      mask: true,
-    })
+  
     var reqUrl = util.getRequestURL('saveSupervisFeedBack.we');
     wx.request({
       url: reqUrl,
@@ -313,6 +314,8 @@ Page({
       success: (res) => {
          res = res.data;
          if (res.success) {
+           // 隐藏提示框
+           wx.hideLoading();
            // 数据执行成功
            var deviceStatus = obj.data.deviceStatus;
            if (deviceStatus == 1) {
@@ -320,7 +323,7 @@ Page({
              obj.releaseWorkCard();
            } 
            if (deviceStatus == 0) {
-             // 设备正常，回列表
+             // 提示用户，并返回列表
              wx.navigateBack({
                delta:2
              })
@@ -329,13 +332,11 @@ Page({
          }
       },
       fail: (e) => {
+        wx.hideLoading();
         wx.showModal({
           title: '提示',
           content: '网络异常！',
         })
-      },
-      complete: (com) => {
-        wx.hideLoading();
       }
     })
   },
