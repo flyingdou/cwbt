@@ -369,9 +369,8 @@ Page({
     for (var i = 0; i < photos.length; i++) {
       var url = '';
       if (photos[i].name) {
-        url = app.constant.base_img_url + photos[i].name;
-      }
-      if (photos[i].tempFilePath) {
+        url = app.constant.base_img_url + '/' + photos[i].name;
+      }else if (photos[i].tempFilePath) {
         url = photos[i].tempFilePath;
       }
       imgs.push(url);
