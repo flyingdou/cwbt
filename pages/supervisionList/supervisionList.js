@@ -42,9 +42,6 @@ Page({
     dou.windowHeightRpx = util.getSystemInfo().windowHeightRpx;
 
     obj.setData(dou);
-
-    obj.getSupervisionList(0);
-    obj.getSupervisionList(1);
   },
 
   /**
@@ -59,6 +56,10 @@ Page({
    */
   onShow: function () {
     obj.data.currentPage = app.pageInfo.currentPage;
+
+    // 查询督导数据
+    obj.getSupervisionList(0);
+    obj.getSupervisionList(1);
   },
 
   /**

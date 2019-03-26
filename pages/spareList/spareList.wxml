@@ -9,7 +9,7 @@
                             <!-- 填充高度 -->
                             <view style='height: 20rpx;' wx:if='{{item.status == 2 || item.status == 4 || item.status == 9 || item.feedback == 2}}'></view>
                             <view class='line1'>
-                                  <view class='tv left'>
+                                  <view class='tv'>
                                         <view class='title'>备件名称</view>
                                         <view class='value'>{{item.name}}</view>
                                   </view>
@@ -23,7 +23,7 @@
                             <view class='lineFill'></view>
 
                             <view class='line1'>
-                                  <view class='tv left'>
+                                  <view class='tv'>
                                         <view class='title'>剩余数量</view>
                                         <view class='value'>{{item.number || 0}}</view>
                                   </view>
@@ -37,7 +37,7 @@
                             <view class='lineFill'></view>
 
                             <view class='line1'>
-                                  <view class='tv left'>
+                                  <view class='tv'>
                                         <view class='title'>厂家</view>
                                         <view class='value'>{{item.manufactor || "无"}}</view>
                                   </view>
