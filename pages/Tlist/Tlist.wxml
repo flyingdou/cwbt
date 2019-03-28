@@ -80,7 +80,7 @@
                                   <!-- 他人领取 -->
                                   <view wx:else class='tagDiv'>
                                         <view class = 'overtime overtimeDou' wx:if = '{{item.status == 3}}'>逾期</view>
-                                        <view class='statusFont'>【{{item.collector}}已领取】</view>
+                                        <view class='statusFont'>【{{item.collector || item.userName}}已领取】</view>
                                   </view>
               
                             </view>
