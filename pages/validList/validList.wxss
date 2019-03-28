@@ -1,5 +1,6 @@
 .content{
   position: relative;
+  height: auto;
 }
 
 .list{

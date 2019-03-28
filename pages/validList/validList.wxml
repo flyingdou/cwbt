@@ -37,23 +37,7 @@
 
       </view>
       
-      <!-- 功能按钮 -->
-      <view class='footer' wx:if='{{tabItem.list && tabItem.list.length > 0 && (tabItem.list[0].jurisdiction == 1 || !tabItem.list[0].type)}}'>
-            <checkbox-group bindchange = 'chooseAll' data-index='{{index}}' data-tabindex='{{tabIndex}}'>
-                  <!-- 全选按钮 -->
-                  <view class='isAll'>
-                        <checkbox value = '{{isAll.id}}' checked='{{isAll.checked}}'>全选</checkbox>
-                  </view>
-            </checkbox-group>
-            
-
-            <!-- 验收按钮 -->
-            <view class='buttons'>
-                  <view class='button validYes' bindtap='valid' data-status = '2'>验收</view>
-            </view>
-            
       
-      </view>
 
 
       </checkbox-group>
@@ -62,3 +46,20 @@
 
   </view>
 </tab>
+
+<!-- 功能按钮 -->
+<view class='footer' wx:if='{{titles[tabIndex].list && titles[tabIndex].list.length > 0 && (titles[tabIndex].list[0].jurisdiction == 1 || !titles[tabIndex].list[0].type)}}'>
+      <checkbox-group bindchange = 'chooseAll' data-index='{{index}}' data-tabindex='{{tabIndex}}'>
+            <!-- 全选按钮 -->
+            <view class='isAll'>
+                  <checkbox value = '{{isAll.id}}' checked='{{isAll.checked}}'>全选</checkbox>
+            </view>
+      </checkbox-group>
+      
+
+      <!-- 验收按钮 -->
+      <view class='buttons'>
+            <view class='button validYes' bindtap='valid' data-status = '2'>验收</view>
+      </view>
+      
+</view>
