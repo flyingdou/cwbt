@@ -21,7 +21,6 @@ Page({
     if (app.user.id) {
        obj.init();
     }
-    
   },
 
   /**
@@ -68,9 +67,10 @@ Page({
 
     // 用户账号保留
     if (wx.getStorageSync('account')) {
-      obj.setData({
-        account: wx.getStorageSync('account')
-      });
+      var account = wx.getStorageSync('account');
+      obj.setData({ account });
+      // 检查微信openid是否存入数据库中
+      obj.checkAccountWechatId({detail: { value: account }});
     }
 
     // 根据用户部门ID查询任务数量
