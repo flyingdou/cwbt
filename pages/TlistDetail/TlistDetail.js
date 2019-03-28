@@ -1,3 +1,4 @@
+import regeneratorRuntime from '../../utils/runtime.js';
 var app = getApp();
 var util = require('../../utils/util.js');
 var obj = null;
@@ -297,84 +298,82 @@ Page({
   },
 
   /**
-   * 上传图片
+   * 上传图片（同步）
    */
-  uploadPics: (i, key) => {
-    var photos = obj.data[key];
-    var count = photos.length;
-    var reqUrl = app.constant.upload_url;
-    if (!i) {
-      i = 0;
-    }
-    // 已有照片，不上传
-    if (!photos[i].tempFilePath) {
-      i++;
-      obj.uploadPics(i,key);
-      return;
-    }
-    // 开始上传图片
-    wx.uploadFile({
-      url: reqUrl,
-      filePath: photos[i].tempFilePath,
-      name: 'myfile',
-      success: (res) => {
-        var res = res.data;
-        if (res) {
-          res = JSON.parse(res);
-        }
-        if (res.success) {
-          photos[i].name = res.picture;
-        } else {
-          var x = i + 1;
-          console.log('第' + x + '张图片上传失败！');
-        }
-      },
-      fail: (e) => {
-        var y = i + 1;
-        console.log('第' + y + '张图片上传失败！可能是网络异常导致');
-      },
-      complete: () => {
-        console.log(i);
-        i++;
-        if (i >= count) {
-          var dou = {};
-          dou.showPhoto = false;
-          dou[key] = photos;
-          obj.setData(dou);
-          console.log('图片上传完成！');
-          obj.finish();
-         
-          return;
-        } else {
-          // 图片还未传完，需要继续上传
-          obj.uploadPics(i, key);
-        }
-      }
+  uploadPictureDou(tempFilePath) {
+    return new Promise(function (resolve, reject) {
+      // 开始上传图片
+      var reqUrl = app.constant.upload_url;
+      wx.uploadFile({
+        url: reqUrl,
+        filePath: tempFilePath,
+        name: 'myfile',
+        success: (res) => {
+          var res = res.data;
+          if (res) {
+            res = JSON.parse(res);
+          }
+          resolve(res)
+        },
 
-    })
+      })
+    });
   },
 
   /**
-   * 调用上传方法
+   * 批量上传照片(同步)
    */
-  uploadPictures: (e) => {
+  async uploadDou(key) {
+    var photoList = obj.data[key] || [];
+    for (var p = 0; p < photoList.length; p++) {
+      // 拍照的才进行上传照片
+      if (photoList[p].tempFilePath) {
+          var res = await obj.uploadPictureDou(photoList[p].tempFilePath);
+          if (res.success) {
+            photoList[p].name = res.picture;
+            // 删除tempFilePath
+            delete photoList[p]['tempFilePath'];
+          }
+      }
+
+    }
+
+    var dou = {};
+    dou[key] = photoList;
+    obj.setData(dou);
+    wx.hideLoading();
+  },
+
+  /**
+   * 提交(同步)
+   */
+  async uploadPictures(e) {
+    // 数据校验
     if (!obj.checkValid()) {
-        return;
+       return;
     }
     var key = e.currentTarget.dataset.key;
-    var photos = obj.data.photos;
-    if (photos.length > 0) {
-        obj.uploadPics(0, key);
-    } else {
-        obj.finish();
+
+    // 等待这一步骤执行完，再进行下面的步骤
+    if (obj.data[key]) {
+       wx.showLoading({
+         title: '处理中',
+         mask: true
+       })
+       await obj.uploadDou(key);
     }
-    
+    obj.finish();
   },
 
   /**
    * finish 保存数据
    */
   finish: () => {
+    // showloading
+    wx.showLoading({
+      title: '处理中',
+      mask: true
+    })
     // 校验数据
     var status = obj.data.status;
     var handle = obj.data.handle;
@@ -382,6 +381,7 @@ Page({
     var workcardName = undefined;
     if (status == 1) {
       if (handle == 0) {
+        wx.hideLoading();
         wx.showModal({
           title: '提示',
           content: '请选择维修方式！',
@@ -394,8 +394,6 @@ Page({
       if (handle == 1) {
         handle = 0; // 自行维修
         handleName = '自行维修';
-        
-
       }
 
       if (handle == 2) {
@@ -409,6 +407,7 @@ Page({
     var photos = obj.data.photos;
     var needPhoto = obj.data.needPhoto;
     if (needPhoto && photos.length < 1) {
+      wx.hideLoading();
       wx.showModal({
         title: '提示',
         content: '该任务需要拍照！',
@@ -416,8 +415,21 @@ Page({
       })
       return;
     }
-    for (var x = 0; x < photos.length; x++) {
-      delete photos[x]['tempFilePath'];
+
+    // 报审事项
+    var applyNote = obj.data.applyNote;
+    // 工作卡异常时，必填报审事项
+    if (status == 1) {
+      if (!applyNote || applyNote == '') {
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示',
+          content: '请填写报审事项！',
+          showCancel: false
+        })
+        return;
+      }
+      param.apply_note = applyNote;
     }
     
     var userId = app.user.id;
@@ -433,22 +445,6 @@ Page({
       equipmentId: obj.data.workDetail.eid,
       dept_id: app.user.deptId
     };
-
-
-    // 报审事项
-    var applyNote = obj.data.applyNote;
-    // 工作卡异常时，必填报审事项
-    if (status == 1) {
-      if (!applyNote || applyNote == '') {
-        wx.showModal({
-          title: '提示',
-          content: '请填写报审事项！',
-          showCancel: false
-        })
-        return;
-      }
-      param.apply_note = applyNote;
-    }
 
     // 可选数据
     // 备注信息
@@ -474,14 +470,6 @@ Page({
       param.workcardName = workcardName;
     }
 
-    // 测试数据
-    // console.log('param: ' + JSON.stringify(param));
-    // return;
-    // showLoading
-    wx.showLoading({
-      title: '处理中',
-      mask: true,
-    })
     var reqUrl = util.getRequestURL('finish.we');
     // 发起微信请求
     wx.request({
@@ -507,8 +495,8 @@ Page({
             showCancel: false,
             success: (resx) => {
               if (resx.confirm) {
-                wx.reLaunch({
-                  url: '../../pages/index/index',
+                wx.navigateBack({
+                  delta: 1
                 })
               }
             },

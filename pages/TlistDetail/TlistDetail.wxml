@@ -106,7 +106,7 @@
             <!-- 正常执行时的照片 -->
             <view class='preview'>
                   <!-- 正常执行时的照片 -->
-                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}'>
+                  <view class='pic' wx:for = '{{photos}}' wx:key='' bindtap='preview' bindlongtap='deletePic' data-index = '{{index}}' data-key = 'photos'>
                         <image src='{{item.tempFilePath ?  item.tempFilePath : base_img_url + "/" + item.name}}' mode='aspectFill' ></image>
                   </view>
 
@@ -124,11 +124,11 @@
 
         </view>
 
-        <!-- 底部按钮 -->
-        <view class='buttons' wx:if = '{{collectorpersonid}}'>
-              <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
-              <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures' data-key = 'photos'>提交</view>
-        </view>
+            <!-- 底部按钮 -->
+            <view class='buttons' wx:if = '{{collectorpersonid}}'>
+                  <view wx:if = '{{!isScan}}' class='button scanButton' bindtap='sure' >填写执行情况</view>
+                  <view wx:if = '{{isScan}}' class='button finshButton' bindtap='uploadPictures' data-key = 'photos'>提交</view>
+            </view>
 
       
       </view>

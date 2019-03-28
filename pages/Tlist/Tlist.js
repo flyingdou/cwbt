@@ -76,10 +76,7 @@ Page({
       windowHeightRpx: util.getSystemInfo().windowHeightRpx
     });
 
-    obj.init();
-
-    obj.getTempList(0);
-    obj.getTempList(1);
+    
   },
 
   /**
@@ -93,7 +90,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    // 初始化页面数据
+    obj.init();
+
+    obj.getTempList(0);
+    obj.getTempList(1);
 
   },
 
