@@ -42,7 +42,7 @@ App({
     // 开发模式添加默认用户
     if (this.constant.isDev) {
        this.user = { id: 1316, deptId: 216, userPriv: 4, name: 'hua', account: 13657277062 };
-      //  this.user = { id: 1317, deptId: 216, userPriv: 4, name: 'dou', account: 15527930302 };
+      //  this.user = { id: 1317, deptId: 216, userPriv: 3, name: 'dou', account: 15527930302 };
       //  this.user = { id: 1318, deptId: 21, userPriv: 2, name: 'zuo', account: 15201870052 };
       //  this.user = { id: 1324, deptId: 2, userPriv: 2, name: 'tang', account: 13517115190 };
       //  this.user = {};
@@ -60,15 +60,15 @@ App({
     isDev: true,
     base_img_url: 'https://cwbt.castlc.cn/picture',
     base_domain:'https://cwbt.castlc.cn/',
-    base_forward_url: 'https://cwbt.castlc.cn/cwbt/test/login',
-    base_req_url: 'http://cwbt.castlc.cn/cwbt/api/cwbtMP/',
-    upload_url: 'https://cwbt.castlc.cn/cwbt/api/cwbtMP/uploadFile',
+    base_forward_url: 'https://cwbt.castlc.cn/test/login',
+    base_req_url: 'http://cwbt.castlc.cn/api/cwbtMP/',
+    upload_url: 'https://cwbt.castlc.cn/api/cwbtMP/uploadFile',
     download_url: 'https://cwbt.castlc.cn/file/',
     logo: 'https://cwbt.castlc.cn/picture/shipLogo123.jpg',
-    base_req_url_backup_1: 'http://192.168.0.107:8080/api/cwbtMP/',
-    base_req_url_backup: 'https://cwbt.castlc.cn/cwbt/test/login?url=http://47.92.101.196:8080/api/cwbtMP/',
+    base_req_url_backup_1: 'http://192.168.43.110:8080/api/cwbtMP/',
+    base_req_url_backup: 'https://cwbt.castlc.cn/test/login?url=http://47.92.101.196:8080/api/cwbtMP/',
     download_url_backup: 'https://cwbt.castlc.cn/file/',
-    server_url: 'https://cwbt.castlc.cn/cwbt/test/login?url=http://47.92.101.196:8080/',
+    server_url: 'https://cwbt.castlc.cn/test/login?url=http://47.92.101.196:8080/',
     server_url_1: 'http://192.168.0.107:8080/'
   },
 
