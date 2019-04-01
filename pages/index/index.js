@@ -35,59 +35,37 @@ Page({
    */
   onShow: function () {
     // 判断用户是否登录
-    if (app.user.id) {
-      wx.setNavigationBarColor({ 
-        backgroundColor: '#000000',
-        frontColor: '#ffffff',
-        animation: {
-          duration: 400,
-          timingFunc: 'easeIn'
-        }
-      });
-      obj.setData({
-        isLogin: false,
-        userPriv: app.user.userPriv
-      });
-      wx.showTabBar();
-    } else {
-      wx.setNavigationBarColor({ 
-        backgroundColor: '#348BFF',
-        frontColor: '#ffffff',
-        animation: {
-          duration: 400,
-          timingFunc: 'easeIn'
-        }
-      });
-      obj.setData({
-        isLogin: true,
-        password: ''
-      });
-      wx.hideTabBar();
-    }
+    obj.checkLogin();
 
     // 用户账号保留
     if (wx.getStorageSync('account')) {
       var account = wx.getStorageSync('account');
       obj.setData({ account });
-      // 检查微信openid是否存入数据库中
-      obj.checkAccountWechatId({detail: { value: account }});
+      // 获取服务端小程序配置参数
+      app.getWechatConfig(() => {
+        // 检查微信openid是否存入数据库中
+        obj.checkAccountWechatId({ detail: { value: account } });
+      });
     }
 
     // 根据用户部门ID查询任务数量
     if (app.user.deptId) {
-      var url = util.getRequestURL('getWorksCount.we');
-      var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv };
-      wx.request({
-        url: url,
-        data: {
-          json: encodeURI(JSON.stringify(param))
-        },
-        success: (res) => {
-          var workCount = res.data;
-          obj.setData({
-            workCount: workCount
-          });
-        }
+      // 获取服务端小程序配置参数
+      app.getWechatConfig(() => {
+        var url = util.getRequestURL('getWorksCount.we');
+        var param = { deptId: app.user.deptId, userId: app.user.id, userPriv: app.user.userPriv };
+        wx.request({
+          url: url,
+          data: {
+            json: encodeURI(JSON.stringify(param))
+          },
+          success: (res) => {
+            var workCount = res.data;
+            obj.setData({
+              workCount: workCount
+            });
+          }
+        });
       });
     }
   },
@@ -125,6 +103,39 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 检查登录
+  checkLogin: () => {
+    if (app.user.id) {
+      wx.setNavigationBarColor({
+        backgroundColor: '#000000',
+        frontColor: '#ffffff',
+        animation: {
+          duration: 400,
+          timingFunc: 'easeIn'
+        }
+      });
+      obj.setData({
+        isLogin: false,
+        userPriv: app.user.userPriv
+      });
+      wx.showTabBar();
+    } else {
+      wx.setNavigationBarColor({
+        backgroundColor: '#348BFF',
+        frontColor: '#ffffff',
+        animation: {
+          duration: 400,
+          timingFunc: 'easeIn'
+        }
+      });
+      obj.setData({
+        isLogin: true,
+        password: ''
+      });
+      wx.hideTabBar();
+    }
   },
 
   /**
@@ -223,56 +234,59 @@ Page({
       title: '登录中',
       mask: true,
     });
-    // 调用服务端登录接口
-    var url = util.getRequestURL('login.we');
+    
+    // 获取服务端小程序配置参数
+    app.getWechatConfig(() => {
+      // 调用服务端登录接口
+      var url = util.getRequestURL('login.we');
+      wx.request({  
+        url: url,
+        data: {
+          account: obj.data.account,
+          pwd: obj.data.password,
+          json: encodeURI(JSON.stringify(param)),
+          encryptedData: encryptedData
+        },
+        success: (res) => {
+          console.log(res);
+          wx.hideLoading();
 
-    wx.request({
-      url: url,
-      data: {
-        account: obj.data.account,
-        pwd: obj.data.password,
-        json: encodeURI(JSON.stringify(param)),
-        encryptedData: encryptedData
-      },
-      success: (res) => {
-        console.log(res);
-        wx.hideLoading();
+          if (res.data.success) {
+            wx.setNavigationBarColor({
+              backgroundColor: '#000000',
+              frontColor: '#ffffff',
+              animation: {
+                duration: 400,
+                timingFunc: 'easeIn'
+              }
+            });
 
-        if (res.data.success) {
-          wx.setNavigationBarColor({ 
-            backgroundColor: '#000000',
-            frontColor: '#ffffff',
-            animation: {
-              duration: 400,
-              timingFunc: 'easeIn'
-            }
-          });
+            // 登录成功后直接进入页面不需要提示
+            // util.tipsMessage('登录成功！');
 
-          // 登录成功后直接进入页面不需要提示
-          // util.tipsMessage('登录成功！');
-
-          app.user = res.data.user;
-          app.user.account = obj.data.account;
-          wx.setStorageSync('user', res.data.user);
-          wx.setStorageSync('account', obj.data.account);
-          var workCount = res.data.workCount;
-          obj.setData({
-            isLogin: false,
-            userPriv: app.user.userPriv,
-            workCount: workCount
-          });
-          wx.showTabBar();
-          // 初始化页面数据
-          obj.init();
-        } else {
-          util.tipsMessage('账号或密码错误！');
+            app.user = res.data.user;
+            app.user.account = obj.data.account;
+            wx.setStorageSync('user', res.data.user);
+            wx.setStorageSync('account', obj.data.account);
+            var workCount = res.data.workCount;
+            obj.setData({
+              isLogin: false,
+              userPriv: app.user.userPriv,
+              workCount: workCount
+            });
+            wx.showTabBar();
+            // 初始化页面数据
+            obj.init();
+          } else {
+            util.tipsMessage('账号或密码错误！');
+          }
+        },
+        fail: (e) => {
+          wx.hideLoading();
+          console.log(e);
+          util.tipsMessage('网络异常，请稍后再试');
         }
-      },
-      fail: (e) => {
-        wx.hideLoading();
-        console.log(e);
-        util.tipsMessage('网络异常，请稍后再试');
-      }
+      });
     });
   },
 
@@ -281,25 +295,14 @@ Page({
    */
   relapseWorkCard: (e) => {
     var link = e.currentTarget.dataset.link;
-
-    // 正式环境执行代码
-    if (!app.constant.isDev) {
-      wx.scanCode({
-        scanType: ['barCode', 'qrCode'],
-        success: (res) => {
-          wx.navigateTo({
-            url: link + '?code=' + res.result
-          });
-        }
-      });
-    } 
-    
-    // 开发环境执行代码
-    if (app.constant.isDev) {
-      wx.navigateTo({
-        url: link + '?code=0000123' 
-      });
-    }
+    wx.scanCode({
+      scanType: ['barCode', 'qrCode'],
+      success: (res) => {
+        wx.navigateTo({
+          url: link + '?code=' + res.result
+        });
+      }
+    });
   },
 
   /**
@@ -364,22 +367,25 @@ Page({
       mask: true
     })
 
-    wx.request({
-      url: reqUrl,
-      dataType: 'json',
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      success: (res) => {
-        res = res.data;
-        if (res.success) {
-           obj.resizeList(res.funcList);
+    // 获取服务端小程序配置参数
+    app.getWechatConfig(() => {
+      wx.request({
+        url: reqUrl,
+        dataType: 'json',
+        data: {
+          json: encodeURI(JSON.stringify(param))
+        },
+        success: (res) => {
+          res = res.data;
+          if (res.success) {
+            obj.resizeList(res.funcList);
+          }
+        },
+        complete: (rx) => {
+          wx.hideLoading();
         }
-      },
-      complete: (rx) => {
-        wx.hideLoading();
-      }
-    })
+      })
+    });
 
     obj.setData({
       chooseTemp: chooseTemp,
@@ -389,7 +395,6 @@ Page({
     
   },
 
-  
   /**
    * 数组大小调整为3个
    */
@@ -424,32 +429,19 @@ Page({
     });
   },
 
-  
-
   /**
    * 查询设备信息
    */
   getEquipmentInfo: (e) => {
     var link = e.currentTarget.dataset.link;
     // 正式环境执行代码
-    if (!app.constant.isDev) {
-      wx.scanCode({
-        scanType: ['barCode', 'qrCode'],
-        success: (res) => {
-          wx.navigateTo({
-            url: link + '?code=' + res.result
-          });
-        }
-      });
-    }
-
-    // 开发环境执行代码
-    if (app.constant.isDev) {
-      wx.navigateTo({
-        url: link + '?code=121600110200400'
-      });
-    }
-  },
-
-  
+    wx.scanCode({
+      scanType: ['barCode', 'qrCode'],
+      success: (res) => {
+        wx.navigateTo({
+          url: link + '?code=' + res.result
+        });
+      }
+    });
+  }
 })

@@ -75,7 +75,8 @@ function tipsMessage (message, callback) {
  */
 function getRequestURL(interfaceName) {
   var url = '';
-  if (!app.constant.isDev) {
+  var { mode, product, test } = app.constant;
+  if (mode === product || mode === test) {  
     url = app.constant.base_forward_url + '?url=' + app.constant.base_req_url + interfaceName;
   } else {
     url = app.constant.base_req_url_backup + interfaceName;

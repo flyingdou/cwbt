@@ -95,7 +95,7 @@
   </view>
 
   <!-- 测试(开发模式显示) -->
-  <!-- <view class='tool-line' catchtap='goto' data-link='../validedSwitch/validedSwitch' wx:if='{{isDev}}'>
+  <!-- <view class='tool-line' catchtap='goto' data-link='../validedSwitch/validedSwitch'>
           <view class='line'>
                 <view class='line-left'>
                       <image class='line-left-icon' src='../../icon/version.png' mode='widthFix'></image>

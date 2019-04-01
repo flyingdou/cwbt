@@ -335,8 +335,6 @@ Page({
             isScan: isScan,
             scanTime: scanTime
           });
-          // 修改为进行中
-          obj.ongoing();
         } else {
           wx.showModal({
             title: '提示',
@@ -650,40 +648,6 @@ Page({
 
   },
   
-  // 进行中
-  ongoing: () => {
-    var id = obj.data.workDetail.id;
-    var status = obj.data.workDetail.status;
-    if (status == 1) {
-      status = 9;
-    } else if (status == 9) {
-      status = 1;
-    }
-    
-    // 参数
-    var param = {
-      id: id,
-      status: status
-    };
-
-    wx.request({
-      url: util.getRequestURL('updateWorkCard.we'),
-      dataType: 'json',
-      data: {
-        json: encodeURI(JSON.stringify(param))
-      },
-      success: (res) => {
-        res = res.data;
-        if (res.success) {
-          obj.data.workDetail.status = param.status;
-        }
-      }
-    })
-
-
-  },
-
-
   /**
    * 撤回数据
    */
@@ -782,8 +746,7 @@ Page({
       id: obj.data.workDetail.id,
       collectorpersonid: app.user.id,
       expectedtime: expectedtime,
-      collectNote: collectNote,
-      status: 9
+      collectNote: collectNote
     };
 
     wx.request({
