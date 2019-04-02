@@ -59,7 +59,7 @@ App({
 
     // 如果常量配置已经更新过(或开发模式)就无需再次请求
     if (isUpdated || mode === dev) {
-      // 执行回调 
+      // 执行回调
       callback && callback();
       return;
     }
