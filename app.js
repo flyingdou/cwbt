@@ -138,7 +138,7 @@ App({
     // 新增常量
     const mode = {
       // 小程序运行模式
-      mode: _constant.dev
+      mode: _constant.test
     }
 
     // 返回合并新对象
