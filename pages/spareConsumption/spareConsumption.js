@@ -88,7 +88,7 @@ Page({
   addSpare: function () {
     wx.showModal({
       title: '提示',
-      content: '将要扫描设备条码，用以验证设备，确定吗？',
+      content: '将要扫描备件条码，用以验证设备，确定吗？',
       success(tip) {
         if (tip.confirm) {
           // 扫码

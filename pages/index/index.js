@@ -108,6 +108,7 @@ Page({
   // 检查登录
   checkLogin: () => {
     if (app.user.id) {
+      // 显示首页
       wx.setNavigationBarColor({
         backgroundColor: '#000000',
         frontColor: '#ffffff',
@@ -229,6 +230,12 @@ Page({
       encryptedData = param.encryptedData;
       param.encryptedData = null;  
     }
+
+    // 判断是否显示demo页面
+    if (obj.showDemo()) {
+      return;
+    }
+
     // 弹出加载框
     wx.showLoading({
       title: '登录中',
@@ -288,6 +295,20 @@ Page({
         }
       });
     });
+  },
+
+  /**
+   * 显示demo页面
+   */
+  showDemo: (e) => {
+    var { account, password } = obj.data;
+    if (account === '123456' && password === '123456') {
+      obj.setData({
+        isLogin: false,
+        showDemo: true
+      });
+      return true;
+    }
   },
 
   /**
