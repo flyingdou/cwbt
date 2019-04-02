@@ -118,7 +118,7 @@ App({
       dev: 'dev',
 
       // 微信小程序配置接口url
-      wechat_config_url: 'http://localhost:8080/wechatConfig/getConfig',
+      wechat_config_url: 'https://cwbt.castlc.cn/wechatConfig/getConfig',
 
       // 小程序开发模式基础服务端接口url
       base_img_url: 'https://cwbt.castlc.cn/picture',
