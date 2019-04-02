@@ -55,11 +55,11 @@ App({
    */
   getWechatConfig: function (callback) {
     const _this = this;
-    const { isUpdated, mode, product, test, wechat_config_url } = this.constant;
+    const { isUpdated, mode, product, test, dev, wechat_config_url } = this.constant;
 
-    // 如果常量配置已经更新过就无需再次请求
-    if (isUpdated) {
-      // 执行回调
+    // 如果常量配置已经更新过(或开发模式)就无需再次请求
+    if (isUpdated || mode === dev) {
+      // 执行回调 
       callback && callback();
       return;
     }
@@ -128,7 +128,7 @@ App({
       upload_url: 'https://cwbt.castlc.cn/api/cwbtMP/uploadFile',
       download_url: 'https://cwbt.castlc.cn/file/',
       logo: 'https://cwbt.castlc.cn/picture/shipLogo123.jpg',
-      base_req_url_backup_1: 'http://192.168.43.110:8080/api/cwbtMP/',
+      base_req_url_backup_1: 'http://192.168.0.170:8080/api/cwbtMP/',
       base_req_url_backup: 'https://cwbt.castlc.cn/test/login?url=http://47.92.101.196:8080/api/cwbtMP/',
       download_url_backup: 'https://cwbt.castlc.cn/file/',
       server_url: 'https://cwbt.castlc.cn/test/login?url=http://47.92.101.196:8080/',
@@ -138,7 +138,7 @@ App({
     // 新增常量
     const mode = {
       // 小程序运行模式
-      mode: _constant.test
+      mode: _constant.dev
     }
 
     // 返回合并新对象
