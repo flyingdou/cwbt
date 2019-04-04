@@ -99,5 +99,5 @@
 
 <!-- demo内容 -->
 <view class='content' wx:if='{{showDemo}}'>
-  这是一个测试demo
+  <web-view src='https://cwbt.castlc.cn/demo/index.html'></web-view>
 </view>
