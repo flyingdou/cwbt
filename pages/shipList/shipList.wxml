@@ -1,7 +1,7 @@
 <!-- 页面开始 -->
 <view class='content'>
       <view class='chooseBoat'>
-            <radio-group bindchange = 'choose' >
+            <radio-group>
                           <view class='pre' wx:for = '{{boatList}}' wx:key = '' bindtap='choose' data-index='{{index}}'>
                                 <view class='left'>
                                       <!-- image -->
