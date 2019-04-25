@@ -155,23 +155,31 @@ Page({
   releaseWorkcard: () => {
     var code = '';
     // obj.gotoWork();
-    // 扫码识别设备编号
-    wx.scanCode({
-      onlyFromCamera: true, // 仅能通过相机扫码
-      success: (res) => {
-        code = res.result;
-        obj.data.code = code;
-        obj.gotoWork();
-      },
-      fail: (e) => { // 扫码失败
-        wx.showModal({
-          title: '提示',
-          content: '扫码失败，请重新扫码！',
-          showCancel: false,
+    if (obj.data.chooseValue == 'scan') {
+        // 扫码识别设备编号
+        wx.scanCode({
+          onlyFromCamera: true, // 仅能通过相机扫码
+          success: (res) => {
+            code = res.result;
+            obj.data.code = code;
+          },
+          fail: (e) => { // 扫码失败
+            wx.showModal({
+              title: '提示',
+              content: '扫码失败，请重新扫码！',
+              showCancel: false,
+            })
+            return;
+          }
         })
-        return;
-      }
-    })
+
+    } else {
+      // 手动输入条码
+      obj.data.code = obj.data.qrcodeValue;
+    }
+
+    // 请求后台方法
+    obj.gotoWork();
 
   },
 
@@ -227,6 +235,16 @@ Page({
     obj.setData({
       hidden: true
     });
+  },
+
+  /**
+   * 内瓤改变时，动态修改数据
+   */
+  bindChange(e) {
+    var dou = {};
+    var key = e.currentTarget.dataset.key;
+    dou[key] = e.detail.value;
+    obj.setData(dou);
   },
   
 

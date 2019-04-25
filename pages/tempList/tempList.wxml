@@ -67,5 +67,18 @@
 
 <!-- 弹出层 -->
 <modal catchtouchmove = 'true' hidden = '{{hidden}}' title = '提示' confirm-text = '确定' cancel-text = '取消' bindconfirm = 'confirm' bindcancel = 'cancelx'>
-        <view class='block'>将要扫描设备条码，用以验证设备，确定吗？</view>
+        <radio-group bindchange = 'bindChange' data-key = 'chooseValue'>
+              <view class='lineContainer'>
+                    <view class='title'>扫码验证</view>
+                    <radio value='scan' checked='{{chooseValue == "scan"}}'></radio>
+              </view>
+
+              <view class='lineContainer'>
+                    <view>
+                          <view class='title'>输入条码</view>
+                          <input type='text' placeholder='请输入设备条码！' maxlength='-1' value = '{{qrcodeValue}}' bindinput='bindChange' data-key = 'qrcodeValue' wx:if ='{{chooseValue == "input"}}'></input>
+                    </view>
+                    <radio value='input' checked='{{chooseValue == "input"}}'></radio>
+              </view>
+        </radio-group>
 </modal>
