@@ -17,7 +17,8 @@ Page({
     hidden: true,
     showMark: false,
     user_id: app.user.id,
-    needPhoto: true
+    needPhoto: true,
+    isScan: true
   },
 
   /**

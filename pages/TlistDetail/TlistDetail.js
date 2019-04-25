@@ -14,7 +14,8 @@ Page({
     photos:[],
     status:0,
     handle:0,
-    hidden: true
+    hidden: true,
+    isScan: true
   },
 
   /**
