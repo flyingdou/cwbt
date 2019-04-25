@@ -128,11 +128,10 @@ App({
       upload_url: 'https://cwbt.castlc.cn/api/cwbtMP/uploadFile',
       download_url: 'https://cwbt.castlc.cn/file/',
       logo: 'https://cwbt.castlc.cn/picture/shipLogo123.jpg',
-      base_req_url_backup_1: 'http://192.168.0.170:8080/api/cwbtMP/',
-      base_req_url_backup: 'https://cwbt.castlc.cn/test/login?url=http://47.92.101.196:8080/api/cwbtMP/',
+      base_req_url_backup: 'http://127.0.0.1:8080/api/cwbtMP/',
       download_url_backup: 'https://cwbt.castlc.cn/file/',
       server_url: 'https://cwbt.castlc.cn/test/login?url=http://47.92.101.196:8080/',
-      server_url_1: 'http://192.168.0.107:8080/'
+      server_url_1: 'http://127.0.0.1:8080/'
     }
 
     // 新增常量
