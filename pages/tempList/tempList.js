@@ -9,7 +9,8 @@ Page({
   data: {
     currentPage: app.pageInfo.currentPage,
     pageSize: app.pageInfo.pageSize,
-    hidden: true
+    hidden: true,
+    chooseValue: 'scan'
   },
 
   /**
@@ -162,6 +163,7 @@ Page({
           success: (res) => {
             code = res.result;
             obj.data.code = code;
+            obj.gotoWork();
           },
           fail: (e) => { // 扫码失败
             wx.showModal({
@@ -176,10 +178,8 @@ Page({
     } else {
       // 手动输入条码
       obj.data.code = obj.data.qrcodeValue;
+      obj.gotoWork();
     }
-
-    // 请求后台方法
-    obj.gotoWork();
 
   },
 

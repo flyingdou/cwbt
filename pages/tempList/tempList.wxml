@@ -70,15 +70,15 @@
         <radio-group bindchange = 'bindChange' data-key = 'chooseValue'>
               <view class='lineContainer'>
                     <view class='title'>扫码验证</view>
-                    <radio value='scan' checked='{{chooseValue == "scan"}}'></radio>
+                    <radio value='scan' checked='{{chooseValue == "scan"}}'  color = 'rgba(54, 123, 240, 1)' ></radio>
               </view>
 
               <view class='lineContainer'>
                     <view>
                           <view class='title'>输入条码</view>
-                          <input type='text' placeholder='请输入设备条码！' maxlength='-1' value = '{{qrcodeValue}}' bindinput='bindChange' data-key = 'qrcodeValue' wx:if ='{{chooseValue == "input"}}'></input>
+                          <input type='text' class='inputValue' placeholder='请输入设备条码！' maxlength='-1' value = '{{qrcodeValue}}' bindinput='bindChange' data-key = 'qrcodeValue' wx:if ='{{chooseValue == "input"}}'></input>
                     </view>
-                    <radio value='input' checked='{{chooseValue == "input"}}'></radio>
+                    <radio value='input' checked='{{chooseValue == "input"}}'  color = 'rgba(54, 123, 240, 1)'></radio>
               </view>
         </radio-group>
 </modal>

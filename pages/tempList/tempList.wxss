@@ -150,3 +150,7 @@
   align-items: center;
   padding: 20rpx 0;
 }
+
+.inputValue{
+  padding: 20rpx 0;
+}
