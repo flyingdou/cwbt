@@ -118,26 +118,26 @@ App({
       dev: 'dev',
 
       // 微信小程序配置接口url
-      wechat_config_url: 'https://cwbt.castlc.cn/wechatConfig/getConfig',
+      wechat_config_url: 'https://dms.zcwish.com/wechatConfig/getConfig',
 
       // 小程序开发模式基础服务端接口url
-      base_img_url: 'https://cwbt.castlc.cn/picture',
-      base_domain: 'https://cwbt.castlc.cn/',
-      base_forward_url: 'https://cwbt.castlc.cn/test/login',
-      base_req_url: 'http://cwbt.castlc.cn/api/cwbtMP/',
-      upload_url: 'https://cwbt.castlc.cn/api/cwbtMP/uploadFile',
-      download_url: 'https://cwbt.castlc.cn/file/',
-      logo: 'https://cwbt.castlc.cn/picture/shipLogo123.jpg',
+      base_img_url: 'https://dms.zcwish.com/picture',
+      base_domain: 'https://dms.zcwish.com/',
+      base_forward_url: 'https://dms.zcwish.com/test/login',
+      base_req_url: 'http://dms.zcwish.com/api/cwbtMP/',
+      upload_url: 'https://dms.zcwish.com/api/cwbtMP/uploadFile',
+      download_url: 'https://dms.zcwish.com/file/',
+      logo: 'https://dms.zcwish.com/picture/shipLogo123.jpg',
       base_req_url_backup: 'http://127.0.0.1:8080/api/cwbtMP/',
-      download_url_backup: 'https://cwbt.castlc.cn/file/',
-      server_url: 'https://cwbt.castlc.cn/test/login?url=http://47.92.101.196:8080/',
+      download_url_backup: 'https://dms.zcwish.com/file/',
+      server_url: 'https://dms.zcwish.com/test/login?url=http://47.92.101.196:8080/',
       server_url_1: 'http://127.0.0.1:8080/'
     }
 
     // 新增常量
     const mode = {
       // 小程序运行模式
-      mode: _constant.test
+      mode: _constant.product
     }
 
     // 返回合并新对象
