@@ -180,7 +180,7 @@ Page({
           account: obj.data.account
         },
         success: (res) => {
-          if (res.data.code <= 0) {
+          if (res.data && res.data.code <= 0) {
             obj.setData({
               isGetUserInfo: true
             });
