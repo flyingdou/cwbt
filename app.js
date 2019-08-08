@@ -124,7 +124,7 @@ App({
       base_img_url: 'https://dms.zcwish.com/picture',
       base_domain: 'https://dms.zcwish.com/',
       base_forward_url: 'https://dms.zcwish.com/test/login',
-      base_req_url: 'http://dms.zcwish.com/api/cwbtMP/',
+      base_req_url: 'https://dms.zcwish.com/api/cwbtMP/',
       upload_url: 'https://dms.zcwish.com/api/cwbtMP/uploadFile',
       download_url: 'https://dms.zcwish.com/file/',
       logo: 'https://dms.zcwish.com/picture/shipLogo123.jpg',
